@@ -1,0 +1,20 @@
+.cont-body {
+  // margin-top: 1rem;
+  // margin-bottom: 1rem;
+  // padding: 1rem;
+  min-width: 1024px;
+  background-color: white;
+  margin: 0 auto;
+  // min-height: 400px;
+}
+
+.mt-65{
+  margin-top: 65px;
+}
+
+@media (min-width: 1920px) {
+  .container-fluid.pad-fw10 {
+    padding: 0 10%;
+    margin: 0;
+  }
+}

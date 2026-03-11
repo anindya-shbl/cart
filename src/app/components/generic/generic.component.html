@@ -1,0 +1,175 @@
+<div class="salt-bg">
+    <!-- <div class="d-flex justify-content-between">
+        <div routerLink="/jitosearch" class="fs-5 fw-5 text-primary hvr">
+            <i class="fa fa-arrow-left"  style="font-size: 12px;position: relative;top: -2px;right: 2px;"></i> Jito Search
+        </div>
+        <div routerLink="/customercart" class="fs-5 fw-5 text-primary hvr">
+            <i class="fa fa-cart-plus fs-8 pe-1"></i> Cart Items <span class="bgcart">{{addedInCart.length}}</span>
+        </div>
+    </div> -->
+    <div *ngIf="!isLoading" class="grid-container mx-auto" style="max-width: 1600px;">
+        <div >
+            <ng-container *ngIf="finalList.length>0">
+                <ng-container *ngFor="let item of finalList">
+                    <div class="">
+                        <div class="mb-3 item-shadow bg-block justify-content-around">
+                            <div class="d-flex px-3">
+                                <div class="me-3">
+                                    <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/100-match.png" alt="">
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-blue fw-6 fs-7">100% Exact</div>
+                                    <div class="text-gray">Salt Composition</div>
+                                </div>
+                            </div>
+                            <div class="d-flex px-3">
+                                <div class="me-3">
+                                    <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/save-rs.png" alt="">
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-blue fw-6 fs-7">Save {{item.maimPrd.savingsPercent}}%</div>
+                                    <div>With Jito Alternative</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex border rounded bg-gen item-shadow p-4 mb-3">
+                            <div class="">
+                                <div class="itemImg item-shadow me-4">
+                                    <ng-container *ngIf="item.maimPrd.ProductImage != '' && item.maimPrd.ProductImage != null">
+                                        <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.maimPrd.ProductImage}}" alt="" width="100%">
+                                    </ng-container>
+                                    <ng-container *ngIf="item.maimPrd.ProductImage == '' || item.maimPrd.ProductImage == null">
+                                        <img *ngIf="item.maimPrd.PrescriptionOTC == 'P' || item.maimPrd.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                                        <img *ngIf="item.maimPrd.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <div class="w-100">
+                                <div class="mb-3 fw-5 fs-6" (click)="CommonService.getProductDetailsPageURL(item.maimPrd.ProductId, item.maimPrd.DisplayName, item.maimPrd.PrescriptionOTC)">
+                                    {{item.maimPrd.DisplayName}}
+                                </div>
+                                <div class="d-flex justify-content-between flex-wrap">
+                                        <div class="me-2">
+                                            <div class="mb-3 text-secondary">
+                                                {{item.maimPrd.MfgGroup}}
+                                            </div>
+                                            <div *ngIf="item.maimPrd.ExpiryDate != '' && item.maimPrd.ExpiryDate != null" class="mb-3 prbg">
+                                                Exp Dt. <b>{{item.maimPrd.ExpiryDate | date : "dd MMM yyyy"}}</b>
+                                            </div>
+                                            <div *ngIf="CommonService.ConfigData.GenericPercentageCalOnOfferPrice == 'Y'" class="mb-2">
+                                                <span class="me-2 fw-5 fs-6">{{item.maimPrd.CustOfferPrice | currency : "INR"}}</span>
+                                                <span class="me-3 fs-6 text-decoration-line-through">{{item.maimPrd.MRP | currency : "INR"}}</span>
+                                                <span class="text-secondary">{{item.maimPrd.pricePerUnit | currency: 'INR'}}/Unit</span>
+                                            </div>
+                                            <div *ngIf="CommonService.ConfigData.GenericPercentageCalOnOfferPrice == 'N'" class="mb-2">
+                                                <span class="me-3 fw-5 fs-6">{{item.maimPrd.MRP | currency : "INR"}}</span>
+                                                <span class="text-secondary">{{item.maimPrd.pricePerUnit | currency: 'INR'}}/Unit</span>
+                                            </div>
+                                        </div>
+                                        <div style="width: 130px;">
+                                            <div *ngIf="item.maimPrd.addedQty == 0">
+                                                <button class="btn btn-success w-110" type="button" (click)="addToLocalCart(item.maimPrd, 1);">ADD</button>
+                                            </div>
+                                            <div *ngIf="item.maimPrd.addedQty > 0" class="jito-qty cl-green w-110">
+                                                <span class="fs-8 hvr" (click)="cartAddMinus(item.maimPrd)"><i>-</i></span>
+                                                <span>{{ item.maimPrd.addedQty }}</span>
+                                                <span class="fs-8 hvr" (click)="cartAddPlus(item.maimPrd)"><i>+</i></span>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div *ngIf="mediCompText.length > 0" class="mt-1">
+                        <div class="row g-0 text-center bg-white p-3">
+                            <div class="col-4 border-line">
+                                <div class="imgbg shadow-sm"><img [src]="mediCompText[0].imageUrl" alt="" ></div>
+                                <div class="fw-6 text-gray pt-2">{{mediCompText[0].title}}</div>
+                            </div>
+                           
+                            <div class="col-4 border-line">
+                                <div class="imgbg shadow-sm"><img [src]="mediCompText[1].imageUrl" alt="" ></div>
+                                <div class="fw-6 text-gray pt-2">{{mediCompText[1].title}}</div>
+                            </div>
+                         
+                            <div class="col-4">
+                                <div class="imgbg shadow-sm"><img [src]="mediCompText[2].imageUrl" alt="" ></div>
+                                <div class="fw-6 text-gray pt-2">{{mediCompText[2].title}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="my-3 text-center bg-btn text-uppercase fw-5 fs-5"> Medicine Comparison</div>
+
+                        <div class="row g-0 border rounded item-shadow">
+                            <div class="col-6">
+                                <div class="text-center p-3 bg-prdt">
+                                    <div class="itemImg mb-3">
+                                        <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
+                                            <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
+                                        </ng-container>
+                                        <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null">
+                                            <img *ngIf="item.maimPrd.PrescriptionOTC == 'P' || item.maimPrd.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                                            <img *ngIf="item.maimPrd.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                                        </ng-container>
+                                    </div>
+                                    <div class="py-3 border-top border-bottom border-secondary-subtle text-truncate fw-5 fs-5 hvr" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.DisplayName, item.maimPrd.PrescriptionOTC)">{{item.DisplayName}}</div>
+                                    <div class="py-3 border-bottom border-secondary-subtle">
+                                        <span style="line-height: 26px;">{{item.pricePerUnit | currency: 'INR'}}/Unit</span>
+                                    </div>
+                                    <div class="py-3 border-bottom border-secondary-subtle text-truncate">{{item.MfgGroup}}</div>
+                                    <div class="py-3 border-bottom border-secondary-subtle">FDA Approved</div>
+                                    <div class="py-3">{{item.maimPrd.Salts['Name']}}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center p-3 bg-gen position-relative">
+                                    <span class="match">
+                                        <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/100-match.png" alt="">
+                                    </span>
+                                    <div class="itemImg mb-3">
+                                        <ng-container *ngIf="item.maimPrd.ProductImage != '' && item.maimPrd.ProductImage != null">
+                                            <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.maimPrd.ProductImage}}" alt="" width="100%">
+                                        </ng-container>
+                                        <ng-container *ngIf="item.maimPrd.ProductImage == '' || item.maimPrd.ProductImage == null">
+                                            <img *ngIf="item.maimPrd.PrescriptionOTC == 'P' || item.maimPrd.PrescriptionOTC == 'M'" src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                                            <img *ngIf="item.maimPrd.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                                        </ng-container>
+                                    </div>
+                                    <div class="py-3 border-top border-bottom border-secondary-subtle text-truncate fs-5 fw-5 hvr" (click)="CommonService.getProductDetailsPageURL(item.maimPrd.ProductId, item.maimPrd.DisplayName, item.maimPrd.PrescriptionOTC)">
+                                        {{item.maimPrd.DisplayName}}</div>
+                                    <div class="py-3 border-bottom border-secondary-subtle">
+                                        <span class="me-2" style="line-height: 26px;">{{item.maimPrd.pricePerUnit | currency: 'INR'}}/Unit</span>
+                                        <span class="badge">{{item.maimPrd.savingsPercent}}% lower</span>
+                                    </div>
+                                    <div class="py-3 border-bottom border-secondary-subtle text-truncate">{{item.maimPrd.MfgGroup}}</div>
+                                    <div class="py-3 border-bottom border-secondary-subtle">FDA Approved</div>
+                                    <div class="py-3">{{item.maimPrd.Salts['Name']}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div class="">
+            <div class="sticky-top">
+                <div routerLink="/jitosearch" class="text-center mb-3 item-shadow bg-block bg-wt hvr">
+                    <div class="d-flex align-items-center justify-content-center" style="min-height: 50px;">
+                        <i class="fa fa-arrow-left me-3"  style="font-size: 12px"></i> <span class="fs-7 fw-6 text-blue">Jito Search</span>
+                    </div>
+                </div>
+                <div class="text-center item-shadow bg-grad p-4">
+                    <div class="pt-2 pb-3"><i class="fa-solid fa-cart-shopping cart-block"></i></div>
+                    <div *ngIf="addedInCart.length == 0" class="fs-7 fw-6 text-blue pb-4">No items in your cart</div>
+                    <div *ngIf="addedInCart.length > 0" class="fs-7 fw-6 text-blue pb-4">{{ addedInCart.length }} &nbsp;Item
+                        <span *ngIf="addedInCart.length > 1">s</span> in your cart
+                    </div>
+                    <div class="proceed w-240 mx-auto mb-1 hvr" routerLink="/customercart" style="width: 240px;">PROCEED</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

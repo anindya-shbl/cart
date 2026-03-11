@@ -1,0 +1,245 @@
+<div *ngIf="loginForm">
+  <div class="newModalSec">
+    <div class="loginPopUpSection">
+      <button type="button" data-bs-dismiss="modal"
+        aria-label="Close" class="closeBtn" (click)="onReset()">X</button>
+      <div class="left">
+        <div class>
+          <div class="fs-6 fw-6 mb-3"></div>
+
+          <!-- Carousel -->
+          <div id="demo" class="bannerSec carousel slide"
+            data-bs-ride="carousel">
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner" style="min-height: 250px;">
+              <div class="carousel-item active">
+                <img src="{{CommonService.baseurl}}assets/images/login_slider1.jpg" alt="" class="d-block" style="width:100%">
+              </div>
+              <div class="carousel-item">
+                <img src="{{CommonService.baseurl}}/assets/images/login_slider2.jpg" alt="" class="d-block" style="width:100%">
+              </div>
+              <div class="carousel-item">
+                <img src="{{CommonService.baseurl}}/assets/images/login_slider3.jpg" alt="" class="d-block" style="width:100%">
+              </div>
+            </div>
+
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            </div>
+
+          </div>
+
+          <!-- <div class="ps-2">
+            <div class="mb-2">
+              <span class="pe-2 text-success"><i
+                  class="fa fa-hand-o-right"></i></span>Save more on Household
+              Supplies
+            </div>
+            <div class="mb-2">
+              <span class="pe-2 text-success"><i
+                  class="fa fa-hand-o-right"></i></span>100% Guaranteed Genuine
+              Products
+            </div>
+            <div class="mb-2">
+              <span class="pe-2 text-success"><i
+                  class="fa fa-hand-o-right"></i></span>Medicine Info &
+              Substitutes
+            </div>
+            <div class="mb-2">
+              <span class="pe-2 text-success"><i
+                  class="fa fa-hand-o-right"></i></span>Informative Health
+              Articles
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="right">
+
+        <ng-container *ngIf="!otpSec">
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"
+            class="profile-form">
+            <div class="forMOBsec">
+              <div class="loginheading">
+                <div style="font-size: 24px; font-weight: 700; color: #344054">
+                  Quick Login / Register
+                </div>
+                <!-- <p>Get access to your orders, lab tests & doctor consultations</p> -->
+                <div style="font-size: 14px; font-weight: 400; color: #667085; min-height: 34px;">
+                  Stay on top of your medicine & wellness product orders
+                </div>
+              </div>
+              <div *ngIf="errorMsg != ''"
+                class="text-danger fw-6 fs-2 mb-2">{{errorMsg}}</div>
+              <div *ngIf="!isResendOTP" class="mb-3">
+                <label for="email_mobileno" class="form-label fs-2" style="color: #afafaf;">
+                  Please enter Mobile number to receive Verification Code
+                </label>
+                <input type="text" autocomplete="off"
+                  class="form-control fs-4" id="email_mobileno" placeholder="Enter Mobile Number *"
+                  maxlength="10"
+                  formControlName="email_mobileno" pattern="[5-9]{1}[0-9]{9}"
+                  (keypress)="numCheck($event)" style="height: 50px;" />
+                <div *ngIf="submitted && f['email_mobileno'].errors"
+                  class="text-danger fs-2">
+                  <div *ngIf="f['email_mobileno'].errors['required']">
+                    *Mobile No is required
+                  </div>
+                </div>
+                <div *ngIf="submitted && f['email_mobileno'].errors"
+                  class="text-danger fs-2">
+                  <div *ngIf="f['email_mobileno'].errors['pattern']">
+                    *Invalid mobile no
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="mb-3" style="display: none !important;">
+                                    <label for="password" class="form-label fw-6">Password</label>
+                                    <input type="password" autocomplete="off" class="form-control bx-shdw" id="password" formControlName="password" (keyup)="onPasswordvalChange($event)">
+                                </div> -->
+              <!-- <div *ngIf="recaptcha != ''" class="d-flexw-100 mb-3" style="height: 80px;"> -->
+              <div class="captchablock" [ngClass]="isResendOTP?'mt-4':''">
+                <ng-container >
+                  <div *ngIf="!cpatchaLoading" [innerHTML]="recaptcha" class="captchaHolder"></div>
+                  <div *ngIf="cpatchaLoading" class="captchaLoader"> Loading</div>
+                  <div class="refreshIcon"><i class="icon-refresh hvr"
+                      (click)="ReCaptcha()"></i></div>
+                  <div>
+                    <input type="text"
+                      class="form-control text-uppercase fs-4"
+                      placeholder="Enter Captcha *"
+                      id="Login_Captcha" [maxlength]="5"
+                      formControlName="Login_Captcha" style="height: 50px;" />
+
+                  </div>
+
+                </ng-container>
+
+              </div>
+              <!-- <div *ngIf="submitted && f['Login_Captcha'].errors"
+                style="width: 100%;">
+                <div *ngIf="f['Login_Captcha'].errors['required']"
+                  class="text-danger fs-2">
+                  *Input Captcha is required
+                </div>
+              </div> -->
+              <div class="d-flex w-100 mb-3 align-items-center" style="justify-content: flex-end;">
+                <div *ngIf="submitted && f['Login_Captcha'].errors" class="w-100">
+                  <div *ngIf="f['Login_Captcha'].errors['required']"  class="text-danger fs-2"> *Input Captcha is required  </div>
+                </div>
+                <div *ngIf="isResendOTP" class="hvr ms-1 fs-2 fw-5 text-primary text-end text-nowrap"
+                  (click)="changeNumber()">Change Number</div>
+              </div>
+
+              <div class="d-flex py-2 align-items-center mb-2 fw-6"
+                style="display: none !important">
+                <span class="me-3">
+                  <input class="form-check-input" type="checkbox"
+                    id="flexCheckDefault" [checked]="otpChecked"
+                    (click)="setLoginType($event)" />
+                </span>
+                Login with verification code
+              </div>
+            </div>
+            <div class="loginBtnSec">
+              <!-- <button type="reset" class="btn btn-outline-danger btn-sm fw-5 mb-3 me-3" style="min-width: 146px;" (click)="onReset()">Cancel</button> -->
+              <button *ngIf="!isLoading" type="submit" class="proceedBtn">
+                PROCEED
+              </button>
+              <button *ngIf="isLoading"
+                class="proceedBtn d-flex align-items-center justify-content-center"
+                style="column-gap: 6px;" type="button"
+                disabled>
+
+                <span class="spinner-border spinner-border-sm"
+                  aria-hidden="true"></span>
+                <span role="status">Loading...</span>
+              </button>
+            </div>
+          </form>
+        </ng-container>
+
+        <ng-container *ngIf="otpSec">
+          <div class="loginheading">            
+            <div style="font-size: 24px; font-weight: 700; color: #344054">
+              Enter Verification Code
+            </div>
+            <div style="font-size: 14px; font-weight: 400; color: #667085; min-height: 34px;">
+              Verification Code has been sent to your mobile
+              <b>{{f['email_mobileno'].value}}</b>,<br> please enter the same to verify here
+            </div>
+          </div>
+          <!-- <div class="mb-3 fs-6 fw-6">
+            Enter Sastasundar Verification Code
+          </div> -->
+          <div class="mb-3">{{ rspMsg }}</div>
+          <div *ngIf="errorMsg != ''"
+            class="text-danger fw-6 fs-2 mb-2">{{errorMsg}}</div>
+          <div class="mb-1">
+            <label for="OTP" class="form-label fs-2" style="color: #afafaf;">Please enter Verification Code</label>
+            <div class="d-flex">
+              <input #login_otp type="text" class="form-control fs-4"
+                id="password" [maxlength]="5" [(ngModel)]="otpValue" placeholder="Enter Verification Code *"
+                (keypress)="numCheck($event)" style="height: 50px;" />
+              <ng-container *ngIf="showTimer">
+                <!-- <span>Resend code after </span> -->
+                <span class="timer"><i class="icon-stopwatch"></i> 0:{{ secondsLeft }}</span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="d-flex w-100 mb-3 align-items-center" style="justify-content: flex-end;">
+            <div *ngIf="!showTimer" class="w-100">
+              <span class="fs-3">Didn't receive code?</span>
+              <span class="hvr fs-2 mx-1 fw-5 text-primary"
+                (click)="regenerateOTP()">Resend Code</span>
+            </div>
+            <div class="hvr ms-1 fs-2 fw-5 text-primary text-end text-nowrap"
+              (click)="changeNumber()">Change Number</div>
+          </div>
+
+          <div class="loginBtnSec">
+            <button *ngIf="!isLoading" type="submit"
+              class="proceedBtn" (click)="veryfyOTP()"
+              [disabled]="otpValue.length != 5">
+              VERIFY CODE
+            </button>
+            <button *ngIf="isLoading"
+              class="proceedBtn d-flex align-items-center justify-content-center"
+              style="column-gap: 6px;" type="button"
+              disabled>
+              <span class="spinner-border spinner-border-sm"
+                aria-hidden="true"></span>
+              <span role="status">Loading...</span>
+            </button>
+          </div>
+        </ng-container>
+        <div class="msgSec">
+          <p style="color:grey; padding:0; margin:2px 0 0 0;"
+            class="fontsize10">
+            <span>* By clicking &nbsp;<span *ngIf="!otpSec">PROCEED</span><span *ngIf="otpSec">VERIFY CODE</span>, you agree to
+              our</span>&nbsp;<span><a target="_blank"
+                href="{{ CommonService.baseurl }}pages/view/terms_condition">Terms
+                & Conditions</a></span> &nbsp;and &nbsp;<span><a target="_blank"
+                href="{{ CommonService.baseurl }}pages/view/privacy-policy">Privacy
+                Policy</a></span>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="needHelp">
+      <span class="fontsize18">Need Help?</span>
+      <div class="link">
+        <a class="ccc"><i class="icon-phone-square"></i>
+          628-09-09-000</a> <a class="ccc"><i class="icon-mail"></i>
+          care&#64;sastasundar.com</a>
+      </div>
+    </div>
+
+  </div>
+</div>

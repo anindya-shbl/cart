@@ -1,0 +1,120 @@
+<div class="jito-bg">
+    <div class="text-6xl mb-4"><span class="text-primary">Quality Medicines </span>Upto <span class="text-primary">60% </span>Savings</div>
+    <div class="mb-4 fs-8 fw-5 text-center pb-3">
+        Save More with JITO Recommended Alternatives.
+    </div>
+    <div class="mt-3 mx-auto" style="max-width: 760px;">
+        <div class="position-relative">
+            <i class="fa fa-search position-absolute" style="top: 21px; right: 22px; color:#78819B; font-size: 18px; z-index: 6;"></i>
+            <div class="input-group mb-1 hvr ">
+                <input type="text" class="form-control" placeholder="Search for Jito Recommended Alternative" aria-label="Recipient's username" [(ngModel)]="searchText" (keyup)="onSearchChange($event)" (keydown)="onKeydown()">
+            </div>
+            <div *ngIf="showSearchArea" class="search-body">
+                <div class="d-flex justify-content-end px-3 pt-2 fs-13 fw-5 text-secondary">
+                    <span class="hvr" (click)="cleareSearch()"><i class="fa fa-times-circle"></i> close</span>
+                </div>
+                <div *ngIf="!isLoading" class="search-list">
+                    
+                    <div *ngIf="searchList.length > 0" >
+                        <ng-container *ngFor="let salt of uniqueSalts">
+                            <div *ngIf="salt != '' && salt != undefined" class="d-flex justify-content-between hvr search-list-item" (click)="onSaltClick(salt)">
+                                <div class="d-flex w-100">
+                                    <div class="imglistblock">
+                                        <!-- <i class="fa-solid fa-hand-holding-medical fs-8 text-body-tertiary"></i> -->
+                                        <span style='font-size:26px;'>&#10024;</span>
+                                         <!-- <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/composition.png" width="30px" alt=""> -->
+                                    </div>
+                                    <div>
+                                        <div class="fw-5 line-clamp-1">{{salt.Name}}</div>
+                                        <div class="pt-1 text-secondary">In Salt Composition</div>
+                                    </div>
+                                </div>
+                                <div class="pe-1"><i class="fa fa-search text-secondary"></i></div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngFor="let item of searchList">
+                            <div class="d-flex justify-content-between hvr search-list-item" (click)="onselectItem(item)">
+                                <div class="d-flex w-100">
+                                    <div *ngIf="item.ProductImage != '' && item.ProductImage != null" class="imglistblock">
+                                        <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
+                                    </div>
+                                    <div *ngIf="item.ProductImage == '' || item.ProductImage == null" class="imglistblock">
+                                        <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'" src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="35px">
+                                        <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="35px">
+                                    </div>
+                                    <div>
+                                        <div class="fw-5 line-clamp-1">{{item.DisplayName}}</div>
+                                        <div class="pt-1 text-secondary">{{item.MfgGroup}}</div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="pe-1"><i class="fa fa-arrow-right text-secondary" style="rotate: -45deg"></i></div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="searchList.length == 0" class="empty-search">
+                        <div class="empty-search-img p-3">
+                            <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/no-results.png" alt="">
+                        </div>
+                        <div>
+                            <div class="mb-3 fw-6 fs-18"> No Result Found for {{searchText}}</div>
+                            <div class="mb-3">Call us and we will assist you with your medicine order</div>
+                            <div>
+                                <button class="btn btn-primary">Call us for assistance</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="isLoading" class="search-list">
+                    <div class="text-center mt-5">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="banner-block p-4">
+    <div class="grid-container w-100 mx-auto" style="max-width: 1600px;">
+        <div class="w-100 d-flex justify-content-center align-items-center p-4 mx-auto bg-grad item-shadow hvr" (click)="gotoJITO()">
+            <div class="me-5">
+                <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/search-pro.png" alt="">
+            </div>
+            <div class="">
+                <!-- <div class="pb-3 textline fw-6">Why Pay More? go Generic with JITO</div> -->
+                <!-- <div class="pb-4 fw-5 fs-6">Get the same effectiveness at a fraction of the cost</div> -->
+                <div class="fs-6 d-flex align-items-end flex-wrap">
+                    <span class="me-3">Powered by</span> 
+                    <span class="">
+                        <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-logo.png" alt="" width="130px">
+                    </span>
+                </div>
+            </div>
+        </div>
+    <!-- </div>
+    <div class="col-4 p-2"> -->
+        <div class="text-center item-shadow bg-grad p-4">
+            <div class="pb-3"><i class="fa-solid fa-cart-shopping cart-block"></i></div>
+            <div *ngIf="addedInCart.length == 0" class="fs-7 fw-6 text-blue pb-4">No items in your cart</div>
+            <div *ngIf="addedInCart.length > 0" class="fs-7 fw-6 text-blue pb-4">{{ addedInCart.length }} &nbsp;Item<span
+                    *ngIf="addedInCart.length > 1">s</span> in your cart</div>
+            <div class="proceed w-240 mx-auto hvr mb-1" routerLink="/customercart">PROCEED</div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="bannerLnk">
+    <div class="empty-search">
+        <div class="banner-search-img p-2 me-4">
+            <img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/search-pro.png" alt="">
+        </div>
+        <div class="text-center">
+            <div class="mb-3 fw-6 fs-24 text-white"> Quality Medicines Upto 60% Savings</div>
+            <div><a href="https://jitohealth.com" class="btn btn-outline btn-sm px-3" target="_blank">Powered by JitoPharma</a></div>
+        </div>
+    </div>
+</div> -->

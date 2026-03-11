@@ -1,0 +1,22 @@
+.bg-btn {
+    background-color: #DAE1F2;
+    padding: 12px;
+    display: inline-block;
+    width: 100%;
+}
+
+.prbg {
+    background-color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    color: #515255;
+    font-size: 12px;
+    border: 1px dashed lightgray;
+}
+
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-gap: 1rem;
+}

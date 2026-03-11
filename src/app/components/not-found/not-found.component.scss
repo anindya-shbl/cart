@@ -1,0 +1,38 @@
+.empty-state {
+    width: 100%;
+    // margin: 30px auto;
+    padding: 30px 0;
+    background: #ffffff;
+    box-shadow: 1px 2px 10px #e1e3ec;
+    border-radius: 4px;
+
+    &__content {
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .empty-state__icon {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            border-radius: 200px;
+            justify-content: center;
+            background-color: #f7fafc;
+            box-shadow: 0px 2px 1px #e1e3ec;
+
+            img {
+                width: 170px;
+            }
+        }
+
+        .empty-state__message {
+            color: #3f3e3e;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            padding-bottom: 1remx;
+        }
+    }
+}

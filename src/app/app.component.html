@@ -1,0 +1,15 @@
+<ngx-spinner bdColor="#27272770" size="medium" color="#fff" type="line-spin-fade" [fullScreen]="true">
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+<div *ngIf="!loading" class="cont-body">
+  <div class="fixed-top">
+    <app-header></app-header>
+  </div>
+  <div class="mt-65">
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+  <!-- <div>
+    
+  </div> -->
+</div>

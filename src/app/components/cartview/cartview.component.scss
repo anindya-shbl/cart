@@ -1,0 +1,218 @@
+// .bannerLnk {
+//     background-color: #fff;
+//     box-shadow: 0 7px 20px #b9b9b9;
+//     width: 100%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 14px;
+//     column-gap: 14px;
+//     color: #000;
+//     & a {
+//         color: #000;
+//         font-size: 14px;
+//         text-decoration: none;
+//         cursor: pointer;
+//         &:hover {
+//             color: #168496;
+//         }
+//     }
+// }
+
+
+
+// .sticky-top{
+//     z-index: 1 !important;
+//     position: sticky;
+//     top: 65px;
+// }
+
+
+.view-bg{
+    background-color: #eff7ff;
+    padding: 44px 1.5rem 1.5rem;
+    // min-height: calc(100vh - 276px);
+}
+
+.text-6xl{
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #000;   
+}
+
+.search-cont{
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.min-hgt1{
+    background-color: white;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: start;
+    //border: 1px solid rgb(223, 223, 223);
+    border-radius: 10px;
+    padding:  1.5rem;
+    box-shadow: 1px 3px 10px 0px rgba(179,179,179,0.1);
+}
+
+.round-block {
+    border-radius: 50px;
+    background-color: #dbeafe;
+    color: #2563eb;
+    line-height: 27px;
+    font-size: 17px;
+    text-align: center;
+    padding: 10px;
+    min-height: 48px;
+    min-width: 48px;
+}
+
+// .grid-container {
+//   display: grid;
+//   grid-template-columns: 1fr 360px; 
+//   gap: 1rem;
+// }
+
+// @media only screen and (min-width: 1400px) {
+//     .grid-container {
+//         display: grid;
+//         grid-template-columns: 1fr 420px;
+//         gap: 1rem;
+//     }
+// }
+
+.itemImg{
+    width: 110px;
+    min-width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #e6eaf0;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.text-orange{
+    color: orangered;
+}
+
+.qtyBtn {
+    background-color: #fff;
+    border: 1px solid #7dcdf7;
+    padding: 6px;
+    height: 42px;
+    width: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #007dc9;;
+    border-radius: 6px;
+    font-weight: 700;
+    // cursor: pointer;
+    box-shadow: 0 0 2px #7dcdf7;
+}
+
+.cl-blg{
+    color: #006db5;
+}
+
+.proceed{
+    background-color: #006db5;
+    border: 1px solid #006DB5;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #fff;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.item-block{
+    display: flex;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #e6eaf0;
+    background-color: white;
+}
+
+.Rx-icon{
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 28px;
+    height: 29px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    & i {
+        font-size: 13px;
+        color: #666666;
+    }
+}
+
+.exp-sec{
+    display: inline-block;
+    padding: 4px 8px 3px;
+    border: 1px dashed lightgray;
+    // margin-block-end: 10px;
+    color: #696969;
+    font-size: 13px;
+    background-color: #fbfbfb;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.textline {
+    h1{
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    color: #000 !important;
+    @media screen and (max-width: 768px) { 
+    font-size: 1rem !important;
+    }
+    }
+    
+}
+
+.item-shadow{
+    box-shadow : 0px 1px 3px 2px rgba(140, 149, 159, 0.15);
+}
+
+.cart-block{
+    border-radius: 50px;
+    background-color: #dbeafe;
+    color: #2563eb;
+    line-height: 56px;
+    font-size: 30px;
+    text-align: center;
+    padding: 12px 12px 6px 9px;
+    min-height: 72px;
+    min-width: 74px;
+}
+
+.empty-block{
+    display: inline-flex;
+    border-radius: 50%;
+    background-color: #eff7ff;
+    color: #2563eb;
+    line-height: 42px;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 10px 8px 8px;
+    min-height: 90px;
+    min-width: 90px;
+    justify-content: center;
+    align-items: center;
+}

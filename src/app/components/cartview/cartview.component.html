@@ -1,0 +1,201 @@
+<div style="min-height: calc(100vh - 276px);">
+  <div class="view-bg">
+    <div class="text-6xl mb-4">Get <span class="cl-blg">100% Genuine </span>Medicines</div>
+    <div class="mb-4 textline text-center pb-3">
+      <!-- <h1>Flat <span class="text-orange">&nbsp;18% Off</span> on Medicines + <span class="text-orange">₹50 OFF </span>
+        on Your First Order - Order Now & Save Big!</h1> -->
+      <h1>Flat <span class="text-orange">&nbsp;18% Off</span> on Medicines + <span class="text-orange">Extra 2% OFF </span>
+        on Orders above ₹999! use Code : <span class="fs-8">EXTRA2</span></h1>
+    </div>
+    <div class="search-cont mb-3">
+      <app-search (newItemEvent)="getAllRecord()"></app-search>
+    </div>
+    <div class="text-center mt-3 mb-4 tcolor-light fs-5 fw-5">Trusted by Over 8 Lakh Happy Customers.</div>
+  </div>
+
+  <div *ngIf="allItemsList.length > 0" class="mx-auto p-4" style="max-width: 1600px;">
+    <div class="grid-container">
+      <div class="border rounded item-shadow bg-white">
+        <div class="d-flex align-items-center px-4 py-3">
+          <span class="me-3"><i class="fa-solid fa-cart-shopping round-block"></i></span>
+          <span class="fw-6 fs-8">Item<span *ngIf="totalCount > 1">s</span> in your cart - {{ totalCount }}</span>
+        </div>
+        <div class="">
+          <ng-container *ngFor="let item of allItemsList">
+            <div class="d-flex justify-content-between border-top align-items-center p-4">
+              <div class="d-flex hvr position-relative"
+                (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
+                <div class="itemImg">
+                  <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
+                    <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt
+                      width="100%">
+                  </ng-container>
+                  <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null">
+                    <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100%"> -->
+                    <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"
+                      src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                    <img *ngIf="item.PrescriptionOTC == 'O'"
+                      src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                  </ng-container>
+                  <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i
+                      class="fa-solid fa-prescription"></i></span>
+                </div>
+                <div class="w-100 px-3">
+                  <div class="fs-5 fw-5 mb-2">
+                    {{item.ProductName}}
+                  </div>
+                  <div class="fs-3 text-body-tertiary fs-3 mb-2">{{item.MfgGroup}}</div>
+
+                  <div class="exp-sec mb-2" *ngIf="item.ExpiryDate != '' && item.ExpiryDate != null">
+                    <span *ngIf="item.PrescriptionOTC != 'O'">Exp Dt.</span>
+                    <span *ngIf="item.PrescriptionOTC == 'O'">Best Before</span>
+                    : {{item.ExpiryDate | date : "dd MMM yyyy"}}
+                  </div>
+
+                  <div class="d-flex flex-wrap align-items-baseline">
+                    <div class="fs-6 fw-6 me-2">{{item.OfferPrice | currency : "INR"}}</div>
+                    <div *ngIf="item.ProductPrice > item.OfferPrice"
+                      class="text-secondary text-decoration-line-through me-2">{{item.ProductPrice | currency : "INR"}}
+                    </div>
+                    <div *ngIf="item.DiscountPercent > 0" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}%
+                      Off</div>
+                    <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex align-items-end flex-column">
+                <div class="qtyBtn mb-3">
+                  <span (click)="cartAddMinus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-minus"></i></span>
+                  <span class="px-2">{{item.ProductCount}}</span>
+                  <span (click)="cartAddPlus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-plus"></i></span>
+                </div>
+                <div class="mb-1">
+                  <!-- <span class="text-secondary hvr" (click)="deleteById(item.ProductId)"><i class="fa-solid fa-trash-can"></i></span> -->
+                  <span class="text-body-tertiary hvr fs-3" (click)="deleteById(item.ProductId)">Remove<i
+                      class="fa-solid fa-trash-can ms-2 fs-2"></i></span>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="">
+        <div class="bg-white border rounded text-center p-4 item-shadow sticky-top">
+          <div class="pt-2 pb-3"><i class="fa-solid fa-cart-shopping cart-block"></i></div>
+          <div class="fs-8 fw-6 pb-4">{{ totalCount }} &nbsp;Item<span *ngIf="totalCount > 1">s</span> in your cart
+          </div>
+          <div class="pb-3">
+            <button class="proceed w-50" type="button" (click)="proceed()">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="allItemsList.length == 0 && !isLoading" class="mx-auto p-4" style="max-width: 1400px;">
+    <div class="d-flex justify-content-center align-items-center mx-auto py-5"
+      style="max-width: 1024px;">
+      <span class="me-5"><i class="fa-solid fa-cart-shopping empty-block"></i></span>
+      <span class="fw-6 mb-1" style="font-size: 24px;">Your Cart is Empty</span>
+    </div>
+  </div>
+
+  <div class="view-bg pt-4">
+      <div class="mx-auto my-3" style="max-width: 1024px;">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="min-hgt1">
+            <div class="me-3">
+              <i class="fa-solid fa-truck-fast round-block"></i>
+            </div>
+            <div>
+              <div class="mb-2 fs-6 fw-6 tcolor-dark">Fast Delivery</div>
+              <div class="tcolor-light">Same day delivery available</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="min-hgt1">
+            <div class="me-3">
+              <i class="fa-solid fa-shield round-block"></i>
+            </div>
+            <div>
+              <div class="mb-2 fs-6 fw-6 tcolor-dark">100% Genuine</div>
+              <div class="tcolor-light">Verified & authentic medicines</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="min-hgt1">
+            <div class="me-3">
+              <i class="fa-solid fa-clock round-block"></i>
+            </div>
+            <div>
+              <div class="mb-2 fs-6 fw-6 tcolor-dark">24/7 Support</div>
+              <div class="tcolor-light">Expert consultation available</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center p-1 border-top">
+    <div class="p-2 me-2 hvr">
+      <a class="text-decoration-none" (click)="SearchOTCMEDProduct()">
+        <i class="fa-solid fa-store"></i> Household Products
+      </a>
+    </div>
+    <div class="p-2 me-2 hvr">
+      <a class="text-decoration-none" href="{{ CommonService.baseurl }}index.php/medicine/orderbyprescription">
+        <i class="fa-solid fa-file-prescription"></i> Order by Prescription
+      </a>
+    </div>
+    <div *ngIf="isLoggedIn == 'true'" class="p-2 hvr">
+      <a class="text-decoration-none" href="{{ CommonService.baseurl }}index.php/customers/dashboard/orderlist">
+        <i class="fa-solid fa-repeat"></i> Reorder Medicine
+      </a>
+    </div>
+    <div *ngIf="isLoggedIn != 'true'" class="p-2 hvr">
+      <a class="text-decoration-none" href="{{ CommonService.baseurl }}index.php/user/login">
+        <i class="fa-solid fa-repeat"></i> Reorder Medicine
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- <div>
+  <img src="https://asset.sastasundar.com/incom/incom_banner/home_banner/web/100__genuie_medicines_new.png" class="img-fluid" alt="...">
+</div> -->
+
+<!-- =========== open login popup ============ -->
+
+<button #openLogin type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#loginModal"></button>
+
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
+      <button #closelogin type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+      <app-login (closeLogin)="LoginModClose()"></app-login>
+    </div>
+  </div>
+</div>
+
+<button #infoMdl type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#infoMdl"></button>
+
+<div class="modal fade" id="infoMdl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="infoMdlLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+      <div class="d-flex justify-content-end p-3 border-bottom">
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" data-bs-dismiss="modal" aria-label="Close"></i></span>
+      </div>
+      <!-- <button type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close"><i
+          class="icon-lab_cross"></i></button> -->
+      <div class="modalBody">
+        <div class="p-3 fw-5" style="min-height: 100px;">{{infoMsg}}</div>
+      </div>
+    </div>
+  </div>
+</div>

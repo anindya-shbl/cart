@@ -1,0 +1,297 @@
+<div class="mt-3">
+    <!-- <div class="d-flex justify-content-center"> -->
+        <div style="position: relative">
+
+            <i class="fa fa-search position-absolute" style="top: 21px; right: 22px; color:#78819B; font-size: 18px; z-index: 6;"></i>
+            <div class="input-group mb-1 hvr ">
+                <input #psearch type="text" class="form-control" placeholder="Search for Medicines & Household Supplies" aria-label="Customer Search" [(ngModel)]="searchTxt" (keyup)="onSearchChange($event)" (keydown)="onKeydown()">
+            </div>
+            
+            
+                <!-- <div class="input-box" [ngClass]="this.currentUrl == 'ordermedicine'?'hm-ht':''">
+                    <input #psearch type="text" class="form-control" [ngClass]="this.currentUrl == 'ordermedicine'?'':'frmCtrl-sm'" (keyup)="onSearchChange($event)"  (keydown)="onKeydown()" [(ngModel)]="searchTxt" name="searchTxt" autocomplete="off" placeholder="Search for Medicines & Household Supplies">
+                    <i class="fa fa-search"></i>
+                </div> -->
+            
+                
+            <ng-container *ngIf="searchStart">
+                <div class="px-3 search-result text-center">
+                    <div class="search-body" >
+                        <div class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white" style="height: 220px;">
+                            <div class="spinner-border" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!searchStart">
+                <div class="px-3 search-result">
+                    <div *ngIf="searchResult" class="search-body">
+                        <div *ngIf="ProductList.length>0" class="d-flex align-items-center justify-content-between px-3 py-2 bg-light">
+                            <span>Search result for <strong>{{searchTxt}}</strong></span>
+                            <span class="hvr fs-6 fw-4" (click)="resetSearch()"><i class="fa fa-times-circle-o" style="font-size: 20px;" aria-hidden="true"></i></span>
+                        </div>
+                        
+                        <div *ngIf="ProductList.length>0" class="search-list p-0">
+                            <ng-container *ngFor="let product of ProductList; let i = index">
+                                <div class="border-bottom">
+                                <div class="searchLstSec">
+                                
+                                    <div class="lftSec hvr" (click)="CommonService.getProductDetailsPageURL(product[productID], product[productIndex], product[PrescriptionOTC])">
+                                        <div class="d-flex">
+                                            <div class="imglistblock">
+                                                <ng-container *ngIf="product[ProductImage] != '' && product[ProductImage] != null">
+                                                    <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{product[ProductImage]}}" alt width="100%">
+                                                </ng-container>
+                                                <ng-container *ngIf="product[ProductImage] == '' || product[ProductImage] == null">
+                                                    <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100%"> -->
+                                                    <img *ngIf="product[PrescriptionOTC] == 'P' || product[PrescriptionOTC] == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="100%">
+                                                    <img *ngIf="product[PrescriptionOTC] == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="100%">
+                                                </ng-container>
+                                            </div>
+                                            <div>
+                                                <div class="proTitleBlock"><span>{{product[productIndex]}}</span></div>
+                                                <div class="fs-3 text-secondary py-1">{{product[MfgGroup]}}</div>
+                                                <div class="prorsBlock">
+                                                    <ng-container *ngIf="product[ProductStatus]=='C'">
+                                                        <ng-container *ngIf="product[IsOutOfStock] == 'Y'">
+                                                            <span class="text-secondary text-decoration-none">Out of stock</span>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="product[IsOutOfStock] == 'N'">
+                                                            <strong *ngIf="(product[OfferPriceIndex] > 0 && product[MRPIndex] > product[OfferPriceIndex]) else showmrp">{{product[OfferPriceIndex] | currency: 'INR'}}</strong>
+                                                            <!-- <span *ngIf="product[MRPIndex] > 0 && product[MRPIndex] > product[OfferPriceIndex]">MRP<sup>*</sup>Rs.{{product[MRPIndex]}}</span> -->
+                                                            <span *ngIf="product[MRPIndex] > 0 && product[MRPIndex] > product[OfferPriceIndex]">{{product[MRPIndex] | currency: 'INR'}}</span>
+                                                            <ng-template #showmrp>
+                                                                <strong *ngIf="product[MRPIndex] > 0">{{product[MRPIndex] | currency: 'INR'}}</strong>
+                                                            </ng-template>
+                                                            <strong *ngIf="product[DiscountPercent] > 0" class="discountprice">{{product[DiscountPercent]}}% Off</strong>
+                                                        </ng-container>
+                                                    </ng-container> 
+                                                    <ng-container *ngIf="product[ProductStatus]=='D'">
+                                                        <span class="text-danger text-decoration-none">Discontinued</span>
+                                                    </ng-container>                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                
+                                    <div *ngIf="product[ProductStatus]=='C'" class="rghtSec">
+                                        <ng-container *ngIf="product[IsOutOfStock] == 'N'">
+                                            <div *ngIf="product[isExisting] == 0" class="inputGrpSec">
+                                                <input maxlength="2" min="1" #searchqty numbersOnly autocomplete="off" value="1" class="add">
+                                                <div class="input-group-append">
+                                                    <button class="addBtn" type="button" (click)="addToCart(product, searchqty.value, 'AddTo');">ADD</button>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="product[isExisting] == 1">
+                                                <button class="btn medAdd medAdded" type="button">ADDED</button>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="product[IsOutOfStock] == 'Y' && product[showRefPrd]== 0">
+                                            <div class="notify-btn  hvr" (click)="requestNotify(product)">
+                                                <span class="fw-5" >Notify</span>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                
+                                </div>
+
+                                <ng-container *ngIf="product[showRefPrd]== 1">
+                                    <div class="AlternativeAvailable">
+                                        <a *ngIf="showVar != product[productID]" class="Alternative-btn" (click)="displayVrnt(product)">
+                                            <div class="text-primary"><i class="fa-solid fa-database fs-6 me-1 text-primary"></i> New Product Varient Available</div>
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                        <a *ngIf="showVar == product[productID]" class="Alternative-btn" (click)="hideVrnt()">
+                                            <div class="text-primary"><i class="fa-solid fa-database fs-6 me-1 text-primary"></i> New Product Varient Available</div>
+                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        </a>
+                                        <div *ngIf="showVar == product[productID]">
+                                            <div class="Alternative-body">
+                                                <div class="product-block">
+                                                    <div class="searchLstSec p-0">
+                                                        <div class="lftSec hvr"
+                                                            (click)="CommonService.getProductDetailsPageURL(product[RefProductDetails].ProductId, product[RefProductDetails].DisplayName, product[RefProductDetails].PrescriptionOTC)">
+                                                            <div class="imglistblock">
+                                                                <ng-container *ngIf="product[RefProductDetails].ProductImage != '' && product[RefProductDetails].ProductImage != null">
+                                                                    <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{product[RefProductDetails].ProductImage}}"
+                                                                        alt width="100%">
+                                                                </ng-container>
+                                                                <ng-container *ngIf="product[RefProductDetails].ProductImage == '' || product[RefProductDetails].ProductImage == null">
+                                                                    <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100%"> -->
+                                                                    <img *ngIf="product[RefProductDetails].PrescriptionOTC == 'P' || product[RefProductDetails].PrescriptionOTC == 'M'"
+                                                                        src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="100%">
+                                                                    <img *ngIf="product[RefProductDetails].PrescriptionOTC == 'O'"
+                                                                        src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                                                                        width="100%">
+                                                                </ng-container>
+                                                            </div>
+                                                            <div>
+                                                                <div class="proTitleBlock">{{product[RefProductDetails].DisplayName}}</div>
+                                                                <div class="fs-3 py-1 text-secondary">{{product[RefProductDetails].MfgGroup}}</div>
+                                                                <div class="prorsBlock">
+                                                                    <strong>{{product[RefProductDetails].CustOfferPrice | currency: 'INR'}}</strong>
+                                                                    <del *ngIf="product[RefProductDetails].MRP > product[RefProductDetails].CustOfferPrice"
+                                                                        class="s-price">{{product[RefProductDetails].MRP | currency:
+                                                                        'INR'}}</del>
+                                                                    <strong *ngIf="product[RefProductDetails].CustDiscPercent > 0"
+                                                                        class="discountprice">{{product[RefProductDetails].CustDiscPercent}}% Off</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            
+                                                        <!-- <a href="" class="btn btn-info btn-sm">ADD</a> -->
+                                                        <div class="rghtSec">
+                                                            <div *ngIf="product[RefProductDetails].addedQty == 0" class="inputGrpSec">
+                                                                <div class="input-group-append">
+                                                                    <button *ngIf="product[isExisting] == 0" class="addBtn" type="button"
+                                                                        (click)="addVarient(product[RefProductDetails], 1)">ADD</button>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="product[RefProductDetails].addedQty > 0" class="btn medAdd medAdded">ADDED</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="product[showRefPrd]== 0">
+                                    <div *ngIf="product[SubtituteIndex].length>0" class="AlternativeAvailable">
+                                        <a *ngIf="showSubs != product[productID]" class="Alternative-btn" (click)="displaySubs(product)">
+                                            <div><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""
+                                                    width="24px"> <span *ngIf="getMaxSavings(product[SubtituteIndex])>0">{{getMaxSavings(product[SubtituteIndex])}}% Lower Price </span> Alternative Available
+                                            </div>
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                        <a *ngIf="showSubs == product[productID]" class="Alternative-btn" (click)="hideSub()">
+                                            <div><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""
+                                                    width="24px"> <span *ngIf="getMaxSavings(product[SubtituteIndex])>0">{{getMaxSavings(product[SubtituteIndex])}}% Lower Price </span> Alternative Available
+                                            </div>
+                                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                                        </a>
+                                        <div *ngIf="showSubs == product[productID]">
+                                
+                                            <div class="Alternative-body">
+                                                <ng-container *ngFor="let altr of product[SubtituteIndex]">
+                                                    <div class="product-block">
+                                                        <div *ngIf="getMaxSavings(product[SubtituteIndex])>0" class="tagline">Save {{altr.savingsPercent}}%</div>
+                                            
+                                                        <div class="searchLstSec p-0">
+                                                            <div class="lftSec hvr"
+                                                                (click)="CommonService.getProductDetailsPageURL(altr.PreferredProductId, altr.DisplayName, altr.PrescriptionOTC)">
+                                                                <div class="imglistblock">
+                                                                    <ng-container
+                                                                        *ngIf="altr.ProductImage != '' && altr.ProductImage != null">
+                                                                        <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{altr.ProductImage}}"
+                                                                            alt width="100%">
+                                                                    </ng-container>
+                                                                    <ng-container
+                                                                        *ngIf="altr.ProductImage == '' || altr.ProductImage == null">
+                                                                        <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100%"> -->
+                                                                        <img *ngIf="product[PrescriptionOTC] == 'P' || product[PrescriptionOTC] == 'M'"
+                                                                            src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt=""
+                                                                            width="100%">
+                                                                        <img *ngIf="product[PrescriptionOTC] == 'O'"
+                                                                            src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                                                                            width="100%">
+                                                                    </ng-container>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="proTitleBlock">{{altr.DisplayName}}</div>
+                                                                    <div class="fs-3 py-1 text-secondary">{{altr.MfgGroup}}</div>
+                                                                    <div class="prorsBlock">
+                                                                        <strong>{{altr.CustOfferPrice | currency: 'INR'}}</strong>
+                                                                        <del *ngIf="altr.MRP > altr.CustOfferPrice" class="s-price">{{altr.MRP | currency:
+                                                                            'INR'}}</del>
+                                                                        <strong *ngIf="altr.CustDiscPercent > 0" class="discountprice">{{altr.CustDiscPercent}}%
+                                                                            Off</strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                            
+                                                            <!-- <a href="" class="btn btn-info btn-sm">ADD</a> -->
+                                                            <div class="rghtSec">
+                                                                <div *ngIf="altr.addedQty == 0" class="inputGrpSec">
+                                                                    <div class="input-group-append">
+                                                                        <button *ngIf="product[isExisting] == 0" class="addBtn" type="button"
+                                                                            (click)="addAlternative(altr, 1, product[PrescriptionOTC])">ADD</button>
+                                                                        <button *ngIf="product[isExisting] > 0" class="addBtn" type="button"
+                                                                            (click)="replaceAlternative(altr, product)">Replace</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div *ngIf="altr.addedQty > 0" class="btn medAdd medAdded">ADDED</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            </ng-container>
+                        </div>
+                        <!-- <div *ngIf="ProductList.length==0" class="search-list blank px-3">
+                            <div class="fw-6 my-2">You are not getting any results because -</div>
+                            <div>
+                                <ul>
+                                    <li>Either our services are currently not available in your location/area.</li>
+                                    <li>Or this product is currently not available</li>
+                                    <li>Please enusre if the item you are looking for is a medicine</li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <div *ngIf="ProductList.length==0">
+                            <div class="p-3 d-flex align-items-center justify-content-between bg-light" style="font-weight: 400 !important;">
+                                <span class="me-2">No result found for "{{searchTxt}}"</span>
+                                <span class="hvr fw-4" (click)="resetSearch()"><i class="fa fa-times-circle-o" style="font-size: 20px;" aria-hidden="true"></i></span>
+                            </div>
+                            <div  class="d-flex align-items-center justify-content-between p-3 pt-2">
+                                <div class="d-flex hvr">
+                                    <div class="imglistblock text-center me-2" style="background-color: #F0F9FF;">
+                                        <span style="font-size: 25px; color: #0090DD; font-weight: 600;">+</span>
+                                    </div>
+                                    <div>
+                                        <div class="fs-4 fw-5 mb-2">{{searchTxt}} &nbsp;</div>
+                                        <div class="fs-3 text-secondary">New Product</div>
+                                    </div>
+                                </div>
+                                <div class="" style="max-width: 140px;">
+                                    <div class="notify-btn fw-5 hvr" (click)="requestAddNew()">Notify</div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    <!-- </div> -->
+</div>
+
+    
+
+
+
+
+  <button #confirm type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#confirm"></button>
+  <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="confirmLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content custom_modal_content">
+      <button type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close" (click)="confirmBtn()"><i class="icon-lab_cross"></i></button>
+      <div class="modalBody">
+        <div class="mt-3 mb-2 fw-5" style="min-height: 50px;">{{alertMsg}}</div>
+      </div>
+      <div class="modalFooter">
+        <button type="button" class="successBtn" data-bs-dismiss="modal" aria-label="Close"
+        (click)="confirmBtn()">Ok</button>
+        <!-- <button #closebutton type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()">Cancel</button> -->
+      </div>
+    </div>
+  </div>
+</div>

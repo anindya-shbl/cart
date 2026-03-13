@@ -49,8 +49,8 @@ export class AppComponent implements OnInit {
         this.CommonService.EmailId = res['data']['EmailId'];
         this.CommonService.Token = res['data']['EncodedUserId'];
         this.CommonService.Warehouse = res['location']['HealthBuddyName'];
-        this.CommonService.isDownTime = res['data']['downtimeFlg'];
-        this.CommonService.downTimeMsg = res['data']['downtimemsg'];
+        this.CommonService.isDownTime = res['data']['downtimeFlg'] !== undefined ? res['data']['downtimeFlg'] : 0;
+        this.CommonService.downTimeMsg = res['data']['downtimemsg'] !== undefined ? res['data']['downtimemsg'] : '';
 
         if (res['location'] != undefined) {
           this.CommonService.PinCode = res['location']['UserLocationPincode'];

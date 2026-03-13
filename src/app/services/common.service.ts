@@ -44,14 +44,13 @@ export class CommonService {
   public custwebcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/';
   public onlineplaceorderUrl = 'http://192.168.5.236:8081/sspl_com/index.php/cart/online_payment_process';
   public codsuccessUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/order_success';
-  public promoUrl ='http://192.168.5.134:4200/coupon/find_applicable_promos';
+  public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
   public catalogUrl = 'http://192.168.5.236:8003/';
-  public searchUrl = 'http://192.168.5.192:4200/';
+  // public searchUrl = 'http://192.168.5.192:4200/'; // local search
+  // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
+  public searchUrl = 'https://search.sastasundar.com/'; // live
   public ImageUrl = 'https://res.sastasundar.com/';
   public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
-
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   // public userLocationPincode: number = 0;
   // public PanIndia = 0;
@@ -79,6 +78,8 @@ export class CommonService {
   public downTimeMsg: any = '';
 
   private subject: any = new Subject<any>();
+
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   sendClickEvent() {
     this.subject.next();

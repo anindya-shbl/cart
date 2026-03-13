@@ -40,7 +40,7 @@
                                 
                                     <div class="lftSec hvr" (click)="CommonService.getProductDetailsPageURL(product[productID], product[productIndex], product[PrescriptionOTC])">
                                         <div class="d-flex">
-                                            <div class="imglistblock">
+                                            <div class="imglistblock" style="display: block; height: auto; width: 80px;">
                                                 <ng-container *ngIf="product[ProductImage] != '' && product[ProductImage] != null">
                                                     <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{product[ProductImage]}}" alt width="100%">
                                                 </ng-container>
@@ -48,6 +48,9 @@
                                                     <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100%"> -->
                                                     <img *ngIf="product[PrescriptionOTC] == 'P' || product[PrescriptionOTC] == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="100%">
                                                     <img *ngIf="product[PrescriptionOTC] == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="100%">
+                                                </ng-container>
+                                                <ng-container *ngIf="product[InteractiveModule] == '' || product[InteractiveModule] == null">
+                                                    <small class="petTag centertag"> <img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets</small>
                                                 </ng-container>
                                             </div>
                                             <div>
@@ -114,7 +117,7 @@
                                                     <div class="searchLstSec p-0">
                                                         <div class="lftSec hvr"
                                                             (click)="CommonService.getProductDetailsPageURL(product[RefProductDetails].ProductId, product[RefProductDetails].DisplayName, product[RefProductDetails].PrescriptionOTC)">
-                                                            <div class="imglistblock">
+                                                            <div class="imglistblock" >
                                                                 <ng-container *ngIf="product[RefProductDetails].ProductImage != '' && product[RefProductDetails].ProductImage != null">
                                                                     <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{product[RefProductDetails].ProductImage}}"
                                                                         alt width="100%">

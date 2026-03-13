@@ -41,13 +41,16 @@
                         <div class="d-flex justify-content-between p-4">
                           <div class="d-flex position-relative">
 
-                            <div class="itemImg">
+                            <div class="itemImg" style="display: block; height: auto;">
                               <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
                                 <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
                               </ng-container>
                               <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null">
                                 <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
                                 <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                              </ng-container>
+                              <ng-container *ngIf="item.InteractiveModule == '' || item.InteractiveModule == null">
+                                <small class="petTag centertag"><img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
                               </ng-container>
                               <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i class="fa-solid fa-prescription"></i></span>
                             </div>
@@ -180,11 +183,14 @@
                     </ng-container>
                   </div>
                 </ng-container>
-                <div class="p-3 d-flex justify-content-end border-top">
-                  <button *ngIf="PrescUpldFlg" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <div class="p-3 d-flex justify-content-end border-top" style="gap: 10px;">
+                  <button *ngIf="PrescUpldFlgHuman" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     Upload Prescription
                   </button>
-                  <button *ngIf="!PrescUpldFlg" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <button *ngIf="PrescUpldFlgPet" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwoForPet" aria-expanded="true" aria-controls="collapseTwoForPet">
+                    Upload Pet Prescription
+                  </button>
+                  <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     Choose Address
                   </button>
                 </div>
@@ -193,7 +199,7 @@
           </div>
 
           <!-- ================ Prescriptions================ -->
-          <div *ngIf="PrescUpldFlg" class="accordion-item">
+          <div *ngIf="PrescUpldFlgHuman" class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" (click)="resetPG()">
@@ -228,10 +234,10 @@
 
                   <div *ngIf="headerDetails['IsPrescriptionUploaded'] == 0" class>
                     <!-- ============ Image Preview =============== -->
-                    <div *ngIf="ReqPrscList.length > 0" class="requirePrescriptionSec">
-                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscList.length }} item<span *ngIf="ReqPrscList.length > 1">s</span> in your cart require prescription</div>
+                    <div *ngIf="ReqPrscListHuman.length > 0" class="requirePrescriptionSec">
+                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscListHuman.length }} item<span *ngIf="ReqPrscListHuman.length > 1">s</span> in your cart require prescription</div>
                       <ul class="mb-1">
-                        <ng-container *ngFor="let name of slicedArray">
+                        <ng-container *ngFor="let name of slicedArrayHuman">
                           <li class="text-secondary">{{ name.ProductName }}</li>
                         </ng-container>
                       </ul>
@@ -240,7 +246,7 @@
                           <li *ngIf="showMoreBtn">
                             <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View All...</a>
                           </li>
-                          <li *ngIf="!showMoreBtn && slicedArray.length > 3">
+                          <li *ngIf="!showMoreBtn && slicedArrayHuman.length > 3">
                             <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View Less...</a>
                           </li>
                         </ul>
@@ -283,9 +289,9 @@
                       </div>
                     </div>
 
-                    <div *ngIf="savedPrscFile.length > 0" class="my-2">
+                    <div *ngIf="savedPrscFilePet.length > 0" class="my-2">
                       <div class="d-flex flex-wrap">
-                        <ng-container *ngFor="let file of savedPrscFile">
+                        <ng-container *ngFor="let file of savedPrscFilePet">
                           <div class="position-relative m-1">
                             <div class="pdfbgsec border border-danger">
                               <div class="text-danger"><i class="fa-solid fa-file-pdf"></i></div>
@@ -294,7 +300,7 @@
                                 <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
                               </div>
                             </div>
-                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVP(file.PrescriptionId)">
+                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
                               <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
                             </div>
                           </div>
@@ -318,6 +324,131 @@
             </div>
           </div>
 
+          <!-- ================ Prescriptions for PET================ -->
+          <div *ngIf="PrescUpldFlgPet" class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwoForPet" aria-expanded="false" aria-controls="collapseTwoForPet" (click)="resetPG()">
+                Upload Pet Prescription 
+              </button>
+            </h2>
+            <div id="collapseTwoForPet" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body p-0">
+                <div class="p-3">
+                  <!-- ================ Prescription Uploaded ================ -->
+                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 1">
+                    <div class="p-2">
+                      <div class="uploaded hvr" (click)="showUploadedPresc()">
+                        <div>
+                          <i class="fa-solid fa-file-circle-check text-success" style="font-size: 50px;"></i>
+                        </div>
+                        <div class="px-3 fw-5 fs-5 text-success">Pet Prescription Uploaded</div>
+                      </div>
+                      <div *ngIf="UploadedPrscList.length > 0" class="d-flex mt-3">
+                        <ng-container *ngFor="let img of UploadedPrscList; let i = index">
+                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                            <img [src]="img.path" alt width="80" height="80" />
+                          </div>
+                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                            <i class="fa fa-file-pdf-o" style="font-size: 80px; color: #F81305;"></i>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ================ Prescription Uploaded ================ -->
+
+                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
+                    <!-- ============ Image Preview =============== -->
+                    <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
+                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
+                      <ul class="mb-1">
+                        <ng-container *ngFor="let name of slicedArrayPet">
+                          <li class="text-secondary">{{ name.ProductName }}</li>
+                        </ng-container>
+                      </ul>
+                      <div class="viewBtn">
+                        <ul>
+                          <li *ngIf="showMoreBtn">
+                            <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View All...</a>
+                          </li>
+                          <li *ngIf="!showMoreBtn && slicedArrayPet.length > 3">
+                            <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View Less...</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="d-flex align-items-center flex-wrap">
+                      <div *ngIf="savedPrscList.length > 0" class="me-3 mb-2">
+                        <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrsc" [disabled]="savedPrscList.length == 0" (click)="prescriptionViewdWebEngage()">
+                          Saved Prescription
+                        </button>
+                      </div>
+                      <div class="prsc-btn mb-2 hvr">
+                        <label for="file-input-pet" class="hvr">Upload Pet Prescription</label>
+                        <input id="file-input-pet" type="file" class="d-none" (change)="selectPrescriptionPet($event)" multiple accept=".jpg, .jpeg, .pdf" />
+                      </div>
+                    </div>
+
+                    <div *ngIf="prscFilesPet.length > 0" class="my-2">
+                      <!-- <em>{{prscFiles.length}} Prescriptions attached</em> -->
+                      <div class="d-flex flex-wrap">
+                        <ng-container *ngFor="let image of prscImagesPet">
+                          <div class="position-relative m-1">
+                            <div class="pdfbgsec border border-secondary">
+                              <ng-container *ngIf="image.type == 'application/pdf'">
+                                <div class="prs-pdf">
+                                  <i class="fa-solid fa-file-pdf text-danger" style="font-size: 80px;"></i>
+                                  <!-- <i class="icon-file-pdf" style="font-size: 60px; color: #F81305;"></i> -->
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="image.type != 'application/pdf'">
+                                <img [src]="image.url" width="90px" class="rounded" />
+                              </ng-container>
+                            </div>
+                            <div class="position-absolute top-0 end-0 hvr" (click)="delFilePet(image)">
+                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
+                            </div>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+
+                    <div *ngIf="savedPrscFile.length > 0" class="my-2">
+                      <div class="d-flex flex-wrap">
+                        <ng-container *ngFor="let file of savedPrscFile">
+                          <div class="position-relative m-1">
+                            <div class="pdfbgsec border border-danger">
+                              <div class="text-danger"><i class="fa-solid fa-file-pdf"></i></div>
+                              <div class="conBG">
+                                <div class="presName text-danger">{{ file.PrescriptionName }}</div>
+                                <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
+                              </div>
+                            </div>
+                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
+                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
+                            </div>
+                          </div>
+
+                        </ng-container>
+                      </div>
+                    </div>
+
+                    <div class="mt-2 fs-2">
+                      Only .jpg,.jpeg,.pdf files are allowed (max size : 5mb)
+                      Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end p-3 border-top">
+                  <button *ngIf="shippingContinue" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" (click)="continueShipping()">Choose Address</button>
+                  <button *ngIf="!shippingContinue" type="button" class="proceed diabled" >Choose Address</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- ================ Shipping Billing Address================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">

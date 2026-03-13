@@ -36,6 +36,12 @@ export class PlaceOrderComponent implements OnInit {
   selectedPrsc: any = [];
   savedPrscFile: any = [];
   prscImages: any = [];
+  
+  // Pet prescription files (separate tracking)
+  prscFilesPet: any = [];
+  selectedPrscPet: any = [];
+  savedPrscFilePet: any = [];
+  prscImagesPet: any = [];
   HB_Details: any = [];
   ReqPrscList: any = [];
   slicedArray: any = [];
@@ -54,6 +60,14 @@ export class PlaceOrderComponent implements OnInit {
   shippingFlg: boolean = false;
   shippingContinue: boolean = false;
   PrescUpldFlg: boolean = false;
+  PrescUpldFlgHuman: boolean = false;      // Human products needing prescription
+  PrescUpldFlgPet: boolean = false;        // Pet products needing prescription
+  ReqPrscListHuman: any = [];              // Human prescription required items
+  ReqPrscListPet: any = [];                // Pet prescription required items
+  slicedArrayHuman: any = [];              // Human - first 3 items
+  slicedArrayPet: any = [];                // Pet - first 3 items
+  hasHumanProducts: boolean = false;       // Cart has human products
+  hasPetProducts: boolean = false;         // Cart has pet/animal products
   paymentFlg: boolean = false;
   paymentContinue: boolean = false;
 
@@ -151,6 +165,7 @@ export class PlaceOrderComponent implements OnInit {
 
   ngOnInit() {
     localStorage.removeItem('toReplace');
+    // debugger;
     this.isLoggedIn = this.cookieService.get('isLoggedIn');
     if (this.isLoggedIn == 'true') {
       if (this.CommonService.isDownTime == 0) {
@@ -325,6 +340,8 @@ export class PlaceOrderComponent implements OnInit {
     // debugger
     this.CommonService.checkoutCart('cartapp/checkoutincart', fd).subscribe((cartData: any) => {
         // console.log('in cart synch', cartData);
+        cartData = {"result":{"header":{"CartAmount":"257.60","CartItemDiscount":"46.37","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"-0.23","CartVal":"213.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":null,"BillingAddressId":null,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":2,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"211.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"2.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"187943","ProductName":"Dytor 5 mg Tablet (15 Tab)","ProdName":"Dytor","ProductUnit":"Strip","ProductImage":"Dytor-1751611731-10017577-a.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"81.35","ItemQuantity":"1.00","ItemDiscount":"14.64","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"66.71","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"66.71","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000926","BatchNo":"5SN2134","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Dytor 5","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18},{"ProductId":"261658","ProductName":"Naxdom 500 mg Tablet (15 Tab)","ProdName":"Naxdom","ProductUnit":"Strip","ProductImage":"Naxdom-1647948566-10091047-1.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"176.25","ItemQuantity":"1.00","ItemDiscount":"31.73","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"144.52","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"144.52","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"petCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000639","BatchNo":"FHC1043","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}],"itemlist2":{"187943":[{"ProductId":"187943","ProductName":"Dytor 5 mg Tablet (15 Tab)","ProdName":"Dytor","ProductUnit":"Strip","ProductImage":"Dytor-1751611731-10017577-a.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"81.35","ItemQuantity":"1.00","ItemDiscount":"14.64","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"66.71","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"66.71","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000926","BatchNo":"5SN2134","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Dytor 5","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}],"261658":[{"ProductId":"261658","ProductName":"Naxdom 500 mg Tablet (15 Tab)","ProdName":"Naxdom","ProductUnit":"Strip","ProductImage":"Naxdom-1647948566-10091047-1.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"176.25","ItemQuantity":"1.00","ItemDiscount":"31.73","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"144.52","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"144.52","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"petCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000639","BatchNo":"FHC1043","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}]},"lotproductIds":["187943","261658"]}};
+
         if (cartData) {
           let d: Date = new Date();
           this.cookieService.set(
@@ -380,6 +397,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   getCartDetails() {
+    // debugger
     // this.isLoading = true;
     this.spinner.show();
     this.replaceAllSubs = false;
@@ -387,7 +405,7 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-
+cartData = {"result":{"header":{"CartAmount":"257.60","CartItemDiscount":"46.37","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"-0.23","CartVal":"213.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":null,"BillingAddressId":null,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":2,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"211.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"2.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"187943","ProductName":"Dytor 5 mg Tablet (15 Tab)","ProdName":"Dytor","ProductUnit":"Strip","ProductImage":"Dytor-1751611731-10017577-a.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"81.35","ItemQuantity":"1.00","ItemDiscount":"14.64","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"66.71","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"66.71","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000926","BatchNo":"5SN2134","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Dytor 5","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18},{"ProductId":"261658","ProductName":"Naxdom 500 mg Tablet (15 Tab)","ProdName":"Naxdom","ProductUnit":"Strip","ProductImage":"Naxdom-1647948566-10091047-1.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"176.25","ItemQuantity":"1.00","ItemDiscount":"31.73","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"144.52","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"144.52","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"petCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000639","BatchNo":"FHC1043","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}],"itemlist2":{"187943":[{"ProductId":"187943","ProductName":"Dytor 5 mg Tablet (15 Tab)","ProdName":"Dytor","ProductUnit":"Strip","ProductImage":"Dytor-1751611731-10017577-a.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"81.35","ItemQuantity":"1.00","ItemDiscount":"14.64","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"66.71","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"66.71","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000926","BatchNo":"5SN2134","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Dytor 5","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}],"261658":[{"ProductId":"261658","ProductName":"Naxdom 500 mg Tablet (15 Tab)","ProdName":"Naxdom","ProductUnit":"Strip","ProductImage":"Naxdom-1647948566-10091047-1.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"176.25","ItemQuantity":"1.00","ItemDiscount":"31.73","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"144.52","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"144.52","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"petCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000639","BatchNo":"FHC1043","ExpiryDate":"2028-10-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"5107878","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","IsVirtual":0,"DiscountPercent":18}]},"lotproductIds":["187943","261658"]}};
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
 
@@ -442,7 +460,123 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
+      data = {
+        "isAddrUpdate": 1,
+        "header_cart_detail": [
+          {
+            "CartAmount": "257.60",
+            "CartItemDiscount": "46.37",
+            "PromoDiscount": ".00",
+            "CouponDiscount": ".00",
+            "ShippingCharge": ".00",
+            "RoundOfVal": "-0.23",
+            "CartVal": "213.00",
+            "OrderPromoID": null,
+            "PromoDesc": null,
+            "CouponPromoId": null,
+            "CouponPromoDesc": null,
+            "NeedToAttachPrescription": "Y",
+            "CourierCharge": null,
+            "ShippingAddressId": null,
+            "BillingAddressId": null,
+            "AreaId": null,
+            "GroupPromoDiscount": null,
+            "IsRedeemable": "N",
+            "CanCOD": "Y",
+            "DeliveryDelayedDay": 0,
+            "OTCBillAmount": null,
+            "SSCurrencyValue": ".00",
+            "WarehouseId": 2,
+            "IsPanIndia": 0,
+            "AppliedCouponCode": null,
+            "EWalletValue": null,
+            "SSCurrencyRedeemed": 0,
+            "OTCIsUrgent": null,
+            "RemainingOTCUrgentBal": 0,
+            "XplorPoint": ".00",
+            "XplorPointVal": null,
+            "AppliedXplorPoint": ".00",
+            "AppliedXplorPointVal": ".00",
+            "IsShow": null,
+            "OTCMEDBillAmount": null,
+            "GiftCardAmount": ".00",
+            "MedDiscPercent": null,
+            "IsDeliveryChargeWaivedOff": 0,
+            "CartValForDeliveryCharge": "211.00",
+            "IsScarcity": 0,
+            "IsLocalCourierable": 0,
+            "SubscriptionId": null,
+            "SubscriptionDiscount": null,
+            "IsPrescriptionUploaded": 0,
+            "ConvienceFee": "2.00",
+            "SmallOrderFee": ".00",
+            "IsPetCarePrescriptionUploaded": 0,
+            "HBName": "TestHBNoida",
+            "BaseShippingCharge": 49,
+            "BaseShippingChargeCartVal": 249,
+            "BaseConvienceFee": 10
+          }
+        ],
+        "ShippingAddressId": null,
+        "BillingAddressId": null,
+        "result": {
+          "header": [
+            {
+              "CartAmount": "257.60",
+              "CartItemDiscount": "46.37",
+              "PromoDiscount": ".00",
+              "CouponDiscount": ".00",
+              "ShippingCharge": ".00",
+              "RoundOfVal": "-0.23",
+              "CartVal": "213.00",
+              "OrderPromoID": null,
+              "PromoDesc": null,
+              "CouponPromoId": null,
+              "CouponPromoDesc": null,
+              "NeedToAttachPrescription": "Y",
+              "CourierCharge": null,
+              "ShippingAddressId": null,
+              "BillingAddressId": null,
+              "AreaId": null,
+              "GroupPromoDiscount": null,
+              "IsRedeemable": "N",
+              "CanCOD": "Y",
+              "DeliveryDelayedDay": 0,
+              "OTCBillAmount": null,
+              "SSCurrencyValue": ".00",
+              "WarehouseId": 2,
+              "IsPanIndia": 0,
+              "AppliedCouponCode": null,
+              "EWalletValue": null,
+              "SSCurrencyRedeemed": 0,
+              "OTCIsUrgent": null,
+              "RemainingOTCUrgentBal": 0,
+              "XplorPoint": ".00",
+              "XplorPointVal": null,
+              "AppliedXplorPoint": ".00",
+              "AppliedXplorPointVal": ".00",
+              "IsShow": null,
+              "OTCMEDBillAmount": null,
+              "GiftCardAmount": ".00",
+              "MedDiscPercent": null,
+              "IsDeliveryChargeWaivedOff": 0,
+              "CartValForDeliveryCharge": "211.00",
+              "IsScarcity": 0,
+              "IsLocalCourierable": 0,
+              "SubscriptionId": null,
+              "SubscriptionDiscount": null,
+              "IsPrescriptionUploaded": 0,
+              "ConvienceFee": "2.00",
+              "SmallOrderFee": ".00",
+              "IsPetCarePrescriptionUploaded": 0,
+              "HBName": "TestHBNoida"
+            }
+          ],
+          "coupons": [
 
+          ]
+        }
+      };
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -536,25 +670,96 @@ export class PlaceOrderComponent implements OnInit {
     // this.isLoading = false;
   }
 
+  // getReqPrsMeds(data: any) {
+  //   let rqsPrs: any = [];
+  //   this.slicedArray = [];
+  //   data.forEach((d: any) => {
+  //     if (d['PrescriptionOTC'] !== 'O') {
+  //       rqsPrs.push({
+  //         ProductId: d['ProductId'],
+  //         ProductName: d['ProductName'],
+  //       });
+  //     }
+  //   });
+  //   this.ReqPrscList = rqsPrs;
+  //   if (this.ReqPrscList.length > 3) {
+  //     this.slicedArray = this.ReqPrscList.slice(0, 3);
+  //     this.showMoreBtn = true;
+  //   } else {
+  //     this.slicedArray = this.ReqPrscList;
+  //     this.showMoreBtn = false;
+  //   }
+  // }
+
   getReqPrsMeds(data: any) {
-    let rqsPrs: any = [];
+    let rqsPrsHuman: any = [];
+    let rqsPrsPet: any = [];
     this.slicedArray = [];
+    this.slicedArrayHuman = [];
+    this.slicedArrayPet = [];
+
+    // Separate items by product type
     data.forEach((d: any) => {
       if (d['PrescriptionOTC'] !== 'O') {
-        rqsPrs.push({
+        let itemObj = {
           ProductId: d['ProductId'],
           ProductName: d['ProductName'],
-        });
+        };
+
+        // Check if it's a pet product (InteractiveModule exists and is not empty)
+        if (d['InteractiveModule'] && d['InteractiveModule'] != '') {
+        //reversed condition to see the html part
+        // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
+          rqsPrsPet.push(itemObj);
+        } else {
+          // Human product
+          rqsPrsHuman.push(itemObj);
+        }
       }
     });
-    this.ReqPrscList = rqsPrs;
-    if (this.ReqPrscList.length > 3) {
-      this.slicedArray = this.ReqPrscList.slice(0, 3);
+
+    // Set flags and lists
+    this.ReqPrscList = rqsPrsHuman;        // Keep existing for backward compatibility
+    this.ReqPrscListHuman = rqsPrsHuman;
+    this.ReqPrscListPet = rqsPrsPet;
+
+    this.hasHumanProducts = rqsPrsHuman.length > 0;
+    this.hasPetProducts = rqsPrsPet.length > 0;
+
+    // Process human products
+    if (this.ReqPrscListHuman.length > 3) {
+      this.slicedArrayHuman = this.ReqPrscListHuman.slice(0, 3);
       this.showMoreBtn = true;
     } else {
-      this.slicedArray = this.ReqPrscList;
+      this.slicedArrayHuman = this.ReqPrscListHuman;
       this.showMoreBtn = false;
     }
+
+    // Process pet products
+    if (this.ReqPrscListPet.length > 3) {
+      this.slicedArrayPet = this.ReqPrscListPet.slice(0, 3);
+    } else {
+      this.slicedArrayPet = this.ReqPrscListPet;
+    }
+
+    // Set upload prescription flags
+    if (this.headerDetails['IsPrescriptionUploaded'] == 0) {
+      if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        // Show based on what products exist
+        this.PrescUpldFlgHuman = this.hasHumanProducts;
+        this.PrescUpldFlgPet = this.hasPetProducts;
+      } else {
+        this.PrescUpldFlgHuman = false;
+        this.PrescUpldFlgPet = false;
+      }
+    } else {
+      // Already uploaded - show both if items exist
+      this.PrescUpldFlgHuman = this.hasHumanProducts;
+      this.PrescUpldFlgPet = this.hasPetProducts;
+    }
+
+    // For backward compatibility, set PrescUpldFlg if either human or pet is needed
+    this.PrescUpldFlg = this.PrescUpldFlgHuman || this.PrescUpldFlgPet;
   }
 
   getAllReqPrsc() {
@@ -1069,7 +1274,7 @@ export class PlaceOrderComponent implements OnInit {
           this.savedPrscList = data['results'];
         }
       }
-      // console.log('saved prsc List', this.savedPrscList);
+      // console.log('saved prsc List 2', this.savedPrscList);
     });
   }
 
@@ -1243,6 +1448,89 @@ export class PlaceOrderComponent implements OnInit {
     this.prscFiles.splice(index, 1);
     if (this.prscFiles.length == 0) {
       // this.ValidateContinue = true;
+      this.shippingContinue = false;
+    }
+  }
+
+  // ============== PET PRESCRIPTION UPLOAD METHODS ==============
+
+  selectPrescriptionPet(evt: any) {
+    var file = evt.target.files[0];
+    if (file) {
+
+      this.msgText = '';
+      let resp = this.imagesService.onSelectFile(evt, 4, this.prscFilesPet, this.prscImagesPet);
+      if (resp.msg == 'success') {
+        this.prscFilesPet = resp.fileDetails;
+        this.prscImagesPet = resp.Images;
+        this.shippingContinue = true;
+        this.savedPrscFilePet = [];
+        this.selectedPrscPet = [];
+        if (this.savedPrscList.length > 0) {
+          let list: any = [];
+          this.savedPrscList.forEach((elm: any) => {
+            elm = { ...elm, checked: false };
+            list.push(elm);
+          });
+          this.savedPrscList = list;
+        }
+      } else {
+        this.msgText = resp.msg;
+        this.open.nativeElement.click();
+        // alert(this.msgText)
+        this.prscFilesPet = resp.fileDetails;
+        this.prscImagesPet = resp.Images;
+        if (this.prscFilesPet.length > 0 || this.savedPrscFilePet.length > 0) {
+          this.shippingContinue = true;
+        } else {
+          this.shippingContinue = false;
+        }
+      }
+    }
+  }
+
+  assignPrescriptionPet(evnt: any) {
+    this.prscFilesPet = [];
+    this.prscImagesPet = [];
+    if (evnt.target.checked == true) {
+      this.savedPrscList = this.savedPrscList.map((obj: any) => {
+        if (obj.PrescriptionId == evnt.target.value) {
+          this.savedPrscFilePet.push({
+            PrescriptionId: obj.PrescriptionId,
+            PrescriptionName: obj.PrescriptionName,
+            PrescriptionDate: obj.PrescriptionDate,
+            FilePath: obj.FilePath,
+            MyFamilyId: obj.MyFamilyId,
+          });
+          this.shippingContinue = true;
+          return { ...obj, checked: true };
+        }
+        return obj;
+      })
+    } else {
+      this.delSelectedSVPPet(evnt.target.value);
+    }
+  }
+
+  delSelectedSVPPet(id: any) {
+    const indx = this.savedPrscFilePet.findIndex((x: any) => x.PrescriptionId == id);
+    this.savedPrscFilePet.splice(indx, 1);
+    if (this.savedPrscFilePet.length == 0) {
+      this.shippingContinue = false;
+    }
+    this.savedPrscList = this.savedPrscList.map((obj: any) => {
+      if (obj.PrescriptionId == id) {
+        return { ...obj, checked: false };
+      }
+      return obj;
+    })
+  }
+
+  delFilePet(img: any) {
+    const index = this.prscImagesPet.indexOf(img);
+    this.prscImagesPet.splice(index, 1);
+    this.prscFilesPet.splice(index, 1);
+    if (this.prscFilesPet.length == 0) {
       this.shippingContinue = false;
     }
   }
@@ -2070,6 +2358,75 @@ export class PlaceOrderComponent implements OnInit {
     // console.log(this.isCheckedTmc);
   }
 
+  // ========== PRESCRIPTION VALIDATION METHODS ==========
+
+  validatePrescriptionUploads(): boolean {
+    let humanPrescriptionRequired = this.headerDetails['NeedToAttachPrescription'] == 'Y' && this.ReqPrscListHuman.length > 0;
+    let petPrescriptionRequired = this.headerDetails['NeedToAttachPrescription'] == 'Y' && this.ReqPrscListPet.length > 0;
+
+    // Check human prescription
+    if (humanPrescriptionRequired && this.headerDetails['IsPrescriptionUploaded'] == 0) {
+      let hasHumanFiles = this.prscFiles.length > 0 || this.savedPrscFile.length > 0;
+      if (!hasHumanFiles) {
+        this.msgText = 'Please upload prescription for human medicines';
+        this.open.nativeElement.click();
+        return false;
+      }
+    }
+
+    // Check pet prescription
+    if (petPrescriptionRequired && this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
+      let hasPetFiles = this.prscFilesPet.length > 0 || this.savedPrscFilePet.length > 0;
+      if (!hasPetFiles) {
+        this.msgText = 'Please upload prescription for pet medicines';
+        this.open.nativeElement.click();
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // ========== APPEND FILES TO FORMDATA ==========
+
+  appendPrescriptionFilesToFormData(fd: FormData): void {
+    // Append human prescription files
+    if (this.prscFiles && this.prscFiles.length > 0) {
+      this.prscFiles.forEach((file: any, index: number) => {
+        fd.append(`human_prescription_${index}`, file, file.name);
+      });
+      fd.append('human_prescription_count', this.prscFiles.length.toString());
+    } else {
+      fd.append('human_prescription_count', '0');
+    }
+
+    // Append saved human prescription references
+    if (this.savedPrscFile && this.savedPrscFile.length > 0) {
+      let savedPrescIds = this.savedPrscFile.map((f: any) => f.PrescriptionId).join(',');
+      fd.append('saved_human_prescriptions', savedPrescIds);
+    }
+
+    // Append pet prescription files
+    if (this.prscFilesPet && this.prscFilesPet.length > 0) {
+      this.prscFilesPet.forEach((file: any, index: number) => {
+        fd.append(`pet_prescription_${index}`, file, file.name);
+      });
+      fd.append('pet_prescription_count', this.prscFilesPet.length.toString());
+    } else {
+      fd.append('pet_prescription_count', '0');
+    }
+
+    // Append saved pet prescription references
+    if (this.savedPrscFilePet && this.savedPrscFilePet.length > 0) {
+      let savedPetPrescIds = this.savedPrscFilePet.map((f: any) => f.PrescriptionId).join(',');
+      fd.append('saved_pet_prescriptions', savedPetPrescIds);
+    }
+
+    // Add flags indicating prescription status
+    fd.append('has_human_prescriptions', (this.ReqPrscListHuman.length > 0).toString());
+    fd.append('has_pet_prescriptions', (this.ReqPrscListPet.length > 0).toString());
+  }
+
   assignPayment(value: any) {
     // let defaultgateway = value['PGListingId'];
     this.selectedPG = value['PGListingId'];
@@ -2205,7 +2562,13 @@ export class PlaceOrderComponent implements OnInit {
     if (this.isCheckedTmc == false) {
       this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
       this.open.nativeElement.click();
+      return;
     } else {
+      // Validate prescription uploads before payment
+      if (!this.validatePrescriptionUploads()) {
+        return; // Error message already shown by validation method
+      }
+      
       this.msgText = '';
       this.spinner.show();
       let fd = new FormData();
@@ -2234,6 +2597,9 @@ export class PlaceOrderComponent implements OnInit {
       fd.append('ShipID', this.shippingId);
       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
+      // ========== APPEND PRESCRIPTION FILES FOR WALLET ONLY ==========
+      this.appendPrescriptionFilesToFormData(fd);
+
       this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
         // console.log('online_payment_process', response);
 
@@ -2255,7 +2621,13 @@ export class PlaceOrderComponent implements OnInit {
     if (this.isCheckedTmc == false) {
       this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
       this.open.nativeElement.click();
+      return;
     } else {
+      // Validate prescription uploads before payment
+      if (!this.validatePrescriptionUploads()) {
+        return; // Error message already shown by validation method
+      }
+      
       this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
       this.msgText = '';
       this.spinner.show();
@@ -2276,8 +2648,12 @@ export class PlaceOrderComponent implements OnInit {
       fd.append('ShipID', this.shippingId);
       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
-      this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
+      // ========== APPEND PRESCRIPTION FILES ==========
+      this.appendPrescriptionFilesToFormData(fd);
 
+      this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
+        // console.log('online_payment_process', response);
+        
         if (response['Status'] == 'Success') {
           this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
           this.orderSuccess(response);
@@ -2288,7 +2664,6 @@ export class PlaceOrderComponent implements OnInit {
           // this.refundWallet();
         }
       });
-
     }
   }
 
@@ -2336,6 +2711,9 @@ export class PlaceOrderComponent implements OnInit {
     fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
     fd.append('BankCode', '');
     fd.append('EmailID', this.CommonService.EmailId);
+
+    // ========== APPEND PRESCRIPTION FILES ==========
+    this.appendPrescriptionFilesToFormData(fd);
 
     // this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
     this.CommonService.paymentInitiate('cartapp/gatewayinfo', fd).subscribe((response: any) => {

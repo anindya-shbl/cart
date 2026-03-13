@@ -25,7 +25,7 @@
             <div class="d-flex justify-content-between border-top align-items-center p-4">
               <div class="d-flex hvr position-relative"
                 (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
-                <div class="itemImg">
+                <div class="itemImg" style="display: block; height: auto;">
                   <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
                     <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt
                       width="100%">
@@ -36,6 +36,9 @@
                       src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
                     <img *ngIf="item.PrescriptionOTC == 'O'"
                       src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                  </ng-container>
+                  <ng-container *ngIf="item.ProductInteractiveModule == '' || item.ProductInteractiveModule == null">
+                     <small class="petTag centertag"><img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
                   </ng-container>
                   <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i
                       class="fa-solid fa-prescription"></i></span>

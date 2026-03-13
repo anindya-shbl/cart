@@ -60,6 +60,8 @@ export class SearchComponent implements OnInit {
   @ViewChild('psearch') psearch: any;
 
   inside = false;
+  InteractiveModule: any = '';
+  InteractiveModuleFieldName: string = '';  // Track which field name to use
    
   @HostListener("click") 
   clicked() { 
@@ -96,14 +98,14 @@ export class SearchComponent implements OnInit {
 
   getAllRecord() {
     this.dbService.getAll('cartItems').subscribe((res: any) => {
-      // console.log('all records', res);
+      console.log('all records search', res);
       this.addedInCart = res;
     });
   }
 
   onSearchChange(evnt: any) {
     let str = evnt.target.value;
-    // console.log(str);
+    // console.log('onSearchChange'+str);
     clearTimeout(this.typingTimer);
     if (str.length > 2) {
       this.searchTxt = str;
@@ -131,7 +133,7 @@ export class SearchComponent implements OnInit {
     this.CommonService.getSearchData(searchtext).subscribe((data: any) => {
       this.searchStart = false;
 
-      // console.log(data);
+      // console.log("searchData"+data);
 
       if (data['products'].length > 0) {
         // this.emptyResult = false;
@@ -156,6 +158,13 @@ export class SearchComponent implements OnInit {
         this.ProductStatus = this.getKeyIndex('ProductStatus');
         this.RefProductDetails = this.getKeyIndex('RefProductDetails');
         this.showRefPrd = this.getKeyIndex('showRefPrd');
+        // Determine which field name is used for InteractiveModule
+        if (data['keys'].includes('InteractiveModule')) {
+          this.InteractiveModuleFieldName = 'InteractiveModule';
+        } else if (data['keys'].includes('ProductInteractiveModule')) {
+          this.InteractiveModuleFieldName = 'ProductInteractiveModule';
+        }
+        this.InteractiveModule = this.getKeyIndex(this.InteractiveModuleFieldName);
 
         data['products'].forEach((elm: any) => {
           let pID = this.getKeyIndex('ProductId');

@@ -80,8 +80,8 @@ export class LoginComponent implements OnInit {
 
           this.CommonService.UserName = res['data']['FName'];
           this.CommonService.Mobile = res['data']['MobileNo'];
-          this.CommonService.isDownTime = res['data']['downtimeFlg'];
-          this.CommonService.downTimeMsg = res['data']['downtimemsg'];
+          this.CommonService.isDownTime = res['data']['downtimeFlg'] !== undefined ? res['data']['downtimeFlg'] : 0;
+          this.CommonService.downTimeMsg = res['data']['downtimemsg'] !== undefined ? res['data']['downtimemsg'] : '';
           this.CommonService.Warehouse = res['location']['HealthBuddyName'];
 
           if (res['location'] != undefined) {

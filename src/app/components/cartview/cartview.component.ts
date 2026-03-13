@@ -53,7 +53,7 @@ export class CartviewComponent implements OnInit {
     this.isLoading = true;
     this.infoMsg = '';
     this.dbService.getAll('cartItems').subscribe((res: any) => {
-      // console.log('all records', res);
+      console.log('all records from cartview', res);
       this.allItemsList = res;
       this.count();
       if (this.allItemsList.length == 0) {

@@ -37,7 +37,7 @@
                     <img *ngIf="item.PrescriptionOTC == 'O'"
                       src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
                   </ng-container>
-                  <ng-container *ngIf="item.ProductInteractiveModule == '' || item.ProductInteractiveModule == null">
+                  <ng-container *ngIf="item.ProductInteractiveModule != '' || item.ProductInteractiveModule == 'PetCare'">
                      <small class="petTag centertag"><img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
                   </ng-container>
                   <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i

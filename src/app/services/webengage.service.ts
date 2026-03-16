@@ -12,7 +12,8 @@ export class WebEngageService {
 
   initWebEngage() {
     if (typeof window !== 'undefined' && (window as any)['webengage']) {
-      webengage.init('in~~15ba20749');
+      // webengage.init('in~~15ba20749'); // for live
+      webengage.init('in~~47b6675d'); // for stage
       console.log('WebEngage Initialized');
     } else {
       console.error('WebEngage SDK is not loaded properly');

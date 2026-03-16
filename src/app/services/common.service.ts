@@ -24,33 +24,33 @@ export class CommonService {
 
   // ============= development ==========================
 
-  // public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
-  // public baseurl = 'https://stage.sastasundar.com/';
-  // public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
-  // public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
-  // public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
-  // public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
-  // public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
-  // public searchUrl = 'https://stage-search.sastasundar.com/';
-  // public ImageUrl = 'https://res.sastasundar.com/';
-  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
+  public baseurl = 'https://stage.sastasundar.com/';
+  public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
+  public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
+  public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
+  public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
+  public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
+  public searchUrl = 'https://stage-search.sastasundar.com/';
+  public ImageUrl = 'https://res.sastasundar.com/';
+  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
 
 
 
   // ============= local ==========================
-  public webcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/webapi/';
-  public baseurl = 'http://192.168.5.236:8081/sspl_com/';
-  public custwebcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/';
-  public onlineplaceorderUrl = 'http://192.168.5.236:8081/sspl_com/index.php/cart/online_payment_process';
-  public codsuccessUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/order_success';
-  public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
-  public catalogUrl = 'http://192.168.5.236:8003/';
-  // public searchUrl = 'http://192.168.5.192:4200/'; // local search
-  // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
-  public searchUrl = 'https://search.sastasundar.com/'; // live
-  public ImageUrl = 'https://res.sastasundar.com/';
-  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  // public webcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/webapi/';
+  // public baseurl = 'http://192.168.5.236:8081/sspl_com/';
+  // public custwebcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/';
+  // public onlineplaceorderUrl = 'http://192.168.5.236:8081/sspl_com/index.php/cart/online_payment_process';
+  // public codsuccessUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/order_success';
+  // public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
+  // public catalogUrl = 'http://192.168.5.236:8003/';
+  // // public searchUrl = 'http://192.168.5.192:4200/'; // local search
+  // // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
+  // public searchUrl = 'https://search.sastasundar.com/'; // live
+  // public ImageUrl = 'https://res.sastasundar.com/';
+  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
   // public userLocationPincode: number = 0;
   // public PanIndia = 0;

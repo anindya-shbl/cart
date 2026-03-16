@@ -49,7 +49,7 @@
                                                     <img *ngIf="product[PrescriptionOTC] == 'P' || product[PrescriptionOTC] == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="100%">
                                                     <img *ngIf="product[PrescriptionOTC] == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="100%">
                                                 </ng-container>
-                                                <ng-container *ngIf="product[InteractiveModule] == '' || product[InteractiveModule] == null">
+                                                <ng-container *ngIf="product[InteractiveModule] != '' && product[InteractiveModule] == 'PetCare'">
                                                     <small class="petTag centertag"> <img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets</small>
                                                 </ng-container>
                                             </div>

@@ -1473,6 +1473,7 @@ export class PlaceOrderComponent implements OnInit {
     let uploadFiles: any = [];
     this.msgText = '';
 
+    // ============ HANDLE HUMAN PRESCRIPTIONS ============
     if (this.prscFiles.length > 0) {
       uploadFiles = this.prscFiles;
 
@@ -1489,6 +1490,7 @@ export class PlaceOrderComponent implements OnInit {
           let fd = new FormData();
           let requestData = JSON.stringify(res['data']);
           fd.append('prescriptionlist', requestData);
+          fd.append('use_pet_prescription', '0'); // 0 for human prescription
 
           this.prscFiles = [];
           this.savedPrscFile = [];
@@ -1519,6 +1521,7 @@ export class PlaceOrderComponent implements OnInit {
       let fd = new FormData();
       let requestData = JSON.stringify(uploadFiles);
       fd.append('prescriptionlist', requestData);
+      fd.append('use_pet_prescription', '0'); // 0 for human prescription
 
       this.webengageService.trackEvent('Prescription Upload Initiated', {})
 
@@ -1540,6 +1543,74 @@ export class PlaceOrderComponent implements OnInit {
         } else {
           this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
           // alert('Somthing went wrong. Please try again');
+          this.msgText = 'Unable to process your request now, Please try after some time.';
+          this.open.nativeElement.click();
+        }
+      });
+      this.spinner.hide();
+    } else if (this.prscFilesPet.length > 0) {
+      // ============ HANDLE PET PRESCRIPTIONS ============
+      uploadFiles = this.prscFilesPet;
+
+      for (var i = 0; i < uploadFiles.length; i++) {
+        formData.append('refFiles', uploadFiles[i]);
+      }
+
+      this.webengageService.trackEvent('Prescription Upload Initiated', {})
+
+      this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe((res: any) => {
+
+        if (res && res['msgcode'] == 1) {
+          let fd = new FormData();
+          let requestData = JSON.stringify(res['data']);
+          fd.append('prescriptionlist', requestData);
+          fd.append('use_pet_prescription', '1'); // 1 for pet prescription
+
+          this.prscFilesPet = [];
+          this.savedPrscFilePet = [];
+
+          this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
+            if (resData['status'] == 'success') {
+              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
+              this.processOrderDetails();
+            } else {
+              this.msgText = 'Unable to process your request now, Please try after some time.';
+              this.open.nativeElement.click();
+              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
+            }
+          });
+          this.spinner.hide();
+        } else {
+          this.msgText = 'Some thing went wrong, Please try again.';
+          this.open.nativeElement.click();
+          this.spinner.hide();
+        }
+      });
+    } else if (this.savedPrscFilePet.length > 0) {
+      uploadFiles = this.savedPrscFilePet;
+
+      let fd = new FormData();
+      let requestData = JSON.stringify(uploadFiles);
+      fd.append('prescriptionlist', requestData);
+      fd.append('use_pet_prescription', '1'); // 1 for pet prescription
+
+      this.webengageService.trackEvent('Prescription Upload Initiated', {})
+
+      this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
+
+        this.prscFilesPet = [];
+        this.savedPrscFilePet = [];
+        let list: any = [];
+        this.savedPrscList.forEach((elm: any) => {
+          elm = { ...elm, checked: false };
+          list.push(elm);
+        });
+        this.savedPrscList = list;
+        if (resData['status'] == 'success') {
+          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
+          this.processOrderDetails();
+        } else {
+          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
           this.msgText = 'Unable to process your request now, Please try after some time.';
           this.open.nativeElement.click();
         }

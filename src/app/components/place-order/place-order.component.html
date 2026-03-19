@@ -576,6 +576,47 @@
             </div>
           </div>
 
+          <!-- ================ Seller Information================ -->
+          <div *ngIf="sellerDetails !=''" class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                Seller Information
+              </button>
+            </h2>
+            <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body p-0">
+                <div class="p-3">
+                  <div class="d-flex mb-3">
+                    <div class="slr-icons me-2" style="background-color: #06588f;">
+                      <i class="fa-solid fa-house-medical-circle-check"></i>
+                    </div>
+                    <div>
+                      <div class="fs-3 mb-1 text-secondary">Seller Name</div>
+                      <div class="fs-3 fw-5">{{sellerDetails.HBName}}</div>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                    <div class="slr-icons me-2" style="background-color: #035e12;">
+                      <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                      <div class="fs-3 mb-1 text-secondary">Address</div>
+                      <div class="fs-3 fw-5">{{sellerDetails.HBAddress}}</div>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-3">
+                    <div class="slr-icons me-2" style="background-color: #4b0a45;">
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                      <div class="fs-3 mb-1 text-secondary">Phone No</div>
+                      <div class="fs-3 fw-5">{{sellerDetails.HBMobileNo}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- ================ Payment================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">

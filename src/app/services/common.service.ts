@@ -51,7 +51,7 @@ export class CommonService {
   // public searchUrl = 'https://search.sastasundar.com/'; // live
   // public ImageUrl = 'https://res.sastasundar.com/';
   // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
-
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
   // public userLocationPincode: number = 0;
   // public PanIndia = 0;
   // public Warehouse = 1;
@@ -78,8 +78,6 @@ export class CommonService {
   public downTimeMsg: any = '';
 
   private subject: any = new Subject<any>();
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   sendClickEvent() {
     this.subject.next();
@@ -421,4 +419,16 @@ export class CommonService {
     return this.http.get(gettUrl);
   }
 
+  // getHBDetails(path: any, pincode: any): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //   'pincode' : pincode
+  //   });
+  //   let postUrl = this.catalogUrl + path;
+  //   return this.http.post(postUrl,{}, {headers});
+  // }
+
+   getHBDetails(url: any): Observable<any> {
+    let gettUrl = this.catalogUrl + url;
+    return this.http.get(gettUrl);
+  }
 }

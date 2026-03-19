@@ -88,6 +88,7 @@ export class PlaceOrderComponent implements OnInit {
   addressType: any = '';
 
   ExpectedDeliveryMsg: any = '';
+  sellerDetails: any = '';
   DeliveryChargeSlab = [];
   MinOrderSlabAmtForFreeShipping: number = 0;
 
@@ -176,6 +177,7 @@ export class PlaceOrderComponent implements OnInit {
         this.setCFHform();
         this.getSavedPrescription();
         this.getDeliveryChargeSlot();
+        this.getHB_Details();
         if (this.CommonService.ConfigData.WalletEnable == 'Y') {
           this.getWalletBalance();
         }
@@ -1927,6 +1929,7 @@ export class PlaceOrderComponent implements OnInit {
                   }
                   // DeliverySlab
                   this.getDeliveryChargeSlot();
+                  this.getHB_Details();
                   // Delivery Slab
                   this.getAllRecord()
                   this.closebutton.nativeElement.click();
@@ -2140,6 +2143,7 @@ export class PlaceOrderComponent implements OnInit {
               }
               // DeliverySlab
               this.getDeliveryChargeSlot();
+              this.getHB_Details();
               // Delivery Slab
               this.getAllRecord();
               this.ItemListAcd.nativeElement.click()
@@ -2181,7 +2185,24 @@ export class PlaceOrderComponent implements OnInit {
       }
     });
   }
-
+getHB_Details() {
+    let panindia = this.CommonService.IsPanIndia;
+    let pincode = this.CommonService.PinCode;
+    let warehouseId = this.CommonService.WHId.toString();
+    this.CommonService.getHBDetails(`customer/v1/product/getsellername?pincode=${pincode}&whid=${warehouseId}&panindia=${panindia}`).subscribe((resp: any) => {
+      // console.log(resp);
+      if (resp && resp['response_code'] == 200) {
+        let data = resp['data'];
+        // Remove everything after <br>
+        if (data.HBName) {
+          data.HBName = data.HBName.split('<br>')[0].trim();
+        }
+        this.sellerDetails = data;
+      } else {
+        this.sellerDetails = '';
+      }
+    });
+  }
   // applyCoupon(code: any){
   //   console.log(code);
   // }

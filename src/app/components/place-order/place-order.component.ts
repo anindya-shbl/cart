@@ -31,6 +31,7 @@ export class PlaceOrderComponent implements OnInit {
   outOfStockList: any = [];
   couponList: any = [];
   savedPrscList: any = [];
+  savedPrscListForPet: any = [];
   saveForLaterList: any = [];
   prscFiles: any = [];
   selectedPrsc: any = [];
@@ -45,7 +46,8 @@ export class PlaceOrderComponent implements OnInit {
   HB_Details: any = [];
   ReqPrscList: any = [];
   slicedArray: any = [];
-  UploadedPrscList: any = [];
+  UploadedPrscList: any = []; 
+  UploadedPrscListForPet: any = [];
   showImgPath: any = '';
   showMoreBtn: boolean = false;
   totalSaving: any = 0;
@@ -176,6 +178,7 @@ export class PlaceOrderComponent implements OnInit {
         this.setEmailform();
         this.setCFHform();
         this.getSavedPrescription();
+        this.getSavedPrescriptionForPet();
         this.getDeliveryChargeSlot();
         this.getHB_Details();
         if (this.CommonService.ConfigData.WalletEnable == 'Y') {
@@ -1144,6 +1147,7 @@ export class PlaceOrderComponent implements OnInit {
     this.savedPrscList = [];
     this.CommonService.getSavedPrescription('cartuserapp/getprescriptionList').subscribe((data: any) => {
       // console.log('saved prsc List', data, data['results']);
+      data = {"status":"success","msg":"","results":[{"MyFamilyId":1245357,"PrescriptionId":502530,"FilePath":"800027_1245357_15122025225934.pdf","SupervisingDoctor":"Dr A K Roy","PrescriptionDate":"2025-12-15","ApplicationType":null,"PModule":null,"DoctorPhoneNo":0,"DoctorAddress":"Kolkata ","DoctorPinCode":700135,"IsEncrypted":0,"PrescriptionName":"","PresNameUpdatedBy":"HB"},{"MyFamilyId":1245357,"PrescriptionId":502531,"FilePath":"800027_1245357_15122025225949.pdf","SupervisingDoctor":"Dr A K Roy","PrescriptionDate":"2025-12-15","ApplicationType":null,"PModule":null,"DoctorPhoneNo":0,"DoctorAddress":"Kolkata ","DoctorPinCode":700135,"IsEncrypted":0,"PrescriptionName":"","PresNameUpdatedBy":"HB"},{"MyFamilyId":null,"PrescriptionId":470764,"FilePath":"prescription_1764008725_466349.pdf","SupervisingDoctor":null,"PrescriptionDate":"2025-11-24","ApplicationType":"N","PModule":null,"DoctorPhoneNo":null,"DoctorAddress":null,"DoctorPinCode":null,"IsEncrypted":0,"PrescriptionName":null,"PresNameUpdatedBy":"Customer"},{"MyFamilyId":null,"PrescriptionId":370191,"FilePath":"prescription_1758206289_562971.pdf","SupervisingDoctor":null,"PrescriptionDate":"2025-09-18","ApplicationType":"N","PModule":null,"DoctorPhoneNo":null,"DoctorAddress":null,"DoctorPinCode":null,"IsEncrypted":0,"PrescriptionName":null,"PresNameUpdatedBy":"Customer"},{"MyFamilyId":810279,"PrescriptionId":370298,"FilePath":"prescription_1758206289_562971.pdf","SupervisingDoctor":"Dr A K Roy","PrescriptionDate":"2025-09-18","ApplicationType":null,"PModule":null,"DoctorPhoneNo":0,"DoctorAddress":"Kolkata ","DoctorPinCode":700135,"IsEncrypted":0,"PrescriptionName":"","PresNameUpdatedBy":"HB"},{"MyFamilyId":810279,"PrescriptionId":370307,"FilePath":"prescription_1758206289_562971.pdf","SupervisingDoctor":null,"PrescriptionDate":"2025-09-18","ApplicationType":null,"PModule":null,"DoctorPhoneNo":null,"DoctorAddress":null,"DoctorPinCode":null,"IsEncrypted":0,"PrescriptionName":"","PresNameUpdatedBy":"HB"},{"MyFamilyId":1245357,"PrescriptionId":360162,"FilePath":"800027_1245357_11092025201112.pdf","SupervisingDoctor":"Dr A K Roy","PrescriptionDate":"2025-09-11","ApplicationType":null,"PModule":null,"DoctorPhoneNo":0,"DoctorAddress":"Kolkata ","DoctorPinCode":700135,"IsEncrypted":0,"PrescriptionName":"","PresNameUpdatedBy":"HB"}]};
       if (data && data['status'] == 'success') {
         if (data['results'].length > 0) {
           let list: any = [];
@@ -1159,7 +1163,25 @@ export class PlaceOrderComponent implements OnInit {
       // console.log('saved prsc List 2', this.savedPrscList);
     });
   }
-
+  getSavedPrescriptionForPet() {
+    this.savedPrscListForPet = [];
+    this.CommonService.getSavedPrescription('cartuserapp/getprescriptionListforPet').subscribe((data: any) => {
+      // console.log('saved prsc List', data, data['results']);
+      if (data && data['status'] == 'success') {
+        if (data['results'].length > 0) {
+          let list: any = [];
+          data['results'].forEach((elm: any) => {
+            elm = { ...elm, checked: false };
+            list.push(elm);
+          });
+          this.savedPrscListForPet = list;
+        } else {
+          this.savedPrscListForPet = data['results'];
+        }
+      }
+      // console.log('saved prsc List 2', this.savedPrscList);
+    });
+  }
   // selectPrescription_bckp(evt: any) {
   //   this.savedPrscFile = [];
   //   this.selectedPrsc = [];
@@ -1375,7 +1397,7 @@ export class PlaceOrderComponent implements OnInit {
     this.prscFilesPet = [];
     this.prscImagesPet = [];
     if (evnt.target.checked == true) {
-      this.savedPrscList = this.savedPrscList.map((obj: any) => {
+      this.savedPrscListForPet = this.savedPrscListForPet.map((obj: any) => {
         if (obj.PrescriptionId == evnt.target.value) {
           this.savedPrscFilePet.push({
             PrescriptionId: obj.PrescriptionId,
@@ -1400,7 +1422,7 @@ export class PlaceOrderComponent implements OnInit {
     if (this.savedPrscFilePet.length == 0) {
       this.shippingContinue = false;
     }
-    this.savedPrscList = this.savedPrscList.map((obj: any) => {
+    this.savedPrscListForPet = this.savedPrscListForPet.map((obj: any) => {
       if (obj.PrescriptionId == id) {
         return { ...obj, checked: false };
       }
@@ -1463,7 +1485,29 @@ export class PlaceOrderComponent implements OnInit {
       }
     });
   }
+  showUploadedPrescForPet() {
+    this.UploadedPrscListForPet = [];
+    this.spinner.show();
+    this.CommonService.getNewUploadedPrsc('cartuserapp/getPrescriptionPreviewForPet').subscribe((res: any) => {
 
+      if (res && res['status'] == 'success') {
+
+        let ds = res['results']['data'];
+        let ls: any = [];
+
+        ds.forEach((elm: any) => {
+          let ext = elm.substr(elm.lastIndexOf('.') + 1);
+          let obj = { path: elm, type: ext };
+          ls.push(obj)
+        });
+        this.UploadedPrscListForPet = ls;
+        this.spinner.hide();
+      } else {
+        this.showImgPath = '';
+        this.spinner.hide();
+      }
+    });
+  }
   showImg(img: any) {
     window.open(img.path);
   }

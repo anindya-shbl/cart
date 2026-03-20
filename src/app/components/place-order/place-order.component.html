@@ -187,9 +187,9 @@
                   <button *ngIf="PrescUpldFlgHuman" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     Upload Prescription
                   </button>
-                  <button *ngIf="PrescUpldFlgPet" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwoForPet" aria-expanded="true" aria-controls="collapseTwoForPet">
+                  <!-- <button *ngIf="PrescUpldFlgPet" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwoForPet" aria-expanded="true" aria-controls="collapseTwoForPet">
                     Upload Pet Prescription
-                  </button>
+                  </button> -->
                   <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     Choose Address
                   </button>
@@ -199,7 +199,7 @@
           </div>
 
           <!-- ================ Prescriptions================ -->
-          <div *ngIf="PrescUpldFlgHuman" class="accordion-item">
+          <div *ngIf="(PrescUpldFlgHuman  || PrescUpldFlgPet)" class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" (click)="resetPG()">
@@ -228,6 +228,25 @@
                           </div>
                         </ng-container>
                       </div>
+                      <!--for pet-->
+
+                      <div class="uploaded hvr" (click)="showUploadedPrescForPet()">
+                        <div>
+                          <i class="fa-solid fa-file-circle-check text-success" style="font-size: 50px;"></i>
+                        </div>
+                        <div class="px-3 fw-5 fs-5 text-success">Prescription Uploaded For Pet</div>
+                      </div>
+                      <div *ngIf="UploadedPrscListForPet.length > 0" class="d-flex mt-3">
+                        <ng-container *ngFor="let img of UploadedPrscListForPet; let i = index">
+                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                            <img [src]="img.path" alt width="80" height="80" />
+                          </div>
+                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                            <i class="fa fa-file-pdf-o" style="font-size: 80px; color: #F81305;"></i>
+                          </div>
+                        </ng-container>
+                      </div>
+
                     </div>
                   </div>
                   <!-- ================ Prescription Uploaded ================ -->
@@ -259,7 +278,7 @@
                           Saved Prescription
                         </button>
                       </div>
-                      <div class="prsc-btn mb-2 hvr">
+                      <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListHuman.length > 0">
                         <label for="file-input" class="hvr">Upload Prescription</label>
                         <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple accept=".jpg, .jpeg, .pdf" />
                       </div>
@@ -273,7 +292,7 @@
                             <div class="pdfbgsec border border-secondary">
                               <ng-container *ngIf="image.type == 'application/pdf'">
                                 <div class="prs-pdf">
-                                  <i class="fa-solid fa-file-pdf text-danger" style="font-size: 80px;"></i>
+                                  <i class="fa-solid fa-file-pdf text-danger" style="font-size: 50px;"></i>
                                   <!-- <i class="icon-file-pdf" style="font-size: 60px; color: #F81305;"></i> -->
                                 </div>
                               </ng-container>
@@ -282,133 +301,7 @@
                               </ng-container>
                             </div>
                             <div class="position-absolute top-0 end-0 hvr" (click)="delFile(image)">
-                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
-                            </div>
-                          </div>
-                        </ng-container>
-                      </div>
-                    </div>
-
-                    <div *ngIf="savedPrscFilePet.length > 0" class="my-2">
-                      <div class="d-flex flex-wrap">
-                        <ng-container *ngFor="let file of savedPrscFilePet">
-                          <div class="position-relative m-1">
-                            <div class="pdfbgsec border border-danger">
-                              <div class="text-danger"><i class="fa-solid fa-file-pdf"></i></div>
-                              <div class="conBG">
-                                <div class="presName text-danger">{{ file.PrescriptionName }}</div>
-                                <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
-                              </div>
-                            </div>
-                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
-                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
-                            </div>
-                          </div>
-
-                        </ng-container>
-                      </div>
-                    </div>
-
-                    <div class="mt-2 fs-2">
-                      Only .jpg,.jpeg,.pdf files are allowed (max size : 5mb)
-                      Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="d-flex justify-content-end p-3 border-top">
-                  <button *ngIf="shippingContinue" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" (click)="continueShipping()">Choose Address</button>
-                  <button *ngIf="!shippingContinue" type="button" class="proceed diabled" >Choose Address</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ================ Prescriptions for PET================ -->
-          <div *ngIf="PrescUpldFlgPet" class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseTwoForPet" aria-expanded="false" aria-controls="collapseTwoForPet" (click)="resetPG()">
-                Upload Pet Prescription 
-              </button>
-            </h2>
-            <div id="collapseTwoForPet" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div class="accordion-body p-0">
-                <div class="p-3">
-                  <!-- ================ Prescription Uploaded ================ -->
-                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 1">
-                    <div class="p-2">
-                      <div class="uploaded hvr" (click)="showUploadedPresc()">
-                        <div>
-                          <i class="fa-solid fa-file-circle-check text-success" style="font-size: 50px;"></i>
-                        </div>
-                        <div class="px-3 fw-5 fs-5 text-success">Pet Prescription Uploaded</div>
-                      </div>
-                      <div *ngIf="UploadedPrscList.length > 0" class="d-flex mt-3">
-                        <ng-container *ngFor="let img of UploadedPrscList; let i = index">
-                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
-                            <img [src]="img.path" alt width="80" height="80" />
-                          </div>
-                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
-                            <i class="fa fa-file-pdf-o" style="font-size: 80px; color: #F81305;"></i>
-                          </div>
-                        </ng-container>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- ================ Prescription Uploaded ================ -->
-
-                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
-                    <!-- ============ Image Preview =============== -->
-                    <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
-                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
-                      <ul class="mb-1">
-                        <ng-container *ngFor="let name of slicedArrayPet">
-                          <li class="text-secondary">{{ name.ProductName }}</li>
-                        </ng-container>
-                      </ul>
-                      <div class="viewBtn">
-                        <ul>
-                          <li *ngIf="showMoreBtn">
-                            <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View All...</a>
-                          </li>
-                          <li *ngIf="!showMoreBtn && slicedArrayPet.length > 3">
-                            <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View Less...</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div class="d-flex align-items-center flex-wrap">
-                      <div *ngIf="savedPrscList.length > 0" class="me-3 mb-2">
-                        <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrsc" [disabled]="savedPrscList.length == 0" (click)="prescriptionViewdWebEngage()">
-                          Saved Prescription
-                        </button>
-                      </div>
-                      <div class="prsc-btn mb-2 hvr">
-                        <label for="file-input-pet" class="hvr">Upload Pet Prescription</label>
-                        <input id="file-input-pet" type="file" class="d-none" (change)="selectPrescriptionPet($event)" multiple accept=".jpg, .jpeg, .pdf" />
-                      </div>
-                    </div>
-
-                    <div *ngIf="prscFilesPet.length > 0" class="my-2">
-                      <!-- <em>{{prscFiles.length}} Prescriptions attached</em> -->
-                      <div class="d-flex flex-wrap">
-                        <ng-container *ngFor="let image of prscImagesPet">
-                          <div class="position-relative m-1">
-                            <div class="pdfbgsec border border-secondary">
-                              <ng-container *ngIf="image.type == 'application/pdf'">
-                                <div class="prs-pdf">
-                                  <i class="fa-solid fa-file-pdf text-danger" style="font-size: 80px;"></i>
-                                  <!-- <i class="icon-file-pdf" style="font-size: 60px; color: #F81305;"></i> -->
-                                </div>
-                              </ng-container>
-                              <ng-container *ngIf="image.type != 'application/pdf'">
-                                <img [src]="image.url" width="90px" class="rounded" />
-                              </ng-container>
-                            </div>
-                            <div class="position-absolute top-0 end-0 hvr" (click)="delFilePet(image)">
-                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
+                              <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
                             </div>
                           </div>
                         </ng-container>
@@ -426,8 +319,8 @@
                                 <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
                               </div>
                             </div>
-                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
-                              <i class="fa-solid fa-xmark fs-8 p-2 text-secondary"></i>
+                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVP(file.PrescriptionId)">
+                              <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
                             </div>
                           </div>
 
@@ -435,10 +328,94 @@
                       </div>
                     </div>
 
-                    <div class="mt-2 fs-2">
+                    <div class="mt-2 fs-2" *ngIf="ReqPrscListHuman.length > 0">
                       Only .jpg,.jpeg,.pdf files are allowed (max size : 5mb)
                       Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
                     </div>
+                    <!--For Pet-->
+
+                    <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
+                      <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
+                        <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
+                        <ul class="mb-1">
+                          <ng-container *ngFor="let name of slicedArrayPet">
+                            <li class="text-secondary">{{ name.ProductName }}</li>
+                          </ng-container>
+                        </ul>
+                        <div class="viewBtn">
+                          <ul>
+                            <li *ngIf="showMoreBtn">
+                              <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View All...</a>
+                            </li>
+                            <li *ngIf="!showMoreBtn && slicedArrayPet.length > 3">
+                              <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View Less...</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div class="d-flex align-items-center flex-wrap">
+                        <div *ngIf="savedPrscListForPet.length > 0" class="me-3 mb-2">
+                          <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrscForPet" [disabled]="savedPrscListForPet.length == 0" (click)="prescriptionViewdWebEngage()">
+                            Saved Prescription For Pet
+                          </button>
+                        </div>
+                        <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListPet.length > 0">
+                          <label for="file-input-pet" class="hvr">Upload Pet Prescription</label>
+                          <input id="file-input-pet" type="file" class="d-none" (change)="selectPrescriptionPet($event)" multiple accept=".jpg, .jpeg, .pdf" />
+                        </div>
+                      </div>
+
+                      <div *ngIf="prscFilesPet.length > 0" class="my-2">
+                        <!-- <em>{{prscFiles.length}} Prescriptions attached</em> -->
+                        <div class="d-flex flex-wrap">
+                          <ng-container *ngFor="let image of prscImagesPet">
+                            <div class="position-relative m-1">
+                              <div class="pdfbgsec border border-secondary">
+                                <ng-container *ngIf="image.type == 'application/pdf'">
+                                  <div class="prs-pdf">
+                                    <i class="fa-solid fa-file-pdf text-danger" style="font-size: 50px;"></i>
+                                    <!-- <i class="icon-file-pdf" style="font-size: 60px; color: #F81305;"></i> -->
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="image.type != 'application/pdf'">
+                                  <img [src]="image.url" width="90px" class="rounded" />
+                                </ng-container>
+                              </div>
+                              <div class="position-absolute top-0 end-0 hvr" (click)="delFilePet(image)">
+                                <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
+                              </div>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+
+                      <div *ngIf="savedPrscFilePet.length > 0" class="my-2">
+                        <div class="d-flex flex-wrap">
+                          <ng-container *ngFor="let file of savedPrscFilePet">
+                            <div class="position-relative m-1">
+                              <div class="pdfbgsec border border-danger">
+                                <div class="text-danger"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div class="conBG">
+                                  <div class="presName text-danger">{{ file.PrescriptionName }}</div>
+                                  <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
+                                </div>
+                              </div>
+                              <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
+                                <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                        </div>
+                      </div>
+
+                      <div class="mt-2 fs-2" *ngIf="ReqPrscListPet.length > 0">
+                        Only .jpg,.jpeg,.pdf files are allowed (max size : 5mb)
+                        Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
@@ -449,6 +426,7 @@
               </div>
             </div>
           </div>
+
           <!-- ================ Shipping Billing Address================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">
@@ -1226,6 +1204,47 @@
   </div>
 </div>
 
+<!-- ==================== Saved Prescriptions Popup For Pet=================== -->
+<div class="modal fade" id="savedPrscForPet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="savedPrscLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
+        <span class="fs-6 fw-5">Saved Prescription List For Pet</span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" data-bs-dismiss="modal" aria-label="Close"></i></span>
+      </div>
+      <!-- <button type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close"><i class="icon-lab_cross"></i></button>
+      <div class="modalHead">
+        <h3 id="savedPrscLabel">Saved Prescription List</h3>
+      </div> -->
+      <div class="p-3 overflow-y-auto" style="max-height: 450px">
+        <ng-container *ngIf="savedPrscListForPet.length > 0">
+          <ng-container *ngFor="let record of savedPrscListForPet">
+            <div class="d-flex justify-content-between rounded item-shadow p-3 mb-3">
+              <div class="d-flex w-100 hvr" (click)="getPdf(record.FilePath)">
+                <div class="me-3">
+                  <i class="fa-solid fa-file-pdf text-danger" style="font-size: 24px;"></i>
+                </div>
+                <div>
+                  <div class="mb-2 fw-5">{{ record.PrescriptionDate }}</div>
+                  <div class="fs-3 text-secondary">{{ record.FilePath }}</div>
+                </div>
+              </div>
+              <div class="">
+                <input class="form-check-input hvr" style="height: 20px; width: 20px; border-color: #afafaf;" type="checkbox" [value]="record.PrescriptionId" [id]="record.PrescriptionId" [checked]="record.checked" (click)="assignPrescriptionPet($event)" />
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="d-flex justify-content-end p-3">
+        <button *ngIf="savedPrscFilePet.length == 0" class="proceed diabled" type="button">Continue</button>
+        <button *ngIf="savedPrscFilePet.length > 0" class="proceed" type="button" data-bs-dismiss="modal" aria-label="Close">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ====================== uploaded Prescription ========================== -->
 <div class="modal fade" id="uploadedPrsc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uploadedPrscLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1247,6 +1266,40 @@
         <div *ngIf="!modalloader" style="display: flex; align-items: flex-start">
           <div class="mb-1 me-1">
             <ng-container *ngFor="let img of UploadedPrscList; let i = index">
+              <div (click)="showImg(img)">
+                <img [src]="img" alt width="52" height="52" />
+              </div>
+            </ng-container>
+          </div>
+          <div class="scrollSec">
+            <img [src]="showImgPath" alt width="100%" style="border-radius: 6px" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ====================== uploaded Prescription For Pet========================== -->
+<div class="modal fade" id="uploadedPrscForPet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uploadedPrscLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
+        <span class="fs-6 fw-5">Uploaded Prescription Viewer For Pet</span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" data-bs-dismiss="modal" aria-label="Close"></i></span>
+      </div>
+      <!-- <button type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close"><i class="icon-lab_cross"></i></button>
+      <div class="modalHead">
+        <h3 id="uploadedPrscLabel">Uploaded Prescription Viewer</h3>
+      </div> -->
+      <div class="modalBody">
+        <div *ngIf="modalloader" class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white" style="height: 400px">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="!modalloader" style="display: flex; align-items: flex-start">
+          <div class="mb-1 me-1">
+            <ng-container *ngFor="let img of UploadedPrscListForPet; let i = index">
               <div (click)="showImg(img)">
                 <img [src]="img" alt width="52" height="52" />
               </div>

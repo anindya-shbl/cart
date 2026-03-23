@@ -478,17 +478,26 @@ export class PlaceOrderComponent implements OnInit {
           });
         }
 
-        if (this.headerDetails['IsPrescriptionUploaded'] == 0) {
-          if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
-            this.shippingFlg = false;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = true;
-          } else {
-            this.shippingFlg = true;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = false;
-          }
-        } else {
+        // if (this.headerDetails['IsPrescriptionUploaded'] == 0) {
+        //   if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        //     this.shippingFlg = false;
+        //     this.paymentFlg = false;
+        //     this.PrescUpldFlg = true;
+        //   } else {
+        //     this.shippingFlg = true;
+        //     this.paymentFlg = false;
+        //     this.PrescUpldFlg = false;
+        //   }
+        // } else {
+        //   this.PrescUpldFlg = true;
+        //   this.shippingFlg = true;
+        //   this.paymentFlg = false;
+        //   this.shippingContinue = true;
+        //   if (this.addressList.length == 0 && this.addShipping != undefined) {
+        //     this.addShipping.nativeElement.click();
+        //   }
+        // }
+        if((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) {
           this.PrescUpldFlg = true;
           this.shippingFlg = true;
           this.paymentFlg = false;
@@ -496,6 +505,16 @@ export class PlaceOrderComponent implements OnInit {
           if (this.addressList.length == 0 && this.addShipping != undefined) {
             this.addShipping.nativeElement.click();
           }
+        } else {
+            if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+              this.shippingFlg = false;
+              this.paymentFlg = false;
+              this.PrescUpldFlg = true;
+            } else {
+              this.shippingFlg = true;
+              this.paymentFlg = false;
+              this.PrescUpldFlg = false;
+            }
         }
 
         if (

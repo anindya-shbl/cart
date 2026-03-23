@@ -2459,7 +2459,7 @@ getHB_Details() {
         }
       });
 
-      this.resetPG();
+      this.resetPG(); 
     }
   }
 
@@ -2484,14 +2484,14 @@ getHB_Details() {
     });
   }
 
-  chekTermandCondition() {
-    if (this.isCheckedTmc == false) {
-      this.isCheckedTmc = true;
-    } else {
-      this.isCheckedTmc = false;
-    }
-    // console.log(this.isCheckedTmc);
-  }
+  // chekTermandCondition() {
+  //   if (this.isCheckedTmc == false) {
+  //     this.isCheckedTmc = true;
+  //   } else {
+  //     this.isCheckedTmc = false;
+  //   }
+  //   // console.log(this.isCheckedTmc);
+  // }
 
   // ========== PRESCRIPTION VALIDATION METHODS ==========
 
@@ -2632,10 +2632,10 @@ getHB_Details() {
     // debugger
     this.PGROW = data;
     this.msgText = '';
-    if (this.isCheckedTmc == false) {
-      this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-      this.open.nativeElement.click();
-    } else {
+//     if (this.isCheckedTmc == false) {
+//       this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
+//       this.open.nativeElement.click();
+//     } else {
       this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
       if (data['Key'] == 'COD') {
         // this.msgText = 'Processing your order do not refresh page or press back button';
@@ -2688,17 +2688,17 @@ getHB_Details() {
         this.processDgPay(data);
         // }
       }
-    }
+//     }
   }
 
   placeWalletOnly() {
     // this.PGROW = data;
     this.msgText = '';
-    if (this.isCheckedTmc == false) {
-      this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-      this.open.nativeElement.click();
-      return;
-    } else {
+    // if (this.isCheckedTmc == false) {
+    //   this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
+    //   this.open.nativeElement.click();
+    //   return;
+    // } else {
       // Validate prescription uploads before payment
       if (!this.validatePrescriptionUploads()) {
         return; // Error message already shown by validation method
@@ -2747,17 +2747,17 @@ getHB_Details() {
           // this.refundWallet();
         }
       });
-    }
+    // }
   }
 
   placeCFHOnly() {
     // this.PGROW = data;
     this.msgText = '';
-    if (this.isCheckedTmc == false) {
-      this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-      this.open.nativeElement.click();
-      return;
-    } else {
+    // if (this.isCheckedTmc == false) {
+    //   this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
+    //   this.open.nativeElement.click();
+    //   return;
+    // } else {
       // Validate prescription uploads before payment
       if (!this.validatePrescriptionUploads()) {
         return; // Error message already shown by validation method
@@ -2799,7 +2799,7 @@ getHB_Details() {
           // this.refundWallet();
         }
       });
-    }
+    // }
   }
 
   processDgPay(data: any) {
@@ -2896,7 +2896,8 @@ getHB_Details() {
 
   resetPG() {
     this.selectedPG = '';
-    this.isCheckedTmc = false;
+    // this.isCheckedTmc = false;
+    this.isCheckedTmc = true;
     if (this.pglist.length > 0) {
       // this.paymentContinue = true;
       this.selectedPG = this.pglist[0].PGListingId;

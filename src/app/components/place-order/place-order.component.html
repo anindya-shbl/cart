@@ -184,12 +184,9 @@
                   </div>
                 </ng-container>
                 <div class="p-3 d-flex justify-content-end border-top" style="gap: 10px;">
-                  <button *ngIf="PrescUpldFlgHuman" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    Upload Prescription
+                  <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Upload Prescription  <!-- This is the button in the cart items block-->
                   </button>
-                  <!-- <button *ngIf="PrescUpldFlgPet" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwoForPet" aria-expanded="true" aria-controls="collapseTwoForPet">
-                    Upload Pet Prescription
-                  </button> -->
                   <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     Choose Address
                   </button>
@@ -198,12 +195,12 @@
             </div>
           </div>
 
-          <!-- ================ Prescriptions================ -->
+          <!-- ================ Prescriptions================ --> 
           <div *ngIf="(PrescUpldFlgHuman  || PrescUpldFlgPet)" class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" (click)="resetPG()">
-                Upload Prescription
+                Upload Prescription <!-- This is the lebel of upload prescription block-->
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

@@ -225,8 +225,11 @@
                           </div>
                         </ng-container>
                       </div>
+                    </div>
+                  </div>
                       <!--for pet-->
-
+                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 1">
+                    <div class="p-2">
                       <div class="uploaded hvr" (click)="showUploadedPrescForPet()">
                         <div>
                           <i class="fa-solid fa-file-circle-check text-success" style="font-size: 50px;"></i>
@@ -329,8 +332,9 @@
                       Only .jpg,.jpeg,.pdf files are allowed (max size : 5mb)
                       Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
                     </div>
-                    <!--For Pet-->
-
+                  </div>
+                    <!--For Pet start here-->
+                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
                     <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
                       <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
                         <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>

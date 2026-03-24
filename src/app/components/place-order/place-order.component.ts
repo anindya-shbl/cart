@@ -464,7 +464,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
-      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":418.5,"CartItemDiscount":62.78,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.28,"CartVal":358,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":356,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3581423,"BillingAddressId":3581423,"result":{"header":[{"CartAmount":418.5,"CartItemDiscount":62.78,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":358,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":356,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"HBName":"test HB"}],"coupons":[]}};
+      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":112.5,"CartItemDiscount":16.88,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.38,"CartVal":127,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":96,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":29,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3581423,"BillingAddressId":3581423,"result":{"header":[{"CartAmount":112.5,"CartItemDiscount":16.88,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.38,"CartVal":127,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":96,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":29,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB"}],"coupons":[]}};
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -1535,159 +1535,192 @@ export class PlaceOrderComponent implements OnInit {
 
   continueShipping() {
     this.spinner.show();
-    const formData = new FormData();
-    let uploadFiles: any = [];
     this.msgText = '';
 
-    // ============ HANDLE HUMAN PRESCRIPTIONS ============
-    if (this.prscFiles.length > 0) {
-      uploadFiles = this.prscFiles;
+    // Determine what needs to be uploaded
+    const hasHumanToUpload = this.prscFiles.length > 0 || this.savedPrscFile.length > 0;
+    const hasPetToUpload = this.prscFilesPet.length > 0 || this.savedPrscFilePet.length > 0;
 
-      for (var i = 0; i < uploadFiles.length; i++) {
-        formData.append('refFiles', uploadFiles[i]);
+    // If nothing to upload, proceed to address
+    if (!hasHumanToUpload && !hasPetToUpload) {
+      if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
+        this.spinner.hide();
+        this.addShipping.nativeElement.click();
+      } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length > 0) {
+        this.spinner.hide();
+      } else {
+        this.spinner.hide();
       }
+      return;
+    }
 
-      this.webengageService.trackEvent('Prescription Upload Initiated', {})
+    this.webengageService.trackEvent('Prescription Upload Initiated', {});
 
-      this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe((res: any) => {
-        // console.log(res);
-        if (res && res['msgcode'] == 1) {
-          let fd = new FormData();
-          let requestData = JSON.stringify(res['data']);
-          fd.append('prescriptionlist', requestData);
-          fd.append('use_pet_prescription', '0'); // 0 for human prescription
-
-          this.prscFiles = [];
-          this.savedPrscFile = [];
-
-          this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-            // console.log('CP update resData', resData)
-            if (resData['status'] == 'success') {
-              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-              this.processOrderDetails();
-              // this.setShippingAddress(this.shippingId);
-            } else {
-              // alert('Somthing went wrong. Please try again');
-              this.msgText = 'Unable to process your request now, Please try after some time.';
-              this.open.nativeElement.click();
-              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-            }
+    // ============ SEQUENTIAL UPLOAD CHAIN ============
+    // Step 1: Upload/Update human prescription first
+    if (hasHumanToUpload) {
+      this.uploadAndUpdateHumanPrescription(() => {
+        // Step 2: After human is done, upload/update pet prescription
+        if (hasPetToUpload) {
+          this.uploadAndUpdatePetPrescription(() => {
+            // Step 3: Both complete - proceed to order details
+            this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true });
+            this.processOrderDetails();
+            this.spinner.hide();
           });
-          this.spinner.hide();
         } else {
-          this.msgText = 'Some thing went wrong, Please try again.';
-          this.open.nativeElement.click();
-          this.spinner.hide();
-        }
-      });
-    } else if (this.savedPrscFile.length > 0) {
-      uploadFiles = this.savedPrscFile;
-
-      let fd = new FormData();
-      let requestData = JSON.stringify(uploadFiles);
-      fd.append('prescriptionlist', requestData);
-      fd.append('use_pet_prescription', '0'); // 0 for human prescription
-
-      this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-      this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-        // console.log('CP update resData', resData);
-
-        this.prscFiles = [];
-        this.savedPrscFile = [];
-        let list: any = [];
-        this.savedPrscList.forEach((elm: any) => {
-          elm = { ...elm, checked: false };
-          list.push(elm);
-        });
-        this.savedPrscList = list;
-        if (resData['status'] == 'success') {
-          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
+          // Only human needed - proceed
+          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true });
           this.processOrderDetails();
-          // this.setShippingAddress(this.shippingId);
-        } else {
-          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-          // alert('Somthing went wrong. Please try again');
-          this.msgText = 'Unable to process your request now, Please try after some time.';
-          this.open.nativeElement.click();
-        }
-      });
-      this.spinner.hide();
-    } else if (this.prscFilesPet.length > 0) {
-      // ============ HANDLE PET PRESCRIPTIONS ============
-      uploadFiles = this.prscFilesPet;
-
-      for (var i = 0; i < uploadFiles.length; i++) {
-        formData.append('refFiles', uploadFiles[i]);
-      }
-
-      this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-      this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe((res: any) => {
-
-        if (res && res['msgcode'] == 1) {
-          let fd = new FormData();
-          let requestData = JSON.stringify(res['data']);
-          fd.append('prescriptionlist', requestData);
-          fd.append('use_pet_prescription', '1'); // 1 for pet prescription
-
-          this.prscFilesPet = [];
-          this.savedPrscFilePet = [];
-
-          this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-            if (resData['status'] == 'success') {
-              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-              this.processOrderDetails();
-            } else {
-              this.msgText = 'Unable to process your request now, Please try after some time.';
-              this.open.nativeElement.click();
-              this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-            }
-          });
-          this.spinner.hide();
-        } else {
-          this.msgText = 'Some thing went wrong, Please try again.';
-          this.open.nativeElement.click();
           this.spinner.hide();
         }
       });
-    } else if (this.savedPrscFilePet.length > 0) {
-      uploadFiles = this.savedPrscFilePet;
-
-      let fd = new FormData();
-      let requestData = JSON.stringify(uploadFiles);
-      fd.append('prescriptionlist', requestData);
-      fd.append('use_pet_prescription', '1'); // 1 for pet prescription
-
-      this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-      this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-
-        this.prscFilesPet = [];
-        this.savedPrscFilePet = [];
-        let list: any = [];
-        this.savedPrscList.forEach((elm: any) => {
-          elm = { ...elm, checked: false };
-          list.push(elm);
-        });
-        this.savedPrscList = list;
-        if (resData['status'] == 'success') {
-          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-          this.processOrderDetails();
-        } else {
-          this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-          this.msgText = 'Unable to process your request now, Please try after some time.';
-          this.open.nativeElement.click();
-        }
+    } else if (hasPetToUpload) {
+      // Only pet prescription needed
+      this.uploadAndUpdatePetPrescription(() => {
+        this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true });
+        this.processOrderDetails();
+        this.spinner.hide();
       });
-      this.spinner.hide();
-    } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
-      this.spinner.hide();
-      this.addShipping.nativeElement.click()
-    } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length > 0) {
-      this.spinner.hide();
     }
   }
+
+  // Step 1: Upload new human prescription file OR update with saved
+  private uploadAndUpdateHumanPrescription(callback: any) {
+    if (this.prscFiles.length > 0) {
+      // Upload new human prescription files
+      const formData = new FormData();
+      for (let i = 0; i < this.prscFiles.length; i++) {
+        formData.append('refFiles', this.prscFiles[i]);
+      }
+
+      this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe(
+        (res: any) => {
+          if (res && res['msgcode'] == 1) {
+            // Now update the prescription status
+            this.updateHumanPrescriptionStatus(res['data'], callback);
+          } else {
+            this.msgText = 'Human prescription upload failed. Please try again.';
+            this.open.nativeElement.click();
+            this.spinner.hide();
+          }
+        },
+        (error) => {
+          this.msgText = 'Human prescription upload error. Please try again.';
+          this.open.nativeElement.click();
+          this.spinner.hide();
+        }
+      );
+    } else if (this.savedPrscFile.length > 0) {
+      // Use saved human prescription - update directly
+      this.updateHumanPrescriptionStatus(this.savedPrscFile, callback);
+    } else {
+      callback();
+    }
+  }
+
+  // Update human prescription status
+  private updateHumanPrescriptionStatus(prescriptionData: any, callback: any) {
+    let fd = new FormData();
+    let requestData = JSON.stringify(prescriptionData);
+    fd.append('prescriptionlist', requestData);
+    fd.append('use_pet_prescription', '0'); // 0 for human prescription
+
+    this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe(
+      (resData: any) => {
+        if (resData['status'] == 'success') {
+          // Clear human prescription arrays
+          this.prscFiles = [];
+          this.savedPrscFile = [];
+          let list: any = [];
+          this.savedPrscList.forEach((elm: any) => {
+            elm = { ...elm, checked: false };
+            list.push(elm);
+          });
+          this.savedPrscList = list;
+          callback();
+        } else {
+          this.msgText = 'Unable to update human prescription. Please try again.';
+          this.open.nativeElement.click();
+          this.spinner.hide();
+        }
+      },
+      (error) => {
+        this.msgText = 'Error updating human prescription.';
+        this.open.nativeElement.click();
+        this.spinner.hide();
+      }
+    );
+  }
+
+  // Step 2: Upload new pet prescription file OR update with saved
+  private uploadAndUpdatePetPrescription(callback: any) {
+    if (this.prscFilesPet.length > 0) {
+      // Upload new pet prescription files
+      const formData = new FormData();
+      for (let i = 0; i < this.prscFilesPet.length; i++) {
+        formData.append('refFiles', this.prscFilesPet[i]);
+      }
+
+      this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe(
+        (res: any) => {
+          if (res && res['msgcode'] == 1) {
+            // Now update the prescription status
+            this.updatePetPrescriptionStatus(res['data'], callback);
+          } else {
+            this.msgText = 'Pet prescription upload failed. Please try again.';
+            this.open.nativeElement.click();
+            this.spinner.hide();
+          }
+        },
+        (error) => {
+          this.msgText = 'Pet prescription upload error. Please try again.';
+          this.open.nativeElement.click();
+          this.spinner.hide();
+        }
+      );
+    } else if (this.savedPrscFilePet.length > 0) {
+      // Use saved pet prescription - update directly
+      this.updatePetPrescriptionStatus(this.savedPrscFilePet, callback);
+    } else {
+      callback();
+    }
+  }
+
+  // Update pet prescription status
+  private updatePetPrescriptionStatus(prescriptionData: any, callback: any) {
+    let fd = new FormData();
+    let requestData = JSON.stringify(prescriptionData);
+    fd.append('prescriptionlist', requestData);
+    fd.append('use_pet_prescription', '1'); // 1 for pet prescription
+
+    this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe(
+      (resData: any) => {
+        if (resData['status'] == 'success') {
+          // Clear pet prescription arrays
+          this.prscFilesPet = [];
+          this.savedPrscFilePet = [];
+          let list: any = [];
+          this.savedPrscListForPet.forEach((elm: any) => {
+            elm = { ...elm, checked: false };
+            list.push(elm);
+          });
+          this.savedPrscListForPet = list;
+          callback();
+        } else {
+          this.msgText = 'Unable to update pet prescription. Please try again.';
+          this.open.nativeElement.click();
+          this.spinner.hide();
+        }
+      },
+      (error) => {
+        this.msgText = 'Error updating pet prescription.';
+        this.open.nativeElement.click();
+        this.spinner.hide();
+      }
+    );
+  }
+
 
   // =================== address  ================
 

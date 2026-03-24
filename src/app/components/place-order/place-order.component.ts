@@ -1781,10 +1781,10 @@ export class PlaceOrderComponent implements OnInit {
         }
       });
       this.spinner.hide();
-    } else if (this.headerDetails['IsPrescriptionUploaded'] == 1 && this.addressList.length == 0) {
+    } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
       this.spinner.hide();
       this.addShipping.nativeElement.click()
-    } else if (this.headerDetails['IsPrescriptionUploaded'] == 1 && this.addressList.length > 0) {
+    } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length > 0) {
       this.spinner.hide();
     }
   }

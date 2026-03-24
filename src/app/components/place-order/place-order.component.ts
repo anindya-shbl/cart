@@ -477,38 +477,39 @@ export class PlaceOrderComponent implements OnInit {
             // 'HBContact': this.headerDetails['HBContact'],
           });
         }
-        if((this.headerDetails['IsPrescriptionUploaded'] == 0)) {
-           if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        if(((this.headerDetails['IsPrescriptionUploaded'] == 0) && (this.headerDetails['NeedToAttachPrescription'] == 'Y')) || ((this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) && (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y'))){
+          //  if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
             this.shippingFlg = false;
             this.paymentFlg = false;
             this.PrescUpldFlg = true;
+            this.shippingContinue = false;
           } else {
             this.shippingFlg = true;
             this.paymentFlg = false;
             this.PrescUpldFlg = false;
             this.shippingContinue = true;
           }
-        }
-        else if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
-          if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
-            this.shippingFlg = false;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = true;
-          } else {
-            this.shippingFlg = true;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = false;
-            this.shippingContinue = true;
-          }
-        } else {
-          this.PrescUpldFlg = true;
-          this.shippingFlg = true;
-          this.paymentFlg = false;
-          this.shippingContinue = true;
-          if (this.addressList.length == 0 && this.addShipping != undefined) {
-            this.addShipping.nativeElement.click();
-          }
-        }
+        // }
+        // else if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
+        //   if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+        //     this.shippingFlg = false;
+        //     this.paymentFlg = false;
+        //     this.PrescUpldFlg = true;
+        //   } else {
+        //     this.shippingFlg = true;
+        //     this.paymentFlg = false;
+        //     this.PrescUpldFlg = false;
+        //     this.shippingContinue = true;
+        //   }
+        // } else {
+        //   this.PrescUpldFlg = true;
+        //   this.shippingFlg = true;
+        //   this.paymentFlg = false;
+        //   this.shippingContinue = true;
+        //   if (this.addressList.length == 0 && this.addShipping != undefined) {
+        //     this.addShipping.nativeElement.click();
+        //   }
+        // }
        
 
         if (

@@ -651,14 +651,30 @@ export class PlaceOrderComponent implements OnInit {
       if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
         // Show based on what products exist
         this.PrescUpldFlgHuman = this.hasHumanProducts;
-        this.PrescUpldFlgPet = this.hasPetProducts;
+        // this.PrescUpldFlgPet = this.hasPetProducts;
       } else {
         this.PrescUpldFlgHuman = false;
-        this.PrescUpldFlgPet = false;
+        // this.PrescUpldFlgPet = false;
       }
     } else {
       // Already uploaded - show both if items exist
       this.PrescUpldFlgHuman = this.hasHumanProducts;
+      // this.PrescUpldFlgPet = this.hasPetProducts;
+    }
+
+    // Set upload petcare prescription flags
+    if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
+      if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        // Show based on what products exist
+        // this.PrescUpldFlgHuman = this.hasHumanProducts;
+        this.PrescUpldFlgPet = this.hasPetProducts;
+      } else {
+        // this.PrescUpldFlgHuman = false;
+        this.PrescUpldFlgPet = false;
+      }
+    } else {
+      // Already uploaded - show both if items exist
+      // this.PrescUpldFlgHuman = this.hasHumanProducts;
       this.PrescUpldFlgPet = this.hasPetProducts;
     }
 

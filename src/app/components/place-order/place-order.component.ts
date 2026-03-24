@@ -409,7 +409,7 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-      cartData = {"result":{"header":{"CartAmount":60,"CartItemDiscount":9,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0,"CartVal":82,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":51,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":29,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":11723,"ProductName":"Mext F 7.5 mg Tab (28 Tab)","ProdName":"Mext F","ProductUnit":"STRIP","ProductImage":"MEXT-F-1408541348-10011683.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":60,"ItemQuantity":1,"ItemDiscount":9,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":51,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":51,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"MFT1404","ExpiryDate":"2025-06-10","MfgDate":"2015-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303559,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":28,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"itemlist2":{"11723":[{"ProductId":11723,"ProductName":"Mext F 7.5 mg Tab (28 Tab)","ProdName":"Mext F","ProductUnit":"STRIP","ProductImage":"MEXT-F-1408541348-10011683.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":60,"ItemQuantity":1,"ItemDiscount":9,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":51,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":51,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"MFT1404","ExpiryDate":"2025-06-10","MfgDate":"2015-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303559,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":28,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}]},"lotproductIds":[11723]}};
+      cartData = {"result":{"header":{"CartAmount":418.5,"CartItemDiscount":62.78,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":358,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":356,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":12936,"ProductName":"Cal 360 Tab (10 Tab)","ProdName":"Cal 360","ProductUnit":"STRIP","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":52.5,"ItemQuantity":1,"ItemDiscount":7.88,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":44.62,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":44.63,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000011,"BatchNo":"AS4929","ExpiryDate":"2028-08-31","MfgDate":"2015-07-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Calpol","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":11723,"ProductName":"Mext F 7.5 mg Tab (28 Tab)","ProdName":"Mext F","ProductUnit":"STRIP","ProductImage":"MEXT-F-1408541348-10011683.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":60,"ItemQuantity":4,"ItemDiscount":36,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":204,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":51,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"MFT1404","ExpiryDate":"2025-06-10","MfgDate":"2015-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":28,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":4,"SellerInventoryCnt":0},{"ProductId":24152,"ProductName":"Pan 20 mg Tab (15 Tab)","ProdName":"Pan","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":126,"ItemQuantity":1,"ItemDiscount":18.9,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":107.1,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":107.1,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000612,"BatchNo":24443419,"ExpiryDate":"2027-03-31","MfgDate":"1900-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":15,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"itemlist2":{"12936":[{"ProductId":12936,"ProductName":"Cal 360 Tab (10 Tab)","ProdName":"Cal 360","ProductUnit":"STRIP","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":52.5,"ItemQuantity":1,"ItemDiscount":7.88,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":44.62,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":44.63,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000011,"BatchNo":"AS4929","ExpiryDate":"2028-08-31","MfgDate":"2015-07-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Calpol","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"11723":[{"ProductId":11723,"ProductName":"Mext F 7.5 mg Tab (28 Tab)","ProdName":"Mext F","ProductUnit":"STRIP","ProductImage":"MEXT-F-1408541348-10011683.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":60,"ItemQuantity":4,"ItemDiscount":36,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":204,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":51,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"MFT1404","ExpiryDate":"2025-06-10","MfgDate":"2015-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":28,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":4,"SellerInventoryCnt":0}],"24152":[{"ProductId":24152,"ProductName":"Pan 20 mg Tab (15 Tab)","ProdName":"Pan","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":126,"ItemQuantity":1,"ItemDiscount":18.9,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":107.1,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":107.1,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000612,"BatchNo":24443419,"ExpiryDate":"2027-03-31","MfgDate":"1900-01-01","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1303656,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":15,"Unit":"Tablet","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}]},"lotproductIds":[12936,11723,24152]}};
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
 
@@ -464,123 +464,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
-      data = {
-        "isAddrUpdate": 1,
-        "header_cart_detail": [
-          {
-            "CartAmount": "257.60",
-            "CartItemDiscount": "46.37",
-            "PromoDiscount": ".00",
-            "CouponDiscount": ".00",
-            "ShippingCharge": ".00",
-            "RoundOfVal": "-0.23",
-            "CartVal": "213.00",
-            "OrderPromoID": null,
-            "PromoDesc": null,
-            "CouponPromoId": null,
-            "CouponPromoDesc": null,
-            "NeedToAttachPrescription": "Y",
-            "CourierCharge": null,
-            "ShippingAddressId": null,
-            "BillingAddressId": null,
-            "AreaId": null,
-            "GroupPromoDiscount": null,
-            "IsRedeemable": "N",
-            "CanCOD": "Y",
-            "DeliveryDelayedDay": 0,
-            "OTCBillAmount": null,
-            "SSCurrencyValue": ".00",
-            "WarehouseId": 2,
-            "IsPanIndia": 0,
-            "AppliedCouponCode": null,
-            "EWalletValue": null,
-            "SSCurrencyRedeemed": 0,
-            "OTCIsUrgent": null,
-            "RemainingOTCUrgentBal": 0,
-            "XplorPoint": ".00",
-            "XplorPointVal": null,
-            "AppliedXplorPoint": ".00",
-            "AppliedXplorPointVal": ".00",
-            "IsShow": null,
-            "OTCMEDBillAmount": null,
-            "GiftCardAmount": ".00",
-            "MedDiscPercent": null,
-            "IsDeliveryChargeWaivedOff": 0,
-            "CartValForDeliveryCharge": "211.00",
-            "IsScarcity": 0,
-            "IsLocalCourierable": 0,
-            "SubscriptionId": null,
-            "SubscriptionDiscount": null,
-            "IsPrescriptionUploaded": 0,
-            "ConvienceFee": "2.00",
-            "SmallOrderFee": ".00",
-            "IsPetCarePrescriptionUploaded": 1,
-            "HBName": "TestHBNoida",
-            "BaseShippingCharge": 49,
-            "BaseShippingChargeCartVal": 249,
-            "BaseConvienceFee": 10
-          }
-        ],
-        "ShippingAddressId": null,
-        "BillingAddressId": null,
-        "result": {
-          "header": [
-            {
-              "CartAmount": "257.60",
-              "CartItemDiscount": "46.37",
-              "PromoDiscount": ".00",
-              "CouponDiscount": ".00",
-              "ShippingCharge": ".00",
-              "RoundOfVal": "-0.23",
-              "CartVal": "213.00",
-              "OrderPromoID": null,
-              "PromoDesc": null,
-              "CouponPromoId": null,
-              "CouponPromoDesc": null,
-              "NeedToAttachPrescription": "Y",
-              "CourierCharge": null,
-              "ShippingAddressId": null,
-              "BillingAddressId": null,
-              "AreaId": null,
-              "GroupPromoDiscount": null,
-              "IsRedeemable": "N",
-              "CanCOD": "Y",
-              "DeliveryDelayedDay": 0,
-              "OTCBillAmount": null,
-              "SSCurrencyValue": ".00",
-              "WarehouseId": 2,
-              "IsPanIndia": 0,
-              "AppliedCouponCode": null,
-              "EWalletValue": null,
-              "SSCurrencyRedeemed": 0,
-              "OTCIsUrgent": null,
-              "RemainingOTCUrgentBal": 0,
-              "XplorPoint": ".00",
-              "XplorPointVal": null,
-              "AppliedXplorPoint": ".00",
-              "AppliedXplorPointVal": ".00",
-              "IsShow": null,
-              "OTCMEDBillAmount": null,
-              "GiftCardAmount": ".00",
-              "MedDiscPercent": null,
-              "IsDeliveryChargeWaivedOff": 0,
-              "CartValForDeliveryCharge": "211.00",
-              "IsScarcity": 0,
-              "IsLocalCourierable": 0,
-              "SubscriptionId": null,
-              "SubscriptionDiscount": null,
-              "IsPrescriptionUploaded": 0,
-              "ConvienceFee": "2.00",
-              "SmallOrderFee": ".00",
-              "IsPetCarePrescriptionUploaded": 0,
-              "HBName": "TestHBNoida"
-            }
-          ],
-          "coupons": [
-
-          ]
-        }
-      };
+      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":418.5,"CartItemDiscount":62.78,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.28,"CartVal":358,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":356,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3581423,"BillingAddressId":3581423,"result":{"header":[{"CartAmount":418.5,"CartItemDiscount":62.78,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":358,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3581423,"BillingAddressId":3581423,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":356,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"HBName":"test HB"}],"coupons":[]}};
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -752,14 +636,30 @@ export class PlaceOrderComponent implements OnInit {
       if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
         // Show based on what products exist
         this.PrescUpldFlgHuman = this.hasHumanProducts;
-        this.PrescUpldFlgPet = this.hasPetProducts;
+        // this.PrescUpldFlgPet = this.hasPetProducts;
       } else {
         this.PrescUpldFlgHuman = false;
-        this.PrescUpldFlgPet = false;
+        // this.PrescUpldFlgPet = false;
       }
     } else {
       // Already uploaded - show both if items exist
       this.PrescUpldFlgHuman = this.hasHumanProducts;
+      // this.PrescUpldFlgPet = this.hasPetProducts;
+    }
+
+    // Set upload petcare prescription flags
+    if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
+      if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        // Show based on what products exist
+        // this.PrescUpldFlgHuman = this.hasHumanProducts;
+        this.PrescUpldFlgPet = this.hasPetProducts;
+      } else {
+        // this.PrescUpldFlgHuman = false;
+        this.PrescUpldFlgPet = false;
+      }
+    } else {
+      // Already uploaded - show both if items exist
+      // this.PrescUpldFlgHuman = this.hasHumanProducts;
       this.PrescUpldFlgPet = this.hasPetProducts;
     }
 

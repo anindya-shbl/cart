@@ -1674,11 +1674,11 @@ export class PlaceOrderComponent implements OnInit {
         this.prscFilesPet = [];
         this.savedPrscFilePet = [];
         let list: any = [];
-        this.savedPrscList.forEach((elm: any) => {
+        this.savedPrscListForPet.forEach((elm: any) => {
           elm = { ...elm, checked: false };
           list.push(elm);
         });
-        this.savedPrscList = list;
+        this.savedPrscListForPet = list;
         if (resData['status'] == 'success') {
           this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
           this.processOrderDetails();

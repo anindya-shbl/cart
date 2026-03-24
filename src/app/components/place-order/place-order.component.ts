@@ -486,6 +486,7 @@ export class PlaceOrderComponent implements OnInit {
             this.shippingFlg = true;
             this.paymentFlg = false;
             this.PrescUpldFlg = false;
+            this.shippingContinue = true;
           }
         }
         else if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
@@ -497,9 +498,9 @@ export class PlaceOrderComponent implements OnInit {
             this.shippingFlg = true;
             this.paymentFlg = false;
             this.PrescUpldFlg = false;
+            this.shippingContinue = true;
           }
-        }
-        else {
+        } else {
           this.PrescUpldFlg = true;
           this.shippingFlg = true;
           this.paymentFlg = false;

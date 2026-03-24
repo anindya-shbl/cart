@@ -1623,7 +1623,7 @@ export class PlaceOrderComponent implements OnInit {
         }
       });
       this.spinner.hide();
-    } else if (this.prscFilesPet.length > 0) {
+    } if (this.prscFilesPet.length > 0) {
       // ============ HANDLE PET PRESCRIPTIONS ============
       uploadFiles = this.prscFilesPet;
 
@@ -1691,7 +1691,7 @@ export class PlaceOrderComponent implements OnInit {
         }
       });
       this.spinner.hide();
-    } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
+    } if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
       this.spinner.hide();
       this.addShipping.nativeElement.click()
     } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length > 0) {

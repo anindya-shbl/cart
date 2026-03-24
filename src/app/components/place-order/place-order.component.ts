@@ -480,18 +480,8 @@ export class PlaceOrderComponent implements OnInit {
             // 'HBContact': this.headerDetails['HBContact'],
           });
         }
-
-        if((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) {
-          this.PrescUpldFlg = true;
-          this.shippingFlg = true;
-          this.paymentFlg = false;
-          this.shippingContinue = true;
-          if (this.addressList.length == 0 && this.addShipping != undefined) {
-            this.addShipping.nativeElement.click();
-          }
-        }
-        else {
-          if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+        if((this.headerDetails['IsPrescriptionUploaded'] == 0) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0)) {
+           if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
             this.shippingFlg = false;
             this.paymentFlg = false;
             this.PrescUpldFlg = true;
@@ -501,6 +491,16 @@ export class PlaceOrderComponent implements OnInit {
             this.PrescUpldFlg = false;
           }
         }
+        else {
+          this.PrescUpldFlg = true;
+          this.shippingFlg = true;
+          this.paymentFlg = false;
+          this.shippingContinue = true;
+          if (this.addressList.length == 0 && this.addShipping != undefined) {
+            this.addShipping.nativeElement.click();
+          }
+        }
+       
 
         if (
           this.headerDetails.CartItemDiscount != null &&

@@ -477,8 +477,19 @@ export class PlaceOrderComponent implements OnInit {
             // 'HBContact': this.headerDetails['HBContact'],
           });
         }
-        if((this.headerDetails['IsPrescriptionUploaded'] == 0) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0)) {
+        if((this.headerDetails['IsPrescriptionUploaded'] == 0)) {
            if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+            this.shippingFlg = false;
+            this.paymentFlg = false;
+            this.PrescUpldFlg = true;
+          } else {
+            this.shippingFlg = true;
+            this.paymentFlg = false;
+            this.PrescUpldFlg = false;
+          }
+        }
+        else if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
+          if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
             this.shippingFlg = false;
             this.paymentFlg = false;
             this.PrescUpldFlg = true;
@@ -646,7 +657,7 @@ export class PlaceOrderComponent implements OnInit {
 
     // Set upload petcare prescription flags
     if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
-      if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+      if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
         // Show based on what products exist
         // this.PrescUpldFlgHuman = this.hasHumanProducts;
         this.PrescUpldFlgPet = this.hasPetProducts;
@@ -2394,7 +2405,7 @@ getHB_Details() {
 
   validatePrescriptionUploads(): boolean {
     let humanPrescriptionRequired = this.headerDetails['NeedToAttachPrescription'] == 'Y' && this.ReqPrscListHuman.length > 0;
-    let petPrescriptionRequired = this.headerDetails['NeedToAttachPrescription'] == 'Y' && this.ReqPrscListPet.length > 0;
+    let petPrescriptionRequired = this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y' && this.ReqPrscListPet.length > 0;
 
     // Check human prescription
     if (humanPrescriptionRequired && this.headerDetails['IsPrescriptionUploaded'] == 0) {
@@ -2562,6 +2573,11 @@ getHB_Details() {
         } else {
           fd.append('Prescription_required', '0');
         }
+        if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+          fd.append('Pet_Prescription_required', '1');
+        } else {
+          fd.append('Pet_Prescription_required', '0');
+        }
         fd.append('ShipID', this.shippingId);
         fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
@@ -2626,6 +2642,11 @@ getHB_Details() {
       } else {
         fd.append('Prescription_required', '0');
       }
+      if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+        fd.append('Pet_Prescription_required', '1');
+      } else {
+        fd.append('Pet_Prescription_required', '0');
+      }
       fd.append('ShipID', this.shippingId);
       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
@@ -2676,6 +2697,11 @@ getHB_Details() {
         fd.append('Prescription_required', '1');
       } else {
         fd.append('Prescription_required', '0');
+      }
+      if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+        fd.append('Pet_Prescription_required', '1');
+      } else {
+        fd.append('Pet_Prescription_required', '0');
       }
       fd.append('ShipID', this.shippingId);
       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
@@ -2738,6 +2764,11 @@ getHB_Details() {
       fd.append('Prescription_required', '1');
     } else {
       fd.append('Prescription_required', '0');
+    }
+    if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+      fd.append('Pet_Prescription_required', '1');
+    } else {
+      fd.append('Pet_Prescription_required', '0');
     }
     fd.append('ShipID', this.shippingId);
     fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);

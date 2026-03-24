@@ -477,39 +477,32 @@ export class PlaceOrderComponent implements OnInit {
             // 'HBContact': this.headerDetails['HBContact'],
           });
         }
-        if(((this.headerDetails['IsPrescriptionUploaded'] == 0) && (this.headerDetails['NeedToAttachPrescription'] == 'Y')) || ((this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) && (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y'))){
-          //  if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
-            this.shippingFlg = false;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = true;
-            this.shippingContinue = false;
-          } else {
-            this.shippingFlg = true;
-            this.paymentFlg = false;
-            this.PrescUpldFlg = false;
-            this.shippingContinue = true;
-          }
-        // }
-        // else if (this.headerDetails['IsPetCarePrescriptionUploaded'] == 0) {
-        //   if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
-        //     this.shippingFlg = false;
-        //     this.paymentFlg = false;
-        //     this.PrescUpldFlg = true;
-        //   } else {
-        //     this.shippingFlg = true;
-        //     this.paymentFlg = false;
-        //     this.PrescUpldFlg = false;
-        //     this.shippingContinue = true;
-        //   }
-        // } else {
-        //   this.PrescUpldFlg = true;
-        //   this.shippingFlg = true;
-        //   this.paymentFlg = false;
-        //   this.shippingContinue = true;
-        //   if (this.addressList.length == 0 && this.addShipping != undefined) {
-        //     this.addShipping.nativeElement.click();
-        //   }
-        // }
+        // Check if all needed prescriptions are uploaded
+        const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
+        const humanPrescriptionUploaded = this.headerDetails['IsPrescriptionUploaded'] == 1;
+        const petPrescriptionNeeded = this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y';
+        const petPrescriptionUploaded = this.headerDetails['IsPetCarePrescriptionUploaded'] == 1;
+
+        // Allow shipping only when:
+        // 1. Human prescription: not needed OR successfully uploaded
+        // 2. Pet prescription: not needed OR successfully uploaded
+        const allNeededPrescriptionsUploaded = 
+          (!humanPrescriptionNeeded || humanPrescriptionUploaded) &&
+          (!petPrescriptionNeeded || petPrescriptionUploaded);
+
+        if (allNeededPrescriptionsUploaded) {
+          // All required prescriptions are uploaded - allow shipping to continue
+          this.shippingFlg = true;
+          this.paymentFlg = false;
+          this.PrescUpldFlg = false;
+          this.shippingContinue = true;
+        } else {
+          // Some required prescriptions are still pending - block shipping
+          this.shippingFlg = false;
+          this.paymentFlg = false;
+          this.PrescUpldFlg = true;
+          this.shippingContinue = false;
+        }
        
 
         if (

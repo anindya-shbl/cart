@@ -30,7 +30,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "deployUrl": "https://stage.sastasundar.com/ngcart/",
+            "deployUrl": "https://sastasundar.com/ngcart/V2_26/",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",

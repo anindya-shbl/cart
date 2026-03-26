@@ -120,6 +120,7 @@ export class PlaceOrderComponent implements OnInit {
   cardBalance: any = 0;
   useCardBalance: boolean = false;
   cfhBalance: any = 0;
+  showCFHBlock: boolean = false;  // Add this property
 
   @ViewChild('closebutton') closebutton: any;
   @ViewChild('closeAdssBtn') closeAdssBtn: any;
@@ -185,8 +186,12 @@ export class PlaceOrderComponent implements OnInit {
           this.getWalletBalance();
         }
         this.setJitoHeader();
-        this.getCFHBalance('get')
+        if (this.CommonService.ConfigData.IsCFHActive) {
+          this.showCFHBlock = true;
+          this.getCFHBalance('get');
+        }
       }
+      console.log("this.showCFHBlock",this.showCFHBlock);
     } else {
       this.router.navigate(['ordermedicine']);
     }

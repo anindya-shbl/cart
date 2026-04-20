@@ -334,7 +334,7 @@
                     </div>
                   </div>
                     <!--For Pet start here-->
-                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
+                  <div *ngIf="headerDetails['NeedToAttachPetCarePrescription'] == 'Y'" class>
                     <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
                       <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
                         <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>

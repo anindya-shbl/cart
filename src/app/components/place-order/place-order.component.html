@@ -80,7 +80,7 @@
                           <div class="d-flex align-items-end flex-column">
                             <div class="qtyBtn mb-4">
                               <span (click)="cartAddMinus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-minus"></i></span>
-                              <span class="px-2">{{item.ItemQuantity}}</span>
+                              <span class="px-2">{{item.ItemQuantity | number:'1.0-0'}}</span>
                               <span (click)="cartAddPlus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-plus"></i></span>
                             </div>
                             <!-- <div class=""> -->

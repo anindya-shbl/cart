@@ -234,7 +234,7 @@ export class PlaceOrderComponent implements OnInit {
     let cartSynchCall = this.cookieService.get('cartsynch');
     fd.append('SyncType', 'L');
     this.CommonService.cartSynch('cart/cart_sync', fd).subscribe((response: any) => {
-        // let response: any = {"status":200,"message":"List provided.","data":{"List":[{"ProductId":"273511","ProductName":"Cal Aid Capsule (15 Cap)","DosageRestriction":0,"OfferPrice":"272.06","Discount":18,"Iscourierable":0,"ProductImage":"Cal-Aid-1663222704-10102896-1.jpg","MRP":331.78,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000288","MfgGroup":"Indoco Remedies Ltd.","ExpiryDate":"2027-10-31","Brand":"Indoco Remedies Ltd.","DosageForm":"capsule","ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Cal-Aid-1663222704-10102896-1.jpg","ProductCount":"2","RefOrderId":""},{"ProductId":"220897","ProductName":"Ran CV 500 mg Tablet (10 Tab)","DosageRestriction":0,"OfferPrice":"108.47","Discount":18,"Iscourierable":1,"ProductImage":"Ran-CV-1663920084-10050287-1.jpg","MRP":132.28,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000781","MfgGroup":"Msn Laboratories Private Limited","ExpiryDate":"2029-10-31","Brand":"Msn Laboratories Private Limited","DosageForm":"tablet.","ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Ran-CV-1663920084-10050287-1.jpg","ProductCount":"2","RefOrderId":""}],"Time":""}}
+        response = {"status":200,"message":"List provided.","data":{"List":[{"ProductId":"273511","ProductName":"Cal Aid Capsule (15 Cap)","DosageRestriction":0,"OfferPrice":"272.06","Discount":18,"Iscourierable":0,"ProductImage":"Cal-Aid-1663222704-10102896-1.jpg","MRP":331.78,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000288","MfgGroup":"Indoco Remedies Ltd.","ExpiryDate":"2027-10-31","Brand":"Indoco Remedies Ltd.","DosageForm":"capsule","ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Cal-Aid-1663222704-10102896-1.jpg","ProductCount":"2","RefOrderId":""},{"ProductId":"220897","ProductName":"Ran CV 500 mg Tablet (10 Tab)","DosageRestriction":0,"OfferPrice":"108.47","Discount":18,"Iscourierable":1,"ProductImage":"Ran-CV-1663920084-10050287-1.jpg","MRP":132.28,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000781","MfgGroup":"Msn Laboratories Private Limited","ExpiryDate":"2029-10-31","Brand":"Msn Laboratories Private Limited","DosageForm":"tablet.","ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Ran-CV-1663920084-10050287-1.jpg","ProductCount":"2","RefOrderId":""}],"Time":""}}
         if (response && response['data']['List'] != undefined) {
           let RedishData = response['data']['List'];
           if (RedishData.length > 0) {
@@ -272,8 +272,10 @@ export class PlaceOrderComponent implements OnInit {
       this.cartViewWebEngage(this.allItemsList);
       if (this.allItemsList.length > 0) {
         if (cartSynchCall == '0') {
+          console.log('cart synch call');
           this.checkoutCart(res);
         } else {
+          console.log('get cart details call');
           this.getCartDetails();
         }
       } else {

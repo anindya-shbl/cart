@@ -604,7 +604,7 @@ export class PlaceOrderComponent implements OnInit {
         };
 
         // Check if it's a pet product (InteractiveModule exists and is not empty)
-        if (d['InteractiveModule'] && d['InteractiveModule'] != '') {
+        if (d['InteractiveModule'] && d['InteractiveModule'] != '' && d['InteractiveModule'] == 'PetCare') {
         //reversed condition to see the html part
         // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
           rqsPrsPet.push(itemObj);

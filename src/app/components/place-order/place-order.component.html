@@ -50,7 +50,7 @@
                                 <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
                               </ng-container>
                               <ng-container *ngIf="item.InteractiveModule != null && item.InteractiveModule != '' && item.InteractiveModule == 'PetCare'">
-                                <small class="petTag centertag"><img src="assets/images/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
+                                <small class="petTag centertag"><img src="https://asset.sastasundar.com/incom/images/product/icons/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
                               </ng-container>
                               <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i class="fa-solid fa-prescription"></i></span>
                             </div>
@@ -185,7 +185,7 @@
                 </ng-container>
                 <div class="p-3 d-flex justify-content-end border-top" style="gap: 10px;">
                   <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    Upload Prescription  <!-- This is the button in the cart items block-->
+                    Upload Prescription 1 <!-- This is the button in the cart items block-->
                   </button>
                   <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     Choose Address
@@ -195,12 +195,12 @@
             </div>
           </div>
 
-          <!-- ================ Prescriptions================ --> 
+          <!-- ================ Prescriptions================ -->
           <div *ngIf="(PrescUpldFlgHuman  || PrescUpldFlgPet)" class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" (click)="resetPG()">
-                Upload Prescription <!-- This is the lebel of upload prescription block-->
+                Upload Prescription 2
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -279,7 +279,7 @@
                         </button>
                       </div>
                       <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListHuman.length > 0">
-                        <label for="file-input" class="hvr">Upload Prescription</label>
+                        <label for="file-input" class="hvr">Upload Prescription 3</label>
                         <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple accept=".jpg, .jpeg, .pdf" />
                       </div>
                     </div>
@@ -334,7 +334,7 @@
                     </div>
                   </div>
                     <!--For Pet start here-->
-                  <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
+                  <div *ngIf="headerDetails['NeedToAttachPetCarePrescription'] == 'Y'" class>
                     <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
                       <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
                         <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
@@ -599,7 +599,7 @@
           <!-- ================ Payment================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" >Payment Process</button>
+              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" [disabled]="!paymentContinue">Payment Process</button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                <div class="accordion-body p-0">

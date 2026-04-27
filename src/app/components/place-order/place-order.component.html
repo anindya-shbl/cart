@@ -21,14 +21,16 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
               <div class="accordion-body p-0">
-                <div class="border-bottom px-4" >
+                <div class="border-bottom px-4">
                   <div class="mx-auto pb-3" style="max-width: 800px;">
                     <app-search (newItemEvent)="getCartDetails()"></app-search>
                   </div>
                 </div>
 
-                <div *ngIf="totalSavebyAlternative != '' && totalSavebyAlternative.MaxSaveValue != '0.00'" class="border-top border-light-subtle fw-5" style="color: #ca6405;">
-                  <div class="d-flex justify-content-between align-items-center bg-warning-subtle p-3 hvr" data-bs-toggle="modal" data-bs-target="#replaceAllModal">
+                <div *ngIf="totalSavebyAlternative != '' && totalSavebyAlternative.MaxSaveValue != '0.00'"
+                  class="border-top border-light-subtle fw-5" style="color: #ca6405;">
+                  <div class="d-flex justify-content-between align-items-center bg-warning-subtle p-3 hvr"
+                    data-bs-toggle="modal" data-bs-target="#replaceAllModal">
                     <span>{{totalSavebyAlternative.results}}</span>
                     <span class="fs-6"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
                   </div>
@@ -43,19 +45,30 @@
 
                             <div class="itemImg" style="display: block; height: auto;">
                               <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
-                                <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
+                                <img
+                                  src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}"
+                                  alt="" width="100%">
                               </ng-container>
                               <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null">
-                                <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
-                                <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                                <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"
+                                  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt=""
+                                  width="80%">
+                                <img *ngIf="item.PrescriptionOTC == 'O'"
+                                  src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                                  width="80%">
                               </ng-container>
-                              <ng-container *ngIf="item.InteractiveModule != null && item.InteractiveModule != '' && item.InteractiveModule == 'PetCare'">
-                                <small class="petTag centertag"><img src="https://asset.sastasundar.com/incom/images/product/icons/pets-icon.png" alt="For Pets" width="auto"> For Pets </small>
+                              <ng-container
+                                *ngIf="item.InteractiveModule != null && item.InteractiveModule != '' && item.InteractiveModule == 'PetCare'">
+                                <small class="petTag centertag"><img
+                                    src="https://asset.sastasundar.com/incom/images/product/icons/pets-icon.png"
+                                    alt="For Pets" width="auto"> For Pets </small>
                               </ng-container>
-                              <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i class="fa-solid fa-prescription"></i></span>
+                              <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i
+                                  class="fa-solid fa-prescription"></i></span>
                             </div>
                             <div class="w-100 px-3">
-                              <div class="fs-5 fw-5 mb-2" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
+                              <div class="fs-5 fw-5 mb-2"
+                                (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
                                 {{ item.ProductName }}
                               </div>
                               <div class="text-body-tertiary mb-1 fs-3">{{ item.MfgGroup }}</div>
@@ -65,13 +78,17 @@
                                   <span *ngIf="item.PrescriptionOTC == 'O'">Best Before</span>
                                   : {{ item.ExpiryDate | date : "dd MMM yyyy" }}
                                 </div>
-                                <div *ngIf="item.IsNonReturnable == 1" class="my-1 me-2 non-returnable">** Non Returnable Product</div>
+                                <div *ngIf="item.IsNonReturnable == 1" class="my-1 me-2 non-returnable">** Non
+                                  Returnable Product</div>
                               </div>
 
                               <div class="d-flex flex-wrap align-items-baseline">
                                 <div class="fs-6 fw-6 me-2">{{item.OfferPrice | currency : "INR"}}</div>
-                                <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-secondary text-decoration-line-through me-2">{{ item.ItemBasePrice | currency : "INR"}} </div>
-                                <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}% Off</div>
+                                <div *ngIf="item.ItemBasePrice > item.OfferPrice"
+                                  class="text-secondary text-decoration-line-through me-2">{{ item.ItemBasePrice |
+                                  currency : "INR"}} </div>
+                                <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">
+                                  {{item.DiscountPercent}}% Off</div>
                                 <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
                               </div>
                             </div>
@@ -79,40 +96,55 @@
 
                           <div class="d-flex align-items-end flex-column">
                             <div class="qtyBtn mb-4">
-                              <span (click)="cartAddMinus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-minus"></i></span>
+                              <span (click)="cartAddMinus(item.ProductId)" class="px-2 hvr"><i
+                                  class="fa-solid fa-minus"></i></span>
                               <span class="px-2">{{item.ItemQuantity | number:'1.0-0'}}</span>
-                              <span (click)="cartAddPlus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-plus"></i></span>
+                              <span (click)="cartAddPlus(item.ProductId)" class="px-2 hvr"><i
+                                  class="fa-solid fa-plus"></i></span>
                             </div>
                             <!-- <div class=""> -->
-                              <div class="text-primary hvr fs-3 mb-2" (click)="saveForLaterAdd(item)">Save For Later<i class="fa-regular fa-heart ms-2 fs-2"></i></div>
-                              <div class="text-body-tertiary hvr fs-3" (click)="openRemoveModal(item, 'InCart')" data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
+                            <div class="text-primary hvr fs-3 mb-2" (click)="saveForLaterAdd(item)">Save For Later<i
+                                class="fa-regular fa-heart ms-2 fs-2"></i></div>
+                            <div class="text-body-tertiary hvr fs-3" (click)="openRemoveModal(item, 'InCart')"
+                              data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i
+                                class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
                             <!-- </div> -->
                           </div>
                         </div>
 
                         <div *ngIf="alterSaved!='' && alterSaved['ProductId'] == item.ProductId" class="alter-sec">
                           <!-- <span><img src="https://asset.sastasundar.com/incom/sspl_website/images/medi-icon.png" alt=""> -->
-                          <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""  width="24px">
-                          &nbsp;Saved {{calSavings(item.ItemQuantity , alterSaved['savePerStrip']) | currency: 'INR':'symbol':'1.0-0'}} with Alternative </span>
+                          <span><img
+                              src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png"
+                              alt="" width="24px">
+                            &nbsp;Saved {{calSavings(item.ItemQuantity , alterSaved['savePerStrip']) | currency:
+                            'INR':'symbol':'1.0-0'}} with Alternative </span>
                         </div>
 
                         <div *ngIf="allReplaceArr.length > 0">
                           <ng-container *ngFor="let sv of allReplaceArr">
                             <div *ngIf="sv.altId == item.ProductId" class="alter-sec">
                               <!-- <span><img src="https://asset.sastasundar.com/incom/sspl_website/images/medi-icon.png" alt=""> -->
-                              <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""  width="24px">
-                              &nbsp;Saved {{calSavings(item.ItemQuantity , sv.svngPerpck) | currency: 'INR':'symbol':'1.0-0' }} with Alternative </span>
+                              <span><img
+                                  src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png"
+                                  alt="" width="24px">
+                                &nbsp;Saved {{calSavings(item.ItemQuantity , sv.svngPerpck) | currency:
+                                'INR':'symbol':'1.0-0' }} with Alternative </span>
                             </div>
                           </ng-container>
                         </div>
 
-                          <div *ngIf="item.PreferredSubtitute.length>0 && CommonService.ConfigData.IsDisplayGenericProduct == 1" class="alter-sec hvr" (click)="displaySubs(item)">
-                            <!-- <span><img src="https://asset.sastasundar.com/incom/sspl_website/images/medi-icon.png" alt="">  -->
-                            <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""  width="24px">
-                              &nbsp;{{getMaxSavings(item.PreferredSubtitute)}}% Lower Price Jito Alternative Available
-                            </span>
-                            <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-                          </div>
+                        <div
+                          *ngIf="item.PreferredSubtitute.length>0 && CommonService.ConfigData.IsDisplayGenericProduct == 1"
+                          class="alter-sec hvr" (click)="displaySubs(item)">
+                          <!-- <span><img src="https://asset.sastasundar.com/incom/sspl_website/images/medi-icon.png" alt="">  -->
+                          <span><img
+                              src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png"
+                              alt="" width="24px">
+                            &nbsp;{{getMaxSavings(item.PreferredSubtitute)}}% Lower Price Jito Alternative Available
+                          </span>
+                          <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                        </div>
                       </div>
                     </div>
                   </ng-container>
@@ -129,16 +161,24 @@
 
                               <div class="itemImg">
                                 <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
-                                  <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
+                                  <img
+                                    src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}"
+                                    alt="" width="100%">
                                 </ng-container>
                                 <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null" width="100%">
-                                  <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="100%">
-                                  <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="100%">
+                                  <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"
+                                    src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt=""
+                                    width="100%">
+                                  <img *ngIf="item.PrescriptionOTC == 'O'"
+                                    src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                                    width="100%">
                                 </ng-container>
-                                <span *ngIf="item.PrescriptionOTC == 'P'" class="Rx-icon"><i class="fa-solid fa-prescription"></i></span>
+                                <span *ngIf="item.PrescriptionOTC == 'P'" class="Rx-icon"><i
+                                    class="fa-solid fa-prescription"></i></span>
                               </div>
                               <div class="w-100 px-3">
-                                <div class="fs-5 fw-5 mb-2" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
+                                <div class="fs-5 fw-5 mb-2"
+                                  (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
                                   {{ item.DisplayName }}
                                 </div>
                                 <div class="text-body-tertiary mb-2 fs-3">{{ item.MfgGroup }}</div>
@@ -148,16 +188,23 @@
                                     <span *ngIf="item.PrescriptionOTC == 'O'">Best Before</span>
                                     : {{ item.ExpiryDate | date : "dd MMM yyyy" }}
                                   </div>
-                                  <div *ngIf="item.IsNonReturnable == 1" class="ms-2 non-returnable">** Non Returnable Product</div>
+                                  <div *ngIf="item.IsNonReturnable == 1" class="ms-2 non-returnable">** Non Returnable
+                                    Product</div>
                                 </div>
-                                <div *ngIf="item.IsOutOfStock != 'Y' && item.ProductStatus == 'C'" class="d-flex flex-wrap align-items-baseline">
+                                <div *ngIf="item.IsOutOfStock != 'Y' && item.ProductStatus == 'C'"
+                                  class="d-flex flex-wrap align-items-baseline">
                                   <div class="fs-6 fw-6 me-2">{{ item.MRP | currency : "INR" }}</div>
-                                  <div *ngIf="item.MRP > item.OfferPrice" class="text-secondary text-decoration-line-through me-2">{{ item.OfferPrice | currency : "INR" }} </div>
-                                  <div *ngIf="item.MRP > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}% Off</div>
+                                  <div *ngIf="item.MRP > item.OfferPrice"
+                                    class="text-secondary text-decoration-line-through me-2">{{ item.OfferPrice |
+                                    currency : "INR" }} </div>
+                                  <div *ngIf="item.MRP > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">
+                                    {{item.DiscountPercent}}% Off</div>
                                   <div class="fs-3 text-secondary">(* Inclusive of all taxes)</div>
                                 </div>
-                                <div *ngIf="item.IsOutOfStock == 'Y' && item.ProductStatus == 'C'" class="d-inline border rounded px-3 py-2 bg-body-secondary"> Out of stock</div>
-                                <div *ngIf="item.ProductStatus == 'D'" class="d-inline border rounded px-3 py-2 bg-body-secondary">Product Discontinued</div>
+                                <div *ngIf="item.IsOutOfStock == 'Y' && item.ProductStatus == 'C'"
+                                  class="d-inline border rounded px-3 py-2 bg-body-secondary"> Out of stock</div>
+                                <div *ngIf="item.ProductStatus == 'D'"
+                                  class="d-inline border rounded px-3 py-2 bg-body-secondary">Product Discontinued</div>
                               </div>
                             </div>
 
@@ -165,16 +212,24 @@
                             <ng-container *ngIf="item.ProductStatus == 'C'">
                               <div *ngIf="item.IsOutOfStock != 'Y'" class="d-flex align-items-end flex-column">
                                 <div class="qtyBtn mb-4">
-                                  <span (click)="savedItemsMinus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-minus"></i></span>
+                                  <span (click)="savedItemsMinus(item.ProductId)" class="px-2 hvr"><i
+                                      class="fa-solid fa-minus"></i></span>
                                   <span class="px-2">{{ item.ProductCount }}</span>
-                                  <span (click)="savedItemsPlus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-plus"></i></span>
+                                  <span (click)="savedItemsPlus(item.ProductId)" class="px-2 hvr"><i
+                                      class="fa-solid fa-plus"></i></span>
                                 </div>
-                                <div class="text-success hvr fs-3 mb-2" (click)="moveToCart(item, item.ProductCount)">Move To cart<i class="fa-solid fa-cart-plus ms-2 fs-2"></i></div>
-                                <div class="text-body-tertiary hvr fs-3 " (click)="openRemoveModal(item, 'SavedLater')" data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
+                                <div class="text-success hvr fs-3 mb-2" (click)="moveToCart(item, item.ProductCount)">
+                                  Move To cart<i class="fa-solid fa-cart-plus ms-2 fs-2"></i></div>
+                                <div class="text-body-tertiary hvr fs-3 " (click)="openRemoveModal(item, 'SavedLater')"
+                                  data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i
+                                    class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
                               </div>
                             </ng-container>
-                            <ng-container *ngIf="item.ProductStatus == 'D' || (item.IsOutOfStock == 'Y' && item.ProductStatus == 'C')">
-                                <div class="notify-btn btn-wd" (click)="openRemoveModal(item, 'SavedLater')" data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
+                            <ng-container
+                              *ngIf="item.ProductStatus == 'D' || (item.IsOutOfStock == 'Y' && item.ProductStatus == 'C')">
+                              <div class="notify-btn btn-wd" (click)="openRemoveModal(item, 'SavedLater')"
+                                data-bs-toggle="modal" data-bs-target="#confirmRemove">Remove<i
+                                  class="fa-solid fa-trash-can ms-2 fs-2"></i></div>
                             </ng-container>
                           </div>
                         </div>
@@ -184,10 +239,14 @@
                   </div>
                 </ng-container>
                 <div class="p-3 d-flex justify-content-end border-top" style="gap: 10px;">
-                  <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed"
+                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
                     Upload Prescription 1 <!-- This is the button in the cart items block-->
                   </button>
-                  <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed"
+                    data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true"
+                    aria-controls="collapseThree">
                     Choose Address
                   </button>
                 </div>
@@ -217,17 +276,21 @@
                       </div>
                       <div *ngIf="UploadedPrscList.length > 0" class="d-flex mt-3">
                         <ng-container *ngFor="let img of UploadedPrscList; let i = index">
-                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr"
+                            style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;"
+                            (click)="showImg(img)">
                             <img [src]="img.path" alt width="80" height="80" />
                           </div>
-                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr"
+                            style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;"
+                            (click)="showImg(img)">
                             <i class="fa fa-file-pdf-o" style="font-size: 80px; color: #F81305;"></i>
                           </div>
                         </ng-container>
                       </div>
                     </div>
                   </div>
-                      <!--for pet-->
+                  <!--for pet-->
                   <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 1">
                     <div class="p-2">
                       <div class="uploaded hvr" (click)="showUploadedPrescForPet()">
@@ -238,10 +301,14 @@
                       </div>
                       <div *ngIf="UploadedPrscListForPet.length > 0" class="d-flex mt-3">
                         <ng-container *ngFor="let img of UploadedPrscListForPet; let i = index">
-                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                          <div *ngIf="img.type != 'pdf'" class="p-2 hvr"
+                            style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;"
+                            (click)="showImg(img)">
                             <img [src]="img.path" alt width="80" height="80" />
                           </div>
-                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr" style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;" (click)="showImg(img)">
+                          <div *ngIf="img.type == 'pdf'" class="p-2 hvr"
+                            style="border: 1px solid #dddddd; border-radius: 4px !important; margin-right: 8px;"
+                            (click)="showImg(img)">
                             <i class="fa fa-file-pdf-o" style="font-size: 80px; color: #F81305;"></i>
                           </div>
                         </ng-container>
@@ -254,7 +321,8 @@
                   <div *ngIf="headerDetails['IsPrescriptionUploaded'] == 0" class>
                     <!-- ============ Image Preview =============== -->
                     <div *ngIf="ReqPrscListHuman.length > 0" class="requirePrescriptionSec">
-                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscListHuman.length }} item<span *ngIf="ReqPrscListHuman.length > 1">s</span> in your cart require prescription</div>
+                      <div class="fw-5 fs-5 mb-1">{{ ReqPrscListHuman.length }} item<span
+                          *ngIf="ReqPrscListHuman.length > 1">s</span> in your cart require prescription</div>
                       <ul class="mb-1">
                         <ng-container *ngFor="let name of slicedArrayHuman">
                           <li class="text-secondary">{{ name.ProductName }}</li>
@@ -274,13 +342,15 @@
 
                     <div class="d-flex align-items-center flex-wrap">
                       <div *ngIf="savedPrscList.length > 0" class="me-3 mb-2">
-                        <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrsc" [disabled]="savedPrscList.length == 0" (click)="prescriptionViewdWebEngage()">
+                        <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrsc"
+                          [disabled]="savedPrscList.length == 0" (click)="prescriptionViewdWebEngage()">
                           Saved Prescription
                         </button>
                       </div>
                       <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListHuman.length > 0">
                         <label for="file-input" class="hvr">Upload Prescription 3</label>
-                        <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple accept=".jpg, .jpeg, .pdf" />
+                        <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple
+                          accept=".jpg, .jpeg, .pdf" />
                       </div>
                     </div>
 
@@ -319,7 +389,8 @@
                                 <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
                               </div>
                             </div>
-                            <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVP(file.PrescriptionId)">
+                            <div class="position-absolute top-0 end-0 hvr"
+                              (click)="delSelectedSVP(file.PrescriptionId)">
                               <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
                             </div>
                           </div>
@@ -333,11 +404,12 @@
                       Press "Ctrl" key to select and upload multiple scanned copies of the same prescription.
                     </div>
                   </div>
-                    <!--For Pet start here-->
+                  <!--For Pet start here-->
                   <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
                     <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
                       <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
-                        <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
+                        <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span
+                            *ngIf="ReqPrscListPet.length > 1">s</span> in your cart require prescription</div>
                         <ul class="mb-1">
                           <ng-container *ngFor="let name of slicedArrayPet">
                             <li class="text-secondary">{{ name.ProductName }}</li>
@@ -349,7 +421,8 @@
                               <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View All...</a>
                             </li>
                             <li *ngIf="!showMoreBtn && slicedArrayPet.length > 3">
-                              <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View Less...</a>
+                              <a (click)="getAllReqPrsc()" class="text-decoration-none text-primary hvr">View
+                                Less...</a>
                             </li>
                           </ul>
                         </div>
@@ -357,13 +430,16 @@
 
                       <div class="d-flex align-items-center flex-wrap">
                         <div *ngIf="savedPrscListForPet.length > 0" class="me-3 mb-2">
-                          <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrscForPet" [disabled]="savedPrscListForPet.length == 0" (click)="prescriptionViewdWebEngage()">
+                          <button type="button" class="prsc-btn" data-bs-toggle="modal"
+                            data-bs-target="#savedPrscForPet" [disabled]="savedPrscListForPet.length == 0"
+                            (click)="prescriptionViewdWebEngage()">
                             Saved Prescription For Pet
                           </button>
                         </div>
                         <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListPet.length > 0">
                           <label for="file-input-pet" class="hvr">Upload Pet Prescription</label>
-                          <input id="file-input-pet" type="file" class="d-none" (change)="selectPrescriptionPet($event)" multiple accept=".jpg, .jpeg, .pdf" />
+                          <input id="file-input-pet" type="file" class="d-none" (change)="selectPrescriptionPet($event)"
+                            multiple accept=".jpg, .jpeg, .pdf" />
                         </div>
                       </div>
 
@@ -402,7 +478,8 @@
                                   <div class="presDate">{{ file.PrescriptionDate | date : "dd MMM yyyy" }}</div>
                                 </div>
                               </div>
-                              <div class="position-absolute top-0 end-0 hvr" (click)="delSelectedSVPPet(file.PrescriptionId)">
+                              <div class="position-absolute top-0 end-0 hvr"
+                                (click)="delSelectedSVPPet(file.PrescriptionId)">
                                 <i class="fa-solid fa-xmark fs-2 text-secondary"></i>
                               </div>
                             </div>
@@ -421,8 +498,10 @@
                 </div>
 
                 <div class="d-flex justify-content-end p-3 border-top">
-                  <button *ngIf="shippingContinue" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" (click)="continueShipping()">Choose Address</button>
-                  <button *ngIf="!shippingContinue" type="button" class="proceed diabled" >Choose Address</button>
+                  <button *ngIf="shippingContinue" type="button" class="proceed" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
+                    (click)="continueShipping()">Choose Address</button>
+                  <button *ngIf="!shippingContinue" type="button" class="proceed diabled">Choose Address</button>
                 </div>
               </div>
             </div>
@@ -431,7 +510,9 @@
           <!-- ================ Shipping Billing Address================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" [disabled]="!shippingFlg" (click)="resetPG()">
+              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                [disabled]="!shippingFlg" (click)="resetPG()">
                 Delivery Address
               </button>
             </h2>
@@ -439,49 +520,55 @@
               <div *ngIf="shippingFlg" class="accordion-body p-0">
                 <div class="address-grid p-3">
                   <!-- ===========  Shipping =========== -->
-                    <!-- <div *ngIf="selectedAddress != ''" class="rounded item-shadow"> -->
-                    <div class="rounded item-shadow">
-                      <div class="fs-6 fw-5 p-3 d-flex justify-content-between align-items-center border-bottom">
-                        <span>Shipping Address</span>
-                        <span class="icons"><i class="fa-solid fa-truck ms-2"></i></span>
-                      </div>
-                      <!-- <ng-container *ngIf="selectedAddress != ''"> -->
-                        <div class="d-flex p-3 pb-0">
-                          <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3" (click)="addAdrType('shipping', 'add')">Add New</button>
-                          <button *ngIf="addressList.length > 0" type="button" class="qtyBtn fw-5 justify-content-center" data-bs-toggle="modal" data-bs-target="#savedaddress" (click)="addAdrType('shipping', 'change')">Change <i class="fa-solid fa-angle-down"></i></button>
-                        </div>
-                        <div *ngIf="selectedAddress != ''" class="p-3">
-                          <div class="d-flex fw-5 mb-2">
-                            <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
-                            <div>{{selectedAddress.NickName}}</div>
-                          </div>
-                          <div class="d-flex mb-1">
-                            <div class="icons">
-                              <span *ngIf="selectedAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
-                              <span *ngIf="selectedAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
-                              <span *ngIf="selectedAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
-                            </div>
-                            <div>
-                              <div>{{selectedAddress.Addline}}</div>
-                              <div class="mb-1">{{selectedAddress.City}} - {{selectedAddress.StateName}} - {{selectedAddress.PinCode}}</div>
-                            </div>
-                          </div>
-                          <div class="d-flex mb-3">
-                            <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
-                            <div class="">{{selectedAddress.CustContactNo}}</div>
-                          </div>
-                          <div class="form-check bill-check">
-                            <input class="me-2 hvr" type="checkbox" id="addressDefault" [checked]="billingCheck" (click)="changeBilling($event)" />
-                            <label class="hvr" for="addressDefault">Billing to this Address</label>
-                          </div>
-                        </div>
-                        <div *ngIf="selectedAddress == ''" class="p-3">
-                          <div class="mb-3 fs-5 fw-5" style="min-height: 80px;">Add address to get delivery details</div>
-                        </div>
-                      <!-- </ng-container> -->
+                  <!-- <div *ngIf="selectedAddress != ''" class="rounded item-shadow"> -->
+                  <div class="rounded item-shadow">
+                    <div class="fs-6 fw-5 p-3 d-flex justify-content-between align-items-center border-bottom">
+                      <span>Shipping Address</span>
+                      <span class="icons"><i class="fa-solid fa-truck ms-2"></i></span>
                     </div>
+                    <!-- <ng-container *ngIf="selectedAddress != ''"> -->
+                    <div class="d-flex p-3 pb-0">
+                      <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3"
+                        (click)="addAdrType('shipping', 'add')">Add New</button>
+                      <button *ngIf="addressList.length > 0" type="button" class="qtyBtn fw-5 justify-content-center"
+                        data-bs-toggle="modal" data-bs-target="#savedaddress"
+                        (click)="addAdrType('shipping', 'change')">Change <i
+                          class="fa-solid fa-angle-down"></i></button>
+                    </div>
+                    <div *ngIf="selectedAddress != ''" class="p-3">
+                      <div class="d-flex fw-5 mb-2">
+                        <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
+                        <div>{{selectedAddress.NickName}}</div>
+                      </div>
+                      <div class="d-flex mb-1">
+                        <div class="icons">
+                          <span *ngIf="selectedAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
+                          <span *ngIf="selectedAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
+                          <span *ngIf="selectedAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
+                        </div>
+                        <div>
+                          <div>{{selectedAddress.Addline}}</div>
+                          <div class="mb-1">{{selectedAddress.City}} - {{selectedAddress.StateName}} -
+                            {{selectedAddress.PinCode}}</div>
+                        </div>
+                      </div>
+                      <div class="d-flex mb-3">
+                        <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
+                        <div class="">{{selectedAddress.CustContactNo}}</div>
+                      </div>
+                      <div class="form-check bill-check">
+                        <input class="me-2 hvr" type="checkbox" id="addressDefault" [checked]="billingCheck"
+                          (click)="changeBilling($event)" />
+                        <label class="hvr" for="addressDefault">Billing to this Address</label>
+                      </div>
+                    </div>
+                    <div *ngIf="selectedAddress == ''" class="p-3">
+                      <div class="mb-3 fs-5 fw-5" style="min-height: 80px;">Add address to get delivery details</div>
+                    </div>
+                    <!-- </ng-container> -->
+                  </div>
 
-                    <!-- <ng-container *ngIf="selectedAddress == ''">
+                  <!-- <ng-container *ngIf="selectedAddress == ''">
                       <div class="rounded item-shadow p-4" style="min-height: 80px;">
                         <div class="mb-4 fs-6 fw-5">Add address to get delivery details</div>
                         <div>
@@ -492,38 +579,43 @@
 
                   <!-- ===========  Billing =========== -->
                   <div *ngIf="!billingCheck && selectedAddress != ''" class="rounded bg-light item-shadow">
-                      <div class="fs-6 fw-5 p-3 d-flex justify-content-between align-items-center border-bottom">
-                        <span>Billing Address</span>
-                        <span class="icons"><i class="fa-solid fa-money-bill ms-2"></i></span>
+                    <div class="fs-6 fw-5 p-3 d-flex justify-content-between align-items-center border-bottom">
+                      <span>Billing Address</span>
+                      <span class="icons"><i class="fa-solid fa-money-bill ms-2"></i></span>
+                    </div>
+                    <ng-container *ngIf="billingAddress != ''">
+                      <div class="d-flex p-3 pb-0">
+                        <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3"
+                          (click)="addAdrType('billing', 'add')">Add New</button>
+                        <button *ngIf="addressList.length > 0" type="button" class="qtyBtn fw-5 justify-content-center"
+                          data-bs-toggle="modal" data-bs-target="#savedaddress"
+                          (click)="addAdrType('billing', 'change')">Change <i
+                            class="fa-solid fa-angle-down"></i></button>
                       </div>
-                      <ng-container *ngIf="billingAddress != ''">
-                        <div class="d-flex p-3 pb-0">
-                            <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3" (click)="addAdrType('billing', 'add')">Add New</button>
-                            <button *ngIf="addressList.length > 0" type="button" class="qtyBtn fw-5 justify-content-center" data-bs-toggle="modal" data-bs-target="#savedaddress" (click)="addAdrType('billing', 'change')">Change <i class="fa-solid fa-angle-down"></i></button>
+                      <div class="p-3">
+                        <div class="d-flex fw-5 mb-2">
+                          <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
+                          <div>{{billingAddress.NickName}}</div>
                         </div>
-                        <div class="p-3">
-                          <div class="d-flex fw-5 mb-2">
-                            <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
-                            <div>{{billingAddress.NickName}}</div>
+                        <div class="d-flex mb-1">
+                          <div class="icons">
+                            <span *ngIf="billingAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
+                            <span *ngIf="billingAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
+                            <span *ngIf="billingAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
                           </div>
-                          <div class="d-flex mb-1">
-                            <div class="icons">
-                              <span *ngIf="billingAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
-                              <span *ngIf="billingAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
-                              <span *ngIf="billingAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
-                            </div>
-                            <div>
-                              <div>{{billingAddress.Addline}}</div>
-                              <div class="mb-1">{{billingAddress.City}} - {{billingAddress.StateName}} - {{billingAddress.PinCode}}</div>
-                            </div>
-                          </div>
-                          <div class="d-flex">
-                            <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
-                            <div class="">{{billingAddress.CustContactNo}}</div>
+                          <div>
+                            <div>{{billingAddress.Addline}}</div>
+                            <div class="mb-1">{{billingAddress.City}} - {{billingAddress.StateName}} -
+                              {{billingAddress.PinCode}}</div>
                           </div>
                         </div>
+                        <div class="d-flex">
+                          <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
+                          <div class="">{{billingAddress.CustContactNo}}</div>
+                        </div>
+                      </div>
 
-                      </ng-container>
+                    </ng-container>
                   </div>
                 </div>
 
@@ -544,7 +636,9 @@
                   </div>
                   <div class="">
                     <ng-container *ngIf="paymentFlg">
-                      <button type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" [disabled]="!paymentFlg" (click)="getPaymentOptions()">Continue To Payment</button>
+                      <button type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                        aria-expanded="true" aria-controls="collapseFour" [disabled]="!paymentFlg"
+                        (click)="getPaymentOptions()">Continue To Payment</button>
                     </ng-container>
                     <ng-container *ngIf="!paymentFlg">
                       <button type="button" class="proceed diabled">Continue To Payment</button>
@@ -558,7 +652,8 @@
           <!-- ================ Seller Information================ -->
           <div *ngIf="sellerDetails !=''" class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
                 Seller Information
               </button>
             </h2>
@@ -599,10 +694,12 @@
           <!-- ================ Payment================ -->
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" [disabled]="!paymentContinue">Payment Process</button>
+              <button class="accordion-button fw-6 fs-7 collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                [disabled]="!paymentContinue">Payment Process</button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-               <div class="accordion-body p-0">
+              <div class="accordion-body p-0">
                 <!-- <div *ngIf="(headerDetails.CartVal > walletBalance) || (!useWallet)" class="address-grid p-3">
                   <ng-container *ngIf="pglist.length > 0">
                     <ng-container *ngFor="let pgRow of pglist">
@@ -664,33 +761,119 @@
                     </div>
 
                     <div class="mb-3">
-                        <form [formGroup]="AddCardForm" (ngSubmit)="addCard()" class="">
-                          <div class="position-relative w-100 ">
-                            <input type="text" class="form-control hgt-50" id="code" formControlName="code" placeholder="Enter Health Card Code">
-                            <button class="applybtn position-absolute border-0" type="submit">Add Card</button>
-                          </div>
-                          <div *ngIf="cfhsubmit && cfh['code'].errors" class="text-danger fs-3 mt-2">
-                              <div *ngIf="cfh['code'].errors['required']">* Please enter card code</div>
-                          </div>
-                          <!-- <div class="">
+                      <form [formGroup]="AddCardForm" (ngSubmit)="addCard()" class="">
+                        <div class="position-relative w-100 ">
+                          <input type="text" class="form-control hgt-50" id="code" formControlName="code"
+                            placeholder="Enter Health Card Code">
+                          <button class="applybtn position-absolute border-0" type="submit">Add Card</button>
+                        </div>
+                        <div *ngIf="cfhsubmit && cfh['code'].errors" class="text-danger fs-3 mt-2">
+                          <div *ngIf="cfh['code'].errors['required']">* Please enter card code</div>
+                        </div>
+                        <!-- <div class="">
                               <button class="applybtn" type="submit">Add Card</button>
                           </div> -->
-                        </form>
+                      </form>
                     </div>
 
-                    <div class="d-flex justify-content-between rounded p-3 mb-3 align-items-center" style="background-color: #e3fbf0;">
-                      <div>
-                        <div class="mb-2 fs-3 text-secondary">Available Balance</div>
-                        <div class="fs-6 fw-6">{{cardBalance | currency : "INR"}}</div>
+                    <div class="rounded p-3 mb-3" style="background-color: #e3fbf0;">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <div class="mb-2 fs-3 text-secondary">Available Balance</div>
+                          <div class="fs-6 fw-6">{{cardBalance | currency : "INR"}}</div>
+                        </div>
+                        <div>
+                          <div *ngIf="cardBalance>0" class="hvr" style="font-size: 34px;" (click)="useCardToggle()">
+                            <i *ngIf="useCardBalance" class="fa-solid fa-toggle-on text-success"></i>
+                            <i *ngIf="!useCardBalance" class="fa-solid fa-toggle-off text-secondary"></i>
+                          </div>
+
+                          <div *ngIf="cardBalance==0" class="hvr" style="font-size: 34px;">
+                            <i class="fa-solid fa-toggle-off text-secondary"></i>
+                          </div>
+                        </div>
                       </div>
-                      <div *ngIf="cardBalance>0" class="hvr" style="font-size: 34px;" (click)="useCardToggle()">
-                        <i *ngIf="useCardBalance" class="fa-solid fa-toggle-on text-success"></i>
-                        <i *ngIf="!useCardBalance" class="fa-solid fa-toggle-off text-secondary"></i>
-                      </div>
-                      <div *ngIf="cardBalance==0" class="hvr" style="font-size: 34px;">
-                        <i class="fa-solid fa-toggle-off text-secondary"></i>
+                      <div (click)="showItemsBreakDown()" class="pe-2 pt-3 mt-3 border-top" *ngIf="useCardBalance">
+                        <b>
+                          {{ itemsBreakDown ? 'Hide item breakdown':'show which items qualify' }}
+                        </b>
                       </div>
                     </div>
+                    <!-- End -->
+
+                    <div *ngIf="itemsBreakDown" class="border rounded-4 bgOFF overflow-hidden">
+                      <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
+                        <div class="HeadingBlock">
+                          <span class="RoundI"><i class="icon-checked-1"></i></span> 
+                            Covered By Jito Health Card</div>
+                          <div *ngFor="let item of jitoItems" class="problock mb-2">
+                            <div class="d-flex align-item-center justify-content-between">
+                              <span class="t14 tcolor">{{item.ProductName}}</span>
+                              <b class="Pcolor">{{item.JitoTransactionAmount2 | number:'1.2-2'|currency:'INR'}}</b>
+                            </div>
+                            <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Jito Product' }}</span>      
+                          </div>
+                      </div>
+
+                      <div *ngIf="nonJitoItems.length>0" class="p-3">
+                        <div class="HeadingBlock">
+                          <span class="RoundI"><i class="icon-lab_cross"></i></span>Not eligible for Jito Health Card
+                        </div>
+                        <div *ngFor="let item of nonJitoItems"  class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">{{item.ProductName}}</span>
+                            <b class="Pcolor">{{item.NonJitoTransactionAmount | number:'1.2-2'| currency:'INR'}}</b>
+                          </div>
+                          <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Other' }}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- static content start -->
+                    <!-- <div class="border rounded-4 bgOFF overflow-hidden">
+                      <div class="p-3 border-bottom successBG">
+                        <div class="HeadingBlock"><span class="RoundI"><i class="icon-checked-1"></i></span> Covered by
+                          Jito Health Card
+                        </div>
+
+                        <div class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">Jito Multivitamin C+D3 (60 tabs)</span>
+                            <b class="Pcolor">89.5</b>
+                          </div>
+                          <span class="tagProduct">Jito Product</span>
+                        </div>
+                        <div class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">Paracetamol 500mg</span>
+                            <b class="Pcolor">35.5</b>
+                          </div>
+                          <span class="tagProduct">Generic Medicine</span>
+                        </div>
+                      </div>
+
+                      <div class="p-3 ">
+                        <div class="HeadingBlock"><span class="RoundI"><i class="icon-lab_cross"></i></span> Not
+                          eligible for Jito Card
+                        </div>
+
+                        <div class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">Jito Multivitamin C+D3 (60 tabs)</span>
+                            <b class="Pcolor">89.5</b>
+                          </div>
+                          <span class="tagProduct">Jito Product</span>
+                        </div>
+                        <div class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">Paracetamol 500mg</span>
+                            <b class="Pcolor">35.5</b>
+                          </div>
+                          <span class="tagProduct">Generic Medicine</span>
+                        </div>
+                      </div>
+                    </div> -->
+                    <!-- static content end -->
 
                     <div *ngIf="useCardBalance" class="border rounded p-3 mb-3 bg-light-subtle">
                       <div class="mb-2 fw-6">Payment Breakdown</div>
@@ -699,44 +882,61 @@
                         <div>{{headerDetails.CartVal | currency : "INR"}}</div>
                       </div>
                       <div class="d-flex justify-content-between align-items-center pb-2 fs-3 text-success">
-                        <div>Using CFH card</div>
-                        <div *ngIf="cardBalance < headerDetails.CartVal">{{cardBalance | currency : "INR"}}</div>
-                        <div *ngIf="cardBalance >= headerDetails.CartVal">{{headerDetails.CartVal | currency : "INR"}}</div>
+                       
+                        <!-- <div>Using CFH card</div> -->
+                        <!-- <div *ngIf="cardBalance < headerDetails.CartVal">{{cardBalance | currency : "INR"}}</div>
+                        <div *ngIf="cardBalance >= headerDetails.CartVal">{{headerDetails.CartVal | currency : "INR"}}</div> -->
+                         @if(forAllProducts){
+                          <div>Using CFH card</div>
+                         }
+                        @else if(!forAllProducts){
+                          <div>Using Jito Health card</div>
+                        }
+                        <div *ngIf="deduction">{{deduction | currency : "INR"}}</div>
                       </div>
-                      <div class="d-flex justify-content-between align-items-center pt-2" style="border-top: 1px dashed lightgray;">
+                      <div class="d-flex justify-content-between align-items-center pt-2"
+                        style="border-top: 1px dashed lightgray;">
                         <div class="fw-6 fs-6">Amount to be paid</div>
-                        <div class="fw-6 fs-6">{{cfhBalance | currency : "INR"}}</div>
+                        <!-- <div class="fw-6 fs-6">{{cfhBalance | currency : "INR"}}</div> -->
+                        <div class="fw-6 fs-6">{{(headerDetails.CartVal - deduction)  | currency:'INR':'symbol':'1.2-2'}}</div>
                       </div>
                     </div>
 
                     <div *ngIf="useCardBalance && cfhBalance == 0" class="mb-1">
-                        <button type="button" class="proceed" (click)="placeCFHOnly()"> Place &nbsp;Order</button>
+                      <button type="button" class="proceed" (click)="placeCFHOnly()"> Place &nbsp;Order</button>
                     </div>
+
+
                   </div>
                   <div *ngIf="pglist.length > 0" class="address-grid">
                     <ng-container *ngFor="let pgRow of pglist">
                       <div *ngIf="cfhBalance > 0 || (!useCardBalance)" class="rounded item-shadow p-3 d-flex hvr mb-3"
-                        [ngClass]="pgRow.PGListingId == selectedPG ? 'bg-lgrn': 'align-items-center'" (click)="assignPayment(pgRow)">
+                        [ngClass]="pgRow.PGListingId == selectedPG ? 'bg-lgrn': 'align-items-center'"
+                        (click)="assignPayment(pgRow)">
                         <div class="pay-img me-3">
                           <img src="{{CommonService.paymentImageUrl}}{{pgRow.Image}}" alt width="100%" />
                         </div>
                         <div class="w-100">
                           <div class="">
                             <span class="fs-5 fw-5 pt-1">{{ pgRow.Title }}</span>
-                            <span class="fs-6 ms-2" *ngIf="pgRow.PGListingId == selectedPG">- &nbsp;{{ cfhBalance | currency :
+                            <span class="fs-6 ms-2" *ngIf="pgRow.PGListingId == selectedPG">- &nbsp;{{ cfhBalance |
+                              currency :
                               "INR" }}</span>
                           </div>
                           <div *ngIf="pgRow.PGListingId == selectedPG" class="mt-3">
                             <div class="mb-1">
-                              <button type="button" class="proceed" (click)="placeOrder(pgRow)">Place &nbsp;Order</button>
+                              <button type="button" class="proceed" (click)="placeOrder(pgRow)">Place
+                                &nbsp;Order</button>
                             </div>
-                            <div *ngIf="pgRow.Desc != '' && pgRow.Desc != null && pgRow.Desc != 'NULL'" class="fs-2 py-1">
+                            <div *ngIf="pgRow.Desc != '' && pgRow.Desc != null && pgRow.Desc != 'NULL'"
+                              class="fs-2 py-1">
                               <span [innerHTML]="pgRow.Desc"></span>
                             </div>
                           </div>
                         </div>
                         <div class="pay-check">
-                          <div *ngIf="pgRow.PGListingId == selectedPG" class="icon-tick mt-3"><i class="fa-solid fa-check"></i></div>
+                          <div *ngIf="pgRow.PGListingId == selectedPG" class="icon-tick mt-3"><i
+                              class="fa-solid fa-check"></i></div>
                           <div *ngIf="pgRow.PGListingId != selectedPG" class="icon-tick border-secondary"></div>
                         </div>
                       </div>
@@ -768,7 +968,7 @@
           <!-- ==========Bill Summary========== -->
           <div class="accordion mb-3" id="accordionExampleOne">
             <div class="accordion-item">
-              <div class="px-4 py-3 border-bottom fw-6 fs-7" >Bill Summary</div>
+              <div class="px-4 py-3 border-bottom fw-6 fs-7">Bill Summary</div>
               <div id="collapseSix" class="accordion-collapse collapse show" data-bs-parent="#accordionExampleOne">
                 <div class="accordion-body p-0">
                   <ng-container *ngIf="headerDetails != undefined">
@@ -782,20 +982,23 @@
                           <span class="text-body-tertiary">Price Discount (-)</span>
                           <span class="text-success">{{ headerDetails.CartItemDiscount | currency : "INR" }}</span>
                         </div>
-                        <div *ngIf="headerDetails.RoundOfVal != '' && headerDetails.RoundOfVal != undefined" class="d-flex justify-content-between text-body-tertiary mb-2">
+                        <div *ngIf="headerDetails.RoundOfVal != '' && headerDetails.RoundOfVal != undefined"
+                          class="d-flex justify-content-between text-body-tertiary mb-2">
                           <span>Round Off value</span>
                           <span>{{headerDetails.RoundOfVal | currency : "INR"}}</span>
                         </div>
                       </div>
 
                       <div class="fs-5 fw-5">
-                        <div *ngIf="headerDetails.CartValForDeliveryCharge > 0" class="d-flex justify-content-between mb-2">
+                        <div *ngIf="headerDetails.CartValForDeliveryCharge > 0"
+                          class="d-flex justify-content-between mb-2">
                           <span class="">Cart Total</span>
                           <span class="">{{headerDetails.CartValForDeliveryCharge | currency : "INR" }}</span>
                         </div>
                         <div *ngIf="headerDetails.CouponDiscount > 0" class="d-flex justify-content-between mb-2">
                           <span>Coupon Discount (-)</span>
-                          <span class="text-success fw-5 fs-6">{{ headerDetails.CouponDiscount | currency : "INR" }}</span>
+                          <span class="text-success fw-5 fs-6">{{ headerDetails.CouponDiscount | currency : "INR"
+                            }}</span>
                         </div>
                         <div *ngIf="headerDetails.PromoDiscount > 0" class="d-flex justify-content-between mb-2">
                           <span>Promo Discount (-)</span>
@@ -837,34 +1040,50 @@
                           </ng-template>
                         </ng-container> -->
 
-                        <div *ngIf="headerDetails.ShippingCharge > 0; else shipchrg"  class="d-flex justify-content-between mb-2">
+                        <div *ngIf="headerDetails.ShippingCharge > 0; else shipchrg"
+                          class="d-flex justify-content-between mb-2">
                           <span>Shipping Fee (+)
-                            <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon-info22 hvr"></i></span>
+                            <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                                class="icon-info22 hvr"></i></span>
                           </span>
                           <span>
-                            <span *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0" class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge | currency : "INR" }}</span>
+                            <span
+                              *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0"
+                              class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge
+                              | currency : "INR" }}</span>
                             {{ headerDetails.ShippingCharge | currency : "INR" }}
                           </span>
                         </div>
                         <ng-template #shipchrg>
-                          <div *ngIf="headerDetails.CourierCharge > 0; else shipchrgtxt" class="d-flex justify-content-between mb-2">
+                          <div *ngIf="headerDetails.CourierCharge > 0; else shipchrgtxt"
+                            class="d-flex justify-content-between mb-2">
                             <span>Shipping Fee (+)
-                              <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon-info22 hvr"></i></span>
+                              <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                                  class="icon-info22 hvr"></i></span>
                             </span>
                             <span>
-                              <span *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0" class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge | currency : "INR" }}</span>
+                              <span
+                                *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0"
+                                class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge
+                                | currency : "INR" }}</span>
                               {{ headerDetails.CourierCharge | currency : "INR" }}</span>
                           </div>
                         </ng-template>
                         <ng-template #shipchrgtxt>
                           <div *ngIf="headerDetails.ShippingAddressId > 0" class="d-flex justify-content-between mb-2">
                             <span>Shipping Fee (+)
-                              <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="icon-info22 hvr"></i></span>
+                              <span class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                                  class="icon-info22 hvr"></i></span>
                             </span>
                             <span>
-                              <span *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0" class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge | currency : "INR" }}</span>
-                              <span class="text-success" *ngIf="headerDetails.IsDeliveryChargeWaivedOff == 1">Waived off</span>
-                              <span class="text-success" *ngIf="headerDetails.IsDeliveryChargeWaivedOff == 0">Free</span>
+                              <span
+                                *ngIf="(headerDetails.BaseShippingChargeCartVal > headerDetails.CartVal) && headerDetails.BaseShippingCharge >0"
+                                class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseShippingCharge
+                                | currency : "INR" }}</span>
+                              <span class="text-success" *ngIf="headerDetails.IsDeliveryChargeWaivedOff == 1">Waived
+                                off</span>
+                              <span class="text-success"
+                                *ngIf="headerDetails.IsDeliveryChargeWaivedOff == 0">Free</span>
                             </span>
                           </div>
                         </ng-template>
@@ -876,7 +1095,9 @@
                         <div class="d-flex justify-content-between mb-2 pt-1">
                           <span>Platform Fee (+)</span>
                           <span class="">
-                            <span class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseConvienceFee | currency : "INR" }}</span>
+                            <span
+                              class="text-decoration-line-through text-body-tertiary me-1">{{headerDetails.BaseConvienceFee
+                              | currency : "INR" }}</span>
                             {{ headerDetails.ConvienceFee | currency : "INR" }}</span>
                         </div>
                       </div>
@@ -886,8 +1107,10 @@
                         <span class="fs-7 fw-6">{{ headerDetails.CartVal | currency : "INR" }}</span>
                       </div>
                     </div>
-                    <div class="p-3 d-flex align-items-center justify-content-center fs-5 text-success" style="background-color: #e3fbf0;">
-                      <i class="fa-solid fa-gift fs-3 me-2"></i><span class="fw-6">{{ totalSaving | currency : "INR" }}</span> &nbsp;saved on this order!
+                    <div class="p-3 d-flex align-items-center justify-content-center fs-5 text-success"
+                      style="background-color: #e3fbf0;">
+                      <i class="fa-solid fa-gift fs-3 me-2"></i><span class="fw-6">{{ totalSaving | currency : "INR"
+                        }}</span> &nbsp;saved on this order!
                     </div>
                   </ng-container>
                 </div>
@@ -903,7 +1126,8 @@
                   <div class="p-3 d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center">
                       <div class="pe-3">
-                        <img src="https://asset.sastasundar.com/incom/sspl_website/images/wallet-new.png" alt="" width="32px" height="32px">
+                        <img src="https://asset.sastasundar.com/incom/sspl_website/images/wallet-new.png" alt=""
+                          width="32px" height="32px">
                       </div>
                       <div>
                         <div class="fw-6 fs-5 mb-1">{{walletBalance | currency : 'INR' }}</div>
@@ -911,8 +1135,10 @@
                       </div>
                     </div>
                     <div *ngIf="walletBalance >0" style="font-size: 22px; color: #006DB5;">
-                      <span *ngIf="useWallet" (click)="setWalletUse()"><i class="fa fa-check-square hvr" aria-hidden="true"></i></span>
-                      <span *ngIf="!useWallet" (click)="setWalletUse()"><i class="fa fa-square-o hvr" aria-hidden="true"></i></span>
+                      <span *ngIf="useWallet" (click)="setWalletUse()"><i class="fa fa-check-square hvr"
+                          aria-hidden="true"></i></span>
+                      <span *ngIf="!useWallet" (click)="setWalletUse()"><i class="fa fa-square-o hvr"
+                          aria-hidden="true"></i></span>
                     </div>
                   </div>
                 </div>
@@ -937,7 +1163,7 @@
                     <div class="w-100">
                       <div class="d-flex align-items-center justify-content-between mb-2">
                         <span class="fs-5 fw-5">{{ headerDetails.AppliedCouponCode }}</span>
-                        <span class="text-danger fs-3" >Remove</span>
+                        <span class="text-danger fs-3">Remove</span>
                       </div>
                       <div class="text-secondary mb-2">{{ headerDetails.CouponPromoDesc }}</div>
                       <!-- <div class="hvr text-danger" (click)="applyCoupon('', 'removeCoupon')">
@@ -954,40 +1180,44 @@
           <!-- ==========Apply Coupons========== -->
           <div *ngIf="!AppliedCouponFlg" class="accordion" id="accordionExampleTwo">
             <div class="accordion-item">
-              <div class="px-4 py-3 border-bottom fw-6 fs-7" >Apply Coupon</div>
+              <div class="px-4 py-3 border-bottom fw-6 fs-7">Apply Coupon</div>
               <div id="collapseFive" class="accordion-collapse collapse show" data-bs-parent="#accordionExampleTwo">
                 <div class="p-3">
-                    <div class="position-relative">
-                      <input #appliedCuppon type="text" class="form-control hgt-50" placeholder="Apply promo code" />
-                      <span class="applybtn position-absolute" (click)="applyCoupon(appliedCuppon.value, 'addCoupon')">Apply</span>
-                    </div>
+                  <div class="position-relative">
+                    <input #appliedCuppon type="text" class="form-control hgt-50" placeholder="Apply promo code" />
+                    <span class="applybtn position-absolute"
+                      (click)="applyCoupon(appliedCuppon.value, 'addCoupon')">Apply</span>
+                  </div>
 
-                    <div *ngIf="couponList.length > 0" class="">
-                      <ng-container *ngFor="let custcoupon of couponList; let i = index">
-                        <div class="border rounded item-shadow p-3 mt-3 hvr" for="Apply" (click)="applyCoupon(custcoupon.CouponCode, 'addCoupon')">
-                          <div class="d-flex w-100">
-                            <div class="me-3">
-                              <i class="fa-solid fa-tag text-success pt-1" style="font-size: 24px;"></i>
-                            </div>
-                            <div class="w-100">
-                              <div class="d-flex justify-content-between">
-                                <div class="fs-5 fw-5 mb-1">{{ custcoupon.CouponCode }}</div>
-                                <div class="ps-1 fs-3">
-                                  <!-- <span *ngIf="custcoupon.CouponId == headerDetails.CouponPromoId" class="text-success">Applied</span>
-                                      <span *ngIf="custcoupon.CouponId != headerDetails.CouponPromoId" class="text-primary">Apply</span> -->
-                                  <span class="text-primary">Apply</span>
-                                </div>
-                              </div>
-                              <div class="text-success mb-1">{{ custcoupon.CouponName }}</div>
-                            </div>
+                  <div *ngIf="couponList.length > 0" class="">
+                    <ng-container *ngFor="let custcoupon of couponList; let i = index">
+                      <div class="border rounded item-shadow p-3 mt-3 hvr" for="Apply"
+                        (click)="applyCoupon(custcoupon.CouponCode, 'addCoupon')">
+                        <div class="d-flex w-100">
+                          <div class="me-3">
+                            <i class="fa-solid fa-tag text-success pt-1" style="font-size: 24px;"></i>
                           </div>
-                          <div *ngIf="custcoupon.CouponDesc != null && custcoupon.CouponDesc != '' && custcoupon.CouponDesc!= undefined" class="text-secondary fs-3 mt-2 pt-2" style="border-top: 1px dashed #dadbdb;">
-                            {{ custcoupon.CouponDesc }}
+                          <div class="w-100">
+                            <div class="d-flex justify-content-between">
+                              <div class="fs-5 fw-5 mb-1">{{ custcoupon.CouponCode }}</div>
+                              <div class="ps-1 fs-3">
+                                <!-- <span *ngIf="custcoupon.CouponId == headerDetails.CouponPromoId" class="text-success">Applied</span>
+                                      <span *ngIf="custcoupon.CouponId != headerDetails.CouponPromoId" class="text-primary">Apply</span> -->
+                                <span class="text-primary">Apply</span>
+                              </div>
+                            </div>
+                            <div class="text-success mb-1">{{ custcoupon.CouponName }}</div>
                           </div>
                         </div>
-                      </ng-container>
-                    </div>
+                        <div
+                          *ngIf="custcoupon.CouponDesc != null && custcoupon.CouponDesc != '' && custcoupon.CouponDesc!= undefined"
+                          class="text-secondary fs-3 mt-2 pt-2" style="border-top: 1px dashed #dadbdb;">
+                          {{ custcoupon.CouponDesc }}
+                        </div>
+                      </div>
+                    </ng-container>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1018,12 +1248,14 @@
 <!-- <button #uploadedPrsc type="button" style="display: none;" data-bs-toggle="modal" data-bs-target="#uploadedPrsc"></button> -->
 
 <!-- ====================== General Modal ========================== -->
-<div class="modal fade" id="general" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="generalLabel" aria-hidden="true">
+<div class="modal fade" id="general" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="generalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div *ngIf="removeType == ''" class="d-flex justify-content-end px-3 pt-3" id="newaddressLabel">
         <!-- <span class="fs-6 fw-5">Saved Prescription List</span> -->
-        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"></i></span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal" aria-label="Close"
+            (click)="resetRemove()"></i></span>
       </div>
       <!-- <button #closebutton type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"><i class="icon-lab_cross"></i></button> -->
       <div class="modalBody">
@@ -1034,7 +1266,8 @@
             </div>
             <div class="fw-6 fs-5 text-center mb-3">{{ msgText }}</div>
             <div class="text-center">
-              <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()">Continue</button>
+              <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close"
+                (click)="resetRemove()">Continue</button>
             </div>
           </div>
         </ng-container>
@@ -1045,7 +1278,8 @@
             </div>
             <div class="fw-6 fs-5 text-center mb-3">{{ msgText }}</div>
             <div class="text-center">
-              <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()">Continue</button>
+              <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close"
+                (click)="resetRemove()">Continue</button>
             </div>
           </div>
         </ng-container>
@@ -1058,23 +1292,27 @@
 </div>
 
 <!-- ====================== Delivery charges Modal ========================== -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-md modal-dialog-centered">
     <div class="modal-content">
       <div class="d-flex justify-content-end px-3 pt-3" id="newaddressLabel">
         <!-- <span class="fs-6 fw-5">Saved Prescription List</span> -->
-        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"></i></span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal" aria-label="Close"
+            (click)="resetRemove()"></i></span>
       </div>
       <!-- <button #closebutton type="button" class="crossBtn mb-2" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"><i class="icon-lab_cross"></i></button> -->
       <div class="modalBody">
-        <div style="display: flex;align-items: center; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid #e6eaf0;">
+        <div
+          style="display: flex;align-items: center; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid #e6eaf0;">
           <strong class="fs-5">Order Amount</strong>
           <strong class="fs-5">Delivery Charge</strong>
         </div>
 
         <ng-container *ngIf="DeliveryChargeSlab.length > 0">
           <ng-container *ngFor="let slab of DeliveryChargeSlab">
-            <div style="display: flex;align-items: center; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px dashed #e6eaf0;">
+            <div
+              style="display: flex;align-items: center; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px dashed #e6eaf0;">
               <div class="fs-3">{{ slab["Range"] }}</div>
               <div class="fs-3" [ngClass]="slab['DeliveryCharge'] == 0 ? 'text-success' : ''">
                 {{ slab["DeliveryChargeTxt"] }}
@@ -1093,15 +1331,17 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- <span style='font-size:100px;'></span> -->
-       <div class="modalBody">
+      <div class="modalBody">
         <div class="mt-4 mb-1 text-center">
           <span style='font-size:40px; color: red;'>&#9432;</span>
         </div>
         <div class="fw-5 fs-5 text-center px-3">{{ msgText }}</div>
       </div>
       <div class="p-3 d-flex justify-content-center align-items-center">
-        <button type="button" class="proceed bg-light text-dark border-secondary m-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()">Close</button>
-        <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close" (click)="whFailCnf()">Ok</button>
+        <button type="button" class="proceed bg-light text-dark border-secondary m-3" data-bs-dismiss="modal"
+          aria-label="Close" (click)="resetRemove()">Close</button>
+        <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close"
+          (click)="whFailCnf()">Ok</button>
       </div>
 
       <!-- <button #closebutton type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"><i class="icon-lab_cross"></i></button>
@@ -1116,7 +1356,8 @@
 </div>
 
 <!-- ====================== Comfirm Remove Modal  ========================== -->
-<div class="modal fade" id="confirmRemove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRemoveLabel" aria-hidden="true">
+<div class="modal fade" id="confirmRemove" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="confirmRemoveLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <!-- <button #closebutton type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()"><i class="icon-lab_cross"></i></button> -->
@@ -1129,20 +1370,24 @@
         <div class="fw-5 fs-5 text-center px-3">{{ msgText }}</div>
       </div>
       <div class="p-3 d-flex justify-content-center align-items-center">
-        <button type="button" class="proceed bg-light text-dark border-dark-subtle m-3" data-bs-dismiss="modal" aria-label="Close" (click)="resetRemove()">Cancel</button>
-        <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close" (click)="confirmRemove()">Remove</button>
+        <button type="button" class="proceed bg-light text-dark border-dark-subtle m-3" data-bs-dismiss="modal"
+          aria-label="Close" (click)="resetRemove()">Cancel</button>
+        <button type="button" class="proceed m-3" data-bs-dismiss="modal" aria-label="Close"
+          (click)="confirmRemove()">Remove</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ===================== Out of stock Modal ========================= -->
-<div class="modal fade" id="outOfStock" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="outOfStockLabel" aria-hidden="true">
+<div class="modal fade" id="outOfStock" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="outOfStockLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="d-flex justify-content-between px-4 py-3 border-bottom">
         <span class="fs-6 fw-5">Out of stock product list</span>
-        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal" aria-label="Close"></i></span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closebutton data-bs-dismiss="modal"
+            aria-label="Close"></i></span>
       </div>
       <!-- <button #closebutton type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close"><i class="icon-lab_cross"></i></button> -->
       <!-- <div class="modalHead">
@@ -1191,7 +1436,9 @@
                 </div>
               </div>
               <div class="">
-                <input class="form-check-input hvr" style="height: 20px; width: 20px; border-color: #afafaf;" type="checkbox" [value]="record.PrescriptionId" [id]="record.PrescriptionId" [checked]="record.checked" (click)="assignPrescription($event)" />
+                <input class="form-check-input hvr" style="height: 20px; width: 20px; border-color: #afafaf;"
+                  type="checkbox" [value]="record.PrescriptionId" [id]="record.PrescriptionId"
+                  [checked]="record.checked" (click)="assignPrescription($event)" />
               </div>
             </div>
           </ng-container>
@@ -1199,7 +1446,8 @@
       </div>
       <div class="d-flex justify-content-end p-3">
         <button *ngIf="savedPrscFile.length == 0" class="proceed diabled" type="button">Continue</button>
-        <button *ngIf="savedPrscFile.length > 0" class="proceed" type="button" data-bs-dismiss="modal" aria-label="Close">Continue</button>
+        <button *ngIf="savedPrscFile.length > 0" class="proceed" type="button" data-bs-dismiss="modal"
+          aria-label="Close">Continue</button>
       </div>
     </div>
   </div>
@@ -1232,7 +1480,9 @@
                 </div>
               </div>
               <div class="">
-                <input class="form-check-input hvr" style="height: 20px; width: 20px; border-color: #afafaf;" type="checkbox" [value]="record.PrescriptionId" [id]="record.PrescriptionId" [checked]="record.checked" (click)="assignPrescriptionPet($event)" />
+                <input class="form-check-input hvr" style="height: 20px; width: 20px; border-color: #afafaf;"
+                  type="checkbox" [value]="record.PrescriptionId" [id]="record.PrescriptionId"
+                  [checked]="record.checked" (click)="assignPrescriptionPet($event)" />
               </div>
             </div>
           </ng-container>
@@ -1240,14 +1490,16 @@
       </div>
       <div class="d-flex justify-content-end p-3">
         <button *ngIf="savedPrscFilePet.length == 0" class="proceed diabled" type="button">Continue</button>
-        <button *ngIf="savedPrscFilePet.length > 0" class="proceed" type="button" data-bs-dismiss="modal" aria-label="Close">Continue</button>
+        <button *ngIf="savedPrscFilePet.length > 0" class="proceed" type="button" data-bs-dismiss="modal"
+          aria-label="Close">Continue</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ====================== uploaded Prescription ========================== -->
-<div class="modal fade" id="uploadedPrsc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uploadedPrscLabel" aria-hidden="true">
+<div class="modal fade" id="uploadedPrsc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="uploadedPrscLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
@@ -1259,7 +1511,9 @@
         <h3 id="uploadedPrscLabel">Uploaded Prescription Viewer</h3>
       </div> -->
       <div class="modalBody">
-        <div *ngIf="modalloader" class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white" style="height: 400px">
+        <div *ngIf="modalloader"
+          class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white"
+          style="height: 400px">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -1281,7 +1535,8 @@
   </div>
 </div>
 <!-- ====================== uploaded Prescription For Pet========================== -->
-<div class="modal fade" id="uploadedPrscForPet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="uploadedPrscLabel" aria-hidden="true">
+<div class="modal fade" id="uploadedPrscForPet" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="uploadedPrscLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
@@ -1293,7 +1548,9 @@
         <h3 id="uploadedPrscLabel">Uploaded Prescription Viewer</h3>
       </div> -->
       <div class="modalBody">
-        <div *ngIf="modalloader" class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white" style="height: 400px">
+        <div *ngIf="modalloader"
+          class="d-flex w-100 align-items-center justify-content-center border rounded bx-shdw bg-white"
+          style="height: 400px">
           <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -1316,12 +1573,14 @@
 </div>
 
 <!-- ====================New Address Popup=================== -->
-<div class="modal fade" id="newaddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-labelledby="newaddressLabel" aria-hidden="true">
+<div class="modal fade" id="newaddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="newaddressLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
         <span class="fs-6 fw-5">Add New Address</span>
-        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAdssBtn data-bs-dismiss="modal" aria-label="Close" (click)="onReset()"></i></span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAdssBtn data-bs-dismiss="modal" aria-label="Close"
+            (click)="onReset()"></i></span>
       </div>
       <div *ngIf="AddressForm" class="modal-body">
         <form class="address-form" [formGroup]="AddressForm" (ngSubmit)="saveNewAddress()">
@@ -1331,12 +1590,15 @@
               <div class="col-lg-6 mb-3">
                 <label for="Pincode" class="form-label">Pincode<span class="text-danger">*</span></label>
                 <div>
-                  <input type="text" class="form-control" maxlength="6" id="Pincode" formControlName="Pincode" pattern="[1-9]{1}[0-9]{5}" (keypress)="numCheck($event)" (keyup)="checkServiceArea()" />
+                  <input type="text" class="form-control" maxlength="6" id="Pincode" formControlName="Pincode"
+                    pattern="[1-9]{1}[0-9]{5}" (keypress)="numCheck($event)" (keyup)="checkServiceArea()" />
                   <div *ngIf="submitted && f['Pincode'].errors">
-                    <small *ngIf="f['Pincode'].errors['required']" style="color: #f00; font-size: 11px">* Pincode is required</small>
+                    <small *ngIf="f['Pincode'].errors['required']" style="color: #f00; font-size: 11px">* Pincode is
+                      required</small>
                   </div>
                   <div *ngIf="submitted && f['Pincode'].errors">
-                    <small *ngIf="f['Pincode'].errors['pattern']" style="color: #f00; font-size: 11px">* Pincode is invalid</small>
+                    <small *ngIf="f['Pincode'].errors['pattern']" style="color: #f00; font-size: 11px">* Pincode is
+                      invalid</small>
                   </div>
                 </div>
               </div>
@@ -1344,9 +1606,11 @@
               <div class="col-lg-6 mb-3">
                 <label for="MobileNo" class="form-label">Mobile No</label>
                 <div style="width: 100%">
-                  <input type="phone" class="form-control" maxlength="10" id="MobileNo" formControlName="MobileNo" pattern="[5-9]{1}[0-9]{9}" (keypress)="numCheck($event)" />
+                  <input type="phone" class="form-control" maxlength="10" id="MobileNo" formControlName="MobileNo"
+                    pattern="[5-9]{1}[0-9]{9}" (keypress)="numCheck($event)" />
                   <div *ngIf="submitted && f['MobileNo'].errors">
-                    <small *ngIf="f['MobileNo'].errors['pattern']" style="color: #f00; font-size: 11px">* Mobile No. is invalid</small>
+                    <small *ngIf="f['MobileNo'].errors['pattern']" style="color: #f00; font-size: 11px">* Mobile No. is
+                      invalid</small>
                   </div>
                 </div>
               </div>
@@ -1357,13 +1621,15 @@
                 <div class="col-lg-6 mb-3">
                   <label for="State" class="form-label">State</label>
                   <div>
-                    <input class="form-control" type="text" [value]="state_city.StateName" aria-label="state name" disabled readonly>
+                    <input class="form-control" type="text" [value]="state_city.StateName" aria-label="state name"
+                      disabled readonly>
                   </div>
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="City" class="form-label">City</label>
                   <div>
-                    <input class="form-control" type="text" [value]="state_city.CityName" aria-label="city name" disabled readonly>
+                    <input class="form-control" type="text" [value]="state_city.CityName" aria-label="city name"
+                      disabled readonly>
                   </div>
                 </div>
               </div>
@@ -1376,9 +1642,11 @@
               <div class="col-lg-6 mb-3">
                 <label for="ContactPerson" class="form-label">Contact Person<span class="text-danger">*</span></label>
                 <div>
-                  <input type="text" class="form-control" id="ContactPerson" formControlName="ContactPerson" (keypress)="alphaOnly($event)">
+                  <input type="text" class="form-control" id="ContactPerson" formControlName="ContactPerson"
+                    (keypress)="alphaOnly($event)">
                   <div *ngIf="submitted && f['ContactPerson'].errors">
-                    <small *ngIf="f['ContactPerson'].errors['required']" style="color: #f00; font-size: 11px">* Contact Person is required</small>
+                    <small *ngIf="f['ContactPerson'].errors['required']" style="color: #f00; font-size: 11px">* Contact
+                      Person is required</small>
                   </div>
                 </div>
               </div>
@@ -1393,9 +1661,11 @@
             <div class="mb-3">
               <label for="Addressline" class="form-label">Address <span class="text-danger">*</span></label>
               <div>
-                <textarea type="text" rows="3" class="form-control" id="Addressline" formControlName="Addressline"></textarea>
+                <textarea type="text" rows="3" class="form-control" id="Addressline"
+                  formControlName="Addressline"></textarea>
                 <div *ngIf="submitted && f['Addressline'].errors" class="error-text">
-                  <small *ngIf="f['Addressline'].errors['required']" style="color: #f00; font-size: 11px">* Address is required</small>
+                  <small *ngIf="f['Addressline'].errors['required']" style="color: #f00; font-size: 11px">* Address is
+                    required</small>
                 </div>
               </div>
             </div>
@@ -1432,19 +1702,22 @@
 </div>
 
 <!-- ==================== Saved Address Popup=================== -->
-<div class="modal fade" id="savedaddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="savedaddressLabel" aria-hidden="true">
+<div class="modal fade" id="savedaddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="savedaddressLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="d-flex justify-content-between px-4 py-3 border-bottom" id="newaddressLabel">
         <span class="fs-6 fw-5" *ngIf="addressType =='shipping'">Select Delivery Address</span>
         <span class="fs-6 fw-5" *ngIf="addressType =='billing'">Select Billing Address</span>
-        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closesavedAdssBtn data-bs-dismiss="modal" aria-label="Close" (click)="onReset()"></i></span>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closesavedAdssBtn data-bs-dismiss="modal"
+            aria-label="Close" (click)="onReset()"></i></span>
       </div>
 
       <div class="p-3 overflow-y-auto" style="max-height: 450px;">
         <div *ngIf="addressList.length > 0">
           <ng-container *ngFor="let adr of addressList">
-            <div (click)="doAssignAddress(adr.AddressId, adr.PinCode)" class="d-flex justify-content-between align-items-center px-4 py-3 mb-3 rounded item-shadow hvr">
+            <div (click)="doAssignAddress(adr.AddressId, adr.PinCode)"
+              class="d-flex justify-content-between align-items-center px-4 py-3 mb-3 rounded item-shadow hvr">
               <div class="">
                 <div class="d-flex mb-2">
                   <div class="me-3 text-secondary"><i class="fa-solid fa-user"></i></div>
@@ -1468,12 +1741,16 @@
               </div>
 
               <div class="ms-2" *ngIf="addressType =='shipping'">
-                <span *ngIf="adr.AddressId == shippingId"><i class="fa fa-dot-circle-o text-success fs-8"  aria-hidden="true"></i></span>
-                <span *ngIf="adr.AddressId != shippingId"><i class="fa fa-circle-o text-secondary fs-8" aria-hidden="true"></i></span>
+                <span *ngIf="adr.AddressId == shippingId"><i class="fa fa-dot-circle-o text-success fs-8"
+                    aria-hidden="true"></i></span>
+                <span *ngIf="adr.AddressId != shippingId"><i class="fa fa-circle-o text-secondary fs-8"
+                    aria-hidden="true"></i></span>
               </div>
               <div class="ms-2" *ngIf="addressType =='billing'">
-                <span *ngIf="adr.AddressId == billingId"><i class="fa fa-dot-circle-o text-success fs-8" aria-hidden="true"></i></span>
-                <span *ngIf="adr.AddressId != billingId"><i class="fa fa-circle-o text-secondary fs-8" aria-hidden="true"></i></span>
+                <span *ngIf="adr.AddressId == billingId"><i class="fa fa-dot-circle-o text-success fs-8"
+                    aria-hidden="true"></i></span>
+                <span *ngIf="adr.AddressId != billingId"><i class="fa fa-circle-o text-secondary fs-8"
+                    aria-hidden="true"></i></span>
               </div>
             </div>
           </ng-container>
@@ -1530,7 +1807,8 @@
 
 
 <!-- ========================== alternative Products ===================== -->
-<button #alterModal type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#alternativeModal"></button>
+<button #alterModal type="button" style="display: none" data-bs-toggle="modal"
+  data-bs-target="#alternativeModal"></button>
 
 <div class="modal fade" id="alternativeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="alternativeModalLabel" aria-hidden="true">
@@ -1538,17 +1816,20 @@
 
     <div class="modal-content jito-grad">
 
-      <div class="d-flex justify-content-between align-items-center p-3" [ngClass]="compareAlter != '' ? 'border-bottom': ''" id="closeAlt">
-          <div *ngIf="compareAlter == ''" class="d-flex align-items-end fs-24 text-primary-emphasis">
-            <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt="" width="20px"></span>
-            <span class="fw-8 px-1">JITO</span>&nbsp; <span class="fw-5">Quality Alternative Medicine</span>
-          </div>
-          <div *ngIf="compareAlter != ''" class="fs-20 fw-6 text-primary-emphasis">
-            <span class="hvr me-2" (click)="viewAlter()"><i class="fa-solid fa-arrow-left"></i></span> Compare Items
-          </div>
-          <div>
-            <i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAltMod data-bs-dismiss="modal" aria-label="Close" (click)="closeAlterMod()"></i>
-          </div>
+      <div class="d-flex justify-content-between align-items-center p-3"
+        [ngClass]="compareAlter != '' ? 'border-bottom': ''" id="closeAlt">
+        <div *ngIf="compareAlter == ''" class="d-flex align-items-end fs-24 text-primary-emphasis">
+          <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""
+              width="20px"></span>
+          <span class="fw-8 px-1">JITO</span>&nbsp; <span class="fw-5">Quality Alternative Medicine</span>
+        </div>
+        <div *ngIf="compareAlter != ''" class="fs-20 fw-6 text-primary-emphasis">
+          <span class="hvr me-2" (click)="viewAlter()"><i class="fa-solid fa-arrow-left"></i></span> Compare Items
+        </div>
+        <div>
+          <i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAltMod data-bs-dismiss="modal" aria-label="Close"
+            (click)="closeAlterMod()"></i>
+        </div>
       </div>
       <ng-container *ngIf="compareAlter != ''">
         <!-- <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
@@ -1587,7 +1868,8 @@
                       src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
                   </div>
                 </div>
-                <div class="copm-dv text-truncate hvr" (click)="CommonService.getProductDetailsPageURL(altrPrdcts.ProductId, altrPrdcts.ProductName, altrPrdcts.PrescriptionOTC)">
+                <div class="copm-dv text-truncate hvr"
+                  (click)="CommonService.getProductDetailsPageURL(altrPrdcts.ProductId, altrPrdcts.ProductName, altrPrdcts.PrescriptionOTC)">
                   {{ altrPrdcts.ProductName }}
                 </div>
                 <div class="copm-dv">
@@ -1627,7 +1909,8 @@
                       src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
                   </div>
                 </div>
-                <div class="copm-dv text-truncate hvr" (click)="CommonService.getProductDetailsPageURL(altr.PreferredProductId, altr.DisplayName, altrPrdcts.PrescriptionOTC)">
+                <div class="copm-dv text-truncate hvr"
+                  (click)="CommonService.getProductDetailsPageURL(altr.PreferredProductId, altr.DisplayName, altrPrdcts.PrescriptionOTC)">
                   {{ altr.DisplayName }}
                 </div>
                 <div class="copm-dv">
@@ -1644,9 +1927,11 @@
                   {{altr.salts['Name']}}
                 </div>
                 <div class="copm-dv border-bottom-0">
-                  <div *ngIf="altr.addedQty == 0" class="alter-btn bg-success border-success justify-content-center w-100" style="padding: 8px;"
+                  <div *ngIf="altr.addedQty == 0"
+                    class="alter-btn bg-success border-success justify-content-center w-100" style="padding: 8px;"
                     (click)="replaceAlternative(altr, altrPrdcts)">Replace</div>
-                  <div *ngIf="altr.addedQty > 0" class="alter-btn bg-success border-success justify-content-center w-100">Added</div>
+                  <div *ngIf="altr.addedQty > 0"
+                    class="alter-btn bg-success border-success justify-content-center w-100">Added</div>
                 </div>
               </div>
             </div>
@@ -1764,7 +2049,8 @@
 
 <!-- ========================== replace All alternative Products ===================== -->
 
-<div class="modal fade" id="replaceAllModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="replaceAllModalLabel" aria-hidden="true">
+<div class="modal fade" id="replaceAllModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="replaceAllModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="min-width: 650px;">
 
     <div class="modal-content jito-grad">
@@ -1774,28 +2060,29 @@
       </div> -->
 
       <div class="d-flex justify-content-between align-items-center p-3 border-bottom" id="closeallAlt">
-          <div class="d-flex align-items-end fs-24 text-primary-emphasis">
-            <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""
-                width="20px"></span>
-            <span class="fw-8 px-1">JITO</span>&nbsp; <span class="fw-5">Quality Alternative Medicines</span>
-          </div>
-          <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAllaltMod data-bs-dismiss="modal" aria-label="Close"
-              (click)="closeAlterMod()"></i></span>
+        <div class="d-flex align-items-end fs-24 text-primary-emphasis">
+          <span><img src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png" alt=""
+              width="20px"></span>
+          <span class="fw-8 px-1">JITO</span>&nbsp; <span class="fw-5">Quality Alternative Medicines</span>
+        </div>
+        <span><i class="fa-regular fa-circle-xmark fs-8 hvr" #closeAllaltMod data-bs-dismiss="modal" aria-label="Close"
+            (click)="closeAlterMod()"></i></span>
       </div>
 
       <!-- <button #closeAllaltMod type="button" class="crossBtn" data-bs-dismiss="modal" aria-label="Close" (click)="closeAlterMod()"><i class="icon-lab_cross"></i></button>
       <div class="p-3 fs-6 fw-5 border-bottom border-light-subtle">{{JitoConfig['title']}}</div> -->
 
       <div style="max-height: 460px; overflow-y: auto;">
-        <div *ngIf="totalSavebyAlternative != '' && totalSavebyAlternative.MaxSaveValue != '0.00'" class="fw-5" >
+        <div *ngIf="totalSavebyAlternative != '' && totalSavebyAlternative.MaxSaveValue != '0.00'" class="fw-5">
           <div class="bg-warning-subtle p-3 text-center">
             <span style="color: #ca6405;">{{totalSavebyAlternative.results}}</span>
           </div>
         </div>
 
-        <div class="p-3" >
+        <div class="p-3">
           <ng-container *ngFor="let item of finalList">
-            <ng-container *ngIf="item.PreferredSubtitute.length>0 && CommonService.ConfigData.IsDisplayGenericProduct == 1">
+            <ng-container
+              *ngIf="item.PreferredSubtitute.length>0 && CommonService.ConfigData.IsDisplayGenericProduct == 1">
               <ng-container *ngFor="let altr of item.PreferredSubtitute">
                 <div class="position-relative">
                   <div class="replace-icon">
@@ -1805,23 +2092,31 @@
                     <div class="p-3 border-end">
                       <div class="itemImg mx-auto border-0">
                         <ng-container *ngIf="item.ProductImage != '' && item.ProductImage != null">
-                          <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}" alt="" width="100%">
+                          <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{item.ProductImage}}"
+                            alt="" width="100%">
                         </ng-container>
                         <ng-container *ngIf="item.ProductImage == '' || item.ProductImage == null">
                           <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100px"> -->
-                          <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
-                          <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                          <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"
+                            src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                          <img *ngIf="item.PrescriptionOTC == 'O'"
+                            src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                            width="80%">
                         </ng-container>
                         <!-- <span *ngIf="item.PrescriptionOTC == 'P'"><i class="icon-Rx"></i></span> -->
                       </div>
-                      <div class="fs-4 fw-5 hvr my-2 text-truncate" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
+                      <div class="fs-4 fw-5 hvr my-2 text-truncate"
+                        (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
                         {{ item.ProductName }}
                       </div>
-                      <div class="fs-3 text-secondary mb-2 text-truncate" style="height: 18px;">{{ item.MfgGroup }}</div>
+                      <div class="fs-3 text-secondary mb-2 text-truncate" style="height: 18px;">{{ item.MfgGroup }}
+                      </div>
                       <div class="mb-2">
                         <strong class="pe-2">{{item.OfferPrice | currency : "INR"}}</strong>
-                        <del class="pe-2 text-secondary fs-3" *ngIf="item.ItemBasePrice > item.OfferPrice">{{ item.ItemBasePrice | currency : "INR"}} </del>
-                        <strong *ngIf="item.ItemBasePrice > item.OfferPrice" style="color: #E9640D;">{{item.DiscountPercent}}% Off</strong>
+                        <del class="pe-2 text-secondary fs-3" *ngIf="item.ItemBasePrice > item.OfferPrice">{{
+                          item.ItemBasePrice | currency : "INR"}} </del>
+                        <strong *ngIf="item.ItemBasePrice > item.OfferPrice"
+                          style="color: #E9640D;">{{item.DiscountPercent}}% Off</strong>
                       </div>
                       <!-- <div class="fs-3">{{item.ProductUnit}} of {{item.Size}}</div> -->
                       <div class="d-flex flex-wrap align-items-center justify-content-between">
@@ -1847,21 +2142,29 @@
                       </div> -->
                       <div class="itemImg mx-auto border-0">
                         <ng-container *ngIf="altr.ProductImage != '' && altr.ProductImage != null">
-                          <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{altr.ProductImage}}" alt="" width="100%">
+                          <img src="https://asset.sastasundar.com/incom/images/product/thumb/{{altr.ProductImage}}"
+                            alt="" width="100%">
                         </ng-container>
                         <ng-container *ngIf="altr.ProductImage == '' || altr.ProductImage == null">
                           <!-- <img src="https://asset.sastasundar.com/incom/images/product/thumb/default_product1460098847.jpg" alt="" width="100px"> -->
-                          <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"  src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
-                          <img *ngIf="item.PrescriptionOTC == 'O'" src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt="" width="80%">
+                          <img *ngIf="item.PrescriptionOTC == 'P' || item.PrescriptionOTC == 'M'"
+                            src="https://asset.sastasundar.com/incom/images/product/thumb/Med.svg" alt="" width="80%">
+                          <img *ngIf="item.PrescriptionOTC == 'O'"
+                            src="https://asset.sastasundar.com/incom/images/product/thumb/Household.svg" alt=""
+                            width="80%">
                         </ng-container>
                       </div>
-                      <div class="fs-4 fw-5 my-2 text-truncate hvr" (click)="CommonService.getProductDetailsPageURL(altr.PreferredProductId, altr.DisplayName, altr.PrescriptionOTC)">{{altr.DisplayName}}</div>
+                      <div class="fs-4 fw-5 my-2 text-truncate hvr"
+                        (click)="CommonService.getProductDetailsPageURL(altr.PreferredProductId, altr.DisplayName, altr.PrescriptionOTC)">
+                        {{altr.DisplayName}}</div>
                       <div class="fs-3 text-secondary mb-2 text-truncate">{{ altr.MfgGroup }}</div>
                       <div class="">
                         <div class="prorsBlock mb-2">
                           <strong class="pe-2">{{altr.CustOfferPrice | currency: 'INR'}}</strong>
-                          <del *ngIf="altr.MRP > altr.CustOfferPrice" class="text-secondary pe-2 fs-3">{{altr.MRP | currency: 'INR'}}</del>
-                          <strong *ngIf="altr.CustDiscPercent > 0" style="color: #E9640D;">{{altr.CustDiscPercent}}% Off</strong>
+                          <del *ngIf="altr.MRP > altr.CustOfferPrice" class="text-secondary pe-2 fs-3">{{altr.MRP |
+                            currency: 'INR'}}</del>
+                          <strong *ngIf="altr.CustDiscPercent > 0" style="color: #E9640D;">{{altr.CustDiscPercent}}%
+                            Off</strong>
                         </div>
                         <!-- <div class="fs-3 mb-2">{{altr.Unit}} of {{altr.Size}}</div> -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between">
@@ -1870,8 +2173,11 @@
                             <div class="fs-3 mb-2 text-secondary">{{altr.pricePerUnit | currency: 'INR'}}/Unit</div>
                           </div>
                           <div>
-                            <div *ngIf="altr.addedQty == 0" class="alter-btn bg-success border-success justify-content-center" (click)="replaceAlternative(altr, item)">Replace</div>
-                            <div *ngIf="altr.addedQty > 0" class="alter-btn bg-success border-success justify-content-center">Added</div>
+                            <div *ngIf="altr.addedQty == 0"
+                              class="alter-btn bg-success border-success justify-content-center"
+                              (click)="replaceAlternative(altr, item)">Replace</div>
+                            <div *ngIf="altr.addedQty > 0"
+                              class="alter-btn bg-success border-success justify-content-center">Added</div>
                           </div>
                         </div>
                       </div>
@@ -1887,7 +2193,8 @@
       </div>
 
       <div *ngIf="replaceAllSubs" class="px-3 pb-3">
-          <button class="alter-btn justify-content-center w-100" type="button" (click)="replaeAllSubstitude()">Replace All</button>
+        <button class="alter-btn justify-content-center w-100" type="button" (click)="replaeAllSubstitude()">Replace
+          All</button>
       </div>
     </div>
   </div>

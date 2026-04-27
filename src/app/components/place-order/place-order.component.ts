@@ -148,6 +148,11 @@ export class PlaceOrderComponent implements OnInit {
   @ViewChild('alterModal') alterModal: any;
   @ViewChild('closeAltMod') closeAltMod: any;
   @ViewChild('closeAllaltMod') closeAllaltMod: any;
+  jitoItems: any;
+  nonJitoItems: any;
+  forAllProducts!: number;
+  deduction:number=0;
+  itemsBreakDown:boolean = false;
 
   constructor(
     public CommonService: CommonService,
@@ -189,6 +194,8 @@ export class PlaceOrderComponent implements OnInit {
         if (this.CommonService.ConfigData.IsCFHActive) {
           this.showCFHBlock = true;
           this.getCFHBalance('get');
+          // this.itemsBreakDown = true;
+          this.getCFHApplicableAmt();
         }
       }
       // console.log("this.showCFHBlock",this.showCFHBlock);
@@ -3255,7 +3262,8 @@ getHB_Details() {
   }
 
   getCFHBalance(type: any) {
-    let MobileNo = this.CommonService.Mobile;
+    // let MobileNo = this.CommonService.Mobile;
+    let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHBalance(`cfh/get_balance?search=${MobileNo}`).subscribe((res: any) => {
       if (res && res.status == 1) {
@@ -3306,13 +3314,188 @@ getHB_Details() {
     }
   }
 
+  showItemsBreakDown(){
+      this.itemsBreakDown = !this.itemsBreakDown;
+  }
+
   setCFHBalance() {
+    if (this.headerDetails.CartVal > this.deduction) {
+      this.cfhBalance = this.headerDetails.CartVal - this.deduction;
+    } else {
+      this.cfhBalance = 0;
+      this.selectedPG = '';
+    }
+  }
+
+  setCFHBalance_bkp_270426() {
     if (this.headerDetails.CartVal > this.cardBalance) {
       this.cfhBalance = this.headerDetails.CartVal - this.cardBalance;
     } else {
       this.cfhBalance = 0;
       this.selectedPG = '';
     }
+  }
+
+getCFHApplicableAmt() {
+    let MobileNo = this.CommonService.Mobile;
+    // let MobileNo = 7777777777; // for testing purpose
+    // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
+    this.CommonService.getCFHApplicableAmt(`cfh/get_cfh_applicable_amt?search=${MobileNo}`).subscribe((res: any) => {
+      res = {
+    "status": 200,
+    "msg": "Success",
+    "data": {
+        "TotalCartAmount": 309,
+        "TotalJitoTransactionAmount": 153.56,
+        "TotalJitoTransactionAmount_o": 153.56,
+        "JitoItemsBreakdown": [
+            {
+                "ProductId": 12936,
+                "PKLotId": 10000011,
+                "ItemQty": 1,
+                "BatchNo": "AS4929",
+                "ItemBasePrice": 44.62,
+                "ProportionalCONVIENCEFEE": 0.29,
+                "PROPORTIONALSAMLLORDERFEE": 0,
+                "PROPORTIONALCOUPONDISCOUNT": 0,
+                "JitoTransactionAmount2": 44.908802588996764,
+                "JitoTransactionAmount": 44.91,
+                "ProductName": "Cal 360",
+                "DisplayName": "Cal 360 Tab (10 Tab)",
+                "ISJitoGeneric": 0
+            },
+            {
+                "ProductId": 6749,
+                "PKLotId": 10000011,
+                "ItemQty": 1,
+                "BatchNo": "CAA3B4A2",
+                "ItemBasePrice": 107.95,
+                "ProportionalCONVIENCEFEE": 0.7,
+                "PROPORTIONALSAMLLORDERFEE": 0,
+                "PROPORTIONALCOUPONDISCOUNT": 0,
+                "JitoTransactionAmount2": 108.64870550161812,
+                "JitoTransactionAmount": 108.65,
+                "ProductName": "Cal Aid",
+                "DisplayName": "Cal Aid Cap (10 Cap)",
+                "ISJitoGeneric": 0
+            }
+        ],
+        "NonjitoItemsBreakdown": [
+            {
+                "ProductId": 11723,
+                "PKLotId": 10000008,
+                "ItemQty": 1,
+                "BatchNo": "MFT1404",
+                "ItemBasePrice": 51,
+                "ProportionalCONVIENCEFEE": 0.33,
+                "PROPORTIONALSAMLLORDERFEE": 0,
+                "PROPORTIONALCOUPONDISCOUNT": 0,
+                "NonJitoTransactionAmount": 51.33,
+                "ProductName": "Mext F",
+                "DisplayName": "Mext F 7.5 mg Tab (28 Tab)",
+                "ISJitoGeneric": 0
+            },
+            {
+                "ProductId": 5546,
+                "PKLotId": 10000006,
+                "ItemQty": 1,
+                "BatchNo": 37401271,
+                "ItemBasePrice": 103.75,
+                "ProportionalCONVIENCEFEE": 0.67,
+                "PROPORTIONALSAMLLORDERFEE": 0,
+                "PROPORTIONALCOUPONDISCOUNT": 0,
+                "NonJitoTransactionAmount": 104.42,
+                "ProductName": "Diabecon DS Tab",
+                "DisplayName": "Diabecon DS Tab (60 Tab)",
+                "ISJitoGeneric": 0
+            }
+        ],
+        "NonTotalJitoTransactionAmount": 155.75,
+        "cartheader": {
+            "CartAmount": 364.5,
+            "CartItemDiscount": 57.18,
+            "PromoDiscount": 0,
+            "CouponDiscount": 0,
+            "ShippingCharge": 0,
+            "RoundOfVal": -0.32,
+            "CartVal": 309,
+            "OrderPromoID": null,
+            "PromoDesc": null,
+            "CouponPromoId": null,
+            "CouponPromoDesc": null,
+            "NeedToAttachPrescription": "Y",
+            "CourierCharge": null,
+            "ShippingAddressId": 3581423,
+            "BillingAddressId": 3581423,
+            "AreaId": null,
+            "GroupPromoDiscount": null,
+            "IsRedeemable": "N",
+            "CanCOD": "Y",
+            "DeliveryDelayedDay": 0,
+            "OTCBillAmount": 103.75,
+            "SSCurrencyValue": 0,
+            "ApplicationType": "N",
+            "Iscourierable": "N",
+            "EwalletValue": null,
+            "RedeemableSSCur": 0,
+            "WarehouseId": 1,
+            "IsPanIndia": 0,
+            "AppliedCouponCode": null,
+            "OTCMEDBillAmount": 0,
+            "GiftCardAmount": 0,
+            "LapseAmt": 0,
+            "MedDiscPercent": null,
+            "IsDeliveryChargeWaivedOff": 0,
+            "CartValForDeliveryCharge": 307,
+            "IsLocalCourierable": 0,
+            "SubscriptionId": null,
+            "SubscriptionDiscount": null,
+            "IsOutStation": null,
+            "ShippingAddress": "Innovation Tower,Kolkata,West Bengal - 700156",
+            "BillingAddress": "Innovation Tower,Kolkata,West Bengal - 700156",
+            "PrescriptionId": null,
+            "FilePath": null,
+            "AppVersion": null,
+            "IsPrescriptionUploaded": 0,
+            "RestrictedProduct": "N",
+            "ConvienceFee": 2,
+            "ExpressDeliveryCharge": 0,
+            "IsPetCarePrescriptionUploaded": 0,
+            "NeedToAttachPetCarePrescription": "Y",
+            "jito_card_balance": 500
+        },
+        "beneficiary_summary": {
+            "BeneficiaryId": 162,
+            "searched_beneficiary_remaining_balance": 500,
+            "jito_remaining_balance": 500,
+            "non_jito_remaining_balance": 1000
+        },
+        "beneficiary_summary2": {
+            "status": "success",
+            "message": "Beneficiary summary retrieved successfully",
+            "data": {
+                "BeneficiaryId": 162,
+                "searched_beneficiary_remaining_balance": 1500,
+                "jito_remaining_balance": 500,
+                "non_jito_remaining_balance": 1000
+            },
+            "error": null
+        },
+        "applicable_for_all_products": 0,
+        "deduction_amount": 153.56
+    }
+};
+      if (res && res.status == 200) {
+        this.jitoItems = res.data.JitoItemsBreakdown;
+        this.nonJitoItems = res.data.NonjitoItemsBreakdown;
+        this.forAllProducts = res.data.applicable_for_all_products;
+        this.deduction = res.data.deduction_amount;
+        this.spinner.hide();
+      } else {
+        // this.isloading = false;
+        this.spinner.hide();
+      }
+    })
   }
 
   getAletnatives() {

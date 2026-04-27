@@ -431,4 +431,9 @@ export class CommonService {
     let gettUrl = this.catalogUrl + url;
     return this.http.get(gettUrl);
   }
+
+  getCFHApplicableAmt(url: any) {
+    let gettUrl = this.webcartUrl + url;
+    return this.http.get(gettUrl);
+  }
 }

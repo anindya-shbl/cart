@@ -3269,8 +3269,8 @@ getHB_Details() {
   }
 
   getCFHBalance(type: any) {
-    // let MobileNo = this.CommonService.Mobile;
-    let MobileNo = 7777777777; // for testing purpose
+    let MobileNo = this.CommonService.Mobile;
+    // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHBalance(`cfh/get_balance?search=${MobileNo}`).subscribe((res: any) => {
       if (res && res.status == 1) {

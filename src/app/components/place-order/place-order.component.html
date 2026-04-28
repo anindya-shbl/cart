@@ -921,12 +921,12 @@
                          @if(forAllProducts){
                           <div>Using CFH card</div>
                          }
-                        @else if(!forAllProducts){
+                        @else if(!forAllProducts && jitoItems.length>0){
                           <div>Using Jito Health card</div>
                         }
                         <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>
                       </div>
-                      @if(!forAllProducts){                       
+                      @if(!forAllProducts && jitoItems.length>0){ 
                         <div class="specialty-box">
                           <div class="description">
                             <i class="fa fa-exclamation-circle"></i>&nbsp;Only {{ deduction | currency : "INR"}} is eligible (Jito products and generic medicines). The remaining {{(headerDetails.CartVal - deduction)  | currency:'INR':'symbol':'1.2-2'}} for other items needs to be paid separately.  

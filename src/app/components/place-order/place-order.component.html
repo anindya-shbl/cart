@@ -239,10 +239,8 @@
                   </div>
                 </ng-container>
                 <div class="p-3 d-flex justify-content-end border-top" style="gap: 10px;">
-                  <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed"
-                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
-                    aria-controls="collapseTwo">
-                    Upload Prescription 1 <!-- This is the button in the cart items block-->
+                  <button *ngIf="(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Upload Prescription <!-- This is the button in the cart items block-->
                   </button>
                   <button *ngIf="!(PrescUpldFlgHuman || PrescUpldFlgPet)" type="button" class="proceed"
                     data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true"
@@ -259,7 +257,7 @@
             <h2 class="accordion-header">
               <button class="accordion-button fw-6 fs-7 collapsed" ng type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" (click)="resetPG()">
-                Upload Prescription 2
+                Upload Prescription
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -358,9 +356,8 @@
                      
                       
                       <div class="prsc-btn mb-2 hvr" *ngIf="ReqPrscListHuman.length > 0">
-                        <label for="file-input" class="hvr">Upload Prescription 3</label>
-                        <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple
-                          accept=".jpg, .jpeg, .pdf" />
+                        <label for="file-input" class="hvr">Upload Prescription</label>
+                        <input id="file-input" type="file" class="d-none" (change)="selectPrescription($event)" multiple accept=".jpg, .jpeg, .pdf" />
                       </div>
                     </div>
 
@@ -416,6 +413,7 @@
                   </div>
                   <!--For Pet start here-->
                   <div *ngIf="headerDetails['IsPetCarePrescriptionUploaded'] == 0" class>
+                  <!-- <div *ngIf="headerDetails['NeedToAttachPetCarePrescription'] == 'Y'" class> -->
                     <div class="forpetprescription" *ngIf="ReqPrscListPet.length > 0">
                       <div *ngIf="ReqPrscListPet.length > 0" class="requirePrescriptionSec">
                         <div class="fw-5 fs-5 mb-1">{{ ReqPrscListPet.length }} item<span
@@ -859,12 +857,12 @@
                          @if(forAllProducts){
                           <div>Using CFH card</div>
                          }
-                        @else if(!forAllProducts){
+                        @else if(!forAllProducts && jitoItems.length>0){
                           <div>Using Jito Health card</div>
                         }
                         <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>
                       </div>
-                      @if(!forAllProducts){                       
+                      @if(!forAllProducts && jitoItems.length>0){ 
                         <div class="specialty-box">
                           <div class="description">
                             <i class="fa fa-exclamation-circle"></i>&nbsp;Only {{ deduction | currency : "INR"}} is eligible (Jito products and generic medicines). The remaining {{(headerDetails.CartVal - deduction)  | currency:'INR':'symbol':'1.2-2'}} for other items needs to be paid separately.  

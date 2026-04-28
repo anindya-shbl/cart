@@ -342,7 +342,7 @@
 
                      @if(specialistFlag > 0){                       
                         <div class="specialty-box">
-                          <div class="title">Specialty Prescription Required for {{specialistFlag}} item(s)</div>
+                          <div class="title"><i class="fa fa-exclamation-circle"></i> &nbsp; Specialty Prescription Required for {{specialistFlag}} item(s)</div>
                           <div class="description">
                             A prescription from a registered specialist (Endocrinologists, Internal Medicine specialists or Cardiologists.) is required for GLP-1 drugs as per the recent CDSCO guidelines.
                           </div>
@@ -804,14 +804,15 @@
                         </div>
                       </div>
                       <div (click)="showItemsBreakDown()" class="pe-2 pt-3 mt-3 border-top" *ngIf="useCardBalance">
-                        <b>
-                          {{ itemsBreakDown ? 'Hide item breakdown':'show which items qualify' }}
+                        <b class="SeeHide" style="cursor: pointer;">
+                          {{ itemsBreakDown ? 'Hide items breakdown':'See which items qualify' }} 
+                          <i class="fa" [ngClass]="itemsBreakDown ? 'fa-angle-up' : 'fa-angle-down'"></i>
                         </b>
                       </div>
                     </div>
                     <!-- End -->
 
-                    <div *ngIf="itemsBreakDown" class="border rounded-4 bgOFF overflow-hidden">
+                    <div *ngIf="itemsBreakDown" class="border rounded-4 mb-3 bgOFF overflow-hidden">
                       <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
                         <div class="HeadingBlock">
                           <span class="RoundI"><i class="icon-checked-1"></i></span> 
@@ -840,7 +841,7 @@
                     </div>
 
                     <!-- static content start -->
-                    <!-- <div class="border rounded-4 bgOFF overflow-hidden">
+                    <!-- <div class="border rounded-4 mb-3 bgOFF overflow-hidden">
                       <div class="p-3 border-bottom successBG">
                         <div class="HeadingBlock"><span class="RoundI"><i class="icon-checked-1"></i></span> Covered by
                           Jito Health Card

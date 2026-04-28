@@ -10,30 +10,30 @@ export class CommonService {
 
   // ============= live ==========================
 
-  public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
-  public baseurl = 'https://sastasundar.com/';
-  public custwebcartUrl = 'https://sastasundar.com/index.php/customercart/';
-  public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
-  public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
-  public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
-  public catalogUrl = 'https://serv-catalog.sastasundar.com/';
-  public searchUrl = 'https://search.sastasundar.com/';
-  public ImageUrl = 'https://asset.sastasundar.com/';
-  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  // public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
+  // public baseurl = 'https://sastasundar.com/';
+  // public custwebcartUrl = 'https://sastasundar.com/index.php/customercart/';
+  // public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
+  // public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
+  // public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
+  // public catalogUrl = 'https://serv-catalog.sastasundar.com/';
+  // public searchUrl = 'https://search.sastasundar.com/';
+  // public ImageUrl = 'https://asset.sastasundar.com/';
+  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
 
   // ============= development ==========================
 
-  // public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
-  // public baseurl = 'https://stage.sastasundar.com/';
-  // public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
-  // public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
-  // public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
-  // public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
-  // public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
-  // public searchUrl = 'https://stage-search.sastasundar.com/';
-  // public ImageUrl = 'https://res.sastasundar.com/';
-  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
+  public baseurl = 'https://stage.sastasundar.com/';
+  public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
+  public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
+  public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
+  public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
+  public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
+  public searchUrl = 'https://stage-search.sastasundar.com/';
+  public ImageUrl = 'https://res.sastasundar.com/';
+  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
 
 

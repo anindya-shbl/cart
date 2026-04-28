@@ -584,6 +584,40 @@
 
 .SeeHide {
     color: #007dc9;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.SeeHide i {
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+}
+
+.SeeHide i.fa-angle-up {
+  transform: rotate(0deg);
+}
+
+.SeeHide i.fa-angle-down {
+  transform: rotate(-180deg);
+}
+
+/* Items Breakdown Animation */
+.items-breakdown {
+  animation: slideDown 0.3s ease-in-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+  }
 }
 .rounded-4 {
     border-radius: 6px;
@@ -640,6 +674,15 @@
 }
 .successBG .Pcolor {
     color: #166534;
+}
+
+.FooterBlock {
+    color: #039855;
+    font-size: 17px;
+    font-weight: 600;
+    gap: 5px;
+    padding-top: 1rem;
+    border-top: 2px solid;
 }
 
 .specialty-rx {

@@ -11,6 +11,7 @@ import { SearchComponent } from '../search/search.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { WebEngageService } from '../../services/webengage.service';
 import { ToastrService } from 'ngx-toastr';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 declare var Razorpay: any;
@@ -20,6 +21,14 @@ declare function onScriptLoad(txnToken: any, orderId: any, amount: any): any;
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.scss',
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({ opacity: 1, height: '*', visibility: 'visible' })),
+      state('out', style({ opacity: 0, height: '0px', visibility: 'hidden' })),
+      transition('in => out', animate('300ms ease-in-out')),
+      transition('out => in', animate('300ms ease-in-out'))
+    ])
+  ]
 })
 export class PlaceOrderComponent implements OnInit {
   isLoggedIn: any = '';

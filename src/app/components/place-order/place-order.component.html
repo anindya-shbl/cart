@@ -874,18 +874,22 @@
                     </div>
                     <!-- End -->
 
-                    <div *ngIf="itemsBreakDown" class="border rounded-4 mb-3 bgOFF overflow-hidden">
+                    <div *ngIf="itemsBreakDown" [@slideInOut]="itemsBreakDown ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
                       <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
                         <div class="HeadingBlock">
                           <span class="RoundI"><i class="icon-checked-1"></i></span> 
-                            Covered By Jito Health Card</div>
-                          <div *ngFor="let item of jitoItems" class="problock mb-2">
-                            <div class="d-flex align-item-center justify-content-between">
-                              <span class="t14 tcolor">{{item.ProductName}}</span>
-                              <b class="Pcolor">{{item.JitoTransactionAmount2 | number:'1.2-2'|currency:'INR'}}</b>
-                            </div>
-                            <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Jito Product' }}</span>      
+                            Covered By Jito Health Card
+                        </div>
+                        <div *ngFor="let item of jitoItems" class="problock mb-2">
+                          <div class="d-flex align-item-center justify-content-between">
+                            <span class="t14 tcolor">{{item.ProductName}}</span>
+                            <b class="Pcolor">{{item.JitoTransactionAmount2 | number:'1.2-2'|currency:'INR'}}</b>
                           </div>
+                          <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Jito Product' }}</span>      
+                        </div>
+                        <div class="d-flex align-item-center justify-content-between FooterBlock ">
+                          <span>Jito Card Covers</span> <span>-{{ deduction | currency : "INR"}}</span>
+                        </div>
                       </div>
 
                       <div *ngIf="nonJitoItems.length>0" class="p-3">
@@ -902,51 +906,6 @@
                       </div>
                     </div>
 
-                    <!-- static content start -->
-                    <!-- <div class="border rounded-4 mb-3 bgOFF overflow-hidden">
-                      <div class="p-3 border-bottom successBG">
-                        <div class="HeadingBlock"><span class="RoundI"><i class="icon-checked-1"></i></span> Covered by
-                          Jito Health Card
-                        </div>
-
-                        <div class="problock mb-2">
-                          <div class="d-flex align-item-center justify-content-between">
-                            <span class="t14 tcolor">Jito Multivitamin C+D3 (60 tabs)</span>
-                            <b class="Pcolor">89.5</b>
-                          </div>
-                          <span class="tagProduct">Jito Product</span>
-                        </div>
-                        <div class="problock mb-2">
-                          <div class="d-flex align-item-center justify-content-between">
-                            <span class="t14 tcolor">Paracetamol 500mg</span>
-                            <b class="Pcolor">35.5</b>
-                          </div>
-                          <span class="tagProduct">Generic Medicine</span>
-                        </div>
-                      </div>
-
-                      <div class="p-3 ">
-                        <div class="HeadingBlock"><span class="RoundI"><i class="icon-lab_cross"></i></span> Not
-                          eligible for Jito Card
-                        </div>
-
-                        <div class="problock mb-2">
-                          <div class="d-flex align-item-center justify-content-between">
-                            <span class="t14 tcolor">Jito Multivitamin C+D3 (60 tabs)</span>
-                            <b class="Pcolor">89.5</b>
-                          </div>
-                          <span class="tagProduct">Jito Product</span>
-                        </div>
-                        <div class="problock mb-2">
-                          <div class="d-flex align-item-center justify-content-between">
-                            <span class="t14 tcolor">Paracetamol 500mg</span>
-                            <b class="Pcolor">35.5</b>
-                          </div>
-                          <span class="tagProduct">Generic Medicine</span>
-                        </div>
-                      </div>
-                    </div> -->
-                    <!-- static content end -->
 
                     <div *ngIf="useCardBalance" class="border rounded p-3 mb-3 bg-light-subtle">
                       <div class="mb-2 fw-6">Payment Breakdown</div>
@@ -965,8 +924,15 @@
                         @else if(!forAllProducts){
                           <div>Using Jito Health card</div>
                         }
-                        <div *ngIf="deduction">{{deduction | currency : "INR"}}</div>
+                        <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>
                       </div>
+                      @if(!forAllProducts){                       
+                        <div class="specialty-box">
+                          <div class="description">
+                            <i class="fa fa-exclamation-circle"></i>&nbsp;Only {{ deduction | currency : "INR"}} is eligible (Jito products and generic medicines). The remaining {{(headerDetails.CartVal - deduction)  | currency:'INR':'symbol':'1.2-2'}} for other items needs to be paid separately.  
+                          </div>
+                        </div>
+                      }
                       <div class="d-flex justify-content-between align-items-center pt-2"
                         style="border-top: 1px dashed lightgray;">
                         <div class="fw-6 fs-6">Amount to be paid</div>

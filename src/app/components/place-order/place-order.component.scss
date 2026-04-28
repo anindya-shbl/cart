@@ -641,3 +641,46 @@
 .successBG .Pcolor {
     color: #166534;
 }
+
+.specialty-rx {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6a1b9a;              /* purple text */
+  background-color: #f0c36d;  /* light purple background */
+  border: 1px solid #d1a3e0;  /* subtle border */
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.specialty-box {
+  background-color: #fff3e0;   /* light orange background */
+  border: 1px solid #f0c36d;   /* soft border */
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 12px 0px;
+  font-family: Arial, sans-serif;
+}
+
+.specialty-box .title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8a4b08; /* darker orange/brown */
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.specialty-box .title::before {
+  content: "!";
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.specialty-box .description {
+  font-size: 13px;
+  color: #6d4c41; /* muted brown */
+  line-height: 1.5;
+}

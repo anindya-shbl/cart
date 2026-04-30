@@ -786,19 +786,24 @@
                           </div>
                         </div>
                       </div>
-                      <div (click)="showItemsBreakDown()" class="pe-2 pt-3 mt-3 border-top" *ngIf="useCardBalance">
-                        <b>
-                          {{ itemsBreakDown ? 'Hide item breakdown':'show which items qualify' }}
-                        </b>
-                      </div>
+                      @if(!forAllProducts){
+                        <div (click)="showItemsBreakDown()" class="pe-2 pt-3 mt-3 border-top" *ngIf="useCardBalance">
+                          <b class="SeeHide" style="cursor: pointer;">
+                            {{ itemsBreakDown ? 'Hide items breakdown':'See which items qualify' }} 
+                            <i class="fa" [ngClass]="itemsBreakDown ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                          </b>
+                        </div>
+                       }
                     </div>
                     <!-- End -->
 
-                    <div *ngIf="itemsBreakDown" class="border rounded-4 bgOFF overflow-hidden">
-                      <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
-                        <div class="HeadingBlock">
-                          <span class="RoundI"><i class="icon-checked-1"></i></span> 
-                            Covered By Jito Health Card</div>
+                    @if(!forAllProducts){
+                      <div *ngIf="itemsBreakDown" [@slideInOut]="itemsBreakDown ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
+                        <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
+                          <div class="HeadingBlock">
+                            <span class="RoundI"><i class="icon-checked-1"></i></span> 
+                              Covered By Jito Health Card
+                          </div>
                           <div *ngFor="let item of jitoItems" class="problock mb-2">
                             <div class="d-flex align-item-center justify-content-between">
                               <span class="t14 tcolor">{{item.ProductName}}</span>
@@ -806,21 +811,28 @@
                             </div>
                             <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Jito Product' }}</span>      
                           </div>
-                      </div>
-
-                      <div *ngIf="nonJitoItems.length>0" class="p-3">
-                        <div class="HeadingBlock">
-                          <span class="RoundI"><i class="icon-lab_cross"></i></span>Not eligible for Jito Health Card
-                        </div>
-                        <div *ngFor="let item of nonJitoItems"  class="problock mb-2">
-                          <div class="d-flex align-item-center justify-content-between">
-                            <span class="t14 tcolor">{{item.ProductName}}</span>
-                            <b class="Pcolor">{{item.NonJitoTransactionAmount | number:'1.2-2'| currency:'INR'}}</b>
+                          <div class="d-flex align-item-center justify-content-between FooterBlock ">
+                            <span>Jito Card Covers</span> <span>-{{ deduction | currency : "INR"}}</span>
                           </div>
-                          <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Other' }}</span>
+                        </div>
+
+                        <div *ngIf="nonJitoItems.length>0" class="p-3">
+                          <div class="HeadingBlock">
+                            <span class="RoundI"><i class="icon-lab_cross"></i></span>Not eligible for Jito Health Card
+                          </div>
+                          <div *ngFor="let item of nonJitoItems"  class="problock mb-2">
+                            <div class="d-flex align-item-center justify-content-between">
+                              <span class="t14 tcolor">{{item.ProductName}}</span>
+                              <b class="Pcolor">{{item.NonJitoTransactionAmount | number:'1.2-2'| currency:'INR'}}</b>
+                            </div>
+                            <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Other' }}</span>
+                          </div>
+                          <div class="d-flex align-item-center justify-content-between FooterBlockNonJito ">
+                            <span>Pay Onine or via COD</span> <span>-{{ total_non_jito_transaction_amount | currency : "INR"}}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    }
 
                     <!-- static content start -->
                     <!-- <div class="border rounded-4 bgOFF overflow-hidden">

@@ -612,7 +612,7 @@ export class PlaceOrderComponent implements OnInit {
     this.slicedArray = [];
     this.slicedArrayHuman = [];
     this.slicedArrayPet = [];
-
+    this.specialistFlag = 0;
     // Separate items by product type
     data.forEach((d: any) => {
       // console.log('processing item for prescription check', d);

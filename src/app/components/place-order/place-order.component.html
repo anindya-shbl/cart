@@ -854,10 +854,10 @@
                         <!-- <div>Using CFH card</div> -->
                         <!-- <div *ngIf="cardBalance < headerDetails.CartVal">{{cardBalance | currency : "INR"}}</div>
                         <div *ngIf="cardBalance >= headerDetails.CartVal">{{headerDetails.CartVal | currency : "INR"}}</div> -->
-                         @if(forAllProducts && nonJitoItems.length>0){
+                         @if(forAllProducts && deduction > 0){
                           <div>Using CFH card</div>
                          }
-                        @else if(!forAllProducts && jitoItems.length>0){
+                        @else if(!forAllProducts && jitoItems.length>0 && deduction > 0){
                           <div>Using Jito Health card</div>
                         }
                         <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>

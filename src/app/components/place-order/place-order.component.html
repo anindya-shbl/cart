@@ -798,7 +798,7 @@
                     <!-- End -->
 
                     @if(!forAllProducts){
-                      <div *ngIf="itemsBreakDown" [@slideInOut]="itemsBreakDown ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
+                      <div [@slideInOut]="itemsBreakDown ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
                         <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
                           <div class="HeadingBlock">
                             <span class="RoundI"><i class="icon-checked-1"></i></span> 

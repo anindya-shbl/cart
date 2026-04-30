@@ -415,6 +415,8 @@ export class PlaceOrderComponent implements OnInit {
             this.getCustomerCoupon();
             this.getSaveForLaterList();
             this.getExpectedDeliveryDate();
+            this.getCFHApplicableAmt();
+            this.getCFHBalance('add');
           }
 
           this.processLocalCart(this.finalList);
@@ -461,6 +463,8 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
+          this.getCFHApplicableAmt();
+          this.getCFHBalance('add');
         }
         this.processLocalCart(this.finalList);
       }

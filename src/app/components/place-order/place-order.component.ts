@@ -163,6 +163,7 @@ export class PlaceOrderComponent implements OnInit {
   forAllProducts!: number;
   deduction:number=0;
   itemsBreakDown:boolean = false;
+  total_non_jito_transaction_amount:number = 0;
 
   constructor(
     public CommonService: CommonService,
@@ -3337,6 +3338,7 @@ getCFHApplicableAmt() {
         this.nonJitoItems = res.data.NonjitoItemsBreakdown;
         this.forAllProducts = res.data.applicable_for_all_products;
         this.deduction = res.data.deduction_amount;
+        this.total_non_jito_transaction_amount = res.data.NonTotalJitoTransactionAmount;
         this.spinner.hide();
       } else {
         // this.isloading = false;

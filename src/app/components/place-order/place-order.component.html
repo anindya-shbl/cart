@@ -214,7 +214,7 @@
                                 <div class="qtyBtn mb-4">
                                   <span (click)="savedItemsMinus(item.ProductId)" class="px-2 hvr"><i
                                       class="fa-solid fa-minus"></i></span>
-                                  <span class="px-2">{{ item.ProductCount }}</span>
+                                  <span class="px-2">{{ item.ProductCount | number:'1.0-0'}}</span>
                                   <span (click)="savedItemsPlus(item.ProductId)" class="px-2 hvr"><i
                                       class="fa-solid fa-plus"></i></span>
                                 </div>
@@ -546,23 +546,23 @@
                     <div *ngIf="selectedAddress != ''" class="p-3">
                       <div class="d-flex fw-5 mb-2">
                         <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
-                        <div>{{selectedAddress.NickName}}</div>
+                        <div>{{selectedAddress?.NickName}}</div>
                       </div>
                       <div class="d-flex mb-1">
                         <div class="icons">
-                          <span *ngIf="selectedAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
-                          <span *ngIf="selectedAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
-                          <span *ngIf="selectedAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
+                          <span *ngIf="selectedAddress?.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
+                          <span *ngIf="selectedAddress?.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
+                          <span *ngIf="selectedAddress?.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
                         </div>
                         <div>
-                          <div>{{selectedAddress.Addline}}</div>
-                          <div class="mb-1">{{selectedAddress.City}} - {{selectedAddress.StateName}} -
-                            {{selectedAddress.PinCode}}</div>
+                          <div>{{selectedAddress?.Addline}}</div>
+                          <div class="mb-1">{{selectedAddress?.City}} - {{selectedAddress?.StateName}} -
+                            {{selectedAddress?.PinCode}}</div>
                         </div>
                       </div>
                       <div class="d-flex mb-3">
                         <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
-                        <div class="">{{selectedAddress.CustContactNo}}</div>
+                        <div class="">{{selectedAddress?.CustContactNo}}</div>
                       </div>
                       <div class="form-check bill-check">
                         <input class="me-2 hvr" type="checkbox" id="addressDefault" [checked]="billingCheck"
@@ -603,23 +603,23 @@
                       <div class="p-3">
                         <div class="d-flex fw-5 mb-2">
                           <div class="icons"><i class="fa-solid fa-user fs-5"></i></div>
-                          <div>{{billingAddress.NickName}}</div>
+                          <div>{{billingAddress?.NickName}}</div>
                         </div>
                         <div class="d-flex mb-1">
                           <div class="icons">
-                            <span *ngIf="billingAddress.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
-                            <span *ngIf="billingAddress.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
-                            <span *ngIf="billingAddress.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
+                            <span *ngIf="billingAddress?.AddressType == 'H'"><i class="fa-solid fa-house"></i></span>
+                            <span *ngIf="billingAddress?.AddressType == 'O'"><i class="fa-solid fa-briefcase"></i></span>
+                            <span *ngIf="billingAddress?.AddressType == 'T'"><i class="fa-solid fa-globe"></i></span>
                           </div>
                           <div>
-                            <div>{{billingAddress.Addline}}</div>
-                            <div class="mb-1">{{billingAddress.City}} - {{billingAddress.StateName}} -
-                              {{billingAddress.PinCode}}</div>
+                            <div>{{billingAddress?.Addline}}</div>
+                            <div class="mb-1">{{billingAddress?.City}} - {{billingAddress?.StateName}} -
+                              {{billingAddress?.PinCode}}</div>
                           </div>
                         </div>
                         <div class="d-flex">
                           <div class="icons"><i class="fa-solid fa-square-phone fs-5"></i></div>
-                          <div class="">{{billingAddress.CustContactNo}}</div>
+                          <div class="">{{billingAddress?.CustContactNo}}</div>
                         </div>
                       </div>
 
@@ -814,7 +814,7 @@
 
                     @if(!forAllProducts){
                       <div [@slideInOut]="(useCardBalance && itemsBreakDown) ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
-                        <div *ngIf="jitoItems.length>0" class="p-3 border-bottom successBG">
+                        <div *ngIf="jitoItems?.length>0" class="p-3 border-bottom successBG">
                           <div class="HeadingBlock">
                             <span class="RoundI"><i class="icon-checked-1"></i></span> 
                               Covered By Jito Health Card
@@ -831,7 +831,7 @@
                           </div>
                         </div>
 
-                        <div *ngIf="nonJitoItems.length>0" class="p-3">
+                        <div *ngIf="nonJitoItems?.length>0" class="p-3">
                           <div class="HeadingBlock">
                             <span class="RoundI"><i class="icon-lab_cross"></i></span>Not eligible for Jito Health Card
                           </div>
@@ -864,12 +864,12 @@
                          @if(forAllProducts && deduction > 0){
                           <div>Using CFH card</div>
                          }
-                        @else if(!forAllProducts && jitoItems.length>0 && deduction > 0){
+                        @else if(!forAllProducts && jitoItems?.length>0 && deduction > 0){
                           <div>Using Jito Health card</div>
                         }
                         <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>
                       </div>
-                      @if(!forAllProducts && jitoItems.length>0){ 
+                      @if(!forAllProducts && jitoItems?.length>0){ 
                         <div class="specialty-box">
                           <div class="description">
                             <i class="fa fa-exclamation-circle"></i>&nbsp;Only {{ deduction | currency : "INR"}} is eligible (Jito products and generic medicines). The remaining {{(headerDetails.CartVal - deduction)  | currency:'INR':'symbol':'1.2-2'}} for other items needs to be paid separately.  

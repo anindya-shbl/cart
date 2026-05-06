@@ -1042,7 +1042,8 @@ export class PlaceOrderComponent implements OnInit {
           if (res.total > 0) {
               let items = res.items;
               this.saveForLaterList = items.map((medItem: any) => {
-                medItem.ProductCount = medProductsInfo.find((prod:any) => prod.ProductId === medItem.ProductId)?.ProductCount || 0;
+                console.log()
+                medItem.ProductCount = medProductsInfo.find((prod:any) => prod.ProductId === parseInt(medItem.ProductId))?.ProductCount || 0;
                 medItem.ExpDate = medItem.ExpiryDate;
                 medItem.ProductImageUrl = 'https://asset.sastasundar.com/incom/images/product/thumb/'+ medItem.ProductImage;
                 medItem.SaltName = medItem.Salts.NameSearch;

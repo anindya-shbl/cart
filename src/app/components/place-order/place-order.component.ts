@@ -164,6 +164,8 @@ export class PlaceOrderComponent implements OnInit {
   deduction:number=0;
   itemsBreakDown:boolean = false;
   total_non_jito_transaction_amount:number = 0;
+  uniqueDataMed: any[] = [];
+  uniqueDataOtc: any[] = [];
 
   constructor(
     public CommonService: CommonService,
@@ -1016,17 +1018,59 @@ export class PlaceOrderComponent implements OnInit {
     this.saveForLaterList = [];
     this.CommonService.getSavedForLaterList('cart/saveForLaterList').subscribe(
       (rsp: any) => {
-        rsp = {"status":200,"message":"success","data":{"Med":[{"ProductId":"334199","DisplayName":"Calcimust Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-1776150205-10161691-a.jpg","ProductCount":"1.00","ProductName":"Calcimust","MRP":"27.00","OfferPrice":"24.30","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"27.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-1776150205-10161691-a.jpg"},{"ProductId":"334199","DisplayName":"Calcimust Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-1776150205-10161691-a.jpg","ProductCount":"1.00","ProductName":"Calcimust","MRP":"27.00","OfferPrice":"24.30","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"27.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-1776150205-10161691-a.jpg"},{"ProductId":"334200","DisplayName":"Calcimust MLD Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-MLD-1776150121-10161692-a.jpg","ProductCount":"1.00","ProductName":"Calcimust MLD","MRP":"30.00","OfferPrice":"27.00","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"30.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-MLD-1776150121-10161692-a.jpg"},{"ProductId":"334200","DisplayName":"Calcimust MLD Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-MLD-1776150121-10161692-a.jpg","ProductCount":"1.00","ProductName":"Calcimust MLD","MRP":"30.00","OfferPrice":"27.00","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"30.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-MLD-1776150121-10161692-a.jpg"}],"Otc":[]}};
-        if (rsp['status'] == 200) {
-          let TempsaveForLaterMedList = [
-            ...rsp['data']['Med'],
-            ...rsp['data']['Otc'],
-          ];
-          this.saveForLaterList = TempsaveForLaterMedList;
-        }
+        // filter data with product id and get details of it from product serach
+        this.uniqueDataMed = this.removeDuplicates(rsp['data']['Med'], 'ProductId');
+        this.uniqueDataOtc = this.removeDuplicates(rsp['data']['Otc'], 'ProductId');
+        console.log('save for later list Med', this.uniqueDataMed);
+        console.log('save for later list Otc', this.uniqueDataOtc);
+        let medProdIdList = this.uniqueDataMed.map((item: any) => item.ProductId);
+         let medProductsInfo = this.uniqueDataMed.map((item: any) => ({ProductId:item.ProductId,ProductCount:item.ProductCount}));
+         console.log('medProductsInfo', medProductsInfo);
+        let otcProdIdList = this.uniqueDataOtc.map((item: any) => item.ProductId);
+        let otcProductsInfo = this.uniqueDataOtc.map((item: any) => ({ProductId:item.ProductId,ProductCount:item.ProductCount}));
+         console.log('otcProductsInfo', otcProductsInfo);
+        console.log('medProdIdList', medProdIdList);
+        console.log('otcProdIdList', otcProdIdList);
+        
+
+        let productIDs = [...medProdIdList,...otcProdIdList].join("|");
+        
+        let url = `product_find?product_id=${productIDs}&wh=${this.CommonService.WHId}&token=${this.CommonService.Token}&panindia=${this.CommonService.IsPanIndia}&pincode=${this.CommonService.PinCode}`
+        this.CommonService.getProductInfo(url).subscribe((res: any) => {
+          console.log(url);
+          console.log('response of product find api', res);
+          if (res.total > 0) {
+              let items = res.items;
+              this.saveForLaterList = items.map((medItem: any) => {
+                medItem.ProductCount = medProductsInfo.find((prod:any) => prod.ProductId === medItem.ProductId)?.ProductCount || 0;
+                medItem.ExpDate = medItem.ExpiryDate;
+                medItem.ProductImageUrl = 'https://asset.sastasundar.com/incom/images/product/thumb/'+ medItem.ProductImage;
+                medItem.SaltName = medItem.Salts.NameSearch;
+                medItem.CustomProductName='';
+                medItem.InteractiveHealthProfileId='';
+                medItem.LastMRP='';
+                return medItem;
+              }
+            )
+          }
+          console.log('final save for later list', this.saveForLaterList);
+        });
+        // if (rsp['status'] == 200) {
+        //   let TempsaveForLaterMedList = [
+        //     ...rsp['data']['Med'],
+        //     ...rsp['data']['Otc'],
+        //   ];
+        //   this.saveForLaterList = TempsaveForLaterMedList;
+        // }
         // console.log(this.saveForLaterList);
         this.resetRemove();
       }
+    );
+  }
+
+  removeDuplicates(array: any[], key: string): any[] {
+    return array.filter((item, index, self) =>
+      index === self.findIndex((obj) => obj[key] === item[key])
     );
   }
 

@@ -385,6 +385,11 @@ export class CommonService {
     return this.http.get(gettUrl);
   }
 
+  getProductInfo(url: any) {
+    let gettUrl = this.searchUrl + url;
+    return this.http.get(gettUrl);
+  }
+
   requestNotify(url: any, fd: any) {
     let postUrl = this.webcartUrl + url
     // let postUrl = 'http://192.168.5.139:8082/sspl_com/index.php/webapi/' + url;

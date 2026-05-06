@@ -632,7 +632,7 @@ export class PlaceOrderComponent implements OnInit {
         //reversed condition to see the html part
         // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
           rqsPrsPet.push(itemObj);
-        } else {
+        } else if(d['PrescriptionOTC'] == 'P') {
           // Human product
           rqsPrsHuman.push(itemObj);
         }
@@ -1016,6 +1016,7 @@ export class PlaceOrderComponent implements OnInit {
     this.saveForLaterList = [];
     this.CommonService.getSavedForLaterList('cart/saveForLaterList').subscribe(
       (rsp: any) => {
+        rsp = {"status":200,"message":"success","data":{"Med":[{"ProductId":"334199","DisplayName":"Calcimust Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-1776150205-10161691-a.jpg","ProductCount":"1.00","ProductName":"Calcimust","MRP":"27.00","OfferPrice":"24.30","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"27.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-1776150205-10161691-a.jpg"},{"ProductId":"334199","DisplayName":"Calcimust Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-1776150205-10161691-a.jpg","ProductCount":"1.00","ProductName":"Calcimust","MRP":"27.00","OfferPrice":"24.30","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"27.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-1776150205-10161691-a.jpg"},{"ProductId":"334200","DisplayName":"Calcimust MLD Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-MLD-1776150121-10161692-a.jpg","ProductCount":"1.00","ProductName":"Calcimust MLD","MRP":"30.00","OfferPrice":"27.00","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"30.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-MLD-1776150121-10161692-a.jpg"},{"ProductId":"334200","DisplayName":"Calcimust MLD Veterinary Bolus (1 Bolus)","Brand":"","ProductImage":"Calcimust-MLD-1776150121-10161692-a.jpg","ProductCount":"1.00","ProductName":"Calcimust MLD","MRP":"30.00","OfferPrice":"27.00","DiscountPercent":"10.00","IsOutOfStock":"N","MfgGroup":"Mankind Pharma Ltd.(N)","ExpDate":"2027-09-30","PrescriptionOTC":"P","CustomProductName":null,"InteractiveModule":null,"InteractiveHealthProfileId":null,"ProductStatus":"C","SaltName":"Calcium + Phosphorus + Multivitamin + Leptadenia Reticulata + Asparagus Racemosus + Mulimineral","DosageForm":"Bolus","LastMRP":"30.00","ExpiryDate":"2027-09-30","AvgRating":null,"NumRating":null,"ProductImageUrl":"https:\/\/asset.sastasundar.com\/incom\/images\/product\/thumb\/Calcimust-MLD-1776150121-10161692-a.jpg"}],"Otc":[]}};
         if (rsp['status'] == 200) {
           let TempsaveForLaterMedList = [
             ...rsp['data']['Med'],
@@ -2097,7 +2098,7 @@ export class PlaceOrderComponent implements OnInit {
         this.selectedAddress = this.addressList.find(
           (adr: any) => adr.AddressId == id
         );
-        this.checkBilling(this.selectedAddress.AddressId);
+        this.checkBilling(this.selectedAddress?.AddressId);
         this.paymentFlg = true;
       } else {
         this.selectedAddress = '';

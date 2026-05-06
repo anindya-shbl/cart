@@ -47,8 +47,8 @@ export class CommonService {
   public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
   public catalogUrl = 'http://192.168.5.236:8003/';
   // public searchUrl = 'http://192.168.5.192:4200/'; // local search
-  public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
-  // public searchUrl = 'https://search.sastasundar.com/'; // live
+  // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
+  public searchUrl = 'https://search.sastasundar.com/'; // live
   public ImageUrl = 'https://res.sastasundar.com/';
   public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
   constructor(private http: HttpClient, private cookieService: CookieService) { }
@@ -381,6 +381,11 @@ export class CommonService {
   }
 
   getAlternativeList(url: any) {
+    let gettUrl = this.searchUrl + url;
+    return this.http.get(gettUrl);
+  }
+
+  getProductInfo(url: any) {
     let gettUrl = this.searchUrl + url;
     return this.http.get(gettUrl);
   }

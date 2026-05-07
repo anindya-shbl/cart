@@ -1227,9 +1227,12 @@ export class PlaceOrderComponent implements OnInit {
       })
         .subscribe((results: any) => {
           // this.autoApplyXplorPoint();
+          // results = {
+          //   "error": "Invalid Data Found. Qty and UnitOfferPrice must be > 0, Product id must be valid"
+          // };
           if (
             results['applicablePromos'] != '' &&
-            results['applicablePromos'].length > 0
+            results['applicablePromos']?.length > 0
           ) {
             for (let i = 0; i < results['applicablePromos'].length; i++) {
               let promo = {

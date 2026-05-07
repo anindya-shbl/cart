@@ -1014,7 +1014,7 @@ export class PlaceOrderComponent implements OnInit {
     );
   }
 
-  getSaveForLaterList() {
+  getSaveForLaterList_bkp070526() {
     this.saveForLaterList = [];
     this.CommonService.getSavedForLaterList('cart/saveForLaterList').subscribe(
       (rsp: any) => {
@@ -1068,7 +1068,17 @@ export class PlaceOrderComponent implements OnInit {
       }
     );
   }
-
+getSaveForLaterList() {
+    this.saveForLaterList = [];
+    this.CommonService.getSavedForLaterList('cart/saveForLaterListNew').subscribe(
+      (rsp: any) => {       
+        if (rsp['status'] == 200) {
+          this.saveForLaterList = rsp['data'];
+        }
+      this.resetRemove();
+      }
+    );
+  }
   removeDuplicates(array: any[], key: string): any[] {
     return array.filter((item, index, self) =>
       index === self.findIndex((obj) => obj[key] === item[key])

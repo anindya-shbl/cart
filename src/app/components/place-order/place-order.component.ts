@@ -608,7 +608,7 @@ export class PlaceOrderComponent implements OnInit {
         //reversed condition to see the html part
         // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
           rqsPrsPet.push(itemObj);
-        } else {
+         } else if(d['PrescriptionOTC'] == 'P') {
           // Human product
           rqsPrsHuman.push(itemObj);
         }

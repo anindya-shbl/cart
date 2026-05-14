@@ -1073,7 +1073,7 @@ getSaveForLaterList() {
     this.CommonService.getSavedForLaterList('cart/saveForLaterListNew').subscribe(
       (rsp: any) => {       
         if (rsp['status'] == 200) {
-          this.saveForLaterList = rsp['data'];
+          this.saveForLaterList = [...rsp['data']['Med'], ...rsp['data']['Otc']];
         }
       this.resetRemove();
       }

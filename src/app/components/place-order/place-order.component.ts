@@ -986,7 +986,7 @@ export class PlaceOrderComponent implements OnInit {
 
   getSaveForLaterList() {
     this.saveForLaterList = [];
-    this.CommonService.getSavedForLaterList('cart/saveForLaterList').subscribe(
+    this.CommonService.getSavedForLaterList('cart/saveForLaterListNew').subscribe(
       (rsp: any) => {
         if (rsp['status'] == 200) {
           let TempsaveForLaterMedList = [

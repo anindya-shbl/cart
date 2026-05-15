@@ -1065,7 +1065,7 @@ export class PlaceOrderComponent implements OnInit {
     // console.log(id);
     this.saveForLaterList = this.saveForLaterList.map((obj: any) => {
       if (obj.ProductId === id) {
-        let qty = obj.ProductCount - 1;
+        let qty = parseInt(obj.ProductCount) - 1;
         if (qty > 0) {
           return { ...obj, ProductCount: qty };
         } else {
@@ -1080,7 +1080,7 @@ export class PlaceOrderComponent implements OnInit {
   savedItemsPlus(id: any) {
     this.saveForLaterList = this.saveForLaterList.map((obj: any) => {
       if (obj.ProductId === id) {
-        let qty = obj.ProductCount + 1;
+        let qty = parseInt(obj.ProductCount) + 1;
         return { ...obj, ProductCount: qty };
       }
       return obj;

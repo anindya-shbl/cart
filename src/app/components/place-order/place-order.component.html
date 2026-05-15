@@ -166,7 +166,7 @@
                               <div *ngIf="item.IsOutOfStock != 'Y'" class="d-flex align-items-end flex-column">
                                 <div class="qtyBtn mb-4">
                                   <span (click)="savedItemsMinus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-minus"></i></span>
-                                  <span class="px-2">{{ item.ProductCount }}</span>
+                                  <span class="px-2">{{ item.ProductCount | number:'1.0-0'}}</span>
                                   <span (click)="savedItemsPlus(item.ProductId)" class="px-2 hvr"><i class="fa-solid fa-plus"></i></span>
                                 </div>
                                 <div class="text-success hvr fs-3 mb-2" (click)="moveToCart(item, item.ProductCount)">Move To cart<i class="fa-solid fa-cart-plus ms-2 fs-2"></i></div>

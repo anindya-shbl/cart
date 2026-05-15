@@ -71,7 +71,7 @@
                               <div class="d-flex flex-wrap align-items-baseline">
                                 <div class="fs-6 fw-6 me-2">{{item.OfferPrice | currency : "INR"}}</div>
                                 <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-secondary text-decoration-line-through me-2">{{ item.ItemBasePrice | currency : "INR"}} </div>
-                                <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}% Off</div>
+                                <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent>0?item.DiscountPercent+'% Off':''}}</div>
                                 <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
                               </div>
                             </div>
@@ -153,7 +153,7 @@
                                 <div *ngIf="item.IsOutOfStock != 'Y' && item.ProductStatus == 'C'" class="d-flex flex-wrap align-items-baseline">
                                   <div class="fs-6 fw-6 me-2">{{ item.MRP | currency : "INR" }}</div>
                                   <div *ngIf="item.MRP > item.OfferPrice" class="text-secondary text-decoration-line-through me-2">{{ item.OfferPrice | currency : "INR" }} </div>
-                                  <div *ngIf="item.MRP > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}% Off</div>
+                                  <div *ngIf="item.MRP > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent>0?item.DiscountPercent+'% Off':''}}</div>
                                   <div class="fs-3 text-secondary">(* Inclusive of all taxes)</div>
                                 </div>
                                 <div *ngIf="item.IsOutOfStock == 'Y' && item.ProductStatus == 'C'" class="d-inline border rounded px-3 py-2 bg-body-secondary"> Out of stock</div>

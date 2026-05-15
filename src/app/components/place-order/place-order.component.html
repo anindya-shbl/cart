@@ -1606,7 +1606,7 @@
                 <div class="copm-dv border-bottom-0">
                   <div class="alter-add justify-content-between w-100 ">
                     <span (click)="cartAddMinus(altrPrdcts.ProductId)" class="fs-6 fw-6 px-3">-</span>
-                    <span>{{ altrPrdcts.ItemQuantity }}</span>
+                    <span>{{ altrPrdcts.ItemQuantity | number:'1.0-0'}}</span>
                     <span (click)="cartAddPlus(altrPrdcts.ProductId)" class="fs-6 fw-6 px-3">+</span>
                   </div>
                 </div>

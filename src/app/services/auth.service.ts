@@ -9,13 +9,13 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
 
     // ============= live ==========================
-    public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
+    // public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
 
     // ============= development ==========================
     // public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
 
     // ============= local ==========================
-    // public webcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/webapi/';
+    public webcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/webapi/';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
         // this.autoSignIn();

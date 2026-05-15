@@ -54,8 +54,8 @@
                               </ng-container>
                               <span class="Rx-icon" *ngIf="item.PrescriptionOTC == 'P'"><i class="fa-solid fa-prescription"></i></span>
                             </div>
-                            <div class="w-100 px-3">
-                              <div class="fs-5 fw-5 mb-2" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)">
+                            <div class="w-100 px-3" (click)="CommonService.getProductDetailsPageURL(item.ProductId, item.ProductName, item.PrescriptionOTC)" style="cursor: pointer;">
+                              <div class="fs-5 fw-5 mb-2">
                                 {{ item.ProductName }}
                               </div>
                               <div class="text-body-tertiary mb-1 fs-3">{{ item.MfgGroup }}</div>

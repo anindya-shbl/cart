@@ -438,7 +438,7 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-      cartData = {"result":{"header":{"CartAmount":"50.00","CartItemDiscount":"9.00","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"+0.00","CartVal":"74.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"N","CourierCharge":null,"ShippingAddressId":"2472733","BillingAddressId":"2472733","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":".00","SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":"41.00","GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"41.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":"29.00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"175549","ProductName":"Crepe Bandage (B.S) SQ 5 cm x 4 m","ProdName":"Crepe Bandage (B.S) SQ","ProductUnit":"Pack","ProductImage":"Crepe-Bandage-BS-SQ-1669638556-10005253-1.jpg","PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":"50.00","ItemQuantity":"1.00","ItemDiscount":"9.00","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"41.00","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"41.00","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":"Surgical","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000132","BatchNo":"02112025","ExpiryDate":"2028-10-31","MfgDate":"2025-11-30","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":1,"IsTBProduct":null,"DosageForm":null,"Brand":"Bengal Surgicals","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"1.00","Unit":"Piece","IsVirtual":0,"DiscountPercent":18}],"itemlist2":{"175549":[{"ProductId":"175549","ProductName":"Crepe Bandage (B.S) SQ 5 cm x 4 m","ProdName":"Crepe Bandage (B.S) SQ","ProductUnit":"Pack","ProductImage":"Crepe-Bandage-BS-SQ-1669638556-10005253-1.jpg","PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":"50.00","ItemQuantity":"1.00","ItemDiscount":"9.00","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"41.00","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"41.00","IsConsiderable":1,"DosageAlert":0,"DosageRestriction":null,"IsCourierable":null,"CustomProductName":null,"InteractiveModule":"Surgical","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000132","BatchNo":"02112025","ExpiryDate":"2028-10-31","MfgDate":"2025-11-30","CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":1,"IsTBProduct":null,"DosageForm":null,"Brand":"Bengal Surgicals","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":"1.00","Unit":"Piece","IsVirtual":0,"DiscountPercent":18}]},"lotproductIds":["175549"]}};
+      cartData = {"result":{"header":{"CartAmount":1269.5,"CartItemDiscount":95.8,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.3,"CartVal":1176,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3299501,"BillingAddressId":3299501,"AreaId":72373,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":913.18,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":0,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":1174,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":12936,"ProductName":"Cal 360 Tab (10 Tab)","ProdName":"Cal 360","ProductUnit":"STRIP","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":52.5,"ItemQuantity":1,"ItemDiscount":7.88,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":44.62,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":44.63,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000013,"BatchNo":"AS4946","ExpiryDate":"2028-08-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1305466,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Calpol","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":6749,"ProductName":"Cal Aid Cap (10 Cap)","ProdName":"Cal Aid","ProductUnit":"STRIP","ProductImage":"cal-aid-1406056794-10006544.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":127,"ItemQuantity":2,"ItemDiscount":38.1,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":215.9,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":107.95,"IsConsiderable":1,"DosageAlert":3,"DosageRestriction":4,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000011,"BatchNo":"CAA3B4A2","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1305466,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"S1","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":2,"SellerInventoryCnt":0},{"ProductId":16752,"ProductName":"Horlicks Classic Malt Refill Powder 500 gm","ProdName":"Horlicks Classic Malt Refill Powder","ProductUnit":"Pack","ProductImage":"Horlicks-Classic-Malt-Refill-Powder-1778150860-10016114-a.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":191,"ItemQuantity":2,"ItemDiscount":38.2,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":343.8,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":171.9,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000006,"BatchNo":"02BB1B","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":null,"SellerId":11010,"IsSellerInventory":0,"IsVirtual":1,"DiscountPercent":10,"NotSellerInventoryCnt":2,"SellerInventoryCnt":0},{"ProductId":3954,"ProductName":"Horlicks Junior (1) Original Refill Powder 500 gm","ProdName":"Horlicks Junior (1) Original Refill Powder","ProductUnit":"PHILE","ProductImage":"HORLICKS-JUNIOR-1-REFIL-1418102975-10004466.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":206,"ItemQuantity":1,"ItemDiscount":4.12,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":201.88,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":201.88,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000001,"BatchNo":"03BA3B","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Horlicks","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":2,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":13140,"ProductName":"Horlicks Mother Vanilla Refill Powder 500 gm","ProdName":"Horlicks Mother Vanilla Refill Powder","ProductUnit":"PHILE","ProductImage":"HORLICKS-MOTHER-VANILLA-REF-1418880404-10013113.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":375,"ItemQuantity":1,"ItemDiscount":7.5,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":367.5,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":367.5,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000001,"BatchNo":"23ZA1Z","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Horlicks","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":2,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"itemlist2":{"12936":[{"ProductId":12936,"ProductName":"Cal 360 Tab (10 Tab)","ProdName":"Cal 360","ProductUnit":"STRIP","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":52.5,"ItemQuantity":1,"ItemDiscount":7.88,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":44.62,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":44.63,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000013,"BatchNo":"AS4946","ExpiryDate":"2028-08-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1305466,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":"Calpol","IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"6749":[{"ProductId":6749,"ProductName":"Cal Aid Cap (10 Cap)","ProdName":"Cal Aid","ProductUnit":"STRIP","ProductImage":"cal-aid-1406056794-10006544.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":127,"ItemQuantity":2,"ItemDiscount":38.1,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":215.9,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":107.95,"IsConsiderable":1,"DosageAlert":3,"DosageRestriction":4,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000011,"BatchNo":"CAA3B4A2","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1305466,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"S1","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Capsule","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":2,"SellerInventoryCnt":0}],"16752":[{"ProductId":16752,"ProductName":"Horlicks Classic Malt Refill Powder 500 gm","ProdName":"Horlicks Classic Malt Refill Powder","ProductUnit":"Pack","ProductImage":"Horlicks-Classic-Malt-Refill-Powder-1778150860-10016114-a.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":191,"ItemQuantity":2,"ItemDiscount":38.2,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":343.8,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":171.9,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000006,"BatchNo":"02BB1B","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":null,"SellerId":11010,"IsSellerInventory":0,"IsVirtual":1,"DiscountPercent":10,"NotSellerInventoryCnt":2,"SellerInventoryCnt":0}],"3954":[{"ProductId":3954,"ProductName":"Horlicks Junior (1) Original Refill Powder 500 gm","ProdName":"Horlicks Junior (1) Original Refill Powder","ProductUnit":"PHILE","ProductImage":"HORLICKS-JUNIOR-1-REFIL-1418102975-10004466.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":206,"ItemQuantity":1,"ItemDiscount":4.12,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":201.88,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":201.88,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000001,"BatchNo":"03BA3B","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Horlicks","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":2,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"13140":[{"ProductId":13140,"ProductName":"Horlicks Mother Vanilla Refill Powder 500 gm","ProdName":"Horlicks Mother Vanilla Refill Powder","ProductUnit":"PHILE","ProductImage":"HORLICKS-MOTHER-VANILLA-REF-1418880404-10013113.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":375,"ItemQuantity":1,"ItemDiscount":7.5,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":367.5,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":367.5,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":2,"IsCourierable":0,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000001,"BatchNo":"23ZA1Z","ExpiryDate":"2025-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":"Horlicks","IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Horlicks","SellerId":11010,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":2,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}]},"lotproductIds":[12936,6749,16752,3954,13140]}};
 
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
@@ -494,7 +494,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
-      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":"50.00","CartItemDiscount":"9.00","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"+0.00","CartVal":"74.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"N","CourierCharge":null,"ShippingAddressId":"2472733","BillingAddressId":"2472733","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":".00","SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":"41.00","GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"41.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":"29.00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Paras Medicos","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":"2472733","BillingAddressId":"2472733","result":{"header":[{"CartAmount":"50.00","CartItemDiscount":"9.00","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"+0.00","CartVal":"74.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"N","CourierCharge":null,"ShippingAddressId":"2472733","BillingAddressId":"2472733","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":".00","SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":"41.00","GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"41.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":"29.00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Paras Medicos"}],"coupons":[]}};
+      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":1269.5,"CartItemDiscount":95.8,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.3,"CartVal":1176,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3299501,"BillingAddressId":3299501,"AreaId":72373,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":913.18,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":0,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":1174,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3299501,"BillingAddressId":3299501,"result":{"header":[{"CartAmount":1269.5,"CartItemDiscount":95.8,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.3,"CartVal":1176,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3299501,"BillingAddressId":3299501,"AreaId":72373,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":913.18,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":0,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":1174,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"test HB"}],"coupons":[]}};
 
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
@@ -3243,154 +3243,11 @@ getHB_Details() {
   }
 
 getCFHApplicableAmt() {
-    let MobileNo = this.CommonService.Mobile;
-    // let MobileNo = 7777777777; // for testing purpose
+    // let MobileNo = this.CommonService.Mobile;
+    let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHApplicableAmt(`cfh/get_cfh_applicable_amt?search=${MobileNo}`).subscribe((res: any) => {
-      res = {
-    "status": 200,
-    "msg": "Success",
-    "data": {
-        "TotalCartAmount": 309,
-        "TotalJitoTransactionAmount": 153.56,
-        "TotalJitoTransactionAmount_o": 153.56,
-        "JitoItemsBreakdown": [
-            {
-                "ProductId": 12936,
-                "PKLotId": 10000011,
-                "ItemQty": 1,
-                "BatchNo": "AS4929",
-                "ItemBasePrice": 44.62,
-                "ProportionalCONVIENCEFEE": 0.29,
-                "PROPORTIONALSAMLLORDERFEE": 0,
-                "PROPORTIONALCOUPONDISCOUNT": 0,
-                "JitoTransactionAmount2": 44.908802588996764,
-                "JitoTransactionAmount": 44.91,
-                "ProductName": "Cal 360",
-                "DisplayName": "Cal 360 Tab (10 Tab)",
-                "ISJitoGeneric": 0
-            },
-            {
-                "ProductId": 6749,
-                "PKLotId": 10000011,
-                "ItemQty": 1,
-                "BatchNo": "CAA3B4A2",
-                "ItemBasePrice": 107.95,
-                "ProportionalCONVIENCEFEE": 0.7,
-                "PROPORTIONALSAMLLORDERFEE": 0,
-                "PROPORTIONALCOUPONDISCOUNT": 0,
-                "JitoTransactionAmount2": 108.64870550161812,
-                "JitoTransactionAmount": 108.65,
-                "ProductName": "Cal Aid",
-                "DisplayName": "Cal Aid Cap (10 Cap)",
-                "ISJitoGeneric": 0
-            }
-        ],
-        "NonjitoItemsBreakdown": [
-            {
-                "ProductId": 11723,
-                "PKLotId": 10000008,
-                "ItemQty": 1,
-                "BatchNo": "MFT1404",
-                "ItemBasePrice": 51,
-                "ProportionalCONVIENCEFEE": 0.33,
-                "PROPORTIONALSAMLLORDERFEE": 0,
-                "PROPORTIONALCOUPONDISCOUNT": 0,
-                "NonJitoTransactionAmount": 51.33,
-                "ProductName": "Mext F",
-                "DisplayName": "Mext F 7.5 mg Tab (28 Tab)",
-                "ISJitoGeneric": 0
-            },
-            {
-                "ProductId": 5546,
-                "PKLotId": 10000006,
-                "ItemQty": 1,
-                "BatchNo": 37401271,
-                "ItemBasePrice": 103.75,
-                "ProportionalCONVIENCEFEE": 0.67,
-                "PROPORTIONALSAMLLORDERFEE": 0,
-                "PROPORTIONALCOUPONDISCOUNT": 0,
-                "NonJitoTransactionAmount": 104.42,
-                "ProductName": "Diabecon DS Tab",
-                "DisplayName": "Diabecon DS Tab (60 Tab)",
-                "ISJitoGeneric": 0
-            }
-        ],
-        "NonTotalJitoTransactionAmount": 155.75,
-        "cartheader": {
-            "CartAmount": 364.5,
-            "CartItemDiscount": 57.18,
-            "PromoDiscount": 0,
-            "CouponDiscount": 0,
-            "ShippingCharge": 0,
-            "RoundOfVal": -0.32,
-            "CartVal": 309,
-            "OrderPromoID": null,
-            "PromoDesc": null,
-            "CouponPromoId": null,
-            "CouponPromoDesc": null,
-            "NeedToAttachPrescription": "Y",
-            "CourierCharge": null,
-            "ShippingAddressId": 3581423,
-            "BillingAddressId": 3581423,
-            "AreaId": null,
-            "GroupPromoDiscount": null,
-            "IsRedeemable": "N",
-            "CanCOD": "Y",
-            "DeliveryDelayedDay": 0,
-            "OTCBillAmount": 103.75,
-            "SSCurrencyValue": 0,
-            "ApplicationType": "N",
-            "Iscourierable": "N",
-            "EwalletValue": null,
-            "RedeemableSSCur": 0,
-            "WarehouseId": 1,
-            "IsPanIndia": 0,
-            "AppliedCouponCode": null,
-            "OTCMEDBillAmount": 0,
-            "GiftCardAmount": 0,
-            "LapseAmt": 0,
-            "MedDiscPercent": null,
-            "IsDeliveryChargeWaivedOff": 0,
-            "CartValForDeliveryCharge": 307,
-            "IsLocalCourierable": 0,
-            "SubscriptionId": null,
-            "SubscriptionDiscount": null,
-            "IsOutStation": null,
-            "ShippingAddress": "Innovation Tower,Kolkata,West Bengal - 700156",
-            "BillingAddress": "Innovation Tower,Kolkata,West Bengal - 700156",
-            "PrescriptionId": null,
-            "FilePath": null,
-            "AppVersion": null,
-            "IsPrescriptionUploaded": 0,
-            "RestrictedProduct": "N",
-            "ConvienceFee": 2,
-            "ExpressDeliveryCharge": 0,
-            "IsPetCarePrescriptionUploaded": 0,
-            "NeedToAttachPetCarePrescription": "Y",
-            "jito_card_balance": 500
-        },
-        "beneficiary_summary": {
-            "BeneficiaryId": 162,
-            "searched_beneficiary_remaining_balance": 500,
-            "jito_remaining_balance": 500,
-            "non_jito_remaining_balance": 1000
-        },
-        "beneficiary_summary2": {
-            "status": "success",
-            "message": "Beneficiary summary retrieved successfully",
-            "data": {
-                "BeneficiaryId": 162,
-                "searched_beneficiary_remaining_balance": 1500,
-                "jito_remaining_balance": 500,
-                "non_jito_remaining_balance": 1000
-            },
-            "error": null
-        },
-        "applicable_for_all_products": 0,
-        "deduction_amount": 153.56
-    }
-};
+      res = {"status":200,"msg":"Success","data":{"TotalCartAmount":1176,"TotalJitoTransactionAmount":260.963,"TotalJitoTransactionAmount_o":260.963,"JitoItemsBreakdown":[{"ProductId":12936,"PKLotId":10000013,"ItemQty":1,"BatchNo":"AS4946","ItemBasePrice_original":52.5,"discount":7.88,"ItemBasePrice":44.62,"ProportionalCONVIENCEFEE":0.076,"ProportionalCONVIENCEFEE2":0.076,"ProportionalCONVIENCEFEE1":0.07588435374149659,"PROPORTIONALSAMLLORDERFEE":0,"PROPORTIONALCOUPONDISCOUNT":0,"JitoTransactionAmount2":44.69588435374149,"JitoTransactionAmount":44.696,"ProductName":"Cal 360","DisplayName":"Cal 360 Tab (10 Tab)","ISJitoGeneric":0},{"ProductId":6749,"PKLotId":10000011,"ItemQty":2,"BatchNo":"CAA3B4A2","ItemBasePrice_original":127,"discount":38.1,"ItemBasePrice":215.9,"ProportionalCONVIENCEFEE":0.367,"ProportionalCONVIENCEFEE2":0.367,"ProportionalCONVIENCEFEE1":0.36717687074829936,"PROPORTIONALSAMLLORDERFEE":0,"PROPORTIONALCOUPONDISCOUNT":0,"JitoTransactionAmount2":216.2671768707483,"JitoTransactionAmount":216.267,"ProductName":"Cal Aid","DisplayName":"Cal Aid Cap (10 Cap)","ISJitoGeneric":0}],"NonjitoItemsBreakdown":[{"ProductId":16752,"PKLotId":10000006,"ItemQty":2,"BatchNo":"02BB1B","ItemBasePrice":343.8,"ProportionalCONVIENCEFEE":0.585,"PROPORTIONALSAMLLORDERFEE":0,"PROPORTIONALCOUPONDISCOUNT":0,"NonJitoTransactionAmount":344.385,"ProductName":"Horlicks Classic Malt Refill Powder","DisplayName":"Horlicks Classic Malt Refill Powder 500 gm","ISJitoGeneric":0},{"ProductId":3954,"PKLotId":10000001,"ItemQty":1,"BatchNo":"03BA3B","ItemBasePrice":201.88,"ProportionalCONVIENCEFEE":0.343,"PROPORTIONALSAMLLORDERFEE":0,"PROPORTIONALCOUPONDISCOUNT":0,"NonJitoTransactionAmount":202.223,"ProductName":"Horlicks Junior (1) Original Refill Powder","DisplayName":"Horlicks Junior (1) Original Refill Powder 500 gm","ISJitoGeneric":0},{"ProductId":13140,"PKLotId":10000001,"ItemQty":1,"BatchNo":"23ZA1Z","ItemBasePrice":367.5,"ProportionalCONVIENCEFEE":0.625,"PROPORTIONALSAMLLORDERFEE":0,"PROPORTIONALCOUPONDISCOUNT":0,"NonJitoTransactionAmount":368.125,"ProductName":"Horlicks Mother Vanilla Refill Powder","DisplayName":"Horlicks Mother Vanilla Refill Powder 500 gm","ISJitoGeneric":0}],"NonTotalJitoTransactionAmount":914.733,"cartheader":{"CartAmount":1269.5,"CartItemDiscount":95.8,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.3,"CartVal":1176,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3299501,"BillingAddressId":3299501,"AreaId":72373,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":913.18,"SSCurrencyValue":0,"ApplicationType":"N","Iscourierable":"N","EwalletValue":null,"RedeemableSSCur":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"OTCMEDBillAmount":0,"GiftCardAmount":0,"LapseAmt":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":1174,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsOutStation":1,"ShippingAddress":"tollygunj karunamoyee lane,kolkata,Himachal Pradesh - 700156","BillingAddress":"tollygunj karunamoyee lane,kolkata,Himachal Pradesh - 700156","PrescriptionId":null,"FilePath":null,"AppVersion":null,"IsPrescriptionUploaded":1,"RestrictedProduct":"N","ConvienceFee":2,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","jito_card_balance":500},"beneficiary_summary":{"BeneficiaryId":162,"searched_beneficiary_remaining_balance":500,"jito_remaining_balance":500,"non_jito_remaining_balance":0},"beneficiary_summary2":{"status":"success","message":"Beneficiary summary retrieved successfully","data":{"BeneficiaryId":162,"searched_beneficiary_remaining_balance":500,"jito_remaining_balance":500,"non_jito_remaining_balance":0},"error":null},"applicable_for_all_products":0,"deduction_amount":260.963}};
       if (res && res.status == 200) {
         this.jitoItems = res.data.JitoItemsBreakdown;
         this.nonJitoItems = res.data.NonjitoItemsBreakdown;

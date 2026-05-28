@@ -2840,6 +2840,10 @@ getHB_Details() {
         }
         if (this.useCardBalance == true) {
           fd.append('user_gift_card', '1');
+          if(!this.forAllProducts)  
+            fd.append('is_jito','1');
+          else
+            fd.append('is_jito','0');
         } else {
           fd.append('user_gift_card', '0');
         }
@@ -2909,6 +2913,10 @@ getHB_Details() {
       }
       if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        if(!this.forAllProducts)  
+            fd.append('is_jito','1');
+          else
+            fd.append('is_jito','0');
       } else {
         fd.append('user_gift_card', '0');
       }
@@ -2965,6 +2973,10 @@ getHB_Details() {
       fd.append('WalletAmount', '0');
       if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        if(!this.forAllProducts)  
+            fd.append('is_jito','1');
+          else
+            fd.append('is_jito','0');
       } else {
         fd.append('user_gift_card', '0');
       }
@@ -3001,6 +3013,8 @@ getHB_Details() {
   }
 
   processDgPay(data: any) {
+    console.log(data);
+    console.log(this.useCardBalance);
     this.msgText = '';
     this.spinner.show();
     let fd = new FormData();
@@ -3030,6 +3044,10 @@ getHB_Details() {
     // }
      if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        if(!this.forAllProducts)  
+            fd.append('is_jito','1');
+          else
+            fd.append('is_jito','0');
       } else {
         fd.append('user_gift_card', '0');
       }

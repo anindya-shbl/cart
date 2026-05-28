@@ -161,7 +161,7 @@ export class PlaceOrderComponent implements OnInit {
   jitoItems: any;
   nonJitoItems: any;
   forAllProducts!: number;
-  deduction:number=0;
+  deduction:any=0;
   itemsBreakDown:boolean = false;
   total_non_jito_transaction_amount:number = 0;
   uniqueDataMed: any[] = [];
@@ -2715,6 +2715,7 @@ getHB_Details() {
         }
         if (this.useCardBalance == true) {
           fd.append('user_gift_card', '1');
+          fd.append('deduction_amount',this.deduction);
           if(!this.forAllProducts)  
             fd.append('is_jito','1');
           else
@@ -2783,6 +2784,7 @@ getHB_Details() {
       }
       if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        fd.append('deduction_amount',this.deduction);
         if(!this.forAllProducts)  
             fd.append('is_jito','1');
           else
@@ -2838,6 +2840,7 @@ getHB_Details() {
       fd.append('WalletAmount', '0');
       if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        fd.append('deduction_amount',this.deduction);
         if(!this.forAllProducts)  
             fd.append('is_jito','1');
           else
@@ -2904,6 +2907,7 @@ getHB_Details() {
     // }
      if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
+        fd.append('deduction_amount',this.deduction);
         if(!this.forAllProducts)  
             fd.append('is_jito','1');
           else
@@ -2965,7 +2969,7 @@ getHB_Details() {
         this.msgText = response['StatusMsg'];
         this.open.nativeElement.click();
         this.spinner.hide();
-        this.refundWallet();
+        // this.refundWallet();
       }
     });
   }
@@ -3072,7 +3076,7 @@ getHB_Details() {
           this.msgText = 'Unable to process your request, Please try after some time';
           this.open.nativeElement.click();
           this.spinner.hide();
-          this.refundWallet();
+          // this.refundWallet();
         }
       })
     });
@@ -3081,7 +3085,7 @@ getHB_Details() {
       // alert('Transaction cancelled.');
       this.msgText = 'Transaction cancelled. Unable to process your request';
       this.open.nativeElement.click();
-      this.refundWallet();
+      // this.refundWallet();
     });
 
     const razorpay = new Razorpay(options);

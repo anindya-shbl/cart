@@ -848,26 +848,20 @@
                         </div>
                       </div>
                     }
-
-
-                    <div *ngIf="useCardBalance" class="border rounded p-3 mb-3 bg-light-subtle">
+                    <div *ngIf="!forAllProducts && useCardBalance && cardBalance>0" class="border rounded p-3 mb-3 bg-light-subtle">
                       <div class="mb-2 fw-6">Payment Breakdown</div>
                       <div class="d-flex justify-content-between align-items-center mb-1 fs-3 text-secondary">
                         <div>Order Amount</div>
                         <div>{{headerDetails.CartVal | currency : "INR"}}</div>
                       </div>
-                      <div class="d-flex justify-content-between align-items-center pb-2 fs-3 text-success">
-                       
-                        <!-- <div>Using CFH card</div> -->
-                        <!-- <div *ngIf="cardBalance < headerDetails.CartVal">{{cardBalance | currency : "INR"}}</div>
-                        <div *ngIf="cardBalance >= headerDetails.CartVal">{{headerDetails.CartVal | currency : "INR"}}</div> -->
-                         @if(forAllProducts && deduction > 0){
+                      <div *ngif="cardBalance > 0 && deduction > 0" class="d-flex justify-content-between align-items-center pb-2 fs-3 text-success">
+                         @if(forAllProducts){
                           <div>Using CFH card</div>
                          }
                         @else if(!forAllProducts && jitoItems?.length>0 && deduction > 0){
                           <div>Using Jito Health card</div>
                         }
-                        <div *ngIf="deduction">-{{deduction | currency : "INR"}}</div>
+                        <div>{{deduction | currency:'INR':'symbol':'1.2-2'}}</div>
                       </div>
                       @if(!forAllProducts && jitoItems?.length>0){ 
                         <div class="specialty-box">

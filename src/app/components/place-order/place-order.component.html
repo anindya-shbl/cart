@@ -785,7 +785,7 @@
                     </div>
 
                     <div class="rounded p-3 mb-3" style="background-color: #e3fbf0;">
-                      <div class="d-flex justify-content-between align-items-center">
+                      <div *ngIf="cardBalance>0" class="d-flex justify-content-between align-items-center">
                         <div>
                           <div class="mb-2 fs-3 text-secondary">Available Balance</div>
                           <div class="fs-6 fw-6">{{cardBalance | currency : "INR"}}</div>

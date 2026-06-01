@@ -3389,6 +3389,10 @@ getCFHApplicableAmt() {
         this.spinner.hide();
       } else {
         // this.isloading = false;
+        this.forAllProducts = 1;  // Reset to default when beneficiary not found
+        this.deduction = 0;
+        this.jitoItems = [];
+        this.nonJitoItems = [];
         this.spinner.hide();
       }
     })

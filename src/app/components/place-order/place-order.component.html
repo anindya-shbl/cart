@@ -791,17 +791,17 @@
                           <div class="fs-6 fw-6">{{cardBalance | currency : "INR"}}</div>
                         </div>
                         <div>
-                          <div *ngIf="cardBalance>0" class="hvr" style="font-size: 34px;" (click)="useCardToggle()">
+                          <div *ngIf="cardBalance>0 && deduction > 0" class="hvr" style="font-size: 34px;" (click)="useCardToggle()">
                             <i *ngIf="useCardBalance" class="fa-solid fa-toggle-on text-success"></i>
                             <i *ngIf="!useCardBalance" class="fa-solid fa-toggle-off text-secondary"></i>
                           </div>
 
-                          <div *ngIf="cardBalance==0" class="hvr" style="font-size: 34px;">
+                          <div *ngIf="!deduction" class="hvr" style="font-size: 34px;">
                             <i class="fa-solid fa-toggle-off text-secondary"></i>
                           </div>
                         </div>
                       </div>
-                      @if(!forAllProducts){
+                      @if(!forAllProducts && deduction > 0){
                         <div (click)="showItemsBreakDown()" class="pe-2 pt-3 mt-3 border-top" *ngIf="useCardBalance">
                           <b class="SeeHide" style="cursor: pointer;">
                             {{ itemsBreakDown ? 'Hide items breakdown':'See which items qualify' }} 
@@ -812,7 +812,7 @@
                     </div>
                     <!-- End -->
 
-                    @if(!forAllProducts){
+                    @if(!forAllProducts && deduction > 0){
                       <div [@slideInOut]="(useCardBalance && itemsBreakDown) ? 'in' : 'out'" class="items-breakdown border rounded-4 mb-3 bgOFF overflow-hidden">
                         <div *ngIf="jitoItems?.length>0" class="p-3 border-bottom successBG">
                           <div class="HeadingBlock">

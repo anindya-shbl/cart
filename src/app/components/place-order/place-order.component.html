@@ -318,7 +318,7 @@
                           *ngIf="ReqPrscListHuman.length > 1">s</span> in your cart require prescription</div>
                       <ul class="mb-1">
                         <ng-container *ngFor="let name of slicedArrayHuman">
-                          <li class="text-secondary">{{ name.ProductName }}</li>
+                          <li class="text-secondary">{{ name.ProductName }} @if(name.Speciality=='128'){ <span class="specialty-rx">Specialty RX</span> }</li>
                         </ng-container>
                       </ul>
                       <div class="viewBtn">
@@ -332,7 +332,14 @@
                         </ul>
                       </div>
                     </div>
-
+                    @if(specialistFlag > 0){                       
+                        <div class="specialty-box">
+                          <div class="title"><i class="fa fa-exclamation-circle"></i> &nbsp; Specialty Prescription Required for {{specialistFlag}} item(s)</div>
+                          <div class="description">
+                            A prescription from a registered specialist (Endocrinologists, Internal Medicine specialists or Cardiologists.) is required for GLP-1 drugs as per the recent CDSCO guidelines.
+                          </div>
+                        </div>
+                      }
                     <div class="d-flex align-items-center flex-wrap">
                       <div *ngIf="savedPrscList.length > 0" class="me-3 mb-2">
                         <button type="button" class="prsc-btn" data-bs-toggle="modal" data-bs-target="#savedPrsc"

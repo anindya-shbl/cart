@@ -814,7 +814,7 @@
                           <div *ngFor="let item of jitoItems" class="problock mb-2">
                             <div class="d-flex align-item-center justify-content-between">
                               <span class="t14 tcolor">{{item.ProductName}}</span>
-                              <b class="Pcolor">{{item.JitoTransactionAmount2 | number:'1.2-2'|currency:'INR'}}</b>
+                              <b class="Pcolor">{{item.ItemBasePrice | number:'1.2-2'|currency:'INR'}}</b>
                             </div>
                             <span class="tagProduct">{{ item.ISJitoGeneric>0 ?'Generic Medicine':'Jito Product' }}</span>      
                           </div>
@@ -823,7 +823,7 @@
                           </div>
                         </div>
 
-                        <div *ngIf="nonJitoItems.length>0" class="p-3">
+                        <!-- <div *ngIf="nonJitoItems.length>0" class="p-3">
                           <div class="HeadingBlock">
                             <span class="RoundI"><i class="icon-lab_cross"></i></span>Not eligible for Jito Health Card
                           </div>
@@ -837,7 +837,7 @@
                           <div class="d-flex align-item-center justify-content-between FooterBlockNonJito ">
                             <span>Pay Onine or via COD</span> <span>-{{ total_non_jito_transaction_amount | currency : "INR"}}</span>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                     }
                     <div *ngIf="!forAllProducts && useCardBalance && cardBalance>0 && deduction > 0" class="border rounded p-3 mb-3 bg-light-subtle">

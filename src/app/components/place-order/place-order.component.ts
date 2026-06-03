@@ -417,6 +417,7 @@ export class PlaceOrderComponent implements OnInit {
             this.getExpectedDeliveryDate();
             this.getCFHApplicableAmt();
             this.getCFHBalance('add');
+            this.setCFHBalance();
           }
 
           this.processLocalCart(this.finalList);
@@ -465,6 +466,7 @@ export class PlaceOrderComponent implements OnInit {
           this.getExpectedDeliveryDate();
           this.getCFHApplicableAmt();
           this.getCFHBalance('add');
+          this.setCFHBalance();
         }
         this.processLocalCart(this.finalList);
       }

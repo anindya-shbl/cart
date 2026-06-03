@@ -128,7 +128,7 @@ export class PlaceOrderComponent implements OnInit {
 
   cardBalance: any = 0;
   useCardBalance: boolean = false;
-  cfhBalance: any = 0;
+  cfhBalance: any = 0; // the balance amount in the cart after applying cfh or before applying cfh
   showCFHBlock: boolean = false;  // Add this property
   specialistFlag: number = 0; // Counter for specialty prescription items
 
@@ -967,7 +967,7 @@ export class PlaceOrderComponent implements OnInit {
 
     this.CommonService.cartSynch('cart/cart_sync', fd).subscribe(
       (response: any) => {
-        // console.log(response);
+        console.log('when cart sync with redis',response);
       }
     );
   }

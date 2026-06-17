@@ -415,12 +415,15 @@ export class PlaceOrderComponent implements OnInit {
             this.getCustomerCoupon();
             this.getSaveForLaterList();
             this.getExpectedDeliveryDate();
-            this.getCFHApplicableAmt();
-            this.getCFHBalance('add');
-            this.setCFHBalance();
+            // this.getCFHApplicableAmt();
+            // this.getCFHBalance('add');
+            // this.setCFHBalance();
           }
 
           this.processLocalCart(this.finalList);
+          this.getCFHApplicableAmt();
+          this.getCFHBalance('add');
+          this.setCFHBalance();
         }
       });
   }

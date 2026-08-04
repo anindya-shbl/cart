@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
 
     // ============= local ==========================
     public webcartUrl = 'http://192.168.5.236/sspl_com/index.php/webapi/';
+    public catalogurl = 'http://192.168.5.236:8003/';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
         // this.autoSignIn();
@@ -62,4 +64,58 @@ export class AuthService {
         // postDataVal.append('hasTestLogin', environment.hasTestLogin);
         return this.http.post(postUrl, postDataVal);
     }
+
+    /**
+   * Get address from coordinates (Reverse Geocoding)
+   */
+  getAddressFromCoordinates(latitude: number, longitude: number): Observable<any> {
+    const params = new HttpParams()
+      .set('lat', latitude.toString())
+      .set('lng', longitude.toString());
+
+    return this.http.get(`${this.catalogurl}/geocode-latlng`, { params });
+  }
+
+  /**
+   * Search address by pincode
+   */
+  searchByPincode(pincode: string): Observable<any> {
+    // const params = new HttpParams().set('input', pincode);
+
+    // return this.http.get(`${this.catalogurl}/search-pincode`, { params });
+    return this.http.post(`${this.catalogurl}/places`, { input: pincode });
+  }
+
+  /**
+   * Search address by area/city name
+   */
+  searchByArea(searchText: string): Observable<any> {
+    // const params = new HttpParams().set('input', searchText);
+
+    // return this.http.get(`${this.catalogurl}/search-area`, { params });
+    return this.http.post(`${this.catalogurl}/places`, { input: searchText });
+  }
+
+  /**
+   * Get place details from place ID
+   */
+  getPlaceDetails(placeId: string): Observable<any> {
+    // const params = new HttpParams().set('placeId', placeId);
+
+    return this.http.get(`${this.catalogurl}/place-details/${placeId}`, {  });
+  }
+
+  /**
+   * Save address to user profile
+   */
+  saveAddress(address: any): Observable<any> {
+    return this.http.post(`${this.catalogurl}/save`, address);
+  }
+
+  /**
+   * Get saved addresses
+   */
+  getSavedAddresses(): Observable<any> {
+    return this.http.get(`${this.catalogurl}/list`);
+  }
 }

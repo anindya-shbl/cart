@@ -21,6 +21,7 @@ import { GenericComponent } from './components/generic/generic.component';
 import { SaltCompositionComponent } from './components/salt-composition/salt-composition.component';
 import { JitoCompareComponent } from './components/jito-compare/jito-compare.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MapLocationPickerComponent } from './components/map-location-picker/map-location-picker.component';
 
 // const dbConfig: DBConfig  = {
 //   name: 'ssht_webDB',
@@ -76,6 +77,7 @@ const dbConfig: DBConfig = {
     SaltCompositionComponent,
     JitoCompareComponent,
     NotFoundComponent,
+    MapLocationPickerComponent
   ],
   imports: [
     BrowserModule,

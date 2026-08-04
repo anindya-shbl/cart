@@ -1,0 +1,94 @@
+<!-- map-location-picker.component.html -->
+<div *ngIf="isOpen" class="modal-overlay" (click)="closeDialog()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    
+    <!-- Header -->
+    <div class="modal-header">
+      <button class="close-btn" (click)="closeDialog()">←</button>
+      <h2>Select Delivery Location</h2>
+    </div>
+
+    <!-- Unified Search Box -->
+    <div class="search-box">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          placeholder="Search for an address, area, or pincode"
+          [(ngModel)]="searchInput"
+          (input)="onSearchChange()"
+          class="search-input"
+        />
+      </div>
+      
+      <!-- Predictions/Results List -->
+      <div *ngIf="predictions.length > 0" class="predictions-list">
+        <div
+          *ngFor="let prediction of predictions"
+          (click)="selectPrediction(prediction)"
+          class="prediction-item"
+          [class.error-item]="prediction.isError"
+        >
+          <span class="icon" [class.error-icon]="prediction.isError">
+            {{ prediction.isError ? '⚠️' : '📍' }}
+          </span>
+          <div>
+            
+            <div class="main">{{ prediction.main_text }}</div>
+            <div class="secondary">{{ prediction.secondary_text }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Searching Indicator -->
+      <div *ngIf="isSearching" class="searching-indicator">
+        <span class="spinner"></span> Searching...
+      </div>
+    </div>
+
+    <!-- Map Info -->
+    <div class="map-info">
+      <p class="map-instruction">📍 Place the pin at the exact delivery location</p>
+    </div>
+
+    <!-- Map Container -->
+    <div #mapContainer class="map-container">
+      <!-- Loading spinner -->
+      <div *ngIf="mapLoading" class="map-loading">
+        <div class="spinner"></div>
+        <p>Loading map...</p>
+      </div>
+
+      <!-- Error message -->
+      <div *ngIf="mapError" class="map-error">
+        <p>{{ mapError }}</p>
+      </div>
+    </div>
+
+    <!-- Selected Location Display (Above Button) -->
+    <div *ngIf="selectedLocation" class="location-display-card">
+      <div class="location-display-header">
+        <span class="location-pin-icon">📍</span>
+        <h3 class="location-display-name">{{ selectedLocation.name }}</h3>
+      </div>
+      <p class="location-display-address">
+        {{ selectedLocation.formatted_address }}
+      </p>
+      <p class="location-display-coords">
+        <span class="coord-label">Latitude:</span> {{ selectedLocation.latitude | number:'1.6-6' }} | 
+        <span class="coord-label">Longitude:</span> {{ selectedLocation.longitude | number:'1.6-6' }}
+      </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="modal-footer">
+      <button 
+        (click)="confirmLocation()" 
+        class="confirm-btn"
+        [disabled]="!selectedLocation"
+      >
+        Confirm & Proceed
+      </button>
+    </div>
+  </div>
+</div>

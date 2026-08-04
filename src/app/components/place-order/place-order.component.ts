@@ -132,6 +132,29 @@ export class PlaceOrderComponent implements OnInit {
   showCFHBlock: boolean = false;  // Add this property
   specialistFlag: number = 0; // Counter for specialty prescription items
 
+  isMapSelected: boolean = false;
+
+  isMapOpen: boolean = false;
+
+  openAddressMap() {
+    console.log('Opening map for address selection...');
+    this.isMapOpen = true;
+    // this.actionType = 'ADD';
+    // console.log('type', this.actionType);
+  }
+
+  onLocationSelected(location: any) {
+    this.selectedAddress = location;
+    console.log('Selected Address:', location);
+    // Send to backend
+    this.addAdrType2('shipping', 'add')
+  }
+
+  onMapClosed() {
+     console.log('Closing map for address selection...');
+    this.isMapOpen = false;
+  }
+
   @ViewChild('closebutton') closebutton: any;
   @ViewChild('closeAdssBtn') closeAdssBtn: any;
   @ViewChild('addShipping') addShipping: any;
@@ -2025,6 +2048,19 @@ getSaveForLaterList() {
   //     this.addressList = data['result']['rs']['allAddressData'];
   //   })
   // }
+  addAdrType2(adrType: any, action: any) {
+    // console.log(adrType);
+    this.addressType = adrType;
+    if (action == 'add') {
+      this.AddressForm.patchValue({ Pincode: this.CommonService.PinCode });
+      if (this.addressType == 'shipping') {
+        this.checkServiceArea();
+        this.newaddress.nativeElement.click();
+      } else {
+        this.newaddress.nativeElement.click();
+      }
+    }
+  }
 
   addAdrType(adrType: any, action: any) {
     // console.log(adrType);

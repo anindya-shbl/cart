@@ -537,7 +537,9 @@
                     <!-- <ng-container *ngIf="selectedAddress != ''"> -->
                     <div class="d-flex p-3 pb-0">
                       <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3"
-                        (click)="addAdrType('shipping', 'add')">Add New</button>
+                        (click)="openAddressMap()">Add New</button>
+                      <!-- <button #addShipping type="button" class="qtyBtn fw-5 justify-content-center me-3"
+                        (click)="addAdrType('shipping', 'add')">Add New</button> -->
                       <button *ngIf="addressList.length > 0" type="button" class="qtyBtn fw-5 justify-content-center"
                         data-bs-toggle="modal" data-bs-target="#savedaddress"
                         (click)="addAdrType('shipping', 'change')">Change <i
@@ -1222,6 +1224,10 @@
   </div>
 </div>
 
+ <!-- Map Component -->
+    <app-map-location-picker [isOpen]="isMapOpen" (locationSelected)="onLocationSelected($event)" (closed)="onMapClosed()"></app-map-location-picker>
+    <!-- Map Component -->
+     
 <!-- ==========Moadls & popup========== -->
 <button #open type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#general"></button>
 <button #otst type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#outOfStock"></button>

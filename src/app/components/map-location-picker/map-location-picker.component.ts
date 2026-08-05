@@ -1,8 +1,7 @@
 declare const google: any;
 
 import { Component, OnInit, ViewChild, Output, EventEmitter, Input, ChangeDetectorRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-// import { AuthService } from '../../services/address.service';
-import { AuthService } from '../../services/auth.service';
+import { AddressService } from '../../services/address.service';
 import { GeolocationService, CurrentLocation } from '../../services/geolocation.service';
 
 @Component({
@@ -32,7 +31,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private AuthService: AuthService,
+    private addressService: AddressService,
     private geolocationService: GeolocationService
   ) {}
 
@@ -98,6 +97,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
         zoomControl: true
       };
 
+      console.log('Map container:', this.mapContainer.nativeElement);
       this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
 
       this.marker = new google.maps.Marker({
@@ -151,7 +151,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
     this.isSearching = true;
     this.predictions = [];
 
-    this.AuthService.searchByPincode(pincode).subscribe({
+    this.addressService.searchByPincode(pincode).subscribe({
       next: (response: any) => {
         this.isSearching = false;
 
@@ -213,7 +213,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
   searchByArea(searchText: string): void {
     this.isSearching = true;
 
-    this.AuthService.searchByArea(searchText).subscribe({
+    this.addressService.searchByArea(searchText).subscribe({
       next: (response: any) => {
         this.isSearching = false;
         // console.log(response.responseCode);
@@ -291,7 +291,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
 
   // Get place details via API
   getPlaceDetails(placeId: string): void {
-    this.AuthService.getPlaceDetails(placeId).subscribe({
+    this.addressService.getPlaceDetails(placeId).subscribe({
       next: (response: any) => {
         // console.log('Place details response:', response);
         if (response.responseCode == 200 && response.data) {
@@ -346,26 +346,35 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
 
   // Get address from coordinates via API
   getAddressFromCoordinates(latitude: number, longitude: number): void {
-    this.AuthService.getAddressFromCoordinates(latitude, longitude).subscribe({
+    this.addressService.getAddressFromCoordinates(latitude, longitude).subscribe({
       next: (response: any) => {
         if (response.responseCode == 200 && response.data) {
-          let addressComponents:any[] = response.data.results[0].address_components;
-          let pincode = addressComponents.find(comp => comp.types.includes('postal_code'))?.long_name || '';
-          let street_number = addressComponents.find(comp => comp.types.includes('street_number'))?.long_name || '';
-          let route = addressComponents.find(comp => comp.types.includes('route'))?.long_name || '';
-          let sublocality_level_2 = addressComponents.find(comp => comp.types.includes('sublocality_level_2'))?.long_name || '';
-          let sublocality_level_1 = addressComponents.find(comp => comp.types.includes('sublocality_level_1'))?.long_name || '';
-          let locality = addressComponents.find(comp => comp.types.includes('locality'))?.long_name || '';
-          let administrative_area_level_2 = addressComponents.find(comp => comp.types.includes('administrative_area_level_2'))?.long_name || '';
-          let administrative_area_level_1 = addressComponents.find(comp => comp.types.includes('administrative_area_level_1'))?.long_name || '';
-          let country = addressComponents.find(comp => comp.types.includes('country'))?.long_name || '';
-          this.selectedLocation = {
-            pincode: pincode,
-            addresss: street_number + ' ' + route + ', ' + sublocality_level_2 + ', ' + sublocality_level_1 + ', ' + locality + ', ' + administrative_area_level_2 + ', ' + administrative_area_level_1 + ', ' + country,
-            formatted_address: response.data.results[0].formatted_address,
-            latitude: response.data.results[0].geometry.location.lat,
-            longitude: response.data.results[0].geometry.location.lng,
-            name: sublocality_level_2
+          // let addressComponents:any[] = response.data.results[0].address_components;
+          // let pincode = addressComponents.find(comp => comp.types.includes('postal_code'))?.long_name || '';
+          // let street_number = addressComponents.find(comp => comp.types.includes('street_number'))?.long_name || '';
+          // let route = addressComponents.find(comp => comp.types.includes('route'))?.long_name || '';
+          // let sublocality_level_2 = addressComponents.find(comp => comp.types.includes('sublocality_level_2'))?.long_name || '';
+          // let sublocality_level_1 = addressComponents.find(comp => comp.types.includes('sublocality_level_1'))?.long_name || '';
+          // let locality = addressComponents.find(comp => comp.types.includes('locality'))?.long_name || '';
+          // let administrative_area_level_2 = addressComponents.find(comp => comp.types.includes('administrative_area_level_2'))?.long_name || '';
+          // let administrative_area_level_1 = addressComponents.find(comp => comp.types.includes('administrative_area_level_1'))?.long_name || '';
+          // let country = addressComponents.find(comp => comp.types.includes('country'))?.long_name || '';
+          // this.selectedLocation = {
+          //   pincode: pincode,
+          //   addresss: street_number + ' ' + route + ', ' + sublocality_level_2 + ', ' + sublocality_level_1 + ', ' + locality + ', ' + administrative_area_level_2 + ', ' + administrative_area_level_1 + ', ' + country,
+          //   formatted_address: response.data.results[0].formatted_address,
+          //   latitude: response.data.results[0].geometry.location.lat,
+          //   longitude: response.data.results[0].geometry.location.lng,
+          //   name: sublocality_level_2
+          // };
+
+           this.selectedLocation = {
+            pincode: response.data.pinCode,
+            addresss: response.data.address,
+            formatted_address: response.data.addressName,
+            latitude: response.data.lat,
+            longitude: response.data.lng,
+            name: response.data.addressName
           };
           this.cdr.detectChanges();
         }

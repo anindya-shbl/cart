@@ -2052,7 +2052,10 @@ getSaveForLaterList() {
     // console.log(adrType);
     this.addressType = adrType;
     if (action == 'add') {
-      this.AddressForm.patchValue({ Pincode: this.CommonService.PinCode });
+      this.AddressForm.patchValue({ 
+        Pincode: this.selectedAddress.pincode,
+        Addressline: this.selectedAddress.addresss,
+      });
       if (this.addressType == 'shipping') {
         this.checkServiceArea();
         this.newaddress.nativeElement.click();

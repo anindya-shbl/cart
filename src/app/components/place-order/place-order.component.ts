@@ -94,6 +94,7 @@ export class PlaceOrderComponent implements OnInit {
   addressList: any = [];
   state_city: any = '';
   selectedAddress: any = '';
+  preSelectedAddress: any = '';
   billingAddress: any = '';
   billingCheck: boolean = false;
   addressType: any = '';
@@ -144,7 +145,8 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   onLocationSelected(location: any) {
-    this.selectedAddress = location;
+    // this.selectedAddress = location;
+    this.preSelectedAddress = location;
     console.log('Selected Address:', location);
     // Send to backend
     this.addAdrType2('shipping', 'add')
@@ -1993,8 +1995,8 @@ export class PlaceOrderComponent implements OnInit {
     this.addressType = adrType;
     if (action == 'add') {
       this.AddressForm.patchValue({ 
-        Pincode: this.selectedAddress.pincode,
-        Addressline: this.selectedAddress.addresss,
+        Pincode: this.preSelectedAddress.pincode,
+        Addressline: this.preSelectedAddress.addresss,
       });
       if (this.addressType == 'shipping') {
         this.checkServiceArea();

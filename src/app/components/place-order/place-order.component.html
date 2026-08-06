@@ -1578,7 +1578,7 @@
               </div>
 
               <div class="col-lg-6 mb-3">
-                <label for="MobileNo" class="form-label">Mobile No</label>
+                <label for="MobileNo" class="form-label">Mobile No<span class="text-danger">*</span></label>
                 <div style="width: 100%">
                   <input type="phone" class="form-control" maxlength="10" id="MobileNo" formControlName="MobileNo"
                     pattern="[5-9]{1}[0-9]{9}" (keypress)="numCheck($event)" />
@@ -1634,9 +1634,10 @@
 
             <div class="mb-3">
               <label for="Addressline" class="form-label">Address <span class="text-danger">*</span></label>
-              <div>
+              <div style="position: relative">
                 <textarea type="text" rows="3" class="form-control" id="Addressline"
-                  formControlName="Addressline"></textarea>
+                  formControlName="Addressline" [readOnly]="isMapSelected"></textarea>
+                  <button class="btnSubmitOutline" style="position: absolute; top: 25px; right: 15px; z-index: 2; padding: 6px 15px; font-size: 13px;" type="button"  (click)="changeLocation()">Change</button>
                 <div *ngIf="submitted && f['Addressline'].errors" class="error-text">
                   <small *ngIf="f['Addressline'].errors['required']" style="color: #f00; font-size: 11px">* Address is
                     required</small>

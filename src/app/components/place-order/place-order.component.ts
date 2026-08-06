@@ -2050,6 +2050,12 @@ getSaveForLaterList() {
   //     this.addressList = data['result']['rs']['allAddressData'];
   //   })
   // }
+  changeLocation() {
+    // this.openAddressMap();
+    this.isMapOpen = true;
+    this.closeAdssBtn.nativeElement.click(); 
+    this.onReset();
+  }
   addAdrType2(adrType: any, action: any) {
     // console.log(adrType);
     this.addressType = adrType;
@@ -2064,6 +2070,7 @@ getSaveForLaterList() {
       } else {
         this.newaddress.nativeElement.click();
       }
+      this.isMapSelected = true;
     }
   }
 

@@ -257,6 +257,7 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
 
   selectPrediction(prediction: any): void {
     // Skip if it's an error prediction
+    console.log('Selected prediction:', prediction);
     if (prediction.isError) {
       return;
     }
@@ -267,9 +268,18 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
     // If we already have coordinates from the search response, use them
     if (prediction.latitude && prediction.longitude) {
       this.placeMarkerByCoordinates(prediction.latitude, prediction.longitude);
-
+      let custom_formatted_address = prediction.addressComponents.filter(
+        (component: any) => {
+          const hasLocalityType = component.types.includes('locality');
+          const hasStateType = component.types.includes('administrative_area_level_1');
+          const hasCountryType = component.types.includes('country');
+          return hasLocalityType || hasStateType || hasCountryType;
+        }
+      ).map((comp: any) => comp.longText).join(', ');
+      console.log('custom_formatted_address:', custom_formatted_address);
       this.selectedLocation = {
-        address: prediction.formatted_address || prediction.description,
+        address: prediction.formatted_address || custom_formatted_address,
+        formatted_address: prediction.formatted_address || custom_formatted_address,
         latitude: prediction.latitude,
         longitude: prediction.longitude,
         name: prediction.name || 'Selected Location'
@@ -312,20 +322,21 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
           // console.log("addressComponents",addressComponents);
           let pincode = addressComponents.find(comp => comp.types.includes('postal_code'))?.longText || '';
           let street_number = addressComponents.find(comp => comp.types.includes('premise'))?.longText || '';
-          let administrative_area_level_3 = addressComponents.find(comp => comp.types.includes('administrative_area_level_3'))?.longText || '';
-          let sublocality_level_2 = addressComponents.find(comp => comp.types.includes('sublocality_level_2'))?.longText || '';
-          let sublocality_level_1 = addressComponents.find(comp => comp.types.includes('sublocality_level_1'))?.longText || '';
-          let locality = addressComponents.find(comp => comp.types.includes('locality'))?.longText || '';
-          let administrative_area_level_2 = addressComponents.find(comp => comp.types.includes('administrative_area_level_2'))?.longText || '';
+          // let administrative_area_level_3 = addressComponents.find(comp => comp.types.includes('administrative_area_level_3'))?.longText || '';
+          // let sublocality_level_2 = addressComponents.find(comp => comp.types.includes('sublocality_level_2'))?.longText || '';
+          // let sublocality_level_1 = addressComponents.find(comp => comp.types.includes('sublocality_level_1'))?.longText || '';
+          // let locality = addressComponents.find(comp => comp.types.includes('locality'))?.longText || '';
+          // let administrative_area_level_2 = addressComponents.find(comp => comp.types.includes('administrative_area_level_2'))?.longText || '';
           let administrative_area_level_1 = addressComponents.find(comp => comp.types.includes('administrative_area_level_1'))?.longText || '';
           let country = addressComponents.find(comp => comp.types.includes('country'))?.longText || '';
           let displayName = response.data.displayName?.text;
           const lat = response.data.location.latitude;
           const lng = response.data.location.longitude;
+          
           this.selectedLocation = {
             pincode: pincode,
-            addresss: street_number + ' ' + displayName + ', ' + sublocality_level_1 + ', ' + administrative_area_level_3 + ', ' + administrative_area_level_1 + ', ' + country,
-            formatted_address: response.data.formattedAddress,
+            addresss: street_number + ' ' + displayName + ', ' + administrative_area_level_1 + ', ' + country,
+            formatted_address: response.data.formattedAddress || street_number + ' ' + displayName + ', ' + administrative_area_level_1 + ', ' + country,
             latitude: response.data.location.latitude,
             longitude: response.data.location.longitude,
             name: displayName
@@ -368,14 +379,16 @@ export class MapLocationPickerComponent implements OnInit, AfterViewInit, OnChan
           //   name: sublocality_level_2
           // };
 
-           this.selectedLocation = {
+          this.selectedLocation = {
             pincode: response.data.pinCode,
             addresss: response.data.address,
-            formatted_address: response.data.addressName,
+            formatted_address: response.data.address,
             latitude: response.data.lat,
             longitude: response.data.lng,
             name: response.data.addressName
           };
+
+
           this.cdr.detectChanges();
         }
       },

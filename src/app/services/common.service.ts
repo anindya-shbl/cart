@@ -17,7 +17,7 @@ export class CommonService {
   public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
   public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
   // public catalogUrl = 'https://serv-catalog.sastasundar.com/';
-  public searchUrl = 'https://search.sastasundar.com/';
+  // public searchUrl = 'https://search.sastasundar.com/';
   public ImageUrl = 'https://asset.sastasundar.com/';
   public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
@@ -31,7 +31,7 @@ export class CommonService {
   // public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
   // public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
   // public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
-  // public searchUrl = 'https://stage-search.sastasundar.com/';
+  public searchUrl = 'https://stage-search.sastasundar.com/';
   // public ImageUrl = 'https://res.sastasundar.com/';
   // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 

@@ -16,7 +16,7 @@ export class CommonService {
   public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
   public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
   public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
-  public catalogUrl = 'https://serv-catalog.sastasundar.com/';
+  // public catalogUrl = 'https://serv-catalog.sastasundar.com/';
   public searchUrl = 'https://search.sastasundar.com/';
   public ImageUrl = 'https://asset.sastasundar.com/';
   public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
@@ -45,7 +45,7 @@ export class CommonService {
   // public onlineplaceorderUrl = 'http://192.168.5.236/sspl_com/index.php/cart/online_payment_process';
   // public codsuccessUrl = 'http://192.168.5.236/sspl_com/index.php/customercart/order_success';
   // public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
-  // public catalogUrl = 'http://192.168.5.236:8003/';
+  public catalogUrl = 'http://192.168.5.236:8003/';
   // // public searchUrl = 'http://192.168.5.192:4200/'; // local search
   // // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
   // public searchUrl = 'https://search.sastasundar.com/'; // live
@@ -434,6 +434,10 @@ export class CommonService {
   }
 
   getCFHApplicableAmt(url: any) {
+    let gettUrl = this.webcartUrl + url;
+    return this.http.get(gettUrl);
+  }
+  getLoyaltyEarnPoints(url: any) {
     let gettUrl = this.webcartUrl + url;
     return this.http.get(gettUrl);
   }

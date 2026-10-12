@@ -46,7 +46,7 @@ export class PlaceOrderComponent implements OnInit {
   selectedPrsc: any = [];
   savedPrscFile: any = [];
   prscImages: any = [];
-  
+
   // Pet prescription files (separate tracking)
   prscFilesPet: any = [];
   selectedPrscPet: any = [];
@@ -55,7 +55,7 @@ export class PlaceOrderComponent implements OnInit {
   HB_Details: any = [];
   ReqPrscList: any = [];
   slicedArray: any = [];
-  UploadedPrscList: any = []; 
+  UploadedPrscList: any = [];
   UploadedPrscListForPet: any = [];
   showImgPath: any = '';
   showMoreBtn: boolean = false;
@@ -161,9 +161,10 @@ export class PlaceOrderComponent implements OnInit {
   jitoItems: any;
   nonJitoItems: any;
   forAllProducts!: number;
-  deduction:any=0;
-  itemsBreakDown:boolean = false;
-  total_non_jito_transaction_amount:number = 0;
+  deduction: any = 0;
+  itemsBreakDown: boolean = false;
+  total_non_jito_transaction_amount: number = 0;
+  LoyaltyPointsOfCarts: any = 0;
 
   constructor(
     public CommonService: CommonService,
@@ -227,14 +228,14 @@ export class PlaceOrderComponent implements OnInit {
   configMinOrderStatus() {
     // let response: any = {"Status":"Success","minOnlinePayVal":50,"minOrderValForShippingFree":250,"minOrderValForCourierFree":750}
     this.CommonService.getMinOrderValue('cartuserapp/ConfigBaseData').subscribe((response: any) => {
-        response = {"Status":"Success","minOnlinePayVal":50,"minOrderValForShippingFree":250,"minOrderValForCourierFree":750};
-        if (response['Status'] == 'Success') {
-          this.freeShippingChage = response['minOrderValForShippingFree'];
-          this.freeCourierChage = response['minOrderValForCourierFree'];
-          this.minOnlinePayVal = parseInt(response['minOnlinePayVal']);
-          // this.router.navigate([''])
-        }
-      });
+      response = { "Status": "Success", "minOnlinePayVal": 50, "minOrderValForShippingFree": 250, "minOrderValForCourierFree": 750 };
+      if (response['Status'] == 'Success') {
+        this.freeShippingChage = response['minOrderValForShippingFree'];
+        this.freeCourierChage = response['minOrderValForCourierFree'];
+        this.minOnlinePayVal = parseInt(response['minOnlinePayVal']);
+        // this.router.navigate([''])
+      }
+    });
   }
 
   setJitoHeader() {
@@ -254,30 +255,30 @@ export class PlaceOrderComponent implements OnInit {
     fd.append('SyncType', 'L');
     this.CommonService.cartSynch('cart/cart_sync', fd).subscribe((response: any) => {
       // debugger;
-      response = {"status":200,"message":"List provided.","data":{"List":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","DosageRestriction":0,"OfferPrice":"176.30","Discount":18,"Iscourierable":1,"ProductImage":"","MRP":215,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000844","MfgGroup":"Pharmed Limited","ExpiryDate":"2028-05-31","Brand":"Pharmed Limited","DosageForm":"tablet.","ProductCount":"1","RefOrderId":""}],"Time":"1791783876"}};
-        if (response && response['data']['List'] != undefined) {
-          let RedishData = response['data']['List'];
-          if (RedishData.length > 0) {
-            this.CompareCartResult(response);
-          } else {
-            // if(cartSynchCall == "0"){
-            //   this.getAllRecord();
-            // }else{
-            //   this.getCartDetails()
-            // }
-            this.getAllRecord();
-          }
+      response = { "status": 200, "message": "List provided.", "data": { "List": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "DosageRestriction": 0, "OfferPrice": "176.30", "Discount": 18, "Iscourierable": 1, "ProductImage": "", "MRP": 215, "IsGiftProduct": 0, "PrescriptionOTC": "P", "WarehouseId": "1", "PKLotId": "10000844", "MfgGroup": "Pharmed Limited", "ExpiryDate": "2028-05-31", "Brand": "Pharmed Limited", "DosageForm": "tablet.", "ProductCount": "1", "RefOrderId": "" }], "Time": "1791783876" } };
+      if (response && response['data']['List'] != undefined) {
+        let RedishData = response['data']['List'];
+        if (RedishData.length > 0) {
+          this.CompareCartResult(response);
+        } else {
+          // if(cartSynchCall == "0"){
+          //   this.getAllRecord();
+          // }else{
+          //   this.getCartDetails()
+          // }
+          this.getAllRecord();
         }
-        // else {
-        //   // needs to handle
-        // }
+      }
+      // else {
+      //   // needs to handle
+      // }
     });
   }
 
   getAllRecord() {
     let cartSynchCall = this.cookieService.get('cartsynch');
     this.dbService.getAll('cartItems').subscribe((res: any) => {
-      // console.log('all records', res);
+      console.log('all records', res);
       this.allItemsList = res;
 
       if (localStorage.getItem('toReplace') != null && localStorage.getItem('toReplace') != undefined && localStorage.getItem('toReplace') != '') {
@@ -291,7 +292,7 @@ export class PlaceOrderComponent implements OnInit {
       } else {
         this.allReplaceArr = [];
       }
-
+      this.getLoyaltyEarnPointsAgainstCart();
       this.cartViewWebEngage(this.allItemsList);
       if (this.allItemsList.length > 0) {
         if (cartSynchCall == '0') {
@@ -372,59 +373,61 @@ export class PlaceOrderComponent implements OnInit {
     fd.append('pincode', this.CommonService.PinCode.toString());
     // debugger
     this.CommonService.checkoutCart('cartapp/checkoutincart', fd).subscribe((cartData: any) => {
-        // console.log('in cart synch', cartData);
-        if (cartData) {
-          let d: Date = new Date();
-          this.cookieService.set(
-            'cartsynch',
-            '1',
-            d.getTime() + 86400 * 30,
-            '/'
-          );
-          // this.outOfStockProducts = cartData['result']['outOfStockProducts'];
-          this.finalList = cartData['result']['itemlist'];
+      // console.log('in cart synch', cartData);
+      if (cartData) {
+        let d: Date = new Date();
+        this.cookieService.set(
+          'cartsynch',
+          '1',
+          d.getTime() + 86400 * 30,
+          '/'
+        );
+        // this.outOfStockProducts = cartData['result']['outOfStockProducts'];
+        this.finalList = cartData['result']['itemlist'];
 
-          let outofStock = cartData['result']['outOfStockProducts'];
-          // console.log('final', this.finalList);
-          // console.log('outofstock', this.outOfStockList);
-          // console.log('headerDetails', this.headerDetails);
-          // console.log('couponList', this.couponList);
+        let outofStock = cartData['result']['outOfStockProducts'];
+        // console.log('final', this.finalList);
+        // console.log('outofstock', this.outOfStockList);
+        // console.log('headerDetails', this.headerDetails);
+        // console.log('couponList', this.couponList);
 
-          if (outofStock.length > 0) {
-            outofStock.forEach((d: any) => {
-              let obj = this.allItemsList.find(
-                (o: any) => o['ProductId'] === d['ProductId']
-              );
-              // console.log(obj)
-              this.outOfStockList.push({
-                ProductId: obj['ProductId'],
-                ProductName: obj['ProductName'],
-              });
-              this.removeWebEngage(obj)
+        if (outofStock.length > 0) {
+          outofStock.forEach((d: any) => {
+            let obj = this.allItemsList.find(
+              (o: any) => o['ProductId'] === d['ProductId']
+            );
+            // console.log(obj)
+            this.outOfStockList.push({
+              ProductId: obj['ProductId'],
+              ProductName: obj['ProductName'],
             });
-            // this.spinner.hide();
-            // console.log('out of stock', this.outOfStockList);
-            // outofStockModal()
-            this.otst.nativeElement.click();
-          }
-
-          if (this.finalList.length > 0) {
-            // this.headerDetails = cartData['result']['header'];
-            // this.couponList = cartData['result']['coupons'];
-            if (this.CommonService.ConfigData.IsDisplayGenericProduct == 1) {
-              this.getAletnatives();
-            }
-            this.processOrderDetails();
-            this.getReqPrsMeds(this.finalList);
-            this.updateRedish(this.finalList);
-            this.getCustomerCoupon();
-            this.getSaveForLaterList();
-            this.getExpectedDeliveryDate();
-          }
-
-          this.processLocalCart(this.finalList);
+            this.removeWebEngage(obj)
+          });
+          // this.spinner.hide();
+          // console.log('out of stock', this.outOfStockList);
+          // outofStockModal()
+          this.otst.nativeElement.click();
         }
-      });
+
+        if (this.finalList.length > 0) {
+          // this.headerDetails = cartData['result']['header'];
+          // this.couponList = cartData['result']['coupons'];
+          if (this.CommonService.ConfigData.IsDisplayGenericProduct == 1) {
+            this.getAletnatives();
+          }
+          this.processOrderDetails();
+          this.getReqPrsMeds(this.finalList);
+          this.updateRedish(this.finalList);
+          this.getCustomerCoupon();
+          this.getSaveForLaterList();
+          this.getExpectedDeliveryDate();
+          this.pushLoyaltyPoints();
+
+        }
+
+        this.processLocalCart(this.finalList);
+      }
+    });
   }
 
   getCartDetails() {
@@ -436,10 +439,10 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-      cartData = {"result":{"header":{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":null,"RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","ProdName":"Cal 123","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"215.00","ItemQuantity":"1.00","ItemDiscount":"38.70","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"176.30","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"176.30","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000844","BatchNo":"CALP26011","ExpiryDate":"2028-05-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"8251115","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","SellerId":null,"IsVirtual":0,"DiscountPercent":18}],"itemlist2":{"173277":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","ProdName":"Cal 123","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"215.00","ItemQuantity":"1.00","ItemDiscount":"38.70","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"176.30","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"176.30","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000844","BatchNo":"CALP26011","ExpiryDate":"2028-05-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"8251115","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","SellerId":null,"IsVirtual":0,"DiscountPercent":18}]},"lotproductIds":["173277"]}};
+      cartData = { "result": { "header": { "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": null, "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249 }, "coupons": [], "outOfStockProducts": [], "itemlist": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "ProdName": "Cal 123", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": "215.00", "ItemQuantity": "1.00", "ItemDiscount": "38.70", "CouponDiscount": ".00", "SSCurrencyValue": ".00", "ItemVal": "176.30", "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": "176.30", "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": "10000844", "BatchNo": "CALP26011", "ExpiryDate": "2028-05-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": "8251115", "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": "15.00", "Unit": "Tablet", "SellerId": null, "IsVirtual": 0, "DiscountPercent": 18 }], "itemlist2": { "173277": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "ProdName": "Cal 123", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": "215.00", "ItemQuantity": "1.00", "ItemDiscount": "38.70", "CouponDiscount": ".00", "SSCurrencyValue": ".00", "ItemVal": "176.30", "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": "176.30", "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": "10000844", "BatchNo": "CALP26011", "ExpiryDate": "2028-05-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": "8251115", "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": "15.00", "Unit": "Tablet", "SellerId": null, "IsVirtual": 0, "DiscountPercent": 18 }] }, "lotproductIds": ["173277"] } };
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
-        
+
         let outofStock = cartData['result']['outOfStockProducts'];
         if (outofStock.length > 0) {
           outofStock.forEach((d: any) => {
@@ -467,6 +470,7 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
+          this.pushLoyaltyPoints();
         }
         this.processLocalCart(this.finalList);
       }
@@ -491,7 +495,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
-      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Myjoy Pharmaceuticals Private Limited","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":"4923662","BillingAddressId":"4923662","result":{"header":[{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":null,"RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Myjoy Pharmaceuticals Private Limited"}],"coupons":[]}};
+      data = { "isAddrUpdate": 0, "header_cart_detail": [{ "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": ".00", "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "HBName": "Myjoy Pharmaceuticals Private Limited", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249, "BaseConvienceFee": 10 }], "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "result": { "header": [{ "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": null, "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "HBName": "Myjoy Pharmaceuticals Private Limited" }], "coupons": [] } };
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -516,7 +520,7 @@ export class PlaceOrderComponent implements OnInit {
         // Allow shipping only when:
         // 1. Human prescription: not needed OR successfully uploaded
         // 2. Pet prescription: not needed OR successfully uploaded
-        const allNeededPrescriptionsUploaded = 
+        const allNeededPrescriptionsUploaded =
           (!humanPrescriptionNeeded || humanPrescriptionUploaded) &&
           (!petPrescriptionNeeded || petPrescriptionUploaded);
 
@@ -533,7 +537,7 @@ export class PlaceOrderComponent implements OnInit {
           this.PrescUpldFlg = true;
           this.shippingContinue = false;
         }
-       
+
 
         if (
           this.headerDetails.CartItemDiscount != null &&
@@ -632,10 +636,10 @@ export class PlaceOrderComponent implements OnInit {
 
         // Check if it's a pet product (InteractiveModule exists and is not empty)
         if (d['InteractiveModule'] && d['InteractiveModule'] != '' && d['InteractiveModule'] == 'PetCare') {
-        //reversed condition to see the html part
-        // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
+          //reversed condition to see the html part
+          // if (d['InteractiveModule']=='' || d['InteractiveModule'] == null) {
           rqsPrsPet.push(itemObj);
-         } else if(d['PrescriptionOTC'] == 'P') {
+        } else if (d['PrescriptionOTC'] == 'P') {
           // Human product
           rqsPrsHuman.push(itemObj);
         }
@@ -646,8 +650,8 @@ export class PlaceOrderComponent implements OnInit {
     this.ReqPrscList = rqsPrsHuman;        // Keep existing for backward compatibility
     this.ReqPrscListHuman = rqsPrsHuman;
     this.ReqPrscListPet = rqsPrsPet;
-    for (let specialItem of this.ReqPrscListHuman ){
-      if(specialItem.Speciality === 128)
+    for (let specialItem of this.ReqPrscListHuman) {
+      if (specialItem.Speciality === 128)
         this.specialistFlag++;
     }
 
@@ -2474,7 +2478,7 @@ export class PlaceOrderComponent implements OnInit {
       }
     });
   }
-getHB_Details() {
+  getHB_Details() {
     let panindia = this.CommonService.IsPanIndia;
     let pincode = this.CommonService.PinCode;
     let warehouseId = this.CommonService.WHId.toString();
@@ -2585,7 +2589,7 @@ getHB_Details() {
         }
       });
 
-      this.resetPG(); 
+      this.resetPG();
     }
   }
 
@@ -2754,97 +2758,23 @@ getHB_Details() {
   //   }
   // }
   placeOrder(data: any) {
-    // console.log(data);
-    // debugger
-    this.PGROW = data;
-    this.msgText = '';
-//     if (this.isCheckedTmc == false) {
-//       this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-//       this.open.nativeElement.click();
-//     } else {
-      this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
-      if (data['Key'] == 'COD') {
-        // this.msgText = 'Processing your order do not refresh page or press back button';
-        // this.open.nativeElement.click();
-        this.msgText = '';
-        this.spinner.show();
-        let fd = new FormData();
-
-        fd.append('PaymentMethod', 'COD');
-        fd.append('EwalletUsed', '0');
-        if (this.useWallet == true) {
-          if (this.headerDetails.CartVal >= this.walletBalance) {
-            fd.append('WalletAmount', this.walletBalance);
-          } else {
-            fd.append('WalletAmount', this.headerDetails.CartVal);
-          }
-        } else {
-          fd.append('WalletAmount', '0');
-        }
-        if (this.useCardBalance == true) {
-          fd.append('user_gift_card', '1');
-          fd.append('deduction_amount',this.deduction);
-          if(!this.forAllProducts)  
-            fd.append('is_jito','1');
-          else
-            fd.append('is_jito','0');
-        } else {
-          fd.append('user_gift_card', '0');
-        }
-        if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
-          fd.append('Prescription_required', '1');
-        } else {
-          fd.append('Prescription_required', '0');
-        }
-        if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
-          fd.append('Pet_Prescription_required', '1');
-        } else {
-          fd.append('Pet_Prescription_required', '0');
-        }
-        fd.append('ShipID', this.shippingId);
-        fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
-
-        this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
-          // console.log('online_payment_process', response);
-
-          if (response['Status'] == 'Success') {
-            this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
-            this.orderSuccess(response);
-          } else {
-            this.msgText = response['StatusMsg'];
-            this.spinner.hide();
-            this.open.nativeElement.click();
-            // this.refundWallet();
-          }
-        });
-      } else {
-        // if(this.CommonService.EmailId == '' || this.CommonService.EmailId == null || this.CommonService.EmailId == undefined){
-        //   this.emailUpdate.nativeElement.click();
-        // } else {
-        this.processDgPay(data);
-        // }
-      }
-//     }
-  }
-
-  placeWalletOnly() {
-    // this.PGROW = data;
+    // console.log(data);
+    // debugger
+    this.PGROW = data;
     this.msgText = '';
-    // if (this.isCheckedTmc == false) {
-    //   this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-    //   this.open.nativeElement.click();
-    //   return;
-    // } else {
-      // Validate prescription uploads before payment
-      if (!this.validatePrescriptionUploads()) {
-        return; // Error message already shown by validation method
-      }
-      
+    //     if (this.isCheckedTmc == false) {
+    //       this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
+    //       this.open.nativeElement.click();
+    //     } else {
+    this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
+    if (data['Key'] == 'COD') {
+      // this.msgText = 'Processing your order do not refresh page or press back button';
+      // this.open.nativeElement.click();
       this.msgText = '';
       this.spinner.show();
       let fd = new FormData();
 
-      fd.append('PaymentMethod', 'EW');
+      fd.append('PaymentMethod', 'COD');
       fd.append('EwalletUsed', '0');
       if (this.useWallet == true) {
         if (this.headerDetails.CartVal >= this.walletBalance) {
@@ -2857,11 +2787,11 @@ getHB_Details() {
       }
       if (this.useCardBalance == true) {
         fd.append('user_gift_card', '1');
-        fd.append('deduction_amount',this.deduction);
-        if(!this.forAllProducts)  
-            fd.append('is_jito','1');
-          else
-            fd.append('is_jito','0');
+        fd.append('deduction_amount', this.deduction);
+        if (!this.forAllProducts)
+          fd.append('is_jito', '1');
+        else
+          fd.append('is_jito', '0');
       } else {
         fd.append('user_gift_card', '0');
       }
@@ -2878,13 +2808,11 @@ getHB_Details() {
       fd.append('ShipID', this.shippingId);
       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
-      // ========== APPEND PRESCRIPTION FILES FOR WALLET ONLY ==========
-      this.appendPrescriptionFilesToFormData(fd);
-
       this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
         // console.log('online_payment_process', response);
 
         if (response['Status'] == 'Success') {
+          this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
           this.orderSuccess(response);
         } else {
           this.msgText = response['StatusMsg'];
@@ -2893,6 +2821,82 @@ getHB_Details() {
           // this.refundWallet();
         }
       });
+    } else {
+      // if(this.CommonService.EmailId == '' || this.CommonService.EmailId == null || this.CommonService.EmailId == undefined){
+      //   this.emailUpdate.nativeElement.click();
+      // } else {
+      this.processDgPay(data);
+      // }
+    }
+    //     }
+  }
+
+  placeWalletOnly() {
+    // this.PGROW = data;
+    this.msgText = '';
+    // if (this.isCheckedTmc == false) {
+    //   this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
+    //   this.open.nativeElement.click();
+    //   return;
+    // } else {
+    // Validate prescription uploads before payment
+    if (!this.validatePrescriptionUploads()) {
+      return; // Error message already shown by validation method
+    }
+
+    this.msgText = '';
+    this.spinner.show();
+    let fd = new FormData();
+
+    fd.append('PaymentMethod', 'EW');
+    fd.append('EwalletUsed', '0');
+    if (this.useWallet == true) {
+      if (this.headerDetails.CartVal >= this.walletBalance) {
+        fd.append('WalletAmount', this.walletBalance);
+      } else {
+        fd.append('WalletAmount', this.headerDetails.CartVal);
+      }
+    } else {
+      fd.append('WalletAmount', '0');
+    }
+    if (this.useCardBalance == true) {
+      fd.append('user_gift_card', '1');
+      fd.append('deduction_amount', this.deduction);
+      if (!this.forAllProducts)
+        fd.append('is_jito', '1');
+      else
+        fd.append('is_jito', '0');
+    } else {
+      fd.append('user_gift_card', '0');
+    }
+    if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+      fd.append('Prescription_required', '1');
+    } else {
+      fd.append('Prescription_required', '0');
+    }
+    if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+      fd.append('Pet_Prescription_required', '1');
+    } else {
+      fd.append('Pet_Prescription_required', '0');
+    }
+    fd.append('ShipID', this.shippingId);
+    fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
+
+    // ========== APPEND PRESCRIPTION FILES FOR WALLET ONLY ==========
+    this.appendPrescriptionFilesToFormData(fd);
+
+    this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
+      // console.log('online_payment_process', response);
+
+      if (response['Status'] == 'Success') {
+        this.orderSuccess(response);
+      } else {
+        this.msgText = response['StatusMsg'];
+        this.spinner.hide();
+        this.open.nativeElement.click();
+        // this.refundWallet();
+      }
+    });
     // }
   }
 
@@ -2904,57 +2908,57 @@ getHB_Details() {
     //   this.open.nativeElement.click();
     //   return;
     // } else {
-      // Validate prescription uploads before payment
-      if (!this.validatePrescriptionUploads()) {
-        return; // Error message already shown by validation method
-      }
-      
-      this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
-      this.msgText = '';
-      this.spinner.show();
-      let fd = new FormData();
-      fd.append('PaymentMethod', 'COD');
-      fd.append('EwalletUsed', '0');
-      fd.append('WalletAmount', '0');
-      if (this.useCardBalance == true) {
-        fd.append('user_gift_card', '1');
-        fd.append('deduction_amount',this.deduction);
-        if(!this.forAllProducts)  
-            fd.append('is_jito','1');
-          else
-            fd.append('is_jito','0');
-      } else {
-        fd.append('user_gift_card', '0');
-      }
-      if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
-        fd.append('Prescription_required', '1');
-      } else {
-        fd.append('Prescription_required', '0');
-      }
-      if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
-        fd.append('Pet_Prescription_required', '1');
-      } else {
-        fd.append('Pet_Prescription_required', '0');
-      }
-      fd.append('ShipID', this.shippingId);
-      fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
+    // Validate prescription uploads before payment
+    if (!this.validatePrescriptionUploads()) {
+      return; // Error message already shown by validation method
+    }
 
-      // ========== APPEND PRESCRIPTION FILES ==========
-      this.appendPrescriptionFilesToFormData(fd);
+    this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
+    this.msgText = '';
+    this.spinner.show();
+    let fd = new FormData();
+    fd.append('PaymentMethod', 'COD');
+    fd.append('EwalletUsed', '0');
+    fd.append('WalletAmount', '0');
+    if (this.useCardBalance == true) {
+      fd.append('user_gift_card', '1');
+      fd.append('deduction_amount', this.deduction);
+      if (!this.forAllProducts)
+        fd.append('is_jito', '1');
+      else
+        fd.append('is_jito', '0');
+    } else {
+      fd.append('user_gift_card', '0');
+    }
+    if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
+      fd.append('Prescription_required', '1');
+    } else {
+      fd.append('Prescription_required', '0');
+    }
+    if (this.headerDetails['NeedToAttachPetCarePrescription'] == 'Y') {
+      fd.append('Pet_Prescription_required', '1');
+    } else {
+      fd.append('Pet_Prescription_required', '0');
+    }
+    fd.append('ShipID', this.shippingId);
+    fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
 
-      this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
-        // console.log('online_payment_process', response);
-        
-        if (response['Status'] == 'Success') {
-          this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
-          this.orderSuccess(response);
-        } else {
-          this.msgText = response['StatusMsg'];
-          this.spinner.hide();
-          this.open.nativeElement.click();
-          // this.refundWallet();
-        }
-      });
+    // ========== APPEND PRESCRIPTION FILES ==========
+    this.appendPrescriptionFilesToFormData(fd);
+
+    this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
+      // console.log('online_payment_process', response);
+
+      if (response['Status'] == 'Success') {
+        this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
+        this.orderSuccess(response);
+      } else {
+        this.msgText = response['StatusMsg'];
+        this.spinner.hide();
+        this.open.nativeElement.click();
+        // this.refundWallet();
+      }
+    });
     // }
   }
 
@@ -2988,16 +2992,16 @@ getHB_Details() {
     // } else {
     //   fd.append('WalletAmount', '0');
     // }
-     if (this.useCardBalance == true) {
-        fd.append('user_gift_card', '1');
-        fd.append('deduction_amount',this.deduction);
-        if(!this.forAllProducts)  
-            fd.append('is_jito','1');
-          else
-            fd.append('is_jito','0');
-      } else {
-        fd.append('user_gift_card', '0');
-      }
+    if (this.useCardBalance == true) {
+      fd.append('user_gift_card', '1');
+      fd.append('deduction_amount', this.deduction);
+      if (!this.forAllProducts)
+        fd.append('is_jito', '1');
+      else
+        fd.append('is_jito', '0');
+    } else {
+      fd.append('user_gift_card', '0');
+    }
     fd.append('WalletAmount', '0');
     fd.append('EwalletUsed', '0');
     if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
@@ -3309,7 +3313,7 @@ getHB_Details() {
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHBalance(`cfh/get_balance?search=${MobileNo}`).subscribe((res: any) => {
-      res = {"status":0,"msg":"error","data":"No beneficiary found matching the search"};
+      res = { "status": 0, "msg": "error", "data": "No beneficiary found matching the search" };
       if (res && res.status == 1) {
         this.cardBalance = res.data.searched_beneficiary_remaining_balance;
         // this.getTransationList();
@@ -3347,7 +3351,7 @@ getHB_Details() {
     }
   }
 
-  useCardToggle(){
+  useCardToggle() {
     if (this.useCardBalance == true) {
       this.useCardBalance = false;
       this.cfhBalance = this.headerDetails.CartVal;
@@ -3358,8 +3362,8 @@ getHB_Details() {
     }
   }
 
-  showItemsBreakDown(){
-      this.itemsBreakDown = !this.itemsBreakDown;
+  showItemsBreakDown() {
+    this.itemsBreakDown = !this.itemsBreakDown;
   }
 
   setCFHBalance() {
@@ -3380,12 +3384,12 @@ getHB_Details() {
     }
   }
 
-getCFHApplicableAmt() {
+  getCFHApplicableAmt() {
     let MobileNo = this.CommonService.Mobile;
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHApplicableAmt(`cfh/get_cfh_applicable_amt?search=${MobileNo}`).subscribe((res: any) => {
-      res = {"status":0,"msg":null,"data":null};
+      res = { "status": 0, "msg": null, "data": null };
       if (res && res.status == 200) {
         this.jitoItems = res.data.JitoItemsBreakdown;
         this.nonJitoItems = res.data.NonjitoItemsBreakdown;
@@ -3401,8 +3405,8 @@ getCFHApplicableAmt() {
         this.nonJitoItems = [];
         // this.spinner.hide();
       }
-       this.getCFHBalance('add');
-       this.spinner.hide();
+      this.getCFHBalance('add');
+      this.spinner.hide();
     })
   }
 
@@ -3947,6 +3951,218 @@ getCFHApplicableAmt() {
 
   viewAlter() {
     this.compareAlter = '';
+  }
+
+  getLoyaltyEarnPointsAgainstCart() {
+    console.log('getLoyaltyEarnPointsAgainstCart called');
+    this.CommonService.getLoyaltyEarnPoints('loyalty/get_loyalty_earn_points').subscribe((res: any) => {
+      res = {
+        "data": {
+          "itemList": [
+            {
+              "ProductId": 16814,
+              "ProductName": "AB Flo SR Tab (10 Tab)",
+              "ProdName": "AB Flo SR",
+              "ProductUnit": "Strip",
+              "ProductImage": null,
+              "PrescriptionOTC": "P",
+              "IsLoose": 0,
+              "ItemBasePrice": 135,
+              "ItemQuantity": 1,
+              "ItemDiscount": 20.25,
+              "CouponDiscount": 0,
+              "SSCurrencyValue": 0,
+              "ItemVal": 114.75,
+              "SourceTarget": "S",
+              "PromoId": null,
+              "PromoDesc": null,
+              "CouponPromoId": null,
+              "CouponPromoDesc": null,
+              "PrescriptionId": null,
+              "IntentQty": null,
+              "IntentRequired": null,
+              "OfferPrice": 114.75,
+              "IsConsiderable": 1,
+              "DosageAlert": null,
+              "DosageRestriction": null,
+              "IsCourierable": 1,
+              "CustomProductName": "",
+              "InteractiveModule": "PetCare",
+              "InteractiveHealthProfileId": null,
+              "InteractiveSubModule": null,
+              "PKLotId": 10000003,
+              "BatchNo": "002B4A0A",
+              "ExpiryDate": "2030-01-01",
+              "MfgDate": null,
+              "CartItemId": null,
+              "CanCOD": "Y",
+              "DeliveryDelayedDay": null,
+              "CPId": 1310371,
+              "IsRedeemable": 0,
+              "RestrictedProduct": "N",
+              "RefOrderId": null,
+              "IsNonReturnable": 0,
+              "MfgGroup": "LUPIN LTD",
+              "SaltName": "ACEBROPHYLLINE",
+              "IsVirtual": 0,
+              "Size": 10,
+              "Unit": "Tablet",
+              "IsSellerInventory": 0,
+              "IsJitoProduct": 0,
+              "SltProdCategory": 0,
+              "IsGenericProduct": 0,
+              "RedeemedPoints": null,
+              "DiscountPercent": 15,
+              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/",
+              "NotSellerInventoryCnt": 1,
+              "SellerInventoryCnt": 0,
+              "LoyaltyPoints": 2
+            },
+            {
+              "ProductId": 7724,
+              "ProductName": "Arbitel AV Tab (10 Tab)",
+              "ProdName": "Arbitel AV",
+              "ProductUnit": "STRIP",
+              "ProductImage": "arbitel-av-1406057171-10008135.jpg",
+              "PrescriptionOTC": "P",
+              "IsLoose": 0,
+              "ItemBasePrice": 117,
+              "ItemQuantity": 1,
+              "ItemDiscount": 17.55,
+              "CouponDiscount": 0,
+              "SSCurrencyValue": 0,
+              "ItemVal": 99.45,
+              "SourceTarget": "S",
+              "PromoId": null,
+              "PromoDesc": null,
+              "CouponPromoId": null,
+              "CouponPromoDesc": null,
+              "PrescriptionId": null,
+              "IntentQty": null,
+              "IntentRequired": null,
+              "OfferPrice": 99.45,
+              "IsConsiderable": 1,
+              "DosageAlert": null,
+              "DosageRestriction": null,
+              "IsCourierable": 1,
+              "CustomProductName": "",
+              "InteractiveModule": null,
+              "InteractiveHealthProfileId": null,
+              "InteractiveSubModule": null,
+              "PKLotId": 10000009,
+              "BatchNo": "AAVH0016",
+              "ExpiryDate": "2030-01-01",
+              "MfgDate": null,
+              "CartItemId": null,
+              "CanCOD": "Y",
+              "DeliveryDelayedDay": null,
+              "CPId": 1310371,
+              "IsRedeemable": 0,
+              "RestrictedProduct": "Y",
+              "RefOrderId": null,
+              "IsNonReturnable": 0,
+              "MfgGroup": "MICRO LABS LIMITED",
+              "SaltName": "TELMISARTAN + ATORVASTATIN",
+              "IsVirtual": 0,
+              "Size": 10,
+              "Unit": "Tablet",
+              "IsSellerInventory": 0,
+              "IsJitoProduct": 0,
+              "SltProdCategory": null,
+              "IsGenericProduct": 0,
+              "RedeemedPoints": null,
+              "DiscountPercent": 15,
+              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg",
+              "NotSellerInventoryCnt": 1,
+              "SellerInventoryCnt": 0,
+              "LoyaltyPoints": 2
+            },
+            {
+              "ProductId": 173277,
+              "ProductName": "Cal 123 Tablet (15 Tab)",
+              "ProdName": "Cal 123 Tablet (15 Tab)",
+              "ProductUnit": "STRIP",
+              "ProductImage": "arbitel-av-1406057171-10008135.jpg",
+              "PrescriptionOTC": "P",
+              "IsLoose": 0,
+              "ItemBasePrice": 117,
+              "ItemQuantity": 1,
+              "ItemDiscount": 17.55,
+              "CouponDiscount": 0,
+              "SSCurrencyValue": 0,
+              "ItemVal": 99.45,
+              "SourceTarget": "S",
+              "PromoId": null,
+              "PromoDesc": null,
+              "CouponPromoId": null,
+              "CouponPromoDesc": null,
+              "PrescriptionId": null,
+              "IntentQty": null,
+              "IntentRequired": null,
+              "OfferPrice": 99.45,
+              "IsConsiderable": 1,
+              "DosageAlert": null,
+              "DosageRestriction": null,
+              "IsCourierable": 1,
+              "CustomProductName": "",
+              "InteractiveModule": null,
+              "InteractiveHealthProfileId": null,
+              "InteractiveSubModule": null,
+              "PKLotId": 10000009,
+              "BatchNo": "AAVH0016",
+              "ExpiryDate": "2030-01-01",
+              "MfgDate": null,
+              "CartItemId": null,
+              "CanCOD": "Y",
+              "DeliveryDelayedDay": null,
+              "CPId": 1310371,
+              "IsRedeemable": 0,
+              "RestrictedProduct": "Y",
+              "RefOrderId": null,
+              "IsNonReturnable": 0,
+              "MfgGroup": "MICRO LABS LIMITED",
+              "SaltName": "TELMISARTAN + ATORVASTATIN",
+              "IsVirtual": 0,
+              "Size": 10,
+              "Unit": "Tablet",
+              "IsSellerInventory": 0,
+              "IsJitoProduct": 0,
+              "SltProdCategory": null,
+              "IsGenericProduct": 0,
+              "RedeemedPoints": null,
+              "DiscountPercent": 15,
+              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg",
+              "NotSellerInventoryCnt": 1,
+              "SellerInventoryCnt": 0,
+              "LoyaltyPoints": 2
+            }
+          ],
+          "TotalLoyaltyPoints": 4
+        },
+        "message": "Loyalty redemption points retrieved successfully",
+        "response_code": "1"
+      };
+      console.log(res);
+      if (res && res['response_code'] == "1") {
+        this.LoyaltyPointsOfCarts = res['data'];
+      }
+    })
+  }
+
+  pushLoyaltyPoints() {
+    console.log('before', this.finalList);
+    console.log('LoyaltyPointsOfCarts', this.LoyaltyPointsOfCarts);
+    this.finalList = this.finalList.map((item:any) => {
+      const match = this.LoyaltyPointsOfCarts.itemList.find(
+        (loyaltyItem:any) => loyaltyItem.ProductId === Number(item.ProductId)
+      );
+
+      return {
+        ...item,
+        LoyaltyPoints: match ? match.LoyaltyPoints : 0
+      };
+    });
+    console.log('after', this.finalList);
   }
 
 }

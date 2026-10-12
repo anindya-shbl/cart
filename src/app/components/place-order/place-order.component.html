@@ -87,6 +87,9 @@
                                 <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-secondary text-decoration-line-through me-2">{{ item.ItemBasePrice | currency : "INR"}} </div>
                                 <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent>0?item.DiscountPercent+'% Off':''}}</div>
                                 <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
+                                <div *ngIf="(item.LoyaltyPoints>0) && CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="mb-2">
+                        <strong class="text-success">Loyalty Points: {{item.LoyaltyPoints}}</strong>
+                      </div>
                               </div>
                             </div>
                           </div>
@@ -1189,6 +1192,14 @@
               </div>
             </div>
           </div>
+
+          <!-- ================== Loyalty Points ================== -->
+          <div *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="accordion mb-2" id="accordionExampleFive">
+            <div class="accordion-item">
+              <div class="px-4 py-3 border-bottom fw-6 fs-7" *ngIf="LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0">
+                <div>You'll earn <img src="" alt="loyalty" /> {{LoyaltyPointsOfCarts.TotalLoyaltyPoints | number:'1.0-0'}} SS Coins on this order</div>
+                <div>Credited to your SS coins wallet after delivery</div>
+              </div>
         </div>
       </div>
     </div>

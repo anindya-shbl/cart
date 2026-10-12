@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   chkloggingStatus() {
+    console.log('chkloggingStatus from login component');
     this.authService.getLogindata('users/dochkLogging').subscribe((res: any) => {
         // console.log(res);
         this.isLoading = false;

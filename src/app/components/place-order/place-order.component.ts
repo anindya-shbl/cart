@@ -227,6 +227,7 @@ export class PlaceOrderComponent implements OnInit {
   configMinOrderStatus() {
     // let response: any = {"Status":"Success","minOnlinePayVal":50,"minOrderValForShippingFree":250,"minOrderValForCourierFree":750}
     this.CommonService.getMinOrderValue('cartuserapp/ConfigBaseData').subscribe((response: any) => {
+        response = {"Status":"Success","minOnlinePayVal":50,"minOrderValForShippingFree":250,"minOrderValForCourierFree":750};
         if (response['Status'] == 'Success') {
           this.freeShippingChage = response['minOrderValForShippingFree'];
           this.freeCourierChage = response['minOrderValForCourierFree'];
@@ -252,6 +253,8 @@ export class PlaceOrderComponent implements OnInit {
     let cartSynchCall = this.cookieService.get('cartsynch');
     fd.append('SyncType', 'L');
     this.CommonService.cartSynch('cart/cart_sync', fd).subscribe((response: any) => {
+      // debugger;
+      response = {"status":200,"message":"List provided.","data":{"List":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","DosageRestriction":0,"OfferPrice":"176.30","Discount":18,"Iscourierable":1,"ProductImage":"","MRP":215,"IsGiftProduct":0,"PrescriptionOTC":"P","WarehouseId":"1","PKLotId":"10000844","MfgGroup":"Pharmed Limited","ExpiryDate":"2028-05-31","Brand":"Pharmed Limited","DosageForm":"tablet.","ProductCount":"1","RefOrderId":""}],"Time":"1791783876"}};
         if (response && response['data']['List'] != undefined) {
           let RedishData = response['data']['List'];
           if (RedishData.length > 0) {
@@ -265,6 +268,9 @@ export class PlaceOrderComponent implements OnInit {
             this.getAllRecord();
           }
         }
+        // else {
+        //   // needs to handle
+        // }
     });
   }
 
@@ -430,6 +436,7 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
+      cartData = {"result":{"header":{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":null,"RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","ProdName":"Cal 123","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"215.00","ItemQuantity":"1.00","ItemDiscount":"38.70","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"176.30","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"176.30","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000844","BatchNo":"CALP26011","ExpiryDate":"2028-05-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"8251115","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","SellerId":null,"IsVirtual":0,"DiscountPercent":18}],"itemlist2":{"173277":[{"ProductId":"173277","ProductName":"Cal 123 Tablet (15 Tab)","ProdName":"Cal 123","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":"215.00","ItemQuantity":"1.00","ItemDiscount":"38.70","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"176.30","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":"176.30","IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000844","BatchNo":"CALP26011","ExpiryDate":"2028-05-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":"8251115","IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":"15.00","Unit":"Tablet","SellerId":null,"IsVirtual":0,"DiscountPercent":18}]},"lotproductIds":["173277"]}};
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
         
@@ -484,6 +491,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
+      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":".00","RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Myjoy Pharmaceuticals Private Limited","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":"4923662","BillingAddressId":"4923662","result":{"header":[{"CartAmount":"215.00","CartItemDiscount":"38.70","PromoDiscount":".00","CouponDiscount":".00","ShippingCharge":null,"RoundOfVal":"-0.30","CartVal":"180.00","OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":"4923662","BillingAddressId":"4923662","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":null,"SSCurrencyValue":".00","WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":".00","XplorPointVal":null,"AppliedXplorPoint":".00","AppliedXplorPointVal":".00","IsShow":null,"OTCMEDBillAmount":null,"GiftCardAmount":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":"176.00","IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":0,"ConvienceFee":"4.00","SmallOrderFee":".00","IsPetCarePrescriptionUploaded":0,"NeedToAttachPetCarePrescription":"N","HBName":"Myjoy Pharmaceuticals Private Limited"}],"coupons":[]}};
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -3301,6 +3309,7 @@ getHB_Details() {
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHBalance(`cfh/get_balance?search=${MobileNo}`).subscribe((res: any) => {
+      res = {"status":0,"msg":"error","data":"No beneficiary found matching the search"};
       if (res && res.status == 1) {
         this.cardBalance = res.data.searched_beneficiary_remaining_balance;
         // this.getTransationList();
@@ -3376,6 +3385,7 @@ getCFHApplicableAmt() {
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHApplicableAmt(`cfh/get_cfh_applicable_amt?search=${MobileNo}`).subscribe((res: any) => {
+      res = {"status":0,"msg":null,"data":null};
       if (res && res.status == 200) {
         this.jitoItems = res.data.JitoItemsBreakdown;
         this.nonJitoItems = res.data.NonjitoItemsBreakdown;

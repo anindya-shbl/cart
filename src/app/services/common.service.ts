@@ -10,7 +10,7 @@ export class CommonService {
 
   // ============= live ==========================
 
-  public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
+  // public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
   public baseurl = 'https://sastasundar.com/';
   public custwebcartUrl = 'https://sastasundar.com/index.php/customercart/';
   public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
@@ -39,11 +39,11 @@ export class CommonService {
 
 
   // ============= local ==========================
-  // public webcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/webapi/';
-  // public baseurl = 'http://192.168.5.236:8081/sspl_com/';
-  // public custwebcartUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/';
-  // public onlineplaceorderUrl = 'http://192.168.5.236:8081/sspl_com/index.php/cart/online_payment_process';
-  // public codsuccessUrl = 'http://192.168.5.236:8081/sspl_com/index.php/customercart/order_success';
+  public webcartUrl = 'http://192.168.5.236/sspl_com/index.php/webapi/';
+  // public baseurl = 'http://192.168.5.236/sspl_com/';
+  // public custwebcartUrl = 'http://192.168.5.236/sspl_com/index.php/customercart/';
+  // public onlineplaceorderUrl = 'http://192.168.5.236/sspl_com/index.php/cart/online_payment_process';
+  // public codsuccessUrl = 'http://192.168.5.236/sspl_com/index.php/customercart/order_success';
   // public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
   // public catalogUrl = 'http://192.168.5.236:8003/';
   // // public searchUrl = 'http://192.168.5.192:4200/'; // local search

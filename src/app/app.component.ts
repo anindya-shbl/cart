@@ -33,7 +33,9 @@ export class AppComponent implements OnInit {
     this.loading = true;
     // this.cookieService.set('isLoggedIn', 'false');
     this.setConfig();
+    this.setLoyaltyConfig();
     this.chkloggingStatus();
+   
   }
 
   chkloggingStatus() {
@@ -117,6 +119,14 @@ export class AppComponent implements OnInit {
     this.CommonService.getConfigDetails('home/getconfig').subscribe((res: any) => {
       if(res && res['msgcode'] == 1){
         this.CommonService.ConfigData = res['results']
+      }
+    })
+  }
+
+  setLoyaltyConfig(){
+    this.CommonService.getConfigDetails('home/getLoyaltyConfig').subscribe((res: any) => {
+      if(res && res['msgcode'] == 1){
+        this.CommonService.LoyaltyConfigData = res['results']
       }
     })
   }

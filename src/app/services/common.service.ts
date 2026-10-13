@@ -74,6 +74,7 @@ export class CommonService {
 
   public Warehouse = '';
   public ConfigData: any = '';
+  public LoyaltyConfigData: any = '';
   public compareabledata: any = [];
   public isDownTime: any = 0;
   public downTimeMsg: any = '';

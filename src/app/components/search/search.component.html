@@ -69,6 +69,9 @@
                                                                 <strong *ngIf="product[MRPIndex] > 0">{{product[MRPIndex] | currency: 'INR'}}</strong>
                                                             </ng-template>
                                                             <strong *ngIf="product[DiscountPercent] > 0" class="discountprice">{{product[DiscountPercent]}}% Off</strong>
+                                                            <div *ngIf="product[LoyaltyPointsIndex] !== undefined">
+                                                                <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />&nbsp;Earn {{product[LoyaltyPointsIndex]}}
+                                                            </div>
                                                         </ng-container>
                                                     </ng-container> 
                                                     <ng-container *ngIf="product[ProductStatus]=='D'">

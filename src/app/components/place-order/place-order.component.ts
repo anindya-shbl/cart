@@ -165,6 +165,8 @@ export class PlaceOrderComponent implements OnInit {
   itemsBreakDown: boolean = false;
   total_non_jito_transaction_amount: number = 0;
   LoyaltyPointsOfCarts: any = 0;
+  loyaltyBalance:number = 0;
+  useLoyaltyCoin:boolean = false;
 
   constructor(
     public CommonService: CommonService,
@@ -185,7 +187,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('LoyaltyConfigData',this.CommonService.LoyaltyConfigData)
+    // console.log('LoyaltyConfigData',this.CommonService.LoyaltyConfigData)
     localStorage.removeItem('toReplace');
     // debugger;
     this.isLoggedIn = this.cookieService.get('isLoggedIn');
@@ -209,6 +211,9 @@ export class PlaceOrderComponent implements OnInit {
           this.getCFHBalance('get');
           // this.itemsBreakDown = true;
           this.getCFHApplicableAmt();
+        }
+        if (this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y') {
+          this.getLoyaltyBalance();
         }
       }
       // console.log("this.showCFHBlock",this.showCFHBlock);
@@ -3312,6 +3317,29 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
+   getLoyaltyBalance() {
+    this.spinner.show();
+    this.CommonService.getLoyaltyBalance('loyalty/get_loyalty_balance').subscribe((res: any) => {
+      // res = {"data":{"total_cr":25,"total_dr":0,"expired_point":0,"actual_balance":25,"soft_redeemed_points":0,"usable_balance":25,"nearby_expiry_message":"10 coins expiring on 22 Mar 2027"},"message":"Loyalty balance retrieved successfully","response_code":"1"};
+      if (res && res['response_code'] == 1) {
+        
+        this.loyaltyBalance = res['data']['usable_balance'];
+        if (this.loyaltyBalance > 0) {
+          this.useLoyaltyCoin = true;
+        } else {
+          this.useLoyaltyCoin = false;
+        }
+        this.spinner.hide();
+      } else {
+        // this.walletInfo = [];
+        this.loyaltyBalance = 0;
+        this.useLoyaltyCoin = false;
+        this.spinner.hide();
+      }
+      // console.log('wallet info',res, this.walletInfo['balance']);
+    });
+  }
+  
   setWalletUse() {
     if (this.useWallet == true) {
       this.useWallet = false;
@@ -3455,8 +3483,8 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   setSubProduct(res: any) {
-    res['items'].forEach((prdct: any) => {
-      let mdLst: any = [];
+    res['items'].forEach((prdct: any) => { // here prdct is referring all the products in cart with substitue get from product_find search
+      let mdLst: any = []; // to hold substitute products
       let mUnitPrice = 0;
       if (this.CommonService.ConfigData.GenericPercentageCalOnOfferPrice == 'Y') {
         mUnitPrice = prdct.OfferPrice / prdct.Size;
@@ -3467,7 +3495,7 @@ export class PlaceOrderComponent implements OnInit {
 
       let data: any = prdct.PreferredSubtitute;
       if (data.length > 0) {
-        data.forEach((elm: any) => {
+        data.forEach((elm: any) => { // here elm refers to each substitute of a particlular product. One product have multiple substitutes
           if (elm.MRP != '' && elm.MRP != null && elm.MRP > 0) {
             let mprdPrice: any = '';
             let sbrdPrice: any = '';
@@ -3489,7 +3517,7 @@ export class PlaceOrderComponent implements OnInit {
                 let prNd = Math.floor(savingsPercentage);
                 if (prNd >= this.CommonService.ConfigData.GenericMinPercentage) {
                   let ds = { ...elm, pricePerUnit: subUnitPrice, savingsPercent: prNd, isExisting: 0, addedQty: 0, savePerStrip: savingPerStrip, salts: prdct.Salts };
-                  this.finalList.forEach((item: any) => {
+                  this.finalList.forEach((item: any) => { // this a checking for already already product replace
                     if (parseInt(ds.PreferredProductId) == item.ProductId) {
                       ds.isExisting = 1;
                       ds.addedQty = item.ItemQuantity;
@@ -3502,7 +3530,7 @@ export class PlaceOrderComponent implements OnInit {
           }
         });
       };
-
+      console.log("mdLst",mdLst)
       if (mdLst.length > 0) {
         if (this.CommonService.ConfigData.SortOnSaving == 'Y') {
           mdLst.sort((a: any, b: any) => b.savingsPercent - a.savingsPercent)
@@ -3518,13 +3546,28 @@ export class PlaceOrderComponent implements OnInit {
         prdct.PreferredSubtitute = mdLst;
       }
 
+
     });
 
     this.finalList = this.finalList.map((ds: any) => {
       let data = res['items'].find((ls: any) => parseInt(ls.ProductId) == ds.ProductId);
+      // add loyalty point key to substitute product
+      if (this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y') {
+        const jp = this.CommonService.LoyaltyConfigData.LoyaltyConfig.jito_percentage;
+        console.log(">>",this.CommonService.LoyaltyConfigData.LoyaltyConfig.jito_percentage);
+        data.PreferredSubtitute.map((dl:any)=>{
+          console.log("dl",dl);
+          const loyaltyCoins = Math.round((parseInt(dl.CustOfferPrice) * parseInt(jp))/100);
+          console.log(loyaltyCoins);
+          dl.loyaltyCoins = loyaltyCoins;
+          return {...dl}
+        });
+        console.log(data.PreferredSubtitute);
+      }
       return { ...ds, PricePerUnit: data.pricePerUnit, PreferredSubtitute: data.PreferredSubtitute, MfgGroup: data.MfgGroup, Unit1: data.Unit1 };
     });
 
+    console.log('ss',this.finalList);
     let count = 0
 
     // let count = this.finalList.filter((p: any) => p.PreferredSubtitute && p.PreferredSubtitute.length > 1).length;
@@ -3538,6 +3581,8 @@ export class PlaceOrderComponent implements OnInit {
     if (count > 1) {
       this.replaceAllSubs = true;
     }
+
+    
 
   }
 

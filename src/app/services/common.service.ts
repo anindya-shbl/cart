@@ -442,4 +442,8 @@ export class CommonService {
     let gettUrl = this.webcartUrl + url;
     return this.http.get(gettUrl);
   }
+  getLoyaltyBalance(url: any) {
+    let gettUrl = this.webcartUrl + url;
+    return this.http.get(gettUrl);
+  }
 }

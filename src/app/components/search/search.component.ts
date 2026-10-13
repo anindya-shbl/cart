@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
 
   productIndex: any = 0;
   OfferPriceIndex: any = 0;
+  LoyaltyPointsIndex: any = 0;
   MRPIndex: any = 0;
   IsOutOfStock: any = 0;
   PrescriptionOTC: any = 0;
@@ -133,7 +134,7 @@ export class SearchComponent implements OnInit {
     this.CommonService.getSearchData(searchtext).subscribe((data: any) => {
       this.searchStart = false;
 
-      // console.log("searchData"+data);
+      // console.log("searchData "+ data['products']);
 
       if (data['products'].length > 0) {
         // this.emptyResult = false;
@@ -166,12 +167,32 @@ export class SearchComponent implements OnInit {
         }
         this.InteractiveModule = this.getKeyIndex(this.InteractiveModuleFieldName);
 
+        if(this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y'){  
+          data['keys'].push('LoyaltyPointsIndex'); 
+          this.LoyaltyPointsIndex = this.getKeyIndex('LoyaltyPointsIndex');
+        }
+
         data['products'].forEach((elm: any) => {
+          // console.log("elm",elm);
           let pID = this.getKeyIndex('ProductId');
           elm[this.isExisting]= 0;
           elm[this.addedQty] = 0;
           elm[this.showRefPrd] = 0;
           // console.log('pID', elm[pID]);
+          if(this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y'){
+            const loyaltyPercentage = this.CommonService.LoyaltyConfigData.LoyaltyConfig;
+            // console.log("loyaltyPercentage",loyaltyPercentage);
+            // console.log(loyaltyPercentage.jito_percentage, loyaltyPercentage.branded_percentage)
+            let selectedLp:number = 0;
+            if(parseInt(elm['IsGenericNew'])){
+              selectedLp = loyaltyPercentage.jito_percentage
+            }
+            else {
+              selectedLp = loyaltyPercentage.branded_percentage
+            }
+            // console.log("selectedLp",selectedLp);
+            elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * selectedLp)/100);
+          }
           this.addedInCart.forEach((item: any) => {
             if (parseInt(elm[pID]) == item.ProductId) {
               elm[this.isExisting] = 1;
@@ -210,6 +231,7 @@ export class SearchComponent implements OnInit {
             // elm[this.SubtituteIndex] = subs;
           }
         });
+        // console.log('d_p',data);
       } else {
         this.ProductList = [];
         // this.emptyResult = true;

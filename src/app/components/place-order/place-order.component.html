@@ -88,7 +88,7 @@
                                 <div *ngIf="item.ItemBasePrice > item.OfferPrice" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent>0?item.DiscountPercent+'% Off':''}}</div>
                                 <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
                                 <div *ngIf="(item.LoyaltyPoints>0) && CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="mb-2">
-                        <strong class="text-success">Loyalty Points: {{item.LoyaltyPoints}}</strong>
+                                <strong class="text-success"><img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />&nbsp; Earn {{item.LoyaltyPoints}}</strong>
                       </div>
                               </div>
                             </div>
@@ -141,8 +141,9 @@
                           <span><img
                               src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png"
                               alt="" width="24px">
-                            &nbsp;{{getMaxSavings(item.PreferredSubtitute)}}% Lower Price Jito Alternative Available
+                            &nbsp;{{getMaxSavings(item.PreferredSubtitute)}}% Lower Price Jito Alternative Available 
                           </span>
+                          <span *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'">+ Earn {{item.PreferredSubtitute[0].loyaltyCoins}} SS Coins</span>
                           <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                         </div>
                       </div>
@@ -1197,7 +1198,17 @@
           <div *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="accordion mb-2" id="accordionExampleFive">
             <div class="accordion-item">
               <div class="px-4 py-3 border-bottom fw-6 fs-7" *ngIf="LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0">
-                <div>You'll earn <img src="" alt="loyalty" /> {{LoyaltyPointsOfCarts.TotalLoyaltyPoints | number:'1.0-0'}} SS Coins on this order</div>
+                <div>You'll earn <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" /> {{LoyaltyPointsOfCarts.TotalLoyaltyPoints | number:'1.0-0'}} SS Coins on this order</div>
+                <div>Credited to your SS coins wallet after delivery</div>
+              </div>
+              <div class="px-4 py-3 border-bottom fw-6 fs-7" *ngIf="LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0">
+                <div>
+                  <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:64px" /> 
+                </div>
+                <div>
+                  <span> Add <b>Jito alternative medicines</b> to redeem SS Coins</span>
+                  <span>Current Balance: {{loyaltyBalance}}</span>
+                </div>
                 <div>Credited to your SS coins wallet after delivery</div>
               </div>
         </div>
@@ -1954,6 +1965,9 @@
         </div>
         <div class="Alternative-body">
           <ng-container *ngFor="let altr of altrPrdcts.PreferredSubtitute">
+            <div style="text-align:center;" *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'">
+              <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />Earn {{altr.loyaltyCoins}} SS Coins
+            </div>
             <div class="border rounded item-shadow position-relative">
               <div class="tagline">Save {{altr.savingsPercent}}%</div>
               <div class="d-flex p-3">

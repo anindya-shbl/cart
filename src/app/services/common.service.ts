@@ -446,4 +446,15 @@ export class CommonService {
     let gettUrl = this.webcartUrl + url;
     return this.http.get(gettUrl);
   }
+  getLoyaltyRedemptionPoints(url: any) {
+    let gettUrl = this.webcartUrl + url;
+    return this.http.get(gettUrl);
+  }
+
+  applyRedemptionOnCart(url: any) {
+    let getUrl = this.webcartUrl + url;
+    // getUrl = 'https://stage.sastasundar.com/index.php/webapi/loyalty/apply_loyalty_redemption_points';
+    //return this.http.post(getUrl,[]);
+    return this.http.get(getUrl);
+  }
 }

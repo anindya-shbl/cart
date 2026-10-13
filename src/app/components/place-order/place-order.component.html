@@ -954,6 +954,12 @@
                           <span class="text-body-tertiary">Price Discount (-)</span>
                           <span class="text-success">{{ headerDetails.CartItemDiscount | currency : "INR" }}</span>
                         </div>
+
+                        <div *ngIf="headerDetailsRedemption.RedeemedPoints > 0" class="d-flex justify-content-between mb-2">
+                          <span class="text-body-tertiary">SS Coins Used (-)</span>
+                          <span class="text-success">{{ headerDetailsRedemption.RedeemedPoints | currency : "INR" }}</span>
+                        </div>
+
                         <div *ngIf="headerDetails.RoundOfVal != '' && headerDetails.RoundOfVal != undefined"
                           class="d-flex justify-content-between text-body-tertiary mb-2">
                           <span>Round Off value</span>
@@ -1201,16 +1207,21 @@
                 <div>You'll earn <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" /> {{LoyaltyPointsOfCarts.TotalLoyaltyPoints | number:'1.0-0'}} SS Coins on this order</div>
                 <div>Credited to your SS coins wallet after delivery</div>
               </div>
-              <div class="px-4 py-3 border-bottom fw-6 fs-7" *ngIf="LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0">
+              <div class="px-4 py-3 border-bottom fw-6 fs-7" *ngIf="(LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0)">
                 <div>
-                  <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:64px" /> 
+                  <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:32px" /> 
                 </div>
                 <div>
-                  <span> Add <b>Jito alternative medicines</b> to redeem SS Coins</span>
+                  <div *ngIf="!LoyaltyRedeemableOptions.RedemptionEnabled">
+                    <span> Add <b>Jito alternative medicines</b> to redeem SS Coins</span>
+                  </div>
+                  <div *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled">
+                    <span> Save <b>{{LoyaltyRedeemableOptions.UsableRedeemablePoints}}</b> Using SS Coins <button class="addBtn" type="button" (click)="applyRedemption()">Click</button></span>
+                  </div>
                   <span>Current Balance: {{loyaltyBalance}}</span>
                 </div>
-                <div>Credited to your SS coins wallet after delivery</div>
               </div>
+              
         </div>
       </div>
     </div>

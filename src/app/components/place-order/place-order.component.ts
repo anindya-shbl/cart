@@ -185,6 +185,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('LoyaltyConfigData',this.CommonService.LoyaltyConfigData)
     localStorage.removeItem('toReplace');
     // debugger;
     this.isLoggedIn = this.cookieService.get('isLoggedIn');
@@ -439,7 +440,8 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-      cartData = { "result": { "header": { "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": null, "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249 }, "coupons": [], "outOfStockProducts": [], "itemlist": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "ProdName": "Cal 123", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": "215.00", "ItemQuantity": "1.00", "ItemDiscount": "38.70", "CouponDiscount": ".00", "SSCurrencyValue": ".00", "ItemVal": "176.30", "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": "176.30", "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": "10000844", "BatchNo": "CALP26011", "ExpiryDate": "2028-05-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": "8251115", "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": "15.00", "Unit": "Tablet", "SellerId": null, "IsVirtual": 0, "DiscountPercent": 18 }], "itemlist2": { "173277": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "ProdName": "Cal 123", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": "215.00", "ItemQuantity": "1.00", "ItemDiscount": "38.70", "CouponDiscount": ".00", "SSCurrencyValue": ".00", "ItemVal": "176.30", "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": "176.30", "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": "10000844", "BatchNo": "CALP26011", "ExpiryDate": "2028-05-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": "8251115", "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": "15.00", "Unit": "Tablet", "SellerId": null, "IsVirtual": 0, "DiscountPercent": 18 }] }, "lotproductIds": ["173277"] } };
+      cartData = {"result":{"header":{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":16814,"ProductName":"AB Flo SR Tab (10 Tab)","ProdName":"AB Flo SR","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":135,"ItemQuantity":1,"ItemDiscount":20.25,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":114.75,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":114.75,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000003,"BatchNo":"002B4A0A","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":7724,"ProductName":"Arbitel AV Tab (10 Tab)","ProdName":"Arbitel AV","ProductUnit":"STRIP","ProductImage":"arbitel-av-1406057171-10008135.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":117,"ItemQuantity":1,"ItemDiscount":17.55,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":99.45,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":99.45,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000009,"BatchNo":"AAVH0016","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":13154,"ProductName":"Caladryl Lotion 100 ml","ProdName":"Caladryl","ProductUnit":"BOTTLE","ProductImage":null,"PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":55.91,"ItemQuantity":1,"ItemDiscount":8.39,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":47.52,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":47.52,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"CAM4274","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Lotion","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"itemlist2":{"16814":[{"ProductId":16814,"ProductName":"AB Flo SR Tab (10 Tab)","ProdName":"AB Flo SR","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":135,"ItemQuantity":1,"ItemDiscount":20.25,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":114.75,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":114.75,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000003,"BatchNo":"002B4A0A","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"7724":[{"ProductId":7724,"ProductName":"Arbitel AV Tab (10 Tab)","ProdName":"Arbitel AV","ProductUnit":"STRIP","ProductImage":"arbitel-av-1406057171-10008135.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":117,"ItemQuantity":1,"ItemDiscount":17.55,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":99.45,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":99.45,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000009,"BatchNo":"AAVH0016","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"13154":[{"ProductId":13154,"ProductName":"Caladryl Lotion 100 ml","ProdName":"Caladryl","ProductUnit":"BOTTLE","ProductImage":null,"PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":55.91,"ItemQuantity":1,"ItemDiscount":8.39,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":47.52,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":47.52,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"CAM4274","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Lotion","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}]},"lotproductIds":[16814,7724,13154]}}
+;
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
 
@@ -495,7 +497,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
       // console.log('order data', data);
-      data = { "isAddrUpdate": 0, "header_cart_detail": [{ "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": ".00", "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "HBName": "Myjoy Pharmaceuticals Private Limited", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249, "BaseConvienceFee": 10 }], "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "result": { "header": [{ "CartAmount": "215.00", "CartItemDiscount": "38.70", "PromoDiscount": ".00", "CouponDiscount": ".00", "ShippingCharge": null, "RoundOfVal": "-0.30", "CartVal": "180.00", "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": "4923662", "BillingAddressId": "4923662", "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": null, "SSCurrencyValue": ".00", "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": ".00", "XplorPointVal": null, "AppliedXplorPoint": ".00", "AppliedXplorPointVal": ".00", "IsShow": null, "OTCMEDBillAmount": null, "GiftCardAmount": ".00", "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": "176.00", "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": "4.00", "SmallOrderFee": ".00", "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "N", "HBName": "Myjoy Pharmaceuticals Private Limited" }], "coupons": [] } };
+      data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3582906,"BillingAddressId":3582906,"result":{"header":[{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB"}],"coupons":[]}};
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
       this.billingId = data['BillingAddressId'];
@@ -738,6 +740,30 @@ export class PlaceOrderComponent implements OnInit {
     };
 
     this.CommonService.getTotalAlterSave('product/getSubstituteProductListSaving', temp).subscribe((res: any) => {
+      res = {
+    "itemsList": [
+        {
+            "PreferredSubtitute": "Calagy Lotion 100 ml",
+            "ProductName": "Caladryl",
+            "ProductId": "13154",
+            "size": 1,
+            "brandUnitOfferPrice": 47.52,
+            "substituteProductOfferPrice": "59.54",
+            "substituteProductSize": 100,
+            "substituteUnitOfferPrice": 0.6,
+            "priceDiff": "46.92",
+            "savingPerUnit": "0.99",
+            "savingPercentage": "98.74%",
+            "OnCart": 1,
+            "MaxSaveValueOfProduct": "46.92"
+        }
+    ],
+    "GenericMinPercentage": 20,
+    "MaxSaveValue": 46,
+    "msgcode": 1,
+    "msgtext": "Success Msg Text",
+    "results": "Save ₹46 on your total cart by switching to Jito Recommended Alternatives"
+};
       // console.log(res)
       if (res && res['msgcode'] == 1) {
         this.totalSavebyAlternative = res;
@@ -1991,6 +2017,7 @@ export class PlaceOrderComponent implements OnInit {
   getAddressList() {
     // this.addressList = [];
     this.CommonService.getAllAddress('cartuserapp/getall_addresses').subscribe((data: any) => {
+      data = {"status":"success","msg":"Address available","data":{"all_address":[{"AddressId":3582892,"UserId":588795,"NickName":"P Dey","AddressType":"H","IsPrimary":0,"Addline":"C D N High School, chiterswar, Pachando, Jharkhand, India","Landmark":"Near pachando middle school","City":"Baharagora - East Singhbhum","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":15,"StateName":"Jharkhand","PinCode":832101,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":0,"CustContactNo":9903191974,"RecepientName":null,"AddressName":null,"Latitude":22.2244362,"Longitude":86.79481589999999,"AddLine1":"CDNHSP Office"},{"AddressId":3582932,"UserId":588795,"NickName":"pp","AddressType":"H","IsPrimary":0,"Addline":"Padyarabettu Daivasthana, Hosangady, Karnataka, India","Landmark":"null","City":"Mangalore - Dakshina Kannada","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":16,"StateName":"Karnataka","PinCode":574197,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":0,"CustContactNo":9989898989,"RecepientName":null,"AddressName":null,"Latitude":13.0366564,"Longitude":75.0848863,"AddLine1":91},{"AddressId":3582933,"UserId":588795,"NickName":"work","AddressType":"W","IsPrimary":0,"Addline":"Kochi International Airport (COK), Kerala, India","Landmark":"null","City":"Aluva - Ernakulam","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":17,"StateName":"Kerala","PinCode":683111,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":0,"CustContactNo":6989898989,"RecepientName":null,"AddressName":null,"Latitude":10.1532129,"Longitude":76.3933204,"AddLine1":"91-3"},{"AddressId":3582871,"UserId":588795,"NickName":"A Bhattacharya","AddressType":"H","IsPrimary":0,"Addline":"Baidyabati Charushila Bose Balika Vidyalaya, Baidyapara, Baidyabati, West Bengal, India","Landmark":"Girl's School","City":"Hooghly","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":712222,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9804750934,"RecepientName":null,"AddressName":null,"Latitude":22.781874500000004,"Longitude":88.3240828,"AddLine1":"91-3 J N GUPTA LANE"},{"AddressId":3582886,"UserId":588795,"NickName":"A Bhattacharya","AddressType":"H","IsPrimary":0,"Addline":"Test 456","Landmark":"Test Test","City":"Hooghly","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":712222,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9804750934,"RecepientName":null,"AddressName":null,"Latitude":0,"Longitude":0,"AddLine1":"Test 123"},{"AddressId":3582904,"UserId":588795,"NickName":"Test","AddressType":"H","IsPrimary":0,"Addline":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India","Landmark":"","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700014,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9804750934,"RecepientName":null,"AddressName":"Work","Latitude":22.5655,"Longitude":88.3702,"AddLine1":""},{"AddressId":3582906,"UserId":588795,"NickName":"sdooooo","AddressType":"H","IsPrimary":0,"Addline":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India","Landmark":"","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700156,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9836370209,"RecepientName":null,"AddressName":null,"Latitude":22.5655,"Longitude":88.3702,"AddLine1":""},{"AddressId":3582907,"UserId":588795,"NickName":"work ","AddressType":"H","IsPrimary":0,"Addline":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India","Landmark":"","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700014,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9804750934,"RecepientName":null,"AddressName":null,"Latitude":22.5655,"Longitude":88.3702,"AddLine1":91},{"AddressId":3582909,"UserId":588795,"NickName":"TEST WORK","AddressType":"O","IsPrimary":0,"Addline":"WRITERS BUILDING, Murgighata, B.B.D. Bagh, Kolkata, West Bengal 700001, India","Landmark":"","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700001,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9836370209,"RecepientName":null,"AddressName":null,"Latitude":22.573895652906863,"Longitude":88.34898271160006,"AddLine1":"Other Type"},{"AddressId":3582934,"UserId":588795,"NickName":"other","AddressType":"W","IsPrimary":1,"Addline":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India","Landmark":"","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700014,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":18,"IsLab":1,"CustContactNo":9845656565,"RecepientName":null,"AddressName":null,"Latitude":22.5655,"Longitude":88.3702,"AddLine1":"other"},{"AddressId":3582863,"UserId":588795,"NickName":"A Bhattacharya","AddressType":"H","IsPrimary":1,"Addline":"Innovation Tower, DH Block(Newtown), Action Area 1D, Newtown, Chakpachuria, West Bengal, India","Landmark":"Opposite of Candor Gate 2","City":"Others","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":37,"StateName":"Others","PinCode":700160,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":null,"IsLab":1,"CustContactNo":9836370209,"RecepientName":null,"AddressName":null,"Latitude":22.5786885,"Longitude":88.4808396,"AddLine1":"SastaSudar"}],"CustomerType":"N"}};
       if (data['data']['all_address'] != undefined) {
         // console.log(data, data['data']['all_address']);
         this.addressList = data['data']['all_address'];
@@ -2599,6 +2626,7 @@ export class PlaceOrderComponent implements OnInit {
     // this.isCheckedTmc = false;
     this.isCheckedTmc = true;
     this.CommonService.get_PG_List('cartapp/getpaymentoptions').subscribe((response: any) => {
+      response = {"data":{"pg_list":[{"PGListingId":47,"Title":"Cash On Delivery","Key":"COD","Image":null,"PgType":null,"Desc":null,"DisplaySeq":1,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":null},{"PGListingId":48,"Title":"Cash on Delivery","Key":"COD","Image":"PAY-CASH.png","PgType":null,"Desc":null,"DisplaySeq":1,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":null},{"PGListingId":149,"Title":"UPI","Key":"EASEBUZZ","Image":"UPI.png","PgType":"UPI","Desc":"NULL","DisplaySeq":6,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"UPI"},{"PGListingId":151,"Title":"Net Banking","Key":"EASEBUZZ","Image":"netbanking.png","PgType":"NB","Desc":"NULL","DisplaySeq":7,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"NB"},{"PGListingId":153,"Title":"Credit Card","Key":"EASEBUZZ","Image":"creditcard.png","PgType":"CC","Desc":"NULL","DisplaySeq":8,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"CC"},{"PGListingId":155,"Title":"Debit Card","Key":"EASEBUZZ","Image":"debitcard.png","PgType":"DC","Desc":"NULL","DisplaySeq":9,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"DC"},{"PGListingId":157,"Title":"Wallet","Key":"EASEBUZZ","Image":"wallet.png","PgType":"MW","Desc":"NULL","DisplaySeq":9,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"MW"},{"PGListingId":159,"Title":"EMI","Key":"EASEBUZZ","Image":"emi.png","PgType":"EMI","Desc":"NULL","DisplaySeq":9,"IsDefault":1,"GateWayPayMode":null,"LongDesc":null,"LongImage":null,"PayOption":"EMI"},{"PGListingId":61,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"PHONEPE","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"},{"PGListingId":62,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"PHONEPE","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"},{"PGListingId":68,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"PHONEPE","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"},{"PGListingId":29,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"RAZORPAY","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"},{"PGListingId":30,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"RAZORPAY","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"},{"PGListingId":41,"Title":"UPI \/ Net Banking \/ Credit Card \/ Debit Card","Key":"RAZORPAY","Image":"razorpay_web.png","PgType":"PG","Desc":"NULL","DisplaySeq":10,"IsDefault":1,"GateWayPayMode":"NULL","LongDesc":"NULL","LongImage":"NULL","PayOption":"PG"}],"bank_list":[]},"message":"","response_code":0};
       if (response['response_code'] == 0) {
         // console.log('pg list', response);
         this.pglist = response['data']['pg_list'];
@@ -3956,192 +3984,7 @@ export class PlaceOrderComponent implements OnInit {
   getLoyaltyEarnPointsAgainstCart() {
     console.log('getLoyaltyEarnPointsAgainstCart called');
     this.CommonService.getLoyaltyEarnPoints('loyalty/get_loyalty_earn_points').subscribe((res: any) => {
-      res = {
-        "data": {
-          "itemList": [
-            {
-              "ProductId": 16814,
-              "ProductName": "AB Flo SR Tab (10 Tab)",
-              "ProdName": "AB Flo SR",
-              "ProductUnit": "Strip",
-              "ProductImage": null,
-              "PrescriptionOTC": "P",
-              "IsLoose": 0,
-              "ItemBasePrice": 135,
-              "ItemQuantity": 1,
-              "ItemDiscount": 20.25,
-              "CouponDiscount": 0,
-              "SSCurrencyValue": 0,
-              "ItemVal": 114.75,
-              "SourceTarget": "S",
-              "PromoId": null,
-              "PromoDesc": null,
-              "CouponPromoId": null,
-              "CouponPromoDesc": null,
-              "PrescriptionId": null,
-              "IntentQty": null,
-              "IntentRequired": null,
-              "OfferPrice": 114.75,
-              "IsConsiderable": 1,
-              "DosageAlert": null,
-              "DosageRestriction": null,
-              "IsCourierable": 1,
-              "CustomProductName": "",
-              "InteractiveModule": "PetCare",
-              "InteractiveHealthProfileId": null,
-              "InteractiveSubModule": null,
-              "PKLotId": 10000003,
-              "BatchNo": "002B4A0A",
-              "ExpiryDate": "2030-01-01",
-              "MfgDate": null,
-              "CartItemId": null,
-              "CanCOD": "Y",
-              "DeliveryDelayedDay": null,
-              "CPId": 1310371,
-              "IsRedeemable": 0,
-              "RestrictedProduct": "N",
-              "RefOrderId": null,
-              "IsNonReturnable": 0,
-              "MfgGroup": "LUPIN LTD",
-              "SaltName": "ACEBROPHYLLINE",
-              "IsVirtual": 0,
-              "Size": 10,
-              "Unit": "Tablet",
-              "IsSellerInventory": 0,
-              "IsJitoProduct": 0,
-              "SltProdCategory": 0,
-              "IsGenericProduct": 0,
-              "RedeemedPoints": null,
-              "DiscountPercent": 15,
-              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/",
-              "NotSellerInventoryCnt": 1,
-              "SellerInventoryCnt": 0,
-              "LoyaltyPoints": 2
-            },
-            {
-              "ProductId": 7724,
-              "ProductName": "Arbitel AV Tab (10 Tab)",
-              "ProdName": "Arbitel AV",
-              "ProductUnit": "STRIP",
-              "ProductImage": "arbitel-av-1406057171-10008135.jpg",
-              "PrescriptionOTC": "P",
-              "IsLoose": 0,
-              "ItemBasePrice": 117,
-              "ItemQuantity": 1,
-              "ItemDiscount": 17.55,
-              "CouponDiscount": 0,
-              "SSCurrencyValue": 0,
-              "ItemVal": 99.45,
-              "SourceTarget": "S",
-              "PromoId": null,
-              "PromoDesc": null,
-              "CouponPromoId": null,
-              "CouponPromoDesc": null,
-              "PrescriptionId": null,
-              "IntentQty": null,
-              "IntentRequired": null,
-              "OfferPrice": 99.45,
-              "IsConsiderable": 1,
-              "DosageAlert": null,
-              "DosageRestriction": null,
-              "IsCourierable": 1,
-              "CustomProductName": "",
-              "InteractiveModule": null,
-              "InteractiveHealthProfileId": null,
-              "InteractiveSubModule": null,
-              "PKLotId": 10000009,
-              "BatchNo": "AAVH0016",
-              "ExpiryDate": "2030-01-01",
-              "MfgDate": null,
-              "CartItemId": null,
-              "CanCOD": "Y",
-              "DeliveryDelayedDay": null,
-              "CPId": 1310371,
-              "IsRedeemable": 0,
-              "RestrictedProduct": "Y",
-              "RefOrderId": null,
-              "IsNonReturnable": 0,
-              "MfgGroup": "MICRO LABS LIMITED",
-              "SaltName": "TELMISARTAN + ATORVASTATIN",
-              "IsVirtual": 0,
-              "Size": 10,
-              "Unit": "Tablet",
-              "IsSellerInventory": 0,
-              "IsJitoProduct": 0,
-              "SltProdCategory": null,
-              "IsGenericProduct": 0,
-              "RedeemedPoints": null,
-              "DiscountPercent": 15,
-              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg",
-              "NotSellerInventoryCnt": 1,
-              "SellerInventoryCnt": 0,
-              "LoyaltyPoints": 2
-            },
-            {
-              "ProductId": 173277,
-              "ProductName": "Cal 123 Tablet (15 Tab)",
-              "ProdName": "Cal 123 Tablet (15 Tab)",
-              "ProductUnit": "STRIP",
-              "ProductImage": "arbitel-av-1406057171-10008135.jpg",
-              "PrescriptionOTC": "P",
-              "IsLoose": 0,
-              "ItemBasePrice": 117,
-              "ItemQuantity": 1,
-              "ItemDiscount": 17.55,
-              "CouponDiscount": 0,
-              "SSCurrencyValue": 0,
-              "ItemVal": 99.45,
-              "SourceTarget": "S",
-              "PromoId": null,
-              "PromoDesc": null,
-              "CouponPromoId": null,
-              "CouponPromoDesc": null,
-              "PrescriptionId": null,
-              "IntentQty": null,
-              "IntentRequired": null,
-              "OfferPrice": 99.45,
-              "IsConsiderable": 1,
-              "DosageAlert": null,
-              "DosageRestriction": null,
-              "IsCourierable": 1,
-              "CustomProductName": "",
-              "InteractiveModule": null,
-              "InteractiveHealthProfileId": null,
-              "InteractiveSubModule": null,
-              "PKLotId": 10000009,
-              "BatchNo": "AAVH0016",
-              "ExpiryDate": "2030-01-01",
-              "MfgDate": null,
-              "CartItemId": null,
-              "CanCOD": "Y",
-              "DeliveryDelayedDay": null,
-              "CPId": 1310371,
-              "IsRedeemable": 0,
-              "RestrictedProduct": "Y",
-              "RefOrderId": null,
-              "IsNonReturnable": 0,
-              "MfgGroup": "MICRO LABS LIMITED",
-              "SaltName": "TELMISARTAN + ATORVASTATIN",
-              "IsVirtual": 0,
-              "Size": 10,
-              "Unit": "Tablet",
-              "IsSellerInventory": 0,
-              "IsJitoProduct": 0,
-              "SltProdCategory": null,
-              "IsGenericProduct": 0,
-              "RedeemedPoints": null,
-              "DiscountPercent": 15,
-              "ProductImageUrl": "https:\/\/res.sastasundar.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg",
-              "NotSellerInventoryCnt": 1,
-              "SellerInventoryCnt": 0,
-              "LoyaltyPoints": 2
-            }
-          ],
-          "TotalLoyaltyPoints": 4
-        },
-        "message": "Loyalty redemption points retrieved successfully",
-        "response_code": "1"
-      };
+      res = {"data":{"itemList":[{"ProductId":16814,"ProductName":"AB Flo SR Tab (10 Tab)","ProdName":"AB Flo SR","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":135,"ItemQuantity":1,"ItemDiscount":20.25,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":114.75,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":114.75,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000003,"BatchNo":"002B4A0A","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","RefOrderId":null,"IsNonReturnable":0,"IsTBProduct":0,"Brand":null,"DosageForm":null,"IsScarcity":0,"Schedule":null,"SltProdCategory":0,"CashDisc":15,"Size":10,"Unit":"Tablet","SourceProductId":10016178,"MfgGroup":"LUPIN LTD","SaltName":"ACEBROPHYLLINE","SellerId":null,"IsSellerInventory":0,"IsJitoProduct":0,"IsGenericProduct":0,"IsVirtual":0,"ProductImageUrl":"https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/","DiscountPercent":15,"DisplayName":"AB Flo SR Tab (10 Tab)","NotSellerInventoryCnt":1,"SellerInventoryCnt":0,"LoyaltyPoints":2},{"ProductId":7724,"ProductName":"Arbitel AV Tab (10 Tab)","ProdName":"Arbitel AV","ProductUnit":"STRIP","ProductImage":"arbitel-av-1406057171-10008135.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":117,"ItemQuantity":1,"ItemDiscount":17.55,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":99.45,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":99.45,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000009,"BatchNo":"AAVH0016","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"Y","RefOrderId":null,"IsNonReturnable":0,"IsTBProduct":null,"Brand":null,"DosageForm":null,"IsScarcity":0,"Schedule":"H","SltProdCategory":null,"CashDisc":15,"Size":10,"Unit":"Tablet","SourceProductId":10008135,"MfgGroup":"MICRO LABS LIMITED","SaltName":"TELMISARTAN + ATORVASTATIN","SellerId":null,"IsSellerInventory":0,"IsJitoProduct":0,"IsGenericProduct":0,"IsVirtual":0,"ProductImageUrl":"https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg","DiscountPercent":15,"DisplayName":"Arbitel AV Tab (10 Tab)","NotSellerInventoryCnt":1,"SellerInventoryCnt":0,"LoyaltyPoints":2},{"ProductId":13154,"ProductName":"Caladryl Lotion 100 ml","ProdName":"Caladryl","ProductUnit":"BOTTLE","ProductImage":null,"PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":55.91,"ItemQuantity":1,"ItemDiscount":8.39,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":47.52,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":47.52,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"CAM4274","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","RefOrderId":null,"IsNonReturnable":0,"IsTBProduct":0,"Brand":null,"DosageForm":null,"IsScarcity":0,"Schedule":null,"SltProdCategory":0,"CashDisc":15,"Size":1,"Unit":"Lotion","SourceProductId":10013116,"MfgGroup":"PIRAMAL HEALTHCARE","SaltName":"CALAMINE","SellerId":null,"IsSellerInventory":0,"IsJitoProduct":0,"IsGenericProduct":0,"IsVirtual":0,"ProductImageUrl":"https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/","DiscountPercent":15,"DisplayName":"Caladryl Lotion 100 ml","NotSellerInventoryCnt":1,"SellerInventoryCnt":0,"LoyaltyPoints":1}],"TotalLoyaltyPoints":5},"message":"Loyalty redemption points retrieved successfully","response_code":"1"};
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyPointsOfCarts = res['data'];

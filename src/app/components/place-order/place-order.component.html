@@ -1215,7 +1215,7 @@
                   <div *ngIf="!LoyaltyRedeemableOptions.RedemptionEnabled">
                     <span> Add <b>Jito alternative medicines</b> to redeem SS Coins</span>
                   </div>
-                  <div *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled">
+                  <div *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && LoyaltyRedeemableOptions.UsableRedeemablePoints>0">
                     <span> Save <b>{{LoyaltyRedeemableOptions.UsableRedeemablePoints}}</b> Using SS Coins <button class="addBtn" type="button" (click)="applyRedemption()">Click</button></span>
                   </div>
                   <span>Current Balance: {{loyaltyBalance}}</span>

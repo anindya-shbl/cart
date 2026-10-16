@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { map, Subscription, switchMap } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { CookieService } from 'ngx-cookie-service';
@@ -168,8 +168,8 @@ export class PlaceOrderComponent implements OnInit {
   LoyaltyPointsOfCarts: any = 0;
   loyaltyBalance: number = 0;
   useLoyaltyCoin: boolean = false;
-  LoyaltyRedeemableOptions:any = '';
-  RedemptionApply:any = '';
+  LoyaltyRedeemableOptions: any = '';
+  RedemptionApply: any = '';
 
   constructor(
     public CommonService: CommonService,
@@ -4172,21 +4172,54 @@ export class PlaceOrderComponent implements OnInit {
     })
   }
 
-  applyRedemption(){
+
+
+  applyRedemption() {
     console.log('applyRedemption called');
-    this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').subscribe((res: any) => {
-      res = {"data":{"response":{"header":{"CartAmount":"59.54","CartItemDiscount":".00","PromoDiscount":null,"CouponDiscount":null,"ShippingCharge":null,"RoundOfVal":"+0.46","CartVal":50,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"N","NeedToAttachPetCarePrescription":"N","CourierCharge":null,"ShippingAddressId":"3582906","BillingAddressId":"3582906","AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"SSCurrencyValue":".00","ScheduleDeliveryDate":null,"WarehouseId":1,"IsPanIndia":0,"SSCurrencyRedeemed":".00","MedDiscPercent":null,"IsDeliveryChargeWaivedOff":0,"CartValForDeliveryCharge":"60.00","IsLocalCourierable":0,"ShippingAddress":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India,Kolkata,West Bengal - 700156","BillingAddress":"Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India,Kolkata,West Bengal - 700156","PrescriptionId":null,"FilePath":null,"AppVersion":null,"RestrictedProduct":"N","IsPrescriptionUploaded":0,"IsPetCarePrescriptionUploaded":0,"RedeemedPoints":10},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":"8943","ProductName":"Calagy Lotion 100 ml","ProdName":"Calagy","ProductUnit":"BOTTLE","ProductImage":"calagy-1406056933-10007091.jpg","PrescriptionOTC":"O","IsLoose":0,"ItemBasePrice":"59.54","ItemQuantity":"1.00","ItemDiscount":".00","CouponDiscount":".00","SSCurrencyValue":".00","ItemVal":"59.54","SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":null,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":"10000002","BatchNo":"BH15001","ExpiryDate":"2028-08-31","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","RefOrderId":null,"IsNonReturnable":0,"IsTBProduct":0,"Brand":null,"DosageForm":null,"IsScarcity":0,"Schedule":null,"SltProdCategory":0,"CashDisc":null,"Size":"100.00","Unit":"ml","SourceProductId":"10007091","MfgGroup":"BIOCHEM (GENERIC DIV)","SaltName":"CALAMINE","SellerId":null,"IsSellerInventory":1,"IsJitoProduct":1,"IsGenericProduct":0,"IsVirtual":0,"ProductImageUrl":"https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/calagy-1406056933-10007091.jpg","DiscountPercent":0,"DisplayName":"Calagy Lotion 100 ml","NotSellerInventoryCnt":0,"SellerInventoryCnt":"1.00"}],"LoyaltyRedemption":{"CustUserId":588795,"RedeemedPoints":10,"PointValue":1,"AvailablePoints":10,"IdempotencyKey":"480B61F2-DD62-499C-8D6B-7D02A96DE08B","CartValBeforeRedemption":60,"CartValAfterRedemption":50}}},
-    "message": "Loyalty redemption points applied successfully",
-        "response_code": "1"};
-      console.log(res);
-      if (res && res['response_code'] == "1") {
-        this.RedemptionApply = res['data'];
-        console.log(this.RedemptionApply)
-        this.headerDetailsRedemption = this.RedemptionApply['response']['header'];
-        console.log('this.headerDetailsRedemption',this.headerDetailsRedemption);
-        this.totalSaving += this.headerDetailsRedemption.RedeemedPoints;
-        this.headerDetails.CartVal = this.headerDetailsRedemption.CartVal;
-      }
-    })
+
+    this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
+      switchMap((status: any) => {
+        const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
+
+        const request$ = isActive
+          ? this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
+            switchMap((redisRes: any) => {
+              if (redisRes?.response_code != 1) {
+                throw new Error('Failed to clear redemption from Redis');
+              }
+              return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
+            })
+          )
+          : this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points');
+
+        return request$.pipe(map((res: any) => ({ isActive, res })));
+      })
+    ).subscribe({
+      next: ({ isActive, res }) => {
+        if (!res || res['response_code'] != 1) {
+          console.warn(isActive ? 'Redemption remove failed' : 'Redemption apply failed', res);
+          return;
+        }
+        this.updateCartFromRedemption(res);
+      },
+      error: (err) => console.error('Redemption toggle failed:', err)
+    });
+  }
+
+  private updateCartFromRedemption(res: any) {
+    const header = res['data']?.response?.header;
+    if (!header) {
+      console.warn('No cart header in redemption response', res);
+      return;
+    }
+
+    const prevPoints = this.headerDetailsRedemption?.RedeemedPoints || 0;
+    const newPoints = header.RedeemedPoints || 0;
+    this.totalSaving += newPoints - prevPoints;
+
+    this.RedemptionApply = res['data'];
+    this.headerDetailsRedemption = header;
+    this.headerDetails.CartVal = header.CartVal;
+
   }
 }

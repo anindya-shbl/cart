@@ -457,4 +457,19 @@ export class CommonService {
     //return this.http.post(getUrl,[]);
     return this.http.get(getUrl);
   }
+  getRedemptionStatus(url: string) {
+    return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
+  }
+
+  removeRedemptionFromRedis(url: string) {
+    // return this.http.post<any>(this.webcartUrl + 'webapi/' + url, new FormData(), { withCredentials: true });
+    return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
+
+  }
+
+  removeRedemptionOnCart(url: string) {
+    // return this.http.post<any>(this.webcartUrl + 'webapi/' + url, new FormData(), { withCredentials: true });
+    return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
+
+  }
 }

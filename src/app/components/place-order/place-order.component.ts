@@ -237,7 +237,7 @@ export class PlaceOrderComponent implements OnInit {
   configMinOrderStatus() {
     // let response: any = {"Status":"Success","minOnlinePayVal":50,"minOrderValForShippingFree":250,"minOrderValForCourierFree":750}
     this.CommonService.getMinOrderValue('cartuserapp/ConfigBaseData').subscribe((response: any) => {
-      response = { "Status": "Success", "minOnlinePayVal": 50, "minOrderValForShippingFree": 250, "minOrderValForCourierFree": 750 };
+      // response = { "Status": "Success", "minOnlinePayVal": 50, "minOrderValForShippingFree": 250, "minOrderValForCourierFree": 750 };
       if (response['Status'] == 'Success') {
         this.freeShippingChage = response['minOrderValForShippingFree'];
         this.freeCourierChage = response['minOrderValForCourierFree'];
@@ -250,29 +250,6 @@ export class PlaceOrderComponent implements OnInit {
   setJitoHeader() {
     this.CommonService.getJitoHeader('home/recommended-alternative').subscribe((res: any) => {
       // console.log(res)
-      res = {
-        "data": {
-          "is_show": "1",
-          "results": [
-            {
-              "title": "FDA Approved Medicine",
-              "imageUrl": "https://stage-cdn.aadharhealth.in/incom/ss/v1/fda.png",
-              "actionUrl": "https://stage.sastasundar.com/#"
-            },
-            {
-              "title": "Dr. Recommended Choice",
-              "imageUrl": "https://stage-cdn.aadharhealth.in/incom/ss/v1/doctor.png",
-              "actionUrl": "https://stage.sastasundar.com/#"
-            },
-            {
-              "title": "Made By Top Manufacturers",
-              "imageUrl": "https://stage-cdn.aadharhealth.in/incom/ss/v1/top_brand.png",
-              "actionUrl": "https://stage.sastasundar.com/#"
-            }
-          ],
-          "title": "Jito Recommended Alternative"
-        }
-      };
       if (res && res['data'] != undefined) {
         this.JitoConfig = res['data'];
       }
@@ -287,8 +264,6 @@ export class PlaceOrderComponent implements OnInit {
     fd.append('SyncType', 'L');
     this.CommonService.cartSynch('cart/cart_sync', fd).subscribe((response: any) => {
       // debugger;
-      // response = { "status": 200, "message": "List provided.", "data": { "List": [{ "ProductId": "173277", "ProductName": "Cal 123 Tablet (15 Tab)", "DosageRestriction": 0, "OfferPrice": "176.30", "Discount": 18, "Iscourierable": 1, "ProductImage": "", "MRP": 215, "IsGiftProduct": 0, "PrescriptionOTC": "P", "WarehouseId": "1", "PKLotId": "10000844", "MfgGroup": "Pharmed Limited", "ExpiryDate": "2028-05-31", "Brand": "Pharmed Limited", "DosageForm": "tablet.", "ProductCount": "1", "RefOrderId": "" }], "Time": "1791783876" } };
-      response = { "status": 200, "message": "List provided.", "data": { "List": [], "Time": 1791870489 } };
       if (response && response['data']['List'] != undefined) {
         let RedishData = response['data']['List'];
         if (RedishData.length > 0) {
@@ -473,9 +448,6 @@ export class PlaceOrderComponent implements OnInit {
     this.closeAltMod.nativeElement.click();
     this.CommonService.getCartDetails('cartapp/getcartdetails').subscribe((cartData: any) => {
       // console.log('in cart synch', cartData);
-      // cartData = {"result":{"header":{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","BaseShippingCharge":49,"BaseShippingChargeCartVal":249},"coupons":[],"outOfStockProducts":[],"itemlist":[{"ProductId":16814,"ProductName":"AB Flo SR Tab (10 Tab)","ProdName":"AB Flo SR","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":135,"ItemQuantity":1,"ItemDiscount":20.25,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":114.75,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":114.75,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000003,"BatchNo":"002B4A0A","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":7724,"ProductName":"Arbitel AV Tab (10 Tab)","ProdName":"Arbitel AV","ProductUnit":"STRIP","ProductImage":"arbitel-av-1406057171-10008135.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":117,"ItemQuantity":1,"ItemDiscount":17.55,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":99.45,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":99.45,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000009,"BatchNo":"AAVH0016","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0},{"ProductId":13154,"ProductName":"Caladryl Lotion 100 ml","ProdName":"Caladryl","ProductUnit":"BOTTLE","ProductImage":null,"PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":55.91,"ItemQuantity":1,"ItemDiscount":8.39,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":47.52,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":47.52,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"CAM4274","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Lotion","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"itemlist2":{"16814":[{"ProductId":16814,"ProductName":"AB Flo SR Tab (10 Tab)","ProdName":"AB Flo SR","ProductUnit":"Strip","ProductImage":null,"PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":135,"ItemQuantity":1,"ItemDiscount":20.25,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":114.75,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":114.75,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":"PetCare","InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000003,"BatchNo":"002B4A0A","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"7724":[{"ProductId":7724,"ProductName":"Arbitel AV Tab (10 Tab)","ProdName":"Arbitel AV","ProductUnit":"STRIP","ProductImage":"arbitel-av-1406057171-10008135.jpg","PrescriptionOTC":"P","IsLoose":0,"ItemBasePrice":117,"ItemQuantity":1,"ItemDiscount":17.55,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":99.45,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":99.45,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000009,"BatchNo":"AAVH0016","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":1310381,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":"H","IsNonReturnable":0,"IsTBProduct":null,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":null,"RefOrderId":null,"Size":10,"Unit":"Tablet","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}],"13154":[{"ProductId":13154,"ProductName":"Caladryl Lotion 100 ml","ProdName":"Caladryl","ProductUnit":"BOTTLE","ProductImage":null,"PrescriptionOTC":"M","IsLoose":0,"ItemBasePrice":55.91,"ItemQuantity":1,"ItemDiscount":8.39,"CouponDiscount":0,"SSCurrencyValue":0,"ItemVal":47.52,"SourceTarget":"S","PromoId":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"PrescriptionId":null,"IntentQty":null,"IntentRequired":null,"OfferPrice":47.52,"IsConsiderable":1,"DosageAlert":null,"DosageRestriction":null,"IsCourierable":1,"CustomProductName":"","InteractiveModule":null,"InteractiveHealthProfileId":null,"InteractiveSubModule":null,"PKLotId":10000008,"BatchNo":"CAM4274","ExpiryDate":"2030-01-01","MfgDate":null,"CartItemId":null,"CanCOD":"Y","DeliveryDelayedDay":null,"CPId":null,"IsRedeemableProduct":0,"RestrictedProduct":"N","Schedule":null,"IsNonReturnable":0,"IsTBProduct":0,"DosageForm":null,"Brand":null,"IsScarcity":0,"SltProdCategory":0,"RefOrderId":null,"Size":1,"Unit":"Lotion","SellerId":null,"IsSellerInventory":0,"IsVirtual":0,"DiscountPercent":15,"NotSellerInventoryCnt":1,"SellerInventoryCnt":0}]},"lotproductIds":[16814,7724,13154]}};
-
-      cartData = { "result": { "header": { "CartAmount": 367.45, "CartItemDiscount": 46.19, "PromoDiscount": 0, "CouponDiscount": 0, "ShippingCharge": null, "RoundOfVal": -0.26, "CartVal": 323, "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": 3582906, "BillingAddressId": 3582906, "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": 0, "SSCurrencyValue": 0, "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": 0, "XplorPointVal": 0, "AppliedXplorPoint": 0, "AppliedXplorPointVal": 0, "IsShow": null, "OTCMEDBillAmount": 107.06, "GiftCardAmount": 0, "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": 321, "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": 2, "SmallOrderFee": 0, "ExpressDeliveryCharge": 0, "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "Y", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249 }, "coupons": [], "outOfStockProducts": [], "itemlist": [{ "ProductId": 16814, "ProductName": "AB Flo SR Tab (10 Tab)", "ProdName": "AB Flo SR", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 135, "ItemQuantity": 1, "ItemDiscount": 20.25, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 114.75, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 114.75, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": "PetCare", "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000003, "BatchNo": "002B4A0A", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310422, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 10, "Unit": "Tablet", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }, { "ProductId": 7724, "ProductName": "Arbitel AV Tab (10 Tab)", "ProdName": "Arbitel AV", "ProductUnit": "STRIP", "ProductImage": "arbitel-av-1406057171-10008135.jpg", "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 117, "ItemQuantity": 1, "ItemDiscount": 17.55, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 99.45, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 99.45, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000009, "BatchNo": "AAVH0016", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310422, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": "H", "IsNonReturnable": 0, "IsTBProduct": null, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": null, "RefOrderId": null, "Size": 10, "Unit": "Tablet", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }, { "ProductId": 13154, "ProductName": "Caladryl Lotion 100 ml", "ProdName": "Caladryl", "ProductUnit": "BOTTLE", "ProductImage": null, "PrescriptionOTC": "M", "IsLoose": 0, "ItemBasePrice": 55.91, "ItemQuantity": 1, "ItemDiscount": 8.39, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 47.52, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 47.52, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000008, "BatchNo": "CAM4274", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 1, "Unit": "Lotion", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }, { "ProductId": 8943, "ProductName": "Calagy Lotion 100 ml", "ProdName": "Calagy", "ProductUnit": "BOTTLE", "ProductImage": "calagy-1406056933-10007091.jpg", "PrescriptionOTC": "M", "IsLoose": 0, "ItemBasePrice": 59.54, "ItemQuantity": 1, "ItemDiscount": 0, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 59.54, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": null, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000002, "BatchNo": "BH15001", "ExpiryDate": "2028-08-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 100, "Unit": "ml", "SellerId": null, "IsSellerInventory": 1, "IsVirtual": 0, "DiscountPercent": 0, "NotSellerInventoryCnt": 0, "SellerInventoryCnt": 1 }], "itemlist2": { "16814": [{ "ProductId": 16814, "ProductName": "AB Flo SR Tab (10 Tab)", "ProdName": "AB Flo SR", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 135, "ItemQuantity": 1, "ItemDiscount": 20.25, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 114.75, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 114.75, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": "PetCare", "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000003, "BatchNo": "002B4A0A", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310422, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 10, "Unit": "Tablet", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }], "7724": [{ "ProductId": 7724, "ProductName": "Arbitel AV Tab (10 Tab)", "ProdName": "Arbitel AV", "ProductUnit": "STRIP", "ProductImage": "arbitel-av-1406057171-10008135.jpg", "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 117, "ItemQuantity": 1, "ItemDiscount": 17.55, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 99.45, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 99.45, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000009, "BatchNo": "AAVH0016", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310422, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": "H", "IsNonReturnable": 0, "IsTBProduct": null, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": null, "RefOrderId": null, "Size": 10, "Unit": "Tablet", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }], "13154": [{ "ProductId": 13154, "ProductName": "Caladryl Lotion 100 ml", "ProdName": "Caladryl", "ProductUnit": "BOTTLE", "ProductImage": null, "PrescriptionOTC": "M", "IsLoose": 0, "ItemBasePrice": 55.91, "ItemQuantity": 1, "ItemDiscount": 8.39, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 47.52, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 47.52, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000008, "BatchNo": "CAM4274", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 1, "Unit": "Lotion", "SellerId": null, "IsSellerInventory": 0, "IsVirtual": 0, "DiscountPercent": 15, "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0 }], "8943": [{ "ProductId": 8943, "ProductName": "Calagy Lotion 100 ml", "ProdName": "Calagy", "ProductUnit": "BOTTLE", "ProductImage": "calagy-1406056933-10007091.jpg", "PrescriptionOTC": "M", "IsLoose": 0, "ItemBasePrice": 59.54, "ItemQuantity": 1, "ItemDiscount": 0, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 59.54, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": null, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000002, "BatchNo": "BH15001", "ExpiryDate": "2028-08-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "Schedule": null, "IsNonReturnable": 0, "IsTBProduct": 0, "DosageForm": null, "Brand": null, "IsScarcity": 0, "SltProdCategory": 0, "RefOrderId": null, "Size": 100, "Unit": "ml", "SellerId": null, "IsSellerInventory": 1, "IsVirtual": 0, "DiscountPercent": 0, "NotSellerInventoryCnt": 0, "SellerInventoryCnt": 1 }] }, "lotproductIds": [16814, 7724, 13154, 8943] } };
       if (cartData) {
         this.finalList = cartData['result']['itemlist'];
 
@@ -530,10 +502,7 @@ export class PlaceOrderComponent implements OnInit {
     // console.log('items to order', this.itemlist);
     // this.getReqPrsMeds(this.itemlist);
     this.CommonService.getOrderDetails('cartapp/load_order_details', fd).subscribe((data: any) => {
-      // console.log('order data', data);
-      // data = {"isAddrUpdate":0,"header_cart_detail":[{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":0,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB","BaseShippingCharge":49,"BaseShippingChargeCartVal":249,"BaseConvienceFee":10}],"ShippingAddressId":3582906,"BillingAddressId":3582906,"result":{"header":[{"CartAmount":307.91,"CartItemDiscount":46.19,"PromoDiscount":0,"CouponDiscount":0,"ShippingCharge":null,"RoundOfVal":0.28,"CartVal":264,"OrderPromoID":null,"PromoDesc":null,"CouponPromoId":null,"CouponPromoDesc":null,"NeedToAttachPrescription":"Y","CourierCharge":null,"ShippingAddressId":3582906,"BillingAddressId":3582906,"AreaId":null,"GroupPromoDiscount":null,"IsRedeemable":"N","CanCOD":"Y","DeliveryDelayedDay":0,"OTCBillAmount":0,"SSCurrencyValue":0,"WarehouseId":1,"IsPanIndia":0,"AppliedCouponCode":null,"EWalletValue":null,"SSCurrencyRedeemed":0,"OTCIsUrgent":null,"RemainingOTCUrgentBal":0,"XplorPoint":0,"XplorPointVal":0,"AppliedXplorPoint":0,"AppliedXplorPointVal":0,"IsShow":null,"OTCMEDBillAmount":47.52,"GiftCardAmount":0,"MedDiscPercent":null,"IsDeliveryChargeWaivedOff":1,"CartValForDeliveryCharge":262,"IsScarcity":0,"IsLocalCourierable":0,"SubscriptionId":null,"SubscriptionDiscount":null,"IsPrescriptionUploaded":1,"ConvienceFee":2,"SmallOrderFee":0,"ExpressDeliveryCharge":0,"IsPetCarePrescriptionUploaded":1,"NeedToAttachPetCarePrescription":"Y","HBName":"test HB"}],"coupons":[]}};
-
-      data = { "isAddrUpdate": 0, "header_cart_detail": [{ "CartAmount": 367.45, "CartItemDiscount": 46.19, "PromoDiscount": 0, "CouponDiscount": 0, "ShippingCharge": 0, "RoundOfVal": -0.26, "CartVal": 323, "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": 3582906, "BillingAddressId": 3582906, "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": 0, "SSCurrencyValue": 0, "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": 0, "XplorPointVal": 0, "AppliedXplorPoint": 0, "AppliedXplorPointVal": 0, "IsShow": null, "OTCMEDBillAmount": 107.06, "GiftCardAmount": 0, "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": 321, "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": 2, "SmallOrderFee": 0, "ExpressDeliveryCharge": 0, "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "Y", "HBName": "test HB", "BaseShippingCharge": 49, "BaseShippingChargeCartVal": 249, "BaseConvienceFee": 10 }], "ShippingAddressId": 3582906, "BillingAddressId": 3582906, "result": { "header": [{ "CartAmount": 367.45, "CartItemDiscount": 46.19, "PromoDiscount": 0, "CouponDiscount": 0, "ShippingCharge": null, "RoundOfVal": -0.26, "CartVal": 323, "OrderPromoID": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "NeedToAttachPrescription": "Y", "CourierCharge": null, "ShippingAddressId": 3582906, "BillingAddressId": 3582906, "AreaId": null, "GroupPromoDiscount": null, "IsRedeemable": "N", "CanCOD": "Y", "DeliveryDelayedDay": 0, "OTCBillAmount": 0, "SSCurrencyValue": 0, "WarehouseId": 1, "IsPanIndia": 0, "AppliedCouponCode": null, "EWalletValue": null, "SSCurrencyRedeemed": 0, "OTCIsUrgent": null, "RemainingOTCUrgentBal": 0, "XplorPoint": 0, "XplorPointVal": 0, "AppliedXplorPoint": 0, "AppliedXplorPointVal": 0, "IsShow": null, "OTCMEDBillAmount": 107.06, "GiftCardAmount": 0, "MedDiscPercent": null, "IsDeliveryChargeWaivedOff": 1, "CartValForDeliveryCharge": 321, "IsScarcity": 0, "IsLocalCourierable": 0, "SubscriptionId": null, "SubscriptionDiscount": null, "IsPrescriptionUploaded": 0, "ConvienceFee": 2, "SmallOrderFee": 0, "ExpressDeliveryCharge": 0, "IsPetCarePrescriptionUploaded": 0, "NeedToAttachPetCarePrescription": "Y", "HBName": "test HB" }], "coupons": [] } };
+      console.log('order data', data);
 
       this.headerDetails = data['header_cart_detail'][0];
       this.shippingId = data['ShippingAddressId'];
@@ -777,30 +746,6 @@ export class PlaceOrderComponent implements OnInit {
     };
 
     this.CommonService.getTotalAlterSave('product/getSubstituteProductListSaving', temp).subscribe((res: any) => {
-      res = {
-        "itemsList": [
-          {
-            "PreferredSubtitute": "Calagy Lotion 100 ml",
-            "ProductName": "Caladryl",
-            "ProductId": "13154",
-            "size": 1,
-            "brandUnitOfferPrice": 47.52,
-            "substituteProductOfferPrice": "59.54",
-            "substituteProductSize": 100,
-            "substituteUnitOfferPrice": 0.6,
-            "priceDiff": "46.92",
-            "savingPerUnit": "0.99",
-            "savingPercentage": "98.74%",
-            "OnCart": 1,
-            "MaxSaveValueOfProduct": "46.92"
-          }
-        ],
-        "GenericMinPercentage": 20,
-        "MaxSaveValue": 46,
-        "msgcode": 1,
-        "msgtext": "Success Msg Text",
-        "results": "Save ₹46 on your total cart by switching to Jito Recommended Alternatives"
-      };
       // console.log(res)
       if (res && res['msgcode'] == 1) {
         this.totalSavebyAlternative = res;
@@ -1292,7 +1237,6 @@ export class PlaceOrderComponent implements OnInit {
   getSavedPrescriptionForPet() {
     this.savedPrscListForPet = [];
     this.CommonService.getSavedPrescription('cartuserapp/getprescriptionListforPet').subscribe((data: any) => {
-      data = { "status": "success", "msg": "", "results": [{ "PrescriptionId": 997576, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "Honu", "CustName": "Anindya Acharya", "FilePath": "588795_39_02092026102741.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-09-02 10:27:41.887", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997521, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "Jio", "CustName": "Anindya Acharya", "FilePath": "588795_38_26082026163354.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 16:33:54.897", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997520, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "588795_34_26082026163354.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 16:33:54.543", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997515, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "588795_34_26082026144929.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 14:49:29.850", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997502, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "prescription_1787724276_306848.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 11:34:37.003", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997501, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "prescription_1787724106_592102.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 11:31:47.367", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997499, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "prescription_1787665052_630663.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 11:05:50.200", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997497, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "prescription_1787665052_630663.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 10:53:48.623", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997496, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "prescription_1787721825_419667.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-08-26 10:53:46.260", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997055, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "Jio", "CustName": "Anindya Acharya", "FilePath": "588795_38_29052026154318.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-05-29 15:43:19.387", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }, { "PrescriptionId": 997054, "CustEmailId": null, "CustMobileNo": 9836370209, "MyFamilyId": null, "PatientName": "test pet", "CustName": "Anindya Acharya", "FilePath": "588795_34_29052026154318.pdf", "PrescriptionStatus": null, "IsValid": 1, "CreatedDate": "2026-05-29 15:43:18.673", "ItemsSlNo": null, "CheckedOutUser": null, "ReasonToDecline": null, "AlternativeContactNo": null, "IsEncrypted": null, "PrescriptionName": null, "RequestToLabAdmin": null }] };
       // console.log('saved prsc List', data, data['results']);
       if (data && data['status'] == 'success') {
         if (data['results'].length > 0) {
@@ -1309,95 +1253,6 @@ export class PlaceOrderComponent implements OnInit {
       // console.log('saved prsc List 2', this.savedPrscList);
     });
   }
-  // selectPrescription_bckp(evt: any) {
-  //   this.savedPrscFile = [];
-  //   this.selectedPrsc = [];
-  //   this.msgText = '';
-  //   let resp = this.imagesService.onSelectFile(evt, 4);
-  //   if (resp.msg == 'success') {
-  //     this.prscFiles = resp.fileDetails;
-  //     this.prscImages = resp.Images;
-  //     this.shippingContinue = true;
-  //   } else {
-  //     // alert(resp.msg);
-
-  //     this.msgText = resp.msg;
-  //     this.open.nativeElement.click();
-  //     this.prscFiles = [];
-  //     this.prscImages = [];
-  //     this.shippingContinue = false;
-  //   }
-  //   // console.log(resp);
-  //   if (this.savedPrscList.length > 0) {
-  //     let list: any = [];
-  //     this.savedPrscList.forEach((elm: any) => {
-  //       elm = { ...elm, checked: false };
-  //       list.push(elm);
-  //     });
-  //     this.savedPrscList = list;
-  //   }
-  // }
-
-
-
-  // assignPrescription_bckp(evnt: any) {
-  //   // debugger
-  //   // console.log('saved prsc', this.savedPrscList);
-  //   // console.log(evnt.target.checked, evnt.target.value);
-  //   if (evnt.target.checked == true) {
-  //     let item1 = this.savedPrscList.find(
-  //       (i: any) => i.PrescriptionId == evnt.target.value
-  //     );
-  //     this.selectedPrsc.push(item1);
-  //   } else {
-  //     const indx = this.selectedPrsc.findIndex(
-  //       (x: any) => x.PrescriptionId == evnt.target.value
-  //     );
-  //     this.selectedPrsc.splice(indx, 1);
-  //   }
-  // }
-
-  // setPrescriptionData() {
-  //   // debugger
-  //   // console.log('cdr', this.selectedPrsc);
-  //   this.prscFiles = [];
-  //   this.prscImages = [];
-  //   this.savedPrscFile = [];
-  //   this.shippingContinue = false;
-
-  //   if (this.selectedPrsc.length > 0) {
-  //     let files = [];
-  //     this.selectedPrsc.forEach((elm: any) => {
-  //       this.savedPrscFile.push({
-  //         PrescriptionId: elm.PrescriptionId,
-  //         PrescriptionName: elm.PrescriptionName,
-  //         PrescriptionDate: elm.PrescriptionDate,
-  //         FilePath: elm.FilePath,
-  //         MyFamilyId: elm.MyFamilyId,
-  //       });
-  //     });
-  //     this.shippingContinue = true;
-  //   }
-  //   this.closebuttonSVP.nativeElement.click();
-  //   // console.log(this.savedPrscFile);
-  // }
-
-  // cancelSVP() {
-  //   // this.prscFiles = [];
-  //   // this.prscImages = [];
-  //   this.savedPrscFile = [];
-  //   this.selectedPrsc = [];
-  //   this.shippingContinue = false;
-  //   this.closebuttonSVP.nativeElement.click();
-  //   if (this.savedPrscList.length > 0) {
-  //     let list: any = [];
-  //     this.savedPrscList.forEach((elm: any) => {
-  //       elm = { ...elm, checked: false };
-  //       list.push(elm);
-  //     });
-  //     this.savedPrscList = list;
-  //   }
-  // }
 
   selectPrescription(evt: any) {
     var file = evt.target.files[0];
@@ -1566,29 +1421,6 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  // showUploadedPresc_bckp() {
-  //   this.UploadedPrscList = [];
-  //   // this.uploadedPrsc.nativeElement.click();
-  //   this.modalloader = true;
-  //   this.CommonService.getNewUploadedPrsc('cartuserapp/getPrescriptionPreview').subscribe((res: any) => {
-  //   // let res = {"status":"success","msg":"","results":{"data":["https:\/\/res.aadharhealth.in\/test_uploads\/Prescription-2c729e8cc390aebff540bfb8bbc5a86b-1729520157181.jpg"],"message":"Prescription Listed","status":2000}}
-
-  //     if (res && res['status'] == 'success') {
-  //       // this.UploadedPrscList = res['results']['data']['prescriptionlist'];
-  //       this.UploadedPrscList = res['results']['data'];
-  //       this.showImgPath = this.UploadedPrscList[0];
-  //       this.modalloader = false;
-  //     }else{
-  //       this.showImgPath = '';
-  //       this.modalloader = false;
-  //     }
-  //   });
-  // }
-
-  // showImg_bckp(img: any) {
-  //   this.showImgPath = img;
-  // }
-
   showUploadedPresc() {
     this.UploadedPrscList = [];
     this.spinner.show();
@@ -1639,163 +1471,6 @@ export class PlaceOrderComponent implements OnInit {
     window.open(img.path);
   }
 
-
-  // continueShipping() {
-  //   this.spinner.show();
-  //   const formData = new FormData();
-  //   let uploadFiles: any = [];
-  //   this.msgText = '';
-
-  //   // ============ HANDLE HUMAN PRESCRIPTIONS ============
-  //   if (this.prscFiles.length > 0) {
-  //     uploadFiles = this.prscFiles;
-
-  //     for (var i = 0; i < uploadFiles.length; i++) {
-  //       formData.append('refFiles', uploadFiles[i]);
-  //     }
-
-  //     this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-  //     this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe((res: any) => {
-  //       // console.log(res);
-
-  //       if (res && res['msgcode'] == 1) {
-  //         let fd = new FormData();
-  //         let requestData = JSON.stringify(res['data']);
-  //         fd.append('prescriptionlist', requestData);
-  //         fd.append('use_pet_prescription', '0'); // 0 for human prescription
-
-  //         this.prscFiles = [];
-  //         this.savedPrscFile = [];
-
-  //         this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-  //           // console.log('CP update resData', resData)
-  //           if (resData['status'] == 'success') {
-  //             this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-  //             this.processOrderDetails();
-  //             // this.setShippingAddress(this.shippingId);
-  //           } else {
-  //             // alert('Somthing went wrong. Please try again');
-  //             this.msgText = 'Unable to process your request now, Please try after some time.';
-  //             this.open.nativeElement.click();
-  //             this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-  //           }
-  //         });
-  //         this.spinner.hide();
-  //       } else {
-  //         this.msgText = 'Some thing went wrong, Please try again.';
-  //         this.open.nativeElement.click();
-  //         this.spinner.hide();
-  //       }
-  //     });
-  //   } else if (this.savedPrscFile.length > 0) {
-  //     uploadFiles = this.savedPrscFile;
-
-  //     let fd = new FormData();
-  //     let requestData = JSON.stringify(uploadFiles);
-  //     fd.append('prescriptionlist', requestData);
-  //     fd.append('use_pet_prescription', '0'); // 0 for human prescription
-
-  //     this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-  //     this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-  //       // console.log('CP update resData', resData);
-
-  //       this.prscFiles = [];
-  //       this.savedPrscFile = [];
-  //       let list: any = [];
-  //       this.savedPrscList.forEach((elm: any) => {
-  //         elm = { ...elm, checked: false };
-  //         list.push(elm);
-  //       });
-  //       this.savedPrscList = list;
-  //       if (resData['status'] == 'success') {
-  //         this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-  //         this.processOrderDetails();
-  //         // this.setShippingAddress(this.shippingId);
-  //       } else {
-  //         this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-  //         // alert('Somthing went wrong. Please try again');
-  //         this.msgText = 'Unable to process your request now, Please try after some time.';
-  //         this.open.nativeElement.click();
-  //       }
-  //     });
-  //     this.spinner.hide();
-  //   } if (this.prscFilesPet.length > 0) {
-  //     // ============ HANDLE PET PRESCRIPTIONS ============
-  //     uploadFiles = this.prscFilesPet;
-
-  //     for (var i = 0; i < uploadFiles.length; i++) {
-  //       formData.append('refFiles', uploadFiles[i]);
-  //     }
-
-  //     this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-  //     this.CommonService.uploadprescription('upload/prescription/v2', formData).subscribe((res: any) => {
-
-  //       if (res && res['msgcode'] == 1) {
-  //         let fd = new FormData();
-  //         let requestData = JSON.stringify(res['data']);
-  //         fd.append('prescriptionlist', requestData);
-  //         fd.append('use_pet_prescription', '1'); // 1 for pet prescription
-
-  //         this.prscFilesPet = [];
-  //         this.savedPrscFilePet = [];
-
-  //         this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-  //           if (resData['status'] == 'success') {
-  //             this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-  //             this.processOrderDetails();
-  //           } else {
-  //             this.msgText = 'Unable to process your request now, Please try after some time.';
-  //             this.open.nativeElement.click();
-  //             this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-  //           }
-  //         });
-  //         this.spinner.hide();
-  //       } else {
-  //         this.msgText = 'Some thing went wrong, Please try again.';
-  //         this.open.nativeElement.click();
-  //         this.spinner.hide();
-  //       }
-  //     });
-  //   } else if (this.savedPrscFilePet.length > 0) {
-  //     uploadFiles = this.savedPrscFilePet;
-
-  //     let fd = new FormData();
-  //     let requestData = JSON.stringify(uploadFiles);
-  //     fd.append('prescriptionlist', requestData);
-  //     fd.append('use_pet_prescription', '1'); // 1 for pet prescription
-
-  //     this.webengageService.trackEvent('Prescription Upload Initiated', {})
-
-  //     this.CommonService.updatePrescriptionStatus('cartuserapp/updatePrescription', fd).subscribe((resData: any) => {
-
-  //       this.prscFilesPet = [];
-  //       this.savedPrscFilePet = [];
-  //       let list: any = [];
-  //       this.savedPrscListForPet.forEach((elm: any) => {
-  //         elm = { ...elm, checked: false };
-  //         list.push(elm);
-  //       });
-  //       this.savedPrscListForPet = list;
-  //       if (resData['status'] == 'success') {
-  //         this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': true })
-  //         this.processOrderDetails();
-  //       } else {
-  //         this.webengageService.trackEvent('Prescription Upload Completed', { 'Status': false })
-  //         this.msgText = 'Unable to process your request now, Please try after some time.';
-  //         this.open.nativeElement.click();
-  //       }
-  //     });
-  //     this.spinner.hide();
-  //   } if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length == 0) {
-  //     this.spinner.hide();
-  //     this.addShipping.nativeElement.click()
-  //   } else if (((this.headerDetails['IsPrescriptionUploaded'] == 1) || (this.headerDetails['IsPetCarePrescriptionUploaded'] == 1)) && this.addressList.length > 0) {
-  //     this.spinner.hide();
-  //   }
-  // }
   continueShipping() {
     this.spinner.show();
     this.msgText = '';
@@ -2022,22 +1697,6 @@ export class PlaceOrderComponent implements OnInit {
     return this.AddCardForm.controls;
   }
 
-  // getAdressById(addressId: number) {
-  //   let fd = new FormData();
-  //   fd.append('AddressId', addressId.toString());
-  //   this.CommonService.postData('cartuserapp/fetch_ship_bill_address', fd).subscribe((data: any) => {
-
-  //   });
-  // }
-
-  // getAddressList(){
-  //   this.profileService.getAllAddress('customers/address/manageAddress').subscribe((data: any) => {
-  //     // let data = {"result":{"rs":{"allAddressData":[{"AddressId":3317699,"UserId":603032,"NickName":"test","AddressType":"H","IsPrimary":0,"Addline":123,"Landmark":896,"City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700102,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":20,"IsLab":1,"CustContactNo":null,"RecepientName":null},{"AddressId":3317707,"UserId":603032,"NickName":"Animesh Banerjee","AddressType":"H","IsPrimary":0,"Addline":"RB Tower, Kestopur, Kolkata-700102","Landmark":"3 No health Camp","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700156,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":10,"IsLab":1,"CustContactNo":null,"RecepientName":null},{"AddressId":3317770,"UserId":603032,"NickName":"Sanjeev Aug 07","AddressType":0,"IsPrimary":1,"Addline":"Innovation Tower","Landmark":"Innovation Tower","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700156,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":10,"IsLab":1,"CustContactNo":null,"RecepientName":null},{"AddressId":3317771,"UserId":603032,"NickName":"Sanjeev Postman 1","AddressType":0,"IsPrimary":0,"Addline":"Innovation Tower 3","Landmark":"Innovation Tower Postman 3","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700156,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":10,"IsLab":1,"CustContactNo":null,"RecepientName":null},{"AddressId":3317774,"UserId":603032,"NickName":"Avik Sarkar","AddressType":"T","IsPrimary":0,"Addline":"R N Road, DumDum","Landmark":"Netaji Club","City":"Kolkata","AreaId":null,"ServiceArea":null,"FamilyId":null,"StateId":35,"StateName":"West Bengal","PinCode":700079,"CountryId":1,"CountryName":"India","IsDeleted":0,"WarehouseId":1,"MedDiscPercent":20,"IsLab":1,"CustContactNo":null,"RecepientName":null}],"CustomerType":"N"}}}
-  //     console.log(data, data['result']['rs']['allAddressData']);
-  //     this.addressList = data['result']['rs']['allAddressData'];
-  //   })
-  // }
-
   addAdrType(adrType: any, action: any) {
     // console.log(adrType);
     this.addressType = adrType;
@@ -2055,7 +1714,6 @@ export class PlaceOrderComponent implements OnInit {
   getAddressList() {
     // this.addressList = [];
     this.CommonService.getAllAddress('cartuserapp/getall_addresses').subscribe((data: any) => {
-      data = { "status": "success", "msg": "Address available", "data": { "all_address": [{ "AddressId": 3582892, "UserId": 588795, "NickName": "P Dey", "AddressType": "H", "IsPrimary": 0, "Addline": "C D N High School, chiterswar, Pachando, Jharkhand, India", "Landmark": "Near pachando middle school", "City": "Baharagora - East Singhbhum", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 15, "StateName": "Jharkhand", "PinCode": 832101, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 0, "CustContactNo": 9903191974, "RecepientName": null, "AddressName": null, "Latitude": 22.2244362, "Longitude": 86.79481589999999, "AddLine1": "CDNHSP Office" }, { "AddressId": 3582932, "UserId": 588795, "NickName": "pp", "AddressType": "H", "IsPrimary": 0, "Addline": "Padyarabettu Daivasthana, Hosangady, Karnataka, India", "Landmark": "null", "City": "Mangalore - Dakshina Kannada", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 16, "StateName": "Karnataka", "PinCode": 574197, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 0, "CustContactNo": 9989898989, "RecepientName": null, "AddressName": null, "Latitude": 13.0366564, "Longitude": 75.0848863, "AddLine1": 91 }, { "AddressId": 3582933, "UserId": 588795, "NickName": "work", "AddressType": "W", "IsPrimary": 0, "Addline": "Kochi International Airport (COK), Kerala, India", "Landmark": "null", "City": "Aluva - Ernakulam", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 17, "StateName": "Kerala", "PinCode": 683111, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 0, "CustContactNo": 6989898989, "RecepientName": null, "AddressName": null, "Latitude": 10.1532129, "Longitude": 76.3933204, "AddLine1": "91-3" }, { "AddressId": 3582871, "UserId": 588795, "NickName": "A Bhattacharya", "AddressType": "H", "IsPrimary": 0, "Addline": "Baidyabati Charushila Bose Balika Vidyalaya, Baidyapara, Baidyabati, West Bengal, India", "Landmark": "Girl's School", "City": "Hooghly", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 712222, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9804750934, "RecepientName": null, "AddressName": null, "Latitude": 22.781874500000004, "Longitude": 88.3240828, "AddLine1": "91-3 J N GUPTA LANE" }, { "AddressId": 3582886, "UserId": 588795, "NickName": "A Bhattacharya", "AddressType": "H", "IsPrimary": 0, "Addline": "Test 456", "Landmark": "Test Test", "City": "Hooghly", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 712222, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9804750934, "RecepientName": null, "AddressName": null, "Latitude": 0, "Longitude": 0, "AddLine1": "Test 123" }, { "AddressId": 3582904, "UserId": 588795, "NickName": "Test", "AddressType": "H", "IsPrimary": 0, "Addline": "Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India", "Landmark": "", "City": "Kolkata", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 700014, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9804750934, "RecepientName": null, "AddressName": "Work", "Latitude": 22.5655, "Longitude": 88.3702, "AddLine1": "" }, { "AddressId": 3582906, "UserId": 588795, "NickName": "sdooooo", "AddressType": "H", "IsPrimary": 0, "Addline": "Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India", "Landmark": "", "City": "Kolkata", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 700156, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9836370209, "RecepientName": null, "AddressName": null, "Latitude": 22.5655, "Longitude": 88.3702, "AddLine1": "" }, { "AddressId": 3582907, "UserId": 588795, "NickName": "work ", "AddressType": "H", "IsPrimary": 0, "Addline": "Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India", "Landmark": "", "City": "Kolkata", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 700014, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9804750934, "RecepientName": null, "AddressName": null, "Latitude": 22.5655, "Longitude": 88.3702, "AddLine1": 91 }, { "AddressId": 3582909, "UserId": 588795, "NickName": "TEST WORK", "AddressType": "O", "IsPrimary": 0, "Addline": "WRITERS BUILDING, Murgighata, B.B.D. Bagh, Kolkata, West Bengal 700001, India", "Landmark": "", "City": "Kolkata", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 700001, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9836370209, "RecepientName": null, "AddressName": null, "Latitude": 22.573895652906863, "Longitude": 88.34898271160006, "AddLine1": "Other Type" }, { "AddressId": 3582934, "UserId": 588795, "NickName": "other", "AddressType": "W", "IsPrimary": 1, "Addline": "Sealdah - B.R. Singh Hospital, Sealdah, Raja Bazar, Kolkata, West Bengal 700014, India", "Landmark": "", "City": "Kolkata", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 35, "StateName": "West Bengal", "PinCode": 700014, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": 18, "IsLab": 1, "CustContactNo": 9845656565, "RecepientName": null, "AddressName": null, "Latitude": 22.5655, "Longitude": 88.3702, "AddLine1": "other" }, { "AddressId": 3582863, "UserId": 588795, "NickName": "A Bhattacharya", "AddressType": "H", "IsPrimary": 1, "Addline": "Innovation Tower, DH Block(Newtown), Action Area 1D, Newtown, Chakpachuria, West Bengal, India", "Landmark": "Opposite of Candor Gate 2", "City": "Others", "AreaId": null, "ServiceArea": null, "FamilyId": null, "StateId": 37, "StateName": "Others", "PinCode": 700160, "CountryId": 1, "CountryName": "India", "IsDeleted": 0, "WarehouseId": 1, "MedDiscPercent": null, "IsLab": 1, "CustContactNo": 9836370209, "RecepientName": null, "AddressName": null, "Latitude": 22.5786885, "Longitude": 88.4808396, "AddLine1": "SastaSudar" }], "CustomerType": "N" } };
       if (data['data']['all_address'] != undefined) {
         // console.log(data, data['data']['all_address']);
         this.addressList = data['data']['all_address'];
@@ -2531,21 +2189,6 @@ export class PlaceOrderComponent implements OnInit {
       warehouseId: this.CommonService.WHId.toString(),
     };
     this.CommonService.getCatalogData('sspl/getdeliverychargeslot', temp).subscribe((response: any) => {
-      response = {
-        "msgcode": 1,
-        "OrderTitle": "Order Amount",
-        "DeliveryChargeTitle": "Delivery Charge",
-        "DeliveryChargeSlab": [
-          {
-            "MinAmount": 0,
-            "MaxAmount": 250,
-            "DeliveryCharge": 0,
-            "Range": "₹0 &  Above ",
-            "DeliveryChargeTxt": "Free Delivery"
-          }
-        ],
-        "msgtext": "Success Msg Text"
-      };
       // console.log('dl slot', response);
       if (response['msgcode'] == 1) {
         this.DeliveryChargeSlab = response['DeliveryChargeSlab'];
@@ -2563,17 +2206,6 @@ export class PlaceOrderComponent implements OnInit {
     let pincode = this.CommonService.PinCode;
     let warehouseId = this.CommonService.WHId.toString();
     this.CommonService.getHBDetails(`customer/v1/product/getsellername?pincode=${pincode}&whid=${warehouseId}&panindia=${panindia}`).subscribe((resp: any) => {
-      resp = {
-        "response_code": 200,
-        "message": "Success",
-        "data": {
-          "HBName": "test HB<br><br>0332356025844,03325905856/58,",
-          "HBId": 11010,
-          "HBMobileNo": "0332356025844,03325905856/58,",
-          "HBAddress": "HNBVKOYDXI , PinCode:: 700144",
-          "HBTitle": "Seller"
-        }
-      };
       // console.log(resp);
       if (resp && resp['response_code'] == 200) {
         let data = resp['data'];
@@ -2690,7 +2322,6 @@ export class PlaceOrderComponent implements OnInit {
     // this.isCheckedTmc = false;
     this.isCheckedTmc = true;
     this.CommonService.get_PG_List('cartapp/getpaymentoptions').subscribe((response: any) => {
-      response = { "data": { "pg_list": [{ "PGListingId": 47, "Title": "Cash On Delivery", "Key": "COD", "Image": null, "PgType": null, "Desc": null, "DisplaySeq": 1, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": null }, { "PGListingId": 48, "Title": "Cash on Delivery", "Key": "COD", "Image": "PAY-CASH.png", "PgType": null, "Desc": null, "DisplaySeq": 1, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": null }, { "PGListingId": 149, "Title": "UPI", "Key": "EASEBUZZ", "Image": "UPI.png", "PgType": "UPI", "Desc": "NULL", "DisplaySeq": 6, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "UPI" }, { "PGListingId": 151, "Title": "Net Banking", "Key": "EASEBUZZ", "Image": "netbanking.png", "PgType": "NB", "Desc": "NULL", "DisplaySeq": 7, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "NB" }, { "PGListingId": 153, "Title": "Credit Card", "Key": "EASEBUZZ", "Image": "creditcard.png", "PgType": "CC", "Desc": "NULL", "DisplaySeq": 8, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "CC" }, { "PGListingId": 155, "Title": "Debit Card", "Key": "EASEBUZZ", "Image": "debitcard.png", "PgType": "DC", "Desc": "NULL", "DisplaySeq": 9, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "DC" }, { "PGListingId": 157, "Title": "Wallet", "Key": "EASEBUZZ", "Image": "wallet.png", "PgType": "MW", "Desc": "NULL", "DisplaySeq": 9, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "MW" }, { "PGListingId": 159, "Title": "EMI", "Key": "EASEBUZZ", "Image": "emi.png", "PgType": "EMI", "Desc": "NULL", "DisplaySeq": 9, "IsDefault": 1, "GateWayPayMode": null, "LongDesc": null, "LongImage": null, "PayOption": "EMI" }, { "PGListingId": 61, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "PHONEPE", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }, { "PGListingId": 62, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "PHONEPE", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }, { "PGListingId": 68, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "PHONEPE", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }, { "PGListingId": 29, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "RAZORPAY", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }, { "PGListingId": 30, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "RAZORPAY", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }, { "PGListingId": 41, "Title": "UPI \/ Net Banking \/ Credit Card \/ Debit Card", "Key": "RAZORPAY", "Image": "razorpay_web.png", "PgType": "PG", "Desc": "NULL", "DisplaySeq": 10, "IsDefault": 1, "GateWayPayMode": "NULL", "LongDesc": "NULL", "LongImage": "NULL", "PayOption": "PG" }], "bank_list": [] }, "message": "", "response_code": 0 };
       if (response['response_code'] == 0) {
         // console.log('pg list', response);
         this.pglist = response['data']['pg_list'];
@@ -2791,64 +2422,6 @@ export class PlaceOrderComponent implements OnInit {
     // console.log(value);
   }
 
-  // placeOrder(data: any) {
-  //   // console.log(data);
-  //   // debugger
-  //   this.PGROW = data;
-  //   this.msgText = '';
-  //   if (this.isCheckedTmc == false) {
-  //     this.msgText = 'Please accept the Terms and Conditions and Privacy Policy to proceed.';
-  //     this.open.nativeElement.click();
-  //   } else {
-  //     this.productCheckoutStartedWebEngage(this.headerDetails, this.finalList)
-  //     if (data['Key'] == 'COD') {
-  //       // this.msgText = 'Processing your order do not refresh page or press back button';
-  //       // this.open.nativeElement.click();
-  //       this.msgText = '';
-  //       this.spinner.show();
-  //       let fd = new FormData();
-
-  //       fd.append('PaymentMethod', 'COD');
-  //       fd.append('EwalletUsed', '0');
-  //       if (this.useWallet == true) {
-  //         if (this.headerDetails.CartVal >= this.walletBalance) {
-  //           fd.append('WalletAmount', this.walletBalance);
-  //         } else {
-  //           fd.append('WalletAmount', this.headerDetails.CartVal);
-  //         }
-  //       } else {
-  //         fd.append('WalletAmount', '0');
-  //       }
-  //       if (this.headerDetails['NeedToAttachPrescription'] == 'Y') {
-  //         fd.append('Prescription_required', '1');
-  //       } else {
-  //         fd.append('Prescription_required', '0');
-  //       }
-  //       fd.append('ShipID', this.shippingId);
-  //       fd.append('IsLocalCourierable', this.headerDetails['IsLocalCourierable']);
-
-  //       this.CommonService.paymentInitiate('cartapp/online_payment_process', fd).subscribe((response: any) => {
-  //         // console.log('online_payment_process', response);
-
-  //         if (response['Status'] == 'Success') {
-  //           this.productCheckoutCompletedWebEngage(this.headerDetails, this.finalList, response['OrderData']['Order'])
-  //           this.orderSuccess(response);
-  //         } else {
-  //           this.msgText = response['StatusMsg'];
-  //           this.spinner.hide();
-  //           this.open.nativeElement.click();
-  //           // this.refundWallet();
-  //         }
-  //       });
-  //     } else {
-  //       // if(this.CommonService.EmailId == '' || this.CommonService.EmailId == null || this.CommonService.EmailId == undefined){
-  //       //   this.emailUpdate.nativeElement.click();
-  //       // } else {
-  //       this.processDgPay(data);
-  //       // }
-  //     }
-  //   }
-  // }
   placeOrder(data: any) {
     // console.log(data);
     // debugger
@@ -3318,38 +2891,6 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
-  // orderSuccess(response: any){
-  //   this.dbService.clear('cartItems').subscribe((res: any) => {
-  //     // console.log(res);
-  //     if (res == true) {
-  //       var form = document.createElement('form');
-  //       let obj = response['PGData']['FormData'];
-  //       form.setAttribute('action', response['PGData']['ActionUrl']);
-  //       form.setAttribute('id', 'submitForm');
-  //       form.setAttribute('method', 'POST');
-  //       document.body.appendChild(form);
-  //       let frmObj = <HTMLFormElement>document.getElementById('submitForm');
-  //       Object.keys(obj).forEach(function (key) {
-  //         let input = document.createElement("input");
-  //         input.setAttribute('type', "hidden");
-  //         input.setAttribute('name', key);
-  //         input.setAttribute('value', obj[key]);
-  //         frmObj.appendChild(input);
-  //       });
-  //       // this.CommonService.loaderFlg = false;
-  //       // csrf token
-  //     let sspl_csrf = this.cookieService.get('sspl_csrf');
-  //     let input = document.createElement("input");
-  //     input.setAttribute('type', "hidden");
-  //     input.setAttribute('name',"csrf_test_name");
-  //     input.setAttribute('value',sspl_csrf);
-  //     frmObj.appendChild(input);
-  //     // csrf token
-  //       frmObj.submit();
-  //     }
-  //   });
-  // }
-
   alphaOnly(event: any) {
     return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))
   };
@@ -3379,7 +2920,6 @@ export class PlaceOrderComponent implements OnInit {
   getLoyaltyBalance() {
     this.spinner.show();
     this.CommonService.getLoyaltyBalance('loyalty/get_loyalty_balance').subscribe((res: any) => {
-      res = { "data": { "total_cr": 25, "total_dr": 0, "expired_point": 0, "actual_balance": 25, "soft_redeemed_points": 0, "usable_balance": 25, "nearby_expiry_message": "10 coins expiring on 22 Mar 2027" }, "message": "Loyalty balance retrieved successfully", "response_code": "1" };
       if (res && res['response_code'] == 1) {
 
         this.loyaltyBalance = res['data']['usable_balance'];
@@ -3428,7 +2968,6 @@ export class PlaceOrderComponent implements OnInit {
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHBalance(`cfh/get_balance?search=${MobileNo}`).subscribe((res: any) => {
-      res = { "status": 0, "msg": "error", "data": "No beneficiary found matching the search" };
       if (res && res.status == 1) {
         this.cardBalance = res.data.searched_beneficiary_remaining_balance;
         // this.getTransationList();
@@ -3504,7 +3043,6 @@ export class PlaceOrderComponent implements OnInit {
     // let MobileNo = 7777777777; // for testing purpose
     // let res: any = {"status":1,"msg":"success","data":{"BeneficiaryId":47,"searched_beneficiary_remaining_balance":5763}}
     this.CommonService.getCFHApplicableAmt(`cfh/get_cfh_applicable_amt?search=${MobileNo}`).subscribe((res: any) => {
-      res = { "status": 0, "msg": null, "data": null };
       if (res && res.status == 200) {
         this.jitoItems = res.data.JitoItemsBreakdown;
         this.nonJitoItems = res.data.NonjitoItemsBreakdown;
@@ -3710,76 +3248,6 @@ export class PlaceOrderComponent implements OnInit {
     );
   }
 
-  // replaeAllSubstitude_bckp(){
-  //   // console.log(this.finalList)
-  //   // let checkOutData : any = []
-  //   localStorage.removeItem('toReplace');
-  //   let replacedSaved: any = [];
-  //   this.dbService.clear('cartItems').subscribe((successDeleted) => {
-  //     this.finalList.forEach((item: any) => {
-  //       if(item.PreferredSubtitute.length == 0){
-
-  //         this.addToLocalCart(item, item.ItemQuantity);
-
-  //       } else {
-  //         item.PreferredSubtitute.forEach((subs: any) => {
-
-  //           let addedNow = item.ItemQuantity * item.Size;
-  //           let tobeAdd = addedNow / subs.Size;
-  //           let alteQty = Math.ceil(tobeAdd);
-
-  //           let productId = subs.PreferredProductId;
-  //           let LotId = 0;
-  //           let CPId = 0;
-
-  //           replacedSaved.push({
-  //             altId: productId,
-  //             svngPerpck: subs.savePerStrip
-  //           })
-
-  //           let tmp = {
-  //             id: productId + '_' + CPId + '_' + LotId,
-  //             ProductId: parseInt(productId),
-  //             ProductName: subs.DisplayName,
-  //             CustProductName: '',
-  //             InteractiveHealthProfileId: '',
-  //             DosageRestriction: subs.DosageRestriction ? subs.DosageRestriction : 0,
-  //             OfferPrice: subs.CustOfferPrice,
-  //             ProductCount: alteQty,
-  //             ItemVal: subs.CustOfferPrice,
-  //             SSCurrencyValue: ".00",
-  //             Iscourierable: subs.IsCourierable ? subs.IsCourierable : 'N',
-  //             ProductImage: subs.ProductImage,
-  //             ProductPrice: subs.MRP,
-  //             PrescriptionOTC: item.PrescriptionOTC,
-  //             WarehouseId: this.CommonService.WHId,
-  //             CPId: 0,
-  //             MyFamilyId: 0,
-  //             PKLotId: '',
-  //             MfgGroup: subs.MfgGroup ? subs.MfgGroup : '',
-  //             ExpiryDate: subs.ExpiryDate ? subs.ExpiryDate : '',
-  //             ProductInteractiveModule: '',
-  //             ProductInteractiveSubModule: '',
-  //             IsNonReturnable: subs.IsNonReturnable ? subs.IsNonReturnable : 'N',
-  //             RefOrderId: 0,
-  //             Brand: '',
-  //             DiscountPercent: subs.CustDiscPercent
-  //           };
-
-  //           this.dbService.add('cartItems', tmp).subscribe((res: any) => {})
-
-  //         });
-  //       }
-  //     });
-
-  //     let d: Date = new Date();
-  //     this.cookieService.set('cartsynch', '0', d.getTime() + 86400 * 30, '/');
-  //     localStorage.setItem('toReplace', JSON.stringify(replacedSaved));
-  //     this.getAllRecord()
-  //   })
-
-  // }
-
   replaeAllSubstitude() {
     // console.log(this.finalList)
     localStorage.removeItem('toReplace');
@@ -3919,24 +3387,6 @@ export class PlaceOrderComponent implements OnInit {
     return Math.trunc(save);
   }
 
-  // addWebEngage(data: any){
-  //   let webData = {
-  //     'Product Name': data.ProductName,
-  //     'Category Name': '',
-  //     'Sub Category Name': '',
-  //     'Brand': data.MfgGroup? data.MfgGroup :'',
-  //     'Returnable': data.IsNonReturnable ? (data.IsNonReturnable == 1 ? false: true): false,
-  //     'Product Expiry Date': data.ExpiryDate,
-  //     'Delivery Pincode': this.CommonService.PinCode,
-  //     'Variant Selected': '',
-  //     'Quantity': data.ItemQuantity,
-  //     'Retail Price': data.OfferPrice,
-  //     'Discount Percentage': data.DiscountPercent,
-  //     'Price': data.ItemBasePrice,
-  //     'Image': data.ProductImage? data.ProductImage :'',
-  //   }
-  //   this.webengageService.trackEvent('Product Added To Cart', webData);
-  // }
 
   removeWebEngage(data: any) {
     let returnable: boolean = false;
@@ -4088,7 +3538,6 @@ export class PlaceOrderComponent implements OnInit {
   getLoyaltyEarnPointsAgainstCart() {
     console.log('getLoyaltyEarnPointsAgainstCart called');
     this.CommonService.getLoyaltyEarnPoints('loyalty/get_loyalty_earn_points').subscribe((res: any) => {
-      res = { "data": { "itemList": [{ "ProductId": 16814, "ProductName": "AB Flo SR Tab (10 Tab)", "ProdName": "AB Flo SR", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 135, "ItemQuantity": 1, "ItemDiscount": 20.25, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 114.75, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 114.75, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": "PetCare", "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000003, "BatchNo": "002B4A0A", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310423, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": 15, "Size": 10, "Unit": "Tablet", "SourceProductId": 10016178, "MfgGroup": "LUPIN LTD", "SaltName": "ACEBROPHYLLINE", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/", "DiscountPercent": 15, "DisplayName": "AB Flo SR Tab (10 Tab)", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 2 }, { "ProductId": 7724, "ProductName": "Arbitel AV Tab (10 Tab)", "ProdName": "Arbitel AV", "ProductUnit": "STRIP", "ProductImage": "arbitel-av-1406057171-10008135.jpg", "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 117, "ItemQuantity": 1, "ItemDiscount": 17.55, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 99.45, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 99.45, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000009, "BatchNo": "AAVH0016", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310423, "IsRedeemableProduct": 0, "RestrictedProduct": "Y", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": null, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": "H", "SltProdCategory": null, "CashDisc": 15, "Size": 10, "Unit": "Tablet", "SourceProductId": 10008135, "MfgGroup": "MICRO LABS LIMITED", "SaltName": "TELMISARTAN + ATORVASTATIN", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg", "DiscountPercent": 15, "DisplayName": "Arbitel AV Tab (10 Tab)", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 2 }, { "ProductId": 13154, "ProductName": "Caladryl Lotion 100 ml", "ProdName": "Caladryl", "ProductUnit": "BOTTLE", "ProductImage": null, "PrescriptionOTC": "O", "IsLoose": 0, "ItemBasePrice": 55.91, "ItemQuantity": 1, "ItemDiscount": 8.39, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 47.52, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 47.52, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000008, "BatchNo": "CAM4274", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": 15, "Size": 1, "Unit": "Lotion", "SourceProductId": 10013116, "MfgGroup": "PIRAMAL HEALTHCARE", "SaltName": "CALAMINE", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/", "DiscountPercent": 15, "DisplayName": "Caladryl Lotion 100 ml", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 1 }, { "ProductId": 8943, "ProductName": "Calagy Lotion 100 ml", "ProdName": "Calagy", "ProductUnit": "BOTTLE", "ProductImage": "calagy-1406056933-10007091.jpg", "PrescriptionOTC": "O", "IsLoose": 0, "ItemBasePrice": 59.54, "ItemQuantity": 1, "ItemDiscount": 0, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 59.54, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": null, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000002, "BatchNo": "BH15001", "ExpiryDate": "2028-08-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": null, "Size": 100, "Unit": "ml", "SourceProductId": 10007091, "MfgGroup": "BIOCHEM (GENERIC DIV)", "SaltName": "CALAMINE", "SellerId": null, "IsSellerInventory": 1, "IsJitoProduct": 1, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/calagy-1406056933-10007091.jpg", "DiscountPercent": 0, "DisplayName": "Calagy Lotion 100 ml", "NotSellerInventoryCnt": 0, "SellerInventoryCnt": 1, "LoyaltyPoints": 6 }], "TotalLoyaltyPoints": 11 }, "message": "Loyalty redemption points retrieved successfully", "response_code": "1" };
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyPointsOfCarts = res['data'];
@@ -4115,55 +3564,6 @@ export class PlaceOrderComponent implements OnInit {
   getLoyaltyRedemptionPointsAgainstCart() {
     console.log('getLoyaltyRedemptionPointsAgainstCart called');
     this.CommonService.getLoyaltyRedemptionPoints('loyalty/get_loyalty_redemption_points').subscribe((res: any) => {
-      res = {
-        "data": {
-          "CustUserId": 588795,
-          "PointValue": 1,
-          "AvailablePoints": 25,
-          "TotalOrderValue": 321.26,
-          "EligibleOrderValue": 59.54,
-          "RedemptionCapPercent": 25,
-          "MaximumRedeemablePoints": 15,
-          "UsableRedeemablePoints": 15,
-          "RedemptionEnabled": 1,
-          "EligibleItems": [
-            {
-              "ProductId": "16814",
-              "ProductName": "AB Flo SR Tab (10 Tab)",
-              "CategoryLabel": "BRANDED",
-              "Amount": 114.75,
-              "Redeemable": false,
-              "RedeemableValue": 0
-            },
-            {
-              "ProductId": "7724",
-              "ProductName": "Arbitel AV Tab (10 Tab)",
-              "CategoryLabel": "BRANDED",
-              "Amount": 99.45,
-              "Redeemable": false,
-              "RedeemableValue": 0
-            },
-            {
-              "ProductId": "13154",
-              "ProductName": "Caladryl Lotion 100 ml",
-              "CategoryLabel": "OTC",
-              "Amount": 47.52,
-              "Redeemable": false,
-              "RedeemableValue": 0
-            },
-            {
-              "ProductId": "8943",
-              "ProductName": "Calagy Lotion 100 ml",
-              "CategoryLabel": "JITO",
-              "Amount": 59.54,
-              "Redeemable": true,
-              "RedeemableValue": 14.885
-            }
-          ]
-        },
-        "message": "Loyalty redemption points retrieved successfully",
-        "response_code": "1"
-      };
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyRedeemableOptions = res['data'];

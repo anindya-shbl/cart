@@ -11,41 +11,41 @@ export class CommonService {
   // ============= live ==========================
 
   // public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
-  public baseurl = 'https://sastasundar.com/';
-  public custwebcartUrl = 'https://sastasundar.com/index.php/customercart/';
-  public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
-  public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
-  public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
+  // public baseurl = 'https://sastasundar.com/';
+  // public custwebcartUrl = 'https://sastasundar.com/index.php/customercart/';
+  // public onlineplaceorderUrl = 'https://sastasundar.com/index.php/cart/online_payment_process';
+  // public codsuccessUrl = 'https://sastasundar.com/index.php/customercart/order_success';
+  // public promoUrl = 'https://search.sastasundar.com/coupon/find_applicable_promos';
   // public catalogUrl = 'https://serv-catalog.sastasundar.com/';
   // public searchUrl = 'https://search.sastasundar.com/';
-  public ImageUrl = 'https://asset.sastasundar.com/';
-  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  // public ImageUrl = 'https://asset.sastasundar.com/';
+  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
 
   // ============= development ==========================
 
-  // public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
-  // public baseurl = 'https://stage.sastasundar.com/';
-  // public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
-  // public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
-  // public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
-  // public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
-  // public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
+  public webcartUrl = 'https://stage.sastasundar.com/index.php/webapi/';
+  public baseurl = 'https://stage.sastasundar.com/';
+  public custwebcartUrl = 'https://stage.sastasundar.com/index.php/customercart/';
+  public onlineplaceorderUrl = 'https://stage.sastasundar.com/index.php/cart/online_payment_process';
+  public codsuccessUrl = 'https://stage.sastasundar.com/index.php/customercart/order_success';
+  public promoUrl ='https://stage-search.sastasundar.com/coupon/find_applicable_promos';
+  public catalogUrl = 'https://stage-serv-catalog.sastasundar.com/';
   public searchUrl = 'https://stage-search.sastasundar.com/';
-  // public ImageUrl = 'https://res.sastasundar.com/';
-  // public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
+  public ImageUrl = 'https://res.sastasundar.com/';
+  public paymentImageUrl = 'https://asset.sastasundar.com/incom/PaymentgatewayImages/web/';
 
 
 
 
   // ============= local ==========================
-  public webcartUrl = 'http://192.168.5.236/sspl_com/index.php/webapi/';
+  // public webcartUrl = 'http://192.168.5.236/sspl_com/index.php/webapi/';
   // public baseurl = 'http://192.168.5.236/sspl_com/';
   // public custwebcartUrl = 'http://192.168.5.236/sspl_com/index.php/customercart/';
   // public onlineplaceorderUrl = 'http://192.168.5.236/sspl_com/index.php/cart/online_payment_process';
   // public codsuccessUrl = 'http://192.168.5.236/sspl_com/index.php/customercart/order_success';
   // public promoUrl ='http://192.168.5.192:4200/coupon/find_applicable_promos';
-  public catalogUrl = 'http://192.168.5.236:8003/';
+  // public catalogUrl = 'http://192.168.5.236:8003/';
   // // public searchUrl = 'http://192.168.5.192:4200/'; // local search
   // // public searchUrl = 'https://stage-search.sastasundar.com/'; // stage
   // public searchUrl = 'https://search.sastasundar.com/'; // live
@@ -454,22 +454,21 @@ export class CommonService {
   applyRedemptionOnCart(url: any) {
     let getUrl = this.webcartUrl + url;
     // getUrl = 'https://stage.sastasundar.com/index.php/webapi/loyalty/apply_loyalty_redemption_points';
-    //return this.http.post(getUrl,[]);
-    return this.http.get(getUrl);
+    return this.http.post(getUrl,[]);
+    // return this.http.get(getUrl);
   }
   getRedemptionStatus(url: string) {
     return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
   }
 
   removeRedemptionFromRedis(url: string) {
-    // return this.http.post<any>(this.webcartUrl + 'webapi/' + url, new FormData(), { withCredentials: true });
     return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
 
   }
 
   removeRedemptionOnCart(url: string) {
-    // return this.http.post<any>(this.webcartUrl + 'webapi/' + url, new FormData(), { withCredentials: true });
-    return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
+    return this.http.post<any>(this.webcartUrl + 'webapi/' + url, new FormData(), { withCredentials: true });
+    // return this.http.get<any>(this.webcartUrl + 'webapi/' + url, { withCredentials: true });
 
   }
 }

@@ -144,10 +144,12 @@
                               src="https://asset.sastasundar.com/incom/jito-health/assets/Images/jito-favicon.png"
                               alt="" width="24px">
                             &nbsp;{{getMaxSavings(item.PreferredSubtitute)}}% Lower Price Jito Alternative Available 
-                          </span>
-                          <span *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="Earn">
+
+                            <span *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="Earn fleft">
                             <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px;"/>
                             &nbsp;Earn &#8377;{{item.PreferredSubtitute[0].loyaltyCoins}} SS Coins</span>
+                          </span>
+                          
                           <span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                         </div>
                       </div>
@@ -1215,23 +1217,23 @@
                 <div class="SSUsingHeading">
                   <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:32px" /> 
                 
-                <div>
+                <div class="Wi100">
                   <div *ngIf="!LoyaltyRedeemableOptions.UsableRedeemablePoints">
                     <div class="fs-3" > Add <b>Jito alternative medicines</b> to redeem SS Coins</div>
                   </div>
                   <div class="buttontoggle" *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && LoyaltyRedeemableOptions.UsableRedeemablePoints>0">
-                    <div style="width:70%"> Save <b>&#8377;{{LoyaltyRedeemableOptions.UsableRedeemablePoints}}</b> Using SS Coins </div>
+                    <div class=""> Save <b>&#8377;{{LoyaltyRedeemableOptions.UsableRedeemablePoints}}</b> Using SS Coins </div>
                     <!-- <button class="addBtn" type="button" (click)="applyRedemption()">Click</button> -->
                     <div class="toggle-switch">
                       <input type="checkbox" id="toggle" (click)="applyRedemption()">
                       <label for="toggle" class="sliderCheck"></label>
                     </div>
                   </div>
-                  <span>Current Balance: &#8377;{{loyaltyBalance}}</span>
+                  <span class="cBalance">Current Balance: &#8377;{{loyaltyBalance}}</span>
                 </div>
                 </div>
               </div>
-              
+
         </div>
       </div>
     </div>
@@ -1986,8 +1988,10 @@
         </div>
         <div class="Alternative-body">
           <ng-container *ngFor="let altr of altrPrdcts.PreferredSubtitute">
-            <div style="text-align:center;" *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'">
-              <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />Earn &#8377;{{altr.loyaltyCoins}} SS Coins
+            <div class="text-center d-flex justify-content-center">
+            <span class="Earn mb-2" *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'">
+              <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px; margin-right: 5px;" />Earn &#8377;{{altr.loyaltyCoins}} SS Coins
+            </span>
             </div>
             <div class="border rounded item-shadow position-relative">
               <div class="tagline">Save {{altr.savingsPercent}}%</div>

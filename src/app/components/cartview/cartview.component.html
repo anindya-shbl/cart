@@ -63,6 +63,11 @@
                     <div *ngIf="item.DiscountPercent > 0" class="text-orange fs-6 fw-6 me-2">{{item.DiscountPercent}}%
                       Off</div>
                     <div class="text-body-tertiary fs-3">(* Inclusive of all taxes)</div>
+                    <div *ngIf="(item.LoyaltyPoints>0) && CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="mb-2">
+                        <strong class="text-success">
+                          <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />&nbsp; Earn {{item.LoyaltyPoints}}
+                        </strong>
+                    </div>
                   </div>
                 </div>
               </div>

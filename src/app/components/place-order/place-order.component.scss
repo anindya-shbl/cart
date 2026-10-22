@@ -124,7 +124,7 @@
 }
 
 .accordion-item {
-    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
     box-shadow: 0px 1px 3px 2px rgba(140, 149, 159, 0.15);
 
     h2 {
@@ -734,3 +734,97 @@
   color: #6d4c41; /* muted brown */
   line-height: 1.5;
 }
+
+.SSCoins {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e4e7ec;
+            background-color: #f2faff;
+      }
+      .SSCoins .SSCoinHeading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #344054;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 6px;
+      }
+      .SSCoins .SSCoin-text {
+            color: #667085;
+            font-size: 11px;
+      }
+      .SSUsing {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e4e7ec;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px;
+      }
+      .SSUsing .SSUsingHeading {
+            font-size: 14px;
+            font-weight: 600;
+            color: #344054;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+      }
+      .buttontoggle {
+        display:flex; 
+        align-items:center; 
+        justify-content: space-between;
+        position: relative;
+      }
+    .toggle-switch {
+            position: absolute;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            top: 10px;
+            right:-100%;
+    }
+    .toggle-switch input {
+            display: none;
+    }
+    .sliderCheck {
+            position: absolute;
+            inset: 0;
+            background-color: #cbd1d7;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s ease;
+    }
+    .sliderCheck::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 5px;
+            top: 4px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: 0.3s ease;
+    }
+    /* ON State */
+    .toggle-switch input:checked + .sliderCheck {
+            background-color: #2196f3;
+    }
+    .toggle-switch input:checked + .sliderCheck::before {
+            transform: translateX(36px);
+            left: -10px;
+    }
+
+    .Earn {
+        background: #FFFFFF;
+        background: linear-gradient(115deg, rgba(255, 255, 255, 1) 0%, rgba(229, 243, 255, 1) 100%);
+        border-radius: 20px;
+        padding: 2px 8px;
+        display: flex;
+        align-items: center;
+        color: #0168D9;
+    }

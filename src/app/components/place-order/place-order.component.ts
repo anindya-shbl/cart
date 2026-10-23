@@ -4099,7 +4099,7 @@ export class PlaceOrderComponent implements OnInit {
     console.log('LoyaltyPointsOfCarts', this.LoyaltyPointsOfCarts);
     this.finalList = this.finalList.map((item: any) => {
       const match = this.LoyaltyPointsOfCarts.itemList.find(
-        (loyaltyItem: any) => loyaltyItem.ProductId === Number(item.ProductId)
+        (loyaltyItem: any) => Number(loyaltyItem.ProductId) === Number(item.ProductId)
       );
 
       return {

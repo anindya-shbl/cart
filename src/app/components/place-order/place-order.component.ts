@@ -4226,7 +4226,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   private updateCartFromRedemption(res: any) {
-    const header = res['data']?.response?.header;
+    const header = res['data']?.header;
     if (!header) {
       console.warn('No cart header in redemption response', res);
       return;

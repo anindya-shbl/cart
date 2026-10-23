@@ -325,14 +325,12 @@ export class PlaceOrderComponent implements OnInit {
       } else {
         this.allReplaceArr = [];
       }
-      this.getLoyaltyEarnPointsAgainstCart();
-      this.getLoyaltyRedemptionPointsAgainstCart();
       this.cartViewWebEngage(this.allItemsList);
       if (this.allItemsList.length > 0) {
         if (cartSynchCall == '0') {
-          this.checkoutCart(res);
+          this.checkoutCart(res, () => this.refreshLoyaltyPoints());
         } else {
-          this.getCartDetails();
+          this.getCartDetails(() => this.refreshLoyaltyPoints());
         }
       } else {
         let d: Date = new Date();
@@ -396,7 +394,7 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  checkoutCart(res: any) {
+  checkoutCart(res: any, afterCartLoad?: () => void) {
     // this.isLoading = true;
     this.spinner.show();
     this.closeAllaltMod.nativeElement.click();
@@ -455,16 +453,15 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
-          this.pushLoyaltyPoints();
-
         }
 
         this.processLocalCart(this.finalList);
       }
+      afterCartLoad?.();
     });
   }
 
-  getCartDetails() {
+  getCartDetails(afterCartLoad?: () => void) {
     // debugger
     // this.isLoading = true;
     this.spinner.show();
@@ -506,10 +503,10 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
-          this.pushLoyaltyPoints();
         }
         this.processLocalCart(this.finalList);
       }
+      afterCartLoad?.();
     });
   }
 
@@ -4085,13 +4082,14 @@ export class PlaceOrderComponent implements OnInit {
     this.compareAlter = '';
   }
 
-  getLoyaltyEarnPointsAgainstCart() {
+  getLoyaltyEarnPointsAgainstCart(onSuccess?: () => void) {
     console.log('getLoyaltyEarnPointsAgainstCart called');
     this.CommonService.getLoyaltyEarnPoints('loyalty/get_loyalty_earn_points').subscribe((res: any) => {
       res = { "data": { "itemList": [{ "ProductId": 16814, "ProductName": "AB Flo SR Tab (10 Tab)", "ProdName": "AB Flo SR", "ProductUnit": "Strip", "ProductImage": null, "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 135, "ItemQuantity": 1, "ItemDiscount": 20.25, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 114.75, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 114.75, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": "PetCare", "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000003, "BatchNo": "002B4A0A", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310423, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": 15, "Size": 10, "Unit": "Tablet", "SourceProductId": 10016178, "MfgGroup": "LUPIN LTD", "SaltName": "ACEBROPHYLLINE", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/", "DiscountPercent": 15, "DisplayName": "AB Flo SR Tab (10 Tab)", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 2 }, { "ProductId": 7724, "ProductName": "Arbitel AV Tab (10 Tab)", "ProdName": "Arbitel AV", "ProductUnit": "STRIP", "ProductImage": "arbitel-av-1406057171-10008135.jpg", "PrescriptionOTC": "P", "IsLoose": 0, "ItemBasePrice": 117, "ItemQuantity": 1, "ItemDiscount": 17.55, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 99.45, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 99.45, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000009, "BatchNo": "AAVH0016", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": 1310423, "IsRedeemableProduct": 0, "RestrictedProduct": "Y", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": null, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": "H", "SltProdCategory": null, "CashDisc": 15, "Size": 10, "Unit": "Tablet", "SourceProductId": 10008135, "MfgGroup": "MICRO LABS LIMITED", "SaltName": "TELMISARTAN + ATORVASTATIN", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/arbitel-av-1406057171-10008135.jpg", "DiscountPercent": 15, "DisplayName": "Arbitel AV Tab (10 Tab)", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 2 }, { "ProductId": 13154, "ProductName": "Caladryl Lotion 100 ml", "ProdName": "Caladryl", "ProductUnit": "BOTTLE", "ProductImage": null, "PrescriptionOTC": "O", "IsLoose": 0, "ItemBasePrice": 55.91, "ItemQuantity": 1, "ItemDiscount": 8.39, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 47.52, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": 47.52, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000008, "BatchNo": "CAM4274", "ExpiryDate": "2030-01-01", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": 15, "Size": 1, "Unit": "Lotion", "SourceProductId": 10013116, "MfgGroup": "PIRAMAL HEALTHCARE", "SaltName": "CALAMINE", "SellerId": null, "IsSellerInventory": 0, "IsJitoProduct": 0, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/", "DiscountPercent": 15, "DisplayName": "Caladryl Lotion 100 ml", "NotSellerInventoryCnt": 1, "SellerInventoryCnt": 0, "LoyaltyPoints": 1 }, { "ProductId": 8943, "ProductName": "Calagy Lotion 100 ml", "ProdName": "Calagy", "ProductUnit": "BOTTLE", "ProductImage": "calagy-1406056933-10007091.jpg", "PrescriptionOTC": "O", "IsLoose": 0, "ItemBasePrice": 59.54, "ItemQuantity": 1, "ItemDiscount": 0, "CouponDiscount": 0, "SSCurrencyValue": 0, "ItemVal": 59.54, "SourceTarget": "S", "PromoId": null, "PromoDesc": null, "CouponPromoId": null, "CouponPromoDesc": null, "PrescriptionId": null, "IntentQty": null, "IntentRequired": null, "OfferPrice": null, "IsConsiderable": 1, "DosageAlert": null, "DosageRestriction": null, "IsCourierable": 1, "CustomProductName": "", "InteractiveModule": null, "InteractiveHealthProfileId": null, "InteractiveSubModule": null, "PKLotId": 10000002, "BatchNo": "BH15001", "ExpiryDate": "2028-08-31", "MfgDate": null, "CartItemId": null, "CanCOD": "Y", "DeliveryDelayedDay": null, "CPId": null, "IsRedeemableProduct": 0, "RestrictedProduct": "N", "RefOrderId": null, "IsNonReturnable": 0, "IsTBProduct": 0, "Brand": null, "DosageForm": null, "IsScarcity": 0, "Schedule": null, "SltProdCategory": 0, "CashDisc": null, "Size": 100, "Unit": "ml", "SourceProductId": 10007091, "MfgGroup": "BIOCHEM (GENERIC DIV)", "SaltName": "CALAMINE", "SellerId": null, "IsSellerInventory": 1, "IsJitoProduct": 1, "IsGenericProduct": 0, "IsVirtual": 0, "ProductImageUrl": "https:\/\/stage-ss-res.genupathlabs.com\/incom\/images\/product\/thumb\/calagy-1406056933-10007091.jpg", "DiscountPercent": 0, "DisplayName": "Calagy Lotion 100 ml", "NotSellerInventoryCnt": 0, "SellerInventoryCnt": 1, "LoyaltyPoints": 6 }], "TotalLoyaltyPoints": 11 }, "message": "Loyalty redemption points retrieved successfully", "response_code": "1" };
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyPointsOfCarts = res['data'];
+        onSuccess?.();
       }
     })
   }
@@ -4112,7 +4110,20 @@ export class PlaceOrderComponent implements OnInit {
     console.log('after', this.finalList);
   }
 
-  getLoyaltyRedemptionPointsAgainstCart() {
+  private refreshLoyaltyPoints() {
+    let completedRequests = 0;
+    const onSuccess = () => {
+      completedRequests++;
+      if (completedRequests === 2) {
+        this.pushLoyaltyPoints();
+      }
+    };
+
+    this.getLoyaltyEarnPointsAgainstCart(onSuccess);
+    this.getLoyaltyRedemptionPointsAgainstCart(onSuccess);
+  }
+
+  getLoyaltyRedemptionPointsAgainstCart(onSuccess?: () => void) {
     console.log('getLoyaltyRedemptionPointsAgainstCart called');
     this.CommonService.getLoyaltyRedemptionPoints('loyalty/get_loyalty_redemption_points').subscribe((res: any) => {
       res = {
@@ -4168,6 +4179,7 @@ export class PlaceOrderComponent implements OnInit {
       if (res && res['response_code'] == "1") {
         this.LoyaltyRedeemableOptions = res['data'];
         console.log(this.LoyaltyRedeemableOptions.RedemptionEnabled)
+        onSuccess?.();
       }
     })
   }

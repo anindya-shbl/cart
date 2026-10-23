@@ -300,14 +300,12 @@ export class PlaceOrderComponent implements OnInit {
       } else {
         this.allReplaceArr = [];
       }
-      this.getLoyaltyEarnPointsAgainstCart();
-      this.getLoyaltyRedemptionPointsAgainstCart();
       this.cartViewWebEngage(this.allItemsList);
       if (this.allItemsList.length > 0) {
         if (cartSynchCall == '0') {
-          this.checkoutCart(res);
+          this.checkoutCart(res, () => this.refreshLoyaltyPoints());
         } else {
-          this.getCartDetails();
+          this.getCartDetails(() => this.refreshLoyaltyPoints());
         }
       } else {
         let d: Date = new Date();
@@ -371,7 +369,7 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  checkoutCart(res: any) {
+  checkoutCart(res: any, afterCartLoad?: () => void) {
     // this.isLoading = true;
     this.spinner.show();
     this.closeAllaltMod.nativeElement.click();
@@ -430,16 +428,15 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
-          this.pushLoyaltyPoints();
-
         }
 
         this.processLocalCart(this.finalList);
       }
+      afterCartLoad?.();
     });
   }
 
-  getCartDetails() {
+  getCartDetails(afterCartLoad?: () => void) {
     // debugger
     // this.isLoading = true;
     this.spinner.show();
@@ -478,10 +475,10 @@ export class PlaceOrderComponent implements OnInit {
           this.getCustomerCoupon();
           this.getSaveForLaterList();
           this.getExpectedDeliveryDate();
-          this.pushLoyaltyPoints();
         }
         this.processLocalCart(this.finalList);
       }
+      afterCartLoad?.();
     });
   }
 
@@ -3535,12 +3532,13 @@ export class PlaceOrderComponent implements OnInit {
     this.compareAlter = '';
   }
 
-  getLoyaltyEarnPointsAgainstCart() {
+  getLoyaltyEarnPointsAgainstCart(onSuccess?: () => void) {
     console.log('getLoyaltyEarnPointsAgainstCart called');
     this.CommonService.getLoyaltyEarnPoints('loyalty/get_loyalty_earn_points').subscribe((res: any) => {
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyPointsOfCarts = res['data'];
+        onSuccess?.();
       }
     })
   }
@@ -3561,13 +3559,27 @@ export class PlaceOrderComponent implements OnInit {
     console.log('after', this.finalList);
   }
 
-  getLoyaltyRedemptionPointsAgainstCart() {
+  private refreshLoyaltyPoints() {
+    let completedRequests = 0;
+    const onSuccess = () => {
+      completedRequests++;
+      if (completedRequests === 2) {
+        this.pushLoyaltyPoints();
+      }
+    };
+
+    this.getLoyaltyEarnPointsAgainstCart(onSuccess);
+    this.getLoyaltyRedemptionPointsAgainstCart(onSuccess);
+  }
+
+  getLoyaltyRedemptionPointsAgainstCart(onSuccess?: () => void) {
     console.log('getLoyaltyRedemptionPointsAgainstCart called');
     this.CommonService.getLoyaltyRedemptionPoints('loyalty/get_loyalty_redemption_points').subscribe((res: any) => {
       console.log(res);
       if (res && res['response_code'] == "1") {
         this.LoyaltyRedeemableOptions = res['data'];
         console.log(this.LoyaltyRedeemableOptions.RedemptionEnabled)
+        onSuccess?.();
       }
     })
   }

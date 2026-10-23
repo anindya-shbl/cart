@@ -1084,11 +1084,16 @@ export class PlaceOrderComponent implements OnInit {
     this.saveForLaterList = [];
     this.CommonService.getSavedForLaterList('cart/saveForLaterListNew').subscribe(
       (rsp: any) => {
+        // rsp = {"status":200,"message":"success","data":{"status":"success","msg":"","Med":null,"Otc":null}};
         if (rsp['status'] == 200) {
-          let TempsaveForLaterMedList = [
-            ...rsp['data']['Med'],
-            ...rsp['data']['Otc'],
-          ];
+          const medList = Array.isArray(rsp?.data?.Med) ? rsp.data.Med : [];
+          const otcList = Array.isArray(rsp?.data?.Otc) ? rsp.data.Otc : [];
+
+          const TempsaveForLaterMedList = [...medList, ...otcList];
+          // let TempsaveForLaterMedList = [
+          //   ...rsp['data']['Med'],
+          //   ...rsp['data']['Otc'],
+          // ];
           this.saveForLaterList = TempsaveForLaterMedList;
         }
         // console.log(this.saveForLaterList);
@@ -1246,13 +1251,15 @@ export class PlaceOrderComponent implements OnInit {
 
       this.http.post(this.CommonService.promoUrl, fd, {
         headers: { 'Content-Type': 'application/json' },
-      })
-        .subscribe((results: any) => {
+      }).subscribe((results: any) => {
           // this.autoApplyXplorPoint();
-          if (
-            results['applicablePromos'] != '' &&
-            results['applicablePromos'].length > 0
-          ) {
+          // results = {"applicablePromos":[]};
+          const applicablePromos = results?.applicablePromos;
+          // if (
+          //   results['applicablePromos'] != '' &&
+          //   results['applicablePromos'].length > 0
+          // ) 
+          if (Array.isArray(applicablePromos) && applicablePromos.length > 0){
             for (let i = 0; i < results['applicablePromos'].length; i++) {
               let promo = {
                 CouponName: results['applicablePromos'][i]['PromoName'],

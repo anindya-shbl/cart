@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, Subscription, switchMap } from 'rxjs';
+import { map, Subscription, switchMap, tap } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { CookieService } from 'ngx-cookie-service';
@@ -3593,7 +3593,7 @@ export class PlaceOrderComponent implements OnInit {
 
 
 
-  applyRedemption() {
+  applyRedemption_bkp() {
     console.log('applyRedemption called');
 
     this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
@@ -3641,5 +3641,47 @@ export class PlaceOrderComponent implements OnInit {
     this.headerDetailsRedemption = header;
     this.headerDetails.CartVal = header.CartVal;
 
+  }
+
+
+
+
+  applyRedemption() {
+    console.log('applyRedemption called');
+
+    this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
+      switchMap((status: any) => {
+        const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
+
+        if (!isActive) {
+          return this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').pipe(
+            tap(r => console.log('[apply] response', r)),
+            map((res: any) => ({ step: 'apply', res }))
+          );
+        }
+
+        return this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
+          tap(r => console.log('[redis-clear] response', r)),
+          switchMap((redisRes: any) => {
+            if (redisRes?.response_code != 1) {
+              throw new Error('Failed to clear redemption from Redis');
+            }
+            return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
+          }),
+          tap(r => console.log('[remove-cart] response', r)),
+          map((res: any) => ({ step: 'remove', res }))
+        );
+      })
+    ).subscribe({
+      next: ({ step, res }) => {
+        console.log('next fired for step:', step);
+        if (!res || res['response_code'] != 1) {
+          console.warn(`Redemption ${step} failed`, res);
+          return;
+        }
+        this.updateCartFromRedemption(res);
+      },
+      error: (err) => console.error('Redemption toggle failed:', err)
+    });
   }
 }

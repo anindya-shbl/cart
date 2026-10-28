@@ -3631,7 +3631,8 @@ export class PlaceOrderComponent implements OnInit {
       console.warn('No cart header in redemption response', res);
       return;
     }
-
+    console.log('h',header);
+    console.log('d',this.deduction);
     const prevPoints = this.headerDetailsRedemption?.RedeemedPoints || 0;
     const newPoints = header.RedeemedPoints || 0;
     this.totalSaving += newPoints - prevPoints;

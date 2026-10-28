@@ -130,32 +130,6 @@ export class AppComponent implements OnInit {
 
   getLoyaltyConfig() {
     this.authService.getLoyaltyInterface('loyalty/get_loyalty_config').subscribe((res: any) => {
-      res = {
-        "data": [
-          {
-            "config_key": "POINT_EXPIRY_MONTHS",
-            "config_value": "6",
-            "description": null
-          },
-          {
-            "config_key": "POINT_VALUE",
-            "config_value": "1",
-            "description": null
-          },
-          {
-            "config_key": "REDEMPTION_CAP_PERCENT",
-            "config_value": "25",
-            "description": null
-          },
-          {
-            "config_key": "REDEMPTION_ENABLED",
-            "config_value": "1",
-            "description": null
-          }
-        ],
-        "message": "Success",
-        "response_code": "1"
-      };
       if (res && res['response_code'] == 1) {
         this.authService.LoyaltyConfig = res['data'];
         // console.log("this.authService.LoyaltyConfig", this.authService.LoyaltyConfig);
@@ -175,37 +149,6 @@ export class AppComponent implements OnInit {
 
   getLoyaltyRate() {
     this.authService.getLoyaltyInterface('loyalty/get_loyalty_rate').subscribe((res: any) => {
-      res = {
-        "data": [
-          {
-            "category_label": "GENERIC",
-            "rate_percent": 10,
-            "redeemable": 1
-          },
-          {
-            "category_label": "JITO",
-            "rate_percent": 10,
-            "redeemable": 1
-          },
-          {
-            "category_label": "LAB",
-            "rate_percent": 5,
-            "redeemable": 1
-          },
-          {
-            "category_label": "BRANDED",
-            "rate_percent": 2,
-            "redeemable": 0
-          },
-          {
-            "category_label": "OTC",
-            "rate_percent": 2,
-            "redeemable": 0
-          }
-        ],
-        "message": "Success",
-        "response_code": "1"
-      };
       if (res && res['response_code'] == 1) {
         const rateMap: Record<string, { rate_percent: number; redeemable: number }> =
           Object.fromEntries(

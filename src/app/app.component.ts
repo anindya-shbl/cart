@@ -35,7 +35,8 @@ export class AppComponent implements OnInit {
     this.setConfig();
     this.setLoyaltyConfig();
     this.chkloggingStatus();
-   
+    this.getLoyaltyConfig();
+    this.getLoyaltyRate();
   }
 
   chkloggingStatus() {
@@ -128,6 +129,100 @@ export class AppComponent implements OnInit {
       if(res && res['msgcode'] == 1){
         this.CommonService.LoyaltyConfigData = res['results']
       }
+    })
+  }
+
+  getLoyaltyConfig() {
+    this.authService.getLoyaltyInterface('loyalty/get_loyalty_config').subscribe((res: any) => {
+      res = {
+        "data": [
+          {
+            "config_key": "POINT_EXPIRY_MONTHS",
+            "config_value": "6",
+            "description": null
+          },
+          {
+            "config_key": "POINT_VALUE",
+            "config_value": "1",
+            "description": null
+          },
+          {
+            "config_key": "REDEMPTION_CAP_PERCENT",
+            "config_value": "25",
+            "description": null
+          },
+          {
+            "config_key": "REDEMPTION_ENABLED",
+            "config_value": "1",
+            "description": null
+          }
+        ],
+        "message": "Success",
+        "response_code": "1"
+      };
+      if (res && res['response_code'] == 1) {
+        this.authService.LoyaltyConfig = res['data'];
+        // console.log("this.authService.LoyaltyConfig", this.authService.LoyaltyConfig);
+        // this.authService.RedemptionEnabled = this.authService.LoyaltyConfig.find((c:any) =>c.config_key === "REDEMPTION_ENABLED").config_value;
+        // console.log("this.authService.RedemptionEnabled",this.authService.RedemptionEnabled);
+
+        // Returns the config_value string for a key, or undefined if the key is missing
+        const getConfigValue = (key: string): string | undefined =>
+          this.authService.LoyaltyConfig.find((c: any) => c.config_key === key)?.config_value;
+
+        // config_value is a string ("1"), so convert before using it
+        this.authService.RedemptionEnabled = getConfigValue('REDEMPTION_ENABLED') === '1';
+        this.authService.RedemptionCapPercent = Number(getConfigValue('REDEMPTION_CAP_PERCENT') ?? 0);
+      }
+    })
+  }
+
+  getLoyaltyRate() {
+    this.authService.getLoyaltyInterface('loyalty/get_loyalty_rate').subscribe((res: any) => {
+      res = {
+        "data": [
+          {
+            "category_label": "GENERIC",
+            "rate_percent": 10,
+            "redeemable": 1
+          },
+          {
+            "category_label": "JITO",
+            "rate_percent": 10,
+            "redeemable": 1
+          },
+          {
+            "category_label": "LAB",
+            "rate_percent": 5,
+            "redeemable": 1
+          },
+          {
+            "category_label": "BRANDED",
+            "rate_percent": 2,
+            "redeemable": 0
+          },
+          {
+            "category_label": "OTC",
+            "rate_percent": 2,
+            "redeemable": 0
+          }
+        ],
+        "message": "Success",
+        "response_code": "1"
+      };
+      if (res && res['response_code'] == 1) {
+        const rateMap: Record<string, { rate_percent: number; redeemable: number }> =
+          Object.fromEntries(
+            res['data'].map((c: any) => [
+              c.category_label,
+              { rate_percent: Number(c.rate_percent), redeemable: Number(c.redeemable) }
+            ])
+          );
+        this.authService.LoyaltyConfigData = rateMap;
+        // rateMap.GENERIC.rate_percent === 10
+        // rateMap.BRANDED.redeemable === 0
+      }
+      console.log("this.authService.LoyaltyConfigData",this.authService.LoyaltyConfigData);
     })
   }
 }

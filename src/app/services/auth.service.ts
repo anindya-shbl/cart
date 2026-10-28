@@ -8,6 +8,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
+    public LoyaltyConfigData: any = '';
+    public LoyaltyConfig: any = '';
+    public RedemptionEnabled: any = '';
+    public RedemptionCapPercent: any = '';
     // ============= live ==========================
     // public webcartUrl = 'https://sastasundar.com/index.php/webapi/';
 
@@ -61,5 +65,10 @@ export class AuthService {
         postDataVal.append('csrf_test_name', sspl_csrf);
         // postDataVal.append('hasTestLogin', environment.hasTestLogin);
         return this.http.post(postUrl, postDataVal);
+    }
+
+    getLoyaltyInterface(url: any) {
+        let gettUrl = this.webcartUrl + url;
+        return this.http.get(gettUrl);
     }
 }

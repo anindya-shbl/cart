@@ -6,6 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { CommonService } from '../../services/common.service';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { CookieService } from 'ngx-cookie-service';
@@ -83,6 +84,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     public CommonService: CommonService,
+    public AuthService: AuthService,
     private dbService: NgxIndexedDBService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
@@ -178,21 +180,48 @@ export class SearchComponent implements OnInit {
           elm[this.isExisting]= 0;
           elm[this.addedQty] = 0;
           elm[this.showRefPrd] = 0;
-          // console.log('pID', elm[pID]);
-          if(this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y'){
-            const loyaltyPercentage = this.CommonService.LoyaltyConfigData.LoyaltyConfig;
-            // console.log("loyaltyPercentage",loyaltyPercentage);
-            // console.log(loyaltyPercentage.jito_percentage, loyaltyPercentage.branded_percentage)
-            let selectedLp:number = 0;
-            if(parseInt(elm['IsGenericNew'])){
-              selectedLp = loyaltyPercentage.jito_percentage
+          // console.log('elm', elm);
+
+          if(this.AuthService.RedemptionEnabled) {
+            let rate_percentage:number = 0;
+            if(elm[this.getKeyIndex('IsOwnProduct')]){
+              // jito
+              console.log("JITO",this.AuthService.LoyaltyConfigData.JITO);
+              rate_percentage = this.AuthService.LoyaltyConfigData.JITO.rate_percent;
+            }
+            else if(parseInt(elm[this.getKeyIndex('IsGenericNew')])){
+              // generic
+              console.log("GENERIC",this.AuthService.LoyaltyConfigData.GENERIC);
+              rate_percentage = this.AuthService.LoyaltyConfigData.GENERIC.rate_percent;
+            }
+            else if(elm[this.getKeyIndex('PrescriptionOTC')]=="P"){
+              //branded
+              console.log("BRANDED",this.AuthService.LoyaltyConfigData.BRANDED);
+              rate_percentage = this.AuthService.LoyaltyConfigData.BRANDED.rate_percent;
             }
             else {
-              selectedLp = loyaltyPercentage.branded_percentage
+              // otc
+              console.log("OTC",this.AuthService.LoyaltyConfigData.OTC);
+              rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
             }
-            // console.log("selectedLp",selectedLp);
-            elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * selectedLp)/100);
+
+            elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * rate_percentage)/100);
           }
+
+          // if(this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y'){
+          //   const loyaltyPercentage = this.CommonService.LoyaltyConfigData.LoyaltyConfig;
+          //   // console.log("loyaltyPercentage",loyaltyPercentage);
+          //   // console.log(loyaltyPercentage.jito_percentage, loyaltyPercentage.branded_percentage)
+          //   let selectedLp:number = 0;
+          //   if(parseInt(elm['IsGenericNew'])){
+          //     selectedLp = loyaltyPercentage.jito_percentage
+          //   }
+          //   else {
+          //     selectedLp = loyaltyPercentage.branded_percentage
+          //   }
+          //   // console.log("selectedLp",selectedLp);
+          //   elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * selectedLp)/100);
+          // }
           this.addedInCart.forEach((item: any) => {
             if (parseInt(elm[pID]) == item.ProductId) {
               elm[this.isExisting] = 1;

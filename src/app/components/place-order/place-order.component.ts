@@ -923,7 +923,8 @@ export class PlaceOrderComponent implements OnInit {
           this.dbService.update('cartItems', item).subscribe((res: any) => {
             // console.log('storeData: ', res);
             if (res) {
-              this.getCartDetails();
+              // this.getCartDetails();
+              this.getCartDetails(() => this.refreshLoyaltyPoints());
             }
           });
         } else {
@@ -1009,7 +1010,8 @@ export class PlaceOrderComponent implements OnInit {
           this.dbService.deleteByKey('cartItems', PID).subscribe((status: any) => {
             // console.log('Deleted?:', status);
             if (status == true) {
-              this.getCartDetails();
+              // this.getCartDetails();
+              this.getCartDetails(() => this.refreshLoyaltyPoints());
               this.resetRemove();
             } else {
               // alert('some thing went wrong')
@@ -3244,7 +3246,8 @@ export class PlaceOrderComponent implements OnInit {
         if (this.alterSaved != '') {
           this.alterSaved.savePerStrip = altr.savePerStrip;
         }
-        this.getCartDetails();
+        // this.getCartDetails();
+        this.getCartDetails(() => this.refreshLoyaltyPoints());
       }
       this.closeAltMod.nativeElement.click();
       // this.closeAllaltMod.nativeElement.click();

@@ -483,6 +483,10 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
+  refreshCartAndLoyaltyPoints() {
+    this.getCartDetails(() => this.refreshLoyaltyPoints());
+  }
+
   processOrderDetails() {
     this.spinner.show();
     this.headerDetails = [];
@@ -3578,6 +3582,10 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   private refreshLoyaltyPoints() {
+    if (this.CommonService.ConfigData.LoyaltyPointsEnable != 'Y') {
+      return;
+    }
+
     let completedRequests = 0;
     const onSuccess = () => {
       completedRequests++;

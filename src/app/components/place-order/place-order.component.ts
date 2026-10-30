@@ -518,10 +518,10 @@ export class PlaceOrderComponent implements OnInit {
           });
         }
 
-        if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
-          this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
+        // if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
+        this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
           // this.isRedemptionToggling = true;
-        }
+        // }
         // Check if all needed prescriptions are uploaded
         const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
         const humanPrescriptionUploaded = this.headerDetails['IsPrescriptionUploaded'] == 1;

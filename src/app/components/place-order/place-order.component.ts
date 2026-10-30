@@ -3740,7 +3740,7 @@ export class PlaceOrderComponent implements OnInit {
 
     this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points')
       .pipe(finalize(() => {
-        this.isRedemptionToggling = false;
+        // this.isRedemptionToggling = false;
         // this.cdr.markForCheck();
       }))
       .subscribe((res: any) => {

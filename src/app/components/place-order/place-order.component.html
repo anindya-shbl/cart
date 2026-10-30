@@ -1225,7 +1225,13 @@
                     <div class=""> Save <b>&#8377;{{LoyaltyRedeemableOptions.UsableRedeemablePoints}}</b> Using SS Coins </div>
                     <!-- <button class="addBtn" type="button" (click)="applyRedemption()">Click</button> -->
                     <div class="toggle-switch">
-                      <input type="checkbox" id="toggle" (click)="applyRedemption()">
+                      <span *ngIf="headerDetailsRedemption.RedeemedPoints>0">
+                          <input type="checkbox" checked id="toggle" (click)="removeRedemption()">
+                      </span>
+                      <span *ngIf="headerDetailsRedemption.RedeemedPoints>0">
+                        <input type="checkbox" id="toggle" (click)="applyRedemption()">   
+                      </span>
+                      
                       <label for="toggle" class="sliderCheck"></label>
                     </div>
                   </div>

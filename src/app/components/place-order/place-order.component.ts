@@ -516,6 +516,10 @@ export class PlaceOrderComponent implements OnInit {
             // 'HBContact': this.headerDetails['HBContact'],
           });
         }
+
+        if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
+          this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
+        }
         // Check if all needed prescriptions are uploaded
         const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
         const humanPrescriptionUploaded = this.headerDetails['IsPrescriptionUploaded'] == 1;
@@ -3577,7 +3581,7 @@ export class PlaceOrderComponent implements OnInit {
         this.pushLoyaltyPoints();
       }
     };
-
+    this.getLoyaltyBalance();
     this.getLoyaltyEarnPointsAgainstCart(onSuccess);
     this.getLoyaltyRedemptionPointsAgainstCart(onSuccess);
   }
@@ -3596,95 +3600,120 @@ export class PlaceOrderComponent implements OnInit {
 
 
 
-  applyRedemption_bkp() {
-    console.log('applyRedemption called');
+  // applyRedemption_bkp() {
+  //   console.log('applyRedemption called');
 
-    this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
-      switchMap((status: any) => {
-        const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
+  //   this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
+  //     switchMap((status: any) => {
+  //       const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
 
-        const request$ = isActive
-          ? this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
-            switchMap((redisRes: any) => {
-              if (redisRes?.response_code != 1) {
-                throw new Error('Failed to clear redemption from Redis');
-              }
-              return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
-            })
-          )
-          : this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points');
+  //       const request$ = isActive
+  //         ? this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
+  //           switchMap((redisRes: any) => {
+  //             if (redisRes?.response_code != 1) {
+  //               throw new Error('Failed to clear redemption from Redis');
+  //             }
+  //             return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
+  //           })
+  //         )
+  //         : this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points');
 
-        return request$.pipe(map((res: any) => ({ isActive, res })));
-      })
-    ).subscribe({
-      next: ({ isActive, res }) => {
-        if (!res || res['response_code'] != 1) {
-          console.warn(isActive ? 'Redemption remove failed' : 'Redemption apply failed', res);
-          return;
-        }
-        this.updateCartFromRedemption(res);
-      },
-      error: (err) => console.error('Redemption toggle failed:', err)
+  //       return request$.pipe(map((res: any) => ({ isActive, res })));
+  //     })
+  //   ).subscribe({
+  //     next: ({ isActive, res }) => {
+  //       if (!res || res['response_code'] != 1) {
+  //         console.warn(isActive ? 'Redemption remove failed' : 'Redemption apply failed', res);
+  //         return;
+  //       }
+  //       this.updateCartFromRedemption(res);
+  //     },
+  //     error: (err) => console.error('Redemption toggle failed:', err)
+  //   });
+  // }
+
+  // private updateCartFromRedemption(res: any) {
+  //   const header = res['data']?.header;
+  //   if (!header) {
+  //     console.warn('No cart header in redemption response', res);
+  //     return;
+  //   }
+  //   console.log('h',header);
+  //   console.log('d',this.deduction);
+  //   const prevPoints = this.headerDetailsRedemption?.RedeemedPoints || 0;
+  //   const newPoints = header.RedeemedPoints || 0;
+  //   this.totalSaving += newPoints - prevPoints;
+
+  //   this.RedemptionApply = res['data'];
+  //   this.headerDetailsRedemption = header;
+  //   this.headerDetails.CartVal = header.CartVal;
+
+  // }
+
+
+
+
+  // applyRedemption() {
+  //   console.log('applyRedemption called');
+
+  //   this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
+  //     switchMap((status: any) => {
+  //       const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
+
+  //       if (!isActive) {
+  //         return this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').pipe(
+  //           tap(r => console.log('[apply] response', r)),
+  //           map((res: any) => ({ step: 'apply', res }))
+  //         );
+  //       }
+
+  //       return this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
+  //         tap(r => console.log('[redis-clear] response', r)),
+  //         switchMap((redisRes: any) => {
+  //           if (redisRes?.response_code != 1) {
+  //             throw new Error('Failed to clear redemption from Redis');
+  //           }
+  //           return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
+  //         }),
+  //         tap(r => console.log('[remove-cart] response', r)),
+  //         map((res: any) => ({ step: 'remove', res }))
+  //       );
+  //     })
+  //   ).subscribe({
+  //     next: ({ step, res }) => {
+  //       console.log('next fired for step:', step);
+  //       if (!res || res['response_code'] != 1) {
+  //         console.warn(`Redemption ${step} failed`, res);
+  //         return;
+  //       }
+  //       this.updateCartFromRedemption(res);
+  //     },
+  //     error: (err) => console.error('Redemption toggle failed:', err)
+  //   });
+  // }
+  applyRedemption(){
+    // 
+    console.log('apply');
+    this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').subscribe((res: any) => {
+      if (!res || res['response_code'] != 1) {
+        console.log('redemption failed');
+        // this.getCartDetails(() => this.refreshLoyaltyPoints());
+      }
+      else{
+        this.getCartDetails(() => this.refreshLoyaltyPoints());
+      }
     });
   }
-
-  private updateCartFromRedemption(res: any) {
-    const header = res['data']?.header;
-    if (!header) {
-      console.warn('No cart header in redemption response', res);
-      return;
-    }
-    console.log('h',header);
-    console.log('d',this.deduction);
-    const prevPoints = this.headerDetailsRedemption?.RedeemedPoints || 0;
-    const newPoints = header.RedeemedPoints || 0;
-    this.totalSaving += newPoints - prevPoints;
-
-    this.RedemptionApply = res['data'];
-    this.headerDetailsRedemption = header;
-    this.headerDetails.CartVal = header.CartVal;
-
-  }
-
-
-
-
-  applyRedemption() {
-    console.log('applyRedemption called');
-
-    this.CommonService.getRedemptionStatus('loyalty/check_redis_for_redemption_status').pipe(
-      switchMap((status: any) => {
-        const isActive = status?.response_code == 1 && status?.RedemptionActive == 1;
-
-        if (!isActive) {
-          return this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').pipe(
-            tap(r => console.log('[apply] response', r)),
-            map((res: any) => ({ step: 'apply', res }))
-          );
-        }
-
-        return this.CommonService.removeRedemptionFromRedis('loyalty/remove_redemption_from_redis').pipe(
-          tap(r => console.log('[redis-clear] response', r)),
-          switchMap((redisRes: any) => {
-            if (redisRes?.response_code != 1) {
-              throw new Error('Failed to clear redemption from Redis');
-            }
-            return this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points');
-          }),
-          tap(r => console.log('[remove-cart] response', r)),
-          map((res: any) => ({ step: 'remove', res }))
-        );
-      })
-    ).subscribe({
-      next: ({ step, res }) => {
-        console.log('next fired for step:', step);
-        if (!res || res['response_code'] != 1) {
-          console.warn(`Redemption ${step} failed`, res);
-          return;
-        }
-        this.updateCartFromRedemption(res);
-      },
-      error: (err) => console.error('Redemption toggle failed:', err)
+  removeRedemption(){
+    console.log('remove');
+    this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points').subscribe((res: any) => {
+      if (!res || res['response_code'] != 1) {
+        console.log('redemption failed');
+        // this.getCartDetails(() => this.refreshLoyaltyPoints());
+      }
+      else{
+        this.getCartDetails(() => this.refreshLoyaltyPoints());
+      }
     });
   }
 }

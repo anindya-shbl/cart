@@ -1221,23 +1221,13 @@
                   <div *ngIf="!LoyaltyRedeemableOptions.UsableRedeemablePoints">
                     <div class="fs-3" > Add <b>Jito alternative medicines</b> to redeem SS Coins</div>
                   </div>
-                  <div class="buttontoggle" *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && headerDetailsRedemption.UsableRedeemablePoints>0">
+                  <div class="buttontoggle" *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && LoyaltyRedeemableOptions.UsableRedeemablePoints>0">
                     <div class=""> Save <b>&#8377;{{headerDetailsRedemption.RedeemedPoints}}</b> Using SS Coins </div>
-                    <!-- <button class="addBtn" type="button" (click)="applyRedemption()">Click</button> -->
                     <div class="toggle-switch">
                        <input type="checkbox" 
                        id="toggle" 
                        [checked]="isRedemptionApplied" 
-                      
                        (click)="$event.preventDefault(); onRedemptionClick()">
-                        <!-- [disabled]="isRedemptionToggling"  -->
-                      <!-- <span *ngIf="headerDetailsRedemption.RedeemedPoints>0">
-                          <input type="checkbox" id="toggle" (click)="removeRedemption()" checked class="remove">
-                      </span>
-                      <span *ngIf="!headerDetailsRedemption.RedeemedPoints" class="apply">
-                        <input type="checkbox" id="toggle" (click)="applyRedemption()">   
-                      </span> -->
-                      
                       <label for="toggle" class="sliderCheck"></label>
                     </div>
                   </div>

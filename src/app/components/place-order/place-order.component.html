@@ -1221,7 +1221,7 @@
                   <div *ngIf="!LoyaltyRedeemableOptions.UsableRedeemablePoints">
                     <div class="fs-3" > Add <b>Jito alternative medicines</b> to redeem SS Coins</div>
                   </div>
-                  <div class="buttontoggle" *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && headerDetailsRedemption.RedeemedPoints>0">
+                  <div class="buttontoggle" *ngIf="LoyaltyRedeemableOptions.RedemptionEnabled && headerDetailsRedemption.UsableRedeemablePoints>0">
                     <div class=""> Save <b>&#8377;{{headerDetailsRedemption.RedeemedPoints}}</b> Using SS Coins </div>
                     <!-- <button class="addBtn" type="button" (click)="applyRedemption()">Click</button> -->
                     <div class="toggle-switch">

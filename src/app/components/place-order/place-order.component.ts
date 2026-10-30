@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, Subscription, switchMap, tap } from 'rxjs';
+import { map, Subscription, switchMap, tap,finalize } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { CookieService } from 'ngx-cookie-service';
@@ -132,6 +132,7 @@ export class PlaceOrderComponent implements OnInit {
   cfhBalance: any = 0;
   showCFHBlock: boolean = false;  // Add this property
   specialistFlag: number = 0; // Counter for specialty prescription items
+  isRedemptionToggling:boolean=false;
 
   @ViewChild('closebutton') closebutton: any;
   @ViewChild('closeAdssBtn') closeAdssBtn: any;
@@ -169,7 +170,7 @@ export class PlaceOrderComponent implements OnInit {
   loyaltyBalance: number = 0;
   useLoyaltyCoin: boolean = false;
   LoyaltyRedeemableOptions: any = '';
-  RedemptionApply: any = '';
+  // RedemptionApply: any = '';
 
   constructor(
     public CommonService: CommonService,
@@ -519,6 +520,7 @@ export class PlaceOrderComponent implements OnInit {
 
         if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
           this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
+          this.isRedemptionToggling = true;
         }
         // Check if all needed prescriptions are uploaded
         const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
@@ -3691,29 +3693,78 @@ export class PlaceOrderComponent implements OnInit {
   //     error: (err) => console.error('Redemption toggle failed:', err)
   //   });
   // }
-  applyRedemption(){
-    // 
-    console.log('apply');
-    this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').subscribe((res: any) => {
-      if (!res || res['response_code'] != 1) {
-        console.log('redemption failed');
-        // this.getCartDetails(() => this.refreshLoyaltyPoints());
-      }
-      else{
-        this.getCartDetails(() => this.refreshLoyaltyPoints());
-      }
-    });
+  // applyRedemption(){
+  //   // 
+  //   console.log('apply');
+  //   this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points').subscribe((res: any) => {
+  //     if (!res || res['response_code'] != 1) {
+  //       console.log('redemption failed');
+  //       // this.getCartDetails(() => this.refreshLoyaltyPoints());
+  //     }
+  //     else{
+  //       this.getCartDetails(() => this.refreshLoyaltyPoints());
+  //     }
+  //   });
+  // }
+  // removeRedemption(){
+  //   console.log('remove');
+  //   this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points').subscribe((res: any) => {
+  //     if (!res || res['response_code'] != 1) {
+  //       console.log('redemption failed');
+  //       // this.getCartDetails(() => this.refreshLoyaltyPoints());
+  //     }
+  //     else{
+  //       this.getCartDetails(() => this.refreshLoyaltyPoints());
+  //     }
+  //   });
+  // }
+
+  get isRedemptionApplied(): boolean {
+    return (this.headerDetailsRedemption?.RedeemedPoints ?? 0) > 0;
   }
-  removeRedemption(){
-    console.log('remove');
-    this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points').subscribe((res: any) => {
-      if (!res || res['response_code'] != 1) {
-        console.log('redemption failed');
-        // this.getCartDetails(() => this.refreshLoyaltyPoints());
-      }
-      else{
+  onRedemptionClick() {
+    // if (this.isRedemptionToggling) return;
+
+    if (this.isRedemptionApplied) {
+      this.removeRedemption();
+    } else {
+      this.applyRedemption();
+    }
+  }
+
+  applyRedemption() {
+    console.log('apply');
+    // this.isRedemptionToggling = true;
+
+    this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points')
+      .pipe(finalize(() => {
+        this.isRedemptionToggling = false;
+        // this.cdr.markForCheck();
+      }))
+      .subscribe((res: any) => {
+        if (!res || res['response_code'] != 1) {
+          console.log('redemption failed', res);
+          return;
+        }
         this.getCartDetails(() => this.refreshLoyaltyPoints());
-      }
-    });
+      });
+  }
+
+  removeRedemption() {
+    console.log('remove');
+    // this.isRedemptionToggling = true;
+
+    this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points')
+      .pipe(finalize(() => {
+        this.isRedemptionToggling = false;
+        // this.cdr.markForCheck();
+      }))
+      .subscribe((res: any) => {
+        if (!res || res['response_code'] != 1) {
+          console.log('redemption failed', res);
+          return;
+        }
+        this.getCartDetails(() => this.refreshLoyaltyPoints());
+      });
   }
 }

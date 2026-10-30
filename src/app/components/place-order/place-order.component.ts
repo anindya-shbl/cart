@@ -132,7 +132,7 @@ export class PlaceOrderComponent implements OnInit {
   cfhBalance: any = 0;
   showCFHBlock: boolean = false;  // Add this property
   specialistFlag: number = 0; // Counter for specialty prescription items
-  isRedemptionToggling:boolean=false;
+  // isRedemptionToggling:boolean=false;
 
   @ViewChild('closebutton') closebutton: any;
   @ViewChild('closeAdssBtn') closeAdssBtn: any;
@@ -520,7 +520,7 @@ export class PlaceOrderComponent implements OnInit {
 
         if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
           this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
-          this.isRedemptionToggling = true;
+          // this.isRedemptionToggling = true;
         }
         // Check if all needed prescriptions are uploaded
         const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
@@ -886,6 +886,7 @@ export class PlaceOrderComponent implements OnInit {
   // }
 
   updateById(item: any) {
+      this.removeRedemption();
     // this.dbService.update('cartItems', tmp).subscribe((res: any) => {
     //   console.log('storeData: ', res);
     //   if(res){
@@ -1137,6 +1138,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   confirmRemove() {
+    this.removeRedemption();
     if (this.removeType == 'InCart') {
       this.deleteById(this.itemForRemove);
     } else if (this.removeType == 'SavedLater') {
@@ -3756,7 +3758,7 @@ export class PlaceOrderComponent implements OnInit {
 
     this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points')
       .pipe(finalize(() => {
-        this.isRedemptionToggling = false;
+        // this.isRedemptionToggling = false;
         // this.cdr.markForCheck();
       }))
       .subscribe((res: any) => {

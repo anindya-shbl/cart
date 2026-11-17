@@ -1210,7 +1210,7 @@
           <div *ngIf="CommonService.ConfigData.LoyaltyPointsEnable == 'Y'" class="accordion mb-2" id="accordionExampleFive">
             <div class="accordion-item p-3 ">
               <div class="SSCoins " *ngIf="LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0">
-                <div class="SSCoinHeading">You'll earn <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" /> &#8377;{{LoyaltyPointsOfCarts.TotalLoyaltyPoints | number:'1.0-0'}} SS Coins on this order</div>
+                <div class="SSCoinHeading">You'll earn <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" /> &#8377;{{LoyaltyPointsOfCarts.TotalLoyaltyPoints}} SS Coins on this order</div>
                 <div class="SSCoin-text">Credited to your SS coins wallet after delivery</div>
               </div>
               <div class="SSUsing" *ngIf="(LoyaltyPointsOfCarts.TotalLoyaltyPoints > 0)">

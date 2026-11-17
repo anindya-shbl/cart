@@ -205,7 +205,8 @@ export class SearchComponent implements OnInit {
               rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
             }
 
-            elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * rate_percentage)/100);
+            // elm[this.LoyaltyPointsIndex] = Math.round((parseInt(elm[this.OfferPriceIndex]) * rate_percentage)/100);
+            elm[this.LoyaltyPointsIndex] = ((parseInt(elm[this.OfferPriceIndex]) * rate_percentage)/100).toFixed(2);
           }
 
           // if(this.CommonService.ConfigData.LoyaltyPointsEnable == 'Y'){
@@ -262,7 +263,8 @@ export class SearchComponent implements OnInit {
                   rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
                 }
 
-                elm[this.RefProductDetails].LoyaltyPointsIndexR = Math.round((parseInt(elm[this.RefProductDetails].MRP) * rate_percentage)/100);
+                // elm[this.RefProductDetails].LoyaltyPointsIndexR = Math.round((parseInt(elm[this.RefProductDetails].MRP) * rate_percentage)/100);
+                elm[this.RefProductDetails].LoyaltyPointsIndexR = ((parseInt(elm[this.RefProductDetails].MRP) * rate_percentage)/100).toFixed(2);
               }
               // end
             } else {
@@ -748,7 +750,8 @@ export class SearchComponent implements OnInit {
               rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
             }
 
-            elm['LoyaltyPointsIndexS'] = Math.round((parseInt(elm['MRP']) * rate_percentage)/100);
+            // elm['LoyaltyPointsIndexS'] = Math.round((parseInt(elm['MRP']) * rate_percentage)/100);
+            elm['LoyaltyPointsIndexS'] = ((parseInt(elm['MRP']) * rate_percentage)/100).toFixed(2);
           }
       // end
     });

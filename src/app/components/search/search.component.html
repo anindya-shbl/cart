@@ -144,6 +144,10 @@
                                                                         'INR'}}</del>
                                                                     <strong *ngIf="product[RefProductDetails].CustDiscPercent > 0"
                                                                         class="discountprice">{{product[RefProductDetails].CustDiscPercent}}% Off</strong>
+
+                                                                    <div *ngIf="(product[RefProductDetails]['LoyaltyPointsIndexR'] !== undefined && product[RefProductDetails]['LoyaltyPointsIndexR'] > 0)" class="Earn">
+                                                                            <img src="https://stage.sastasundar.com/flutter/assets/assets/icon/ss_coin_logo.svg" style="width:16px" />&nbsp;Earn &#8377;{{product[RefProductDetails]['LoyaltyPointsIndexR']}}
+                                                                        </div>
                                                                 </div>
                                                             </div>
                                                         </div>

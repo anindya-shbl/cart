@@ -238,6 +238,33 @@ export class SearchComponent implements OnInit {
                   elm[this.RefProductDetails].addedQty = itm.ProductCount;
                 }
               });
+              // loyalty points calculation for reference product start
+              if(this.AuthService.RedemptionEnabled) {
+                let rate_percentage:number = 0;
+                if(elm[this.RefProductDetails].IsOwnProduct){
+                  // jito
+                  console.log("JITO",this.AuthService.LoyaltyConfigData.JITO);
+                  rate_percentage = this.AuthService.LoyaltyConfigData.JITO.rate_percent;
+                }
+                else if(parseInt(elm[this.RefProductDetails].IsGenericNew)){
+                  // generic
+                  console.log("GENERIC",this.AuthService.LoyaltyConfigData.GENERIC);
+                  rate_percentage = this.AuthService.LoyaltyConfigData.GENERIC.rate_percent;
+                }
+                else if(elm[this.RefProductDetails].PrescriptionOTC=="P"){
+                  //branded
+                  console.log("BRANDED",this.AuthService.LoyaltyConfigData.BRANDED);
+                  rate_percentage = this.AuthService.LoyaltyConfigData.BRANDED.rate_percent;
+                }
+                else {
+                  // otc
+                  console.log("OTC",this.AuthService.LoyaltyConfigData.OTC);
+                  rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
+                }
+
+                elm[this.RefProductDetails].LoyaltyPointsIndexR = Math.round((parseInt(elm[this.RefProductDetails].MRP) * rate_percentage)/100);
+              }
+              // end
             } else {
               if (elm[this.SubtituteIndex].length > 0 && this.CommonService.ConfigData.IsDisplayGenericProduct == 1) {
                 let subs = this.setSubProduct(elm);

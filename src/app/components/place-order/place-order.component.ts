@@ -132,7 +132,7 @@ export class PlaceOrderComponent implements OnInit {
   cfhBalance: any = 0;
   showCFHBlock: boolean = false;  // Add this property
   specialistFlag: number = 0; // Counter for specialty prescription items
-  isRedemptionToggling:boolean=false;
+  // isRedemptionToggling:boolean=false;
 
   @ViewChild('closebutton') closebutton: any;
   @ViewChild('closeAdssBtn') closeAdssBtn: any;
@@ -548,10 +548,10 @@ export class PlaceOrderComponent implements OnInit {
           });
         }
 
-        if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
-          this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
-          this.isRedemptionToggling = true;
-        }
+        // if(this.headerDetails.RedeemedPoints && this.headerDetails.RedeemedPoints!=null && this.headerDetails.RedeemedPoints!=''){
+        //   this.headerDetailsRedemption.RedeemedPoints=this.headerDetails.RedeemedPoints;
+        //   this.isRedemptionToggling = true;
+        // }
         // Check if all needed prescriptions are uploaded
         const humanPrescriptionNeeded = this.headerDetails['NeedToAttachPrescription'] == 'Y';
         const humanPrescriptionUploaded = this.headerDetails['IsPrescriptionUploaded'] == 1;
@@ -4337,7 +4337,7 @@ export class PlaceOrderComponent implements OnInit {
 
     this.CommonService.applyRedemptionOnCart('loyalty/apply_loyalty_redemption_points')
       .pipe(finalize(() => {
-        this.isRedemptionToggling = false;
+        // this.isRedemptionToggling = false;
         // this.cdr.markForCheck();
       }))
       .subscribe((res: any) => {
@@ -4355,7 +4355,7 @@ export class PlaceOrderComponent implements OnInit {
 
     this.CommonService.removeRedemptionOnCart('loyalty/remove_loyalty_redemption_points')
       .pipe(finalize(() => {
-        this.isRedemptionToggling = false;
+        // this.isRedemptionToggling = false;
         // this.cdr.markForCheck();
       }))
       .subscribe((res: any) => {

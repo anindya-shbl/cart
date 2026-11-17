@@ -260,7 +260,7 @@ export class SearchComponent implements OnInit {
             // elm[this.SubtituteIndex] = subs;
           }
         });
-        // console.log('d_p',data);
+        console.log('d_p',data);
       } else {
         this.ProductList = [];
         // this.emptyResult = true;
@@ -696,6 +696,34 @@ export class SearchComponent implements OnInit {
 
         }
       }
+
+      // loyalty points calculation for substitute products start
+        if(this.AuthService.RedemptionEnabled) {
+            let rate_percentage:number = 0;
+            if(elm['IsOwnProduct']){
+              // jito
+              console.log("JITO",this.AuthService.LoyaltyConfigData.JITO);
+              rate_percentage = this.AuthService.LoyaltyConfigData.JITO.rate_percent;
+            }
+            else if(parseInt(elm['IsGenericNew'])){
+              // generic
+              console.log("GENERIC",this.AuthService.LoyaltyConfigData.GENERIC);
+              rate_percentage = this.AuthService.LoyaltyConfigData.GENERIC.rate_percent;
+            }
+            else if(elm['PrescriptionOTC']=="P"){
+              //branded
+              console.log("BRANDED",this.AuthService.LoyaltyConfigData.BRANDED);
+              rate_percentage = this.AuthService.LoyaltyConfigData.BRANDED.rate_percent;
+            }
+            else {
+              // otc
+              console.log("OTC",this.AuthService.LoyaltyConfigData.OTC);
+              rate_percentage = this.AuthService.LoyaltyConfigData.OTC.rate_percent;
+            }
+
+            elm['LoyaltyPointsIndexS'] = Math.round((parseInt(elm['MRP']) * rate_percentage)/100);
+          }
+      // end
     });
     if (this.CommonService.ConfigData.SortOnSaving == 'Y') {
       // mdLst.sort((a: any, b: any) => b.savingsPercent - a.savingsPercent)
